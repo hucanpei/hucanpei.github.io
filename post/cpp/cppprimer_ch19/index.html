@@ -49,7 +49,7 @@
 <meta itemprop="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet">
 <meta itemprop="datePublished" content="2020-05-11T15:44:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-11T15:44:00&#43;08:00" />
-<meta itemprop="wordCount" content="7335">
+<meta itemprop="wordCount" content="7413">
 
 
 
@@ -130,7 +130,7 @@
             <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
             <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
             </div>
-          <span class="more-meta"> 约 7335 字 </span>
+          <span class="more-meta"> 约 7413 字 </span>
           <span class="more-meta"> 预计阅读 15 分钟 </span>
         
       </div>
@@ -780,7 +780,7 @@
 <li>普通指针指向类的对象，成员指针指向类的成员</li>
 <li>成员指针的类型中包括类类型和成员类型</li>
 <li>初始化成员指针时，令其指向类的某个成员，但不指定该成员所属的对象。只有使用成员指针时才指定成员所属的对象</li>
-<li>例子：</li>
+<li>例子：本节使用7.3.1的Screen类作为示例</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -811,6 +811,9 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="数据成员指针">数据成员指针</h3>
+<ul>
+<li>声明成员指针时必须包含成员所属的类，应在<code>*</code>之前添加<code>classname::</code>以表示该指针指向<code>classname</code>类的成员</li>
+</ul>
 <h3 id="成员函数指针">成员函数指针</h3>
 <h3 id="将成员函数用作可调用对象">将成员函数用作可调用对象</h3>
 <h2 id="嵌套类">嵌套类</h2>
