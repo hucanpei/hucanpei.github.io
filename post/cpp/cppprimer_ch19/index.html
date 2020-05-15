@@ -49,7 +49,7 @@
 <meta itemprop="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet">
 <meta itemprop="datePublished" content="2020-05-11T15:44:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-11T15:44:00&#43;08:00" />
-<meta itemprop="wordCount" content="7413">
+<meta itemprop="wordCount" content="8362">
 
 
 
@@ -130,8 +130,8 @@
             <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
             <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
             </div>
-          <span class="more-meta"> 约 7413 字 </span>
-          <span class="more-meta"> 预计阅读 15 分钟 </span>
+          <span class="more-meta"> 约 8362 字 </span>
+          <span class="more-meta"> 预计阅读 17 分钟 </span>
         
       </div>
     </header>
@@ -813,8 +813,97 @@
 </div><h3 id="数据成员指针">数据成员指针</h3>
 <ul>
 <li>声明成员指针时必须包含成员所属的类，应在<code>*</code>之前添加<code>classname::</code>以表示该指针指向<code>classname</code>类的成员</li>
+<li>将成员指针声明为const可使指针既能指向const对象又能指向非const对象，但它不能修改成员</li>
+<li>初始化成员指针或对其赋值时，需使用取地址符<code>&amp;</code>，且需指定它所指的成员名</li>
+<li>C++11中声明并定义成员指针的最好方法是使用<code>auto</code>或<code>decltype</code></li>
+<li>例子：声明/定义成员指针</li>
 </ul>
-<h3 id="成员函数指针">成员函数指针</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 上下文：本节开头定义的Screen类 */</span>
+<span class="k">const</span> <span class="n">string</span> <span class="n">Screen</span><span class="o">::*</span><span class="n">pdata</span><span class="p">;</span>    <span class="c1">//声明成员指针pdata指向Screen类的string类型成员，且该指针为const
+</span><span class="c1"></span><span class="n">pdata</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">contents</span><span class="p">;</span>        <span class="c1">//为成员指针pdata赋值，使其指向Screen类的contents成员
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">pdata</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">contents</span><span class="p">;</span>   <span class="c1">//使用auto声明并定义成员指针
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>初始化成员指针或为其赋值时，该指针并未指向任何数据。成员指针仅指定成员而非其所属的对象，只有解引用时才提供对象信息</li>
+<li>两种成员指针访问算符，用于解引用成员指针并获得对象的成员：
+<ul>
+<li><code>.*</code>类似<code>.</code>，作用于对象，取其成员</li>
+<li><code>-&gt;*</code>类似<code>-&gt;</code>，作用于指向对象的指针，取其成员</li>
+<li>这两个算符先用<code>*</code>解引用成员指针来得知需访问哪个成员，再用<code>.</code>/<code>-&gt;</code>通过传入的对象/指向对象的指针来访问该成员</li>
+</ul>
+</li>
+<li>例子：解引用成员指针</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 上下文：本节开头定义的Screen类 */</span>
+<span class="n">Screen</span> <span class="n">myScreen</span><span class="p">,</span><span class="o">*</span><span class="n">pScreen</span><span class="o">=&amp;</span><span class="n">myScreen</span><span class="p">;</span> <span class="c1">//定义对象及其指针
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">pdata</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">contents</span><span class="p">;</span>       <span class="c1">//定义成员指针指向Screen类型的contents成员
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">s</span><span class="o">=</span><span class="n">myScreen</span><span class="p">.</span><span class="o">*</span><span class="n">pdata</span><span class="p">;</span>             <span class="c1">//取对象myScreen的contents成员
+</span><span class="c1"></span><span class="n">s</span><span class="o">=</span><span class="n">pScreen</span><span class="o">-&gt;*</span><span class="n">pdata</span><span class="p">;</span>                  <span class="c1">//取pScreen所指对象的contents成员
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>常规的访问控制规则对成员指针同样有效，即private成员必须在类内访问或用友元访问。</li>
+<li>类的数据成员一般是private，指向数据成员的指针需要权限：
+<ul>
+<li>最好在类内定义成员函数，令其返回值是指向该数据成员的指针</li>
+<li>该成员函数应该是static的，因为初始化成员指针时要用类名而不是对象来访问该成员函数</li>
+</ul>
+</li>
+<li>例子：使用static成员函数来返回指向private数据成员的成员指针</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//该函数返回类型是const string Screen::*，即是返回指向数据成员的指针
+</span><span class="c1"></span>    <span class="c1">//由于使用该函数获得成员指针时并无对象，故定义为static
+</span><span class="c1"></span>    <span class="k">static</span> <span class="k">const</span> <span class="n">string</span> <span class="n">Screen</span><span class="o">::*</span><span class="n">data</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">contents</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">contents</span><span class="p">;</span>    <span class="c1">//被访问的private数据成员
+</span><span class="c1"></span><span class="p">};</span>
+<span class="c1">//使用static成员函数来获得指向private数据成员的成员指针
+</span><span class="c1"></span><span class="k">const</span> <span class="n">string</span> <span class="n">Screen</span><span class="o">::*</span><span class="n">pdata</span><span class="o">=</span><span class="n">Screen</span><span class="o">::</span><span class="n">data</span><span class="p">();</span>
+<span class="n">Screen</span> <span class="n">myScreen</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">s</span><span class="o">=</span><span class="n">myScreen</span><span class="p">.</span><span class="o">*</span><span class="n">pdata</span><span class="p">;</span> <span class="c1">//传入对象，解引用成员指针（顺利访问private数据成员）
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="成员函数指针">成员函数指针</h3>
 <h3 id="将成员函数用作可调用对象">将成员函数用作可调用对象</h3>
 <h2 id="嵌套类">嵌套类</h2>
 <h2 id="union一种节省空间的类">union：一种节省空间的类</h2>
