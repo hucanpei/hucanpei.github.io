@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>同余 on pi</title>
+    <link>http://localhost:1313/tags/%E5%90%8C%E4%BD%99/</link>
+    <description>Recent content in 同余 on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 13 Dec 2019 05:23:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%90%8C%E4%BD%99/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>POJ1426 - Find The Multiple</title>
+      <link>http://localhost:1313/post/oj/poj1426/</link>
+      <pubDate>Fri, 13 Dec 2019 05:23:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj1426/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-1426 Task Given a positive integer n, write a program to find out a nonzero multiple m of n whose decimal representation contains only the digits 0 and 1. You may assume that</description>
+    </item>
+    
+  </channel>
+</rss>

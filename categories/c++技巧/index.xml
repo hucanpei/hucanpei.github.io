@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43;技巧 on pi</title>
+    <link>http://localhost:1313/categories/c&#43;&#43;%E6%8A%80%E5%B7%A7/</link>
+    <description>Recent content in C&#43;&#43;技巧 on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 22 Mar 2020 17:45:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/c++%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C&#43;&#43;技巧：cin/cout和scanf/printf的速度</title>
+      <link>http://localhost:1313/post/cpp/cpp_iostream_cstdio/</link>
+      <pubDate>Sun, 22 Mar 2020 17:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cpp_iostream_cstdio/</guid>
+      <description>如果不做特殊处理，cin/cout的速度比scanf/printf慢得多，做算法时经常Time Limit Exceeded。 但使用一些技巧，cin/c</description>
+    </item>
+    
+  </channel>
+</rss>

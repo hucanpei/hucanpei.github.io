@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on pi</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 11 May 2020 15:44:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[置顶]C&#43;&#43;文章归类</title>
+      <link>http://localhost:1313/post/cpp/top_cpp/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/top_cpp/</guid>
+      <description>C++ primer 读书笔记 C++ primer 第1章 开始 C++ primer 第2章 变量和基本类型 C++ primer 第3章 字符串、向量和数组 C++ primer 第4章 表达式 C++ primer 第5章 语句 C++ primer 第6章 函数 C++ primer 第7章 类 C++ primer 第</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第19章 特殊工具与技术</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch19/</link>
+      <pubDate>Mon, 11 May 2020 15:44:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch19/</guid>
+      <description>控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第18章 用于大型程序的工具</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch18/</link>
+      <pubDate>Sun, 03 May 2020 22:38:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch18/</guid>
+      <description>大规模引用程序的特殊要求，及C++满足这些要求的工具： 在独立开发的子系统之间协同处理错误：异常处理 使用各种库（可能包含独立开发的库）进行协同</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第17章 标准库特殊设施</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch17/</link>
+      <pubDate>Thu, 23 Apr 2020 01:21:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch17/</guid>
+      <description>C++11极大扩充了标准库的规模和范围，标准库占据了C++11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第16章 模板与泛型编程</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch16/</link>
+      <pubDate>Tue, 14 Apr 2020 15:53:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch16/</guid>
+      <description>面向对象编程(OOP)和泛型编程(GP)都能处理在编写程序时类型未知的情况 OOP能处理运行时获取类型的情况 GP能处理编译期可获取类型的情况 标</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第15章 面向对象程序设计</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch15/</link>
+      <pubDate>Thu, 02 Apr 2020 18:26:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch15/</guid>
+      <description>面向对象程序设计(OOP)基于三个基本概念：数据抽象、继承、动态绑定 继承和动态绑定对程序的影响： 可以更容易地定义与其他类相似但不完全相同的新</description>
+    </item>
+    
+    <item>
+      <title>趣谈Linux操作系统10-14：进程、线程、进程数据结构</title>
+      <link>http://localhost:1313/post/os/linux_interest_10-14/</link>
+      <pubDate>Fri, 27 Mar 2020 00:11:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/linux_interest_10-14/</guid>
+      <description>10-进程：公司接这么多项目，如何管？ 11-线程：如何让复杂的项目并行执行？ 12-进程数据结构（上）：项目多了就需要项目管理系统 13-进程数</description>
+    </item>
+    
+    <item>
+      <title>趣谈Linux操作系统6-9：架构、启动、初始化、系统调用</title>
+      <link>http://localhost:1313/post/os/linux_interest_6-9/</link>
+      <pubDate>Tue, 24 Mar 2020 23:17:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/linux_interest_6-9/</guid>
+      <description>06-x86架构：有了开放的架构，才能打造开放的营商环境 x86是一个统一、开放的架构，保证系统运行的硬件环境单一稳定 计算机的工作模式是什么样</description>
+    </item>
+    
+    <item>
+      <title>趣谈Linux操作系统3-5：概述、命令、系统调用</title>
+      <link>http://localhost:1313/post/os/linux_interest_3-5/</link>
+      <pubDate>Tue, 24 Mar 2020 16:02:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/linux_interest_3-5/</guid>
+      <description>03-你可以把Linux内核当成一家软件外包公司的老板 操作系统其实就像一个软件外包公司，其内核就相当于这家外包公司的老板。所以接下来的整个课</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;技巧：cin/cout和scanf/printf的速度</title>
+      <link>http://localhost:1313/post/cpp/cpp_iostream_cstdio/</link>
+      <pubDate>Sun, 22 Mar 2020 17:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cpp_iostream_cstdio/</guid>
+      <description>如果不做特殊处理，cin/cout的速度比scanf/printf慢得多，做算法时经常Time Limit Exceeded。 但使用一些技巧，cin/c</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第14章 重载运算与类型转换</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch14/</link>
+      <pubDate>Fri, 20 Mar 2020 15:50:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch14/</guid>
+      <description>当运算符被用于类类型对象时，可利用运算符重载为其指定新含义（以提升可读性） 可自定义类类型之间的转换规则 基本概念 重载的算符是特殊的函数：名字由</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第13章 拷贝控制</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch13/</link>
+      <pubDate>Sun, 15 Mar 2020 16:30:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch13/</guid>
+      <description>定义一个类时，可显式或隐式的指定在此类型对象上拷贝、移动、赋值、销毁时做什么。通过5种成员函数实现拷贝控制操作： 拷贝构造函数：用同类型的另一</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第12章 动态内存</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch12/</link>
+      <pubDate>Sun, 08 Mar 2020 16:18:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch12/</guid>
+      <description>对象的生存期： 全局对象：程序启动时创建，程序结束时销毁 局部static对象：第一次使用前创建，程序结束时销毁 局部自动对象：定义时创建，离开定</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第11章 关联容器</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch11/</link>
+      <pubDate>Mon, 02 Mar 2020 17:07:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch11/</guid>
+      <description>关联容器的元素按照关键字来保存和访问，而顺序容器的元素是按照在容器中的位置来保存和访问 关联容器支持高效的关键字查找和访问 2种关联容器： map</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第10章 泛型算法</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch10/</link>
+      <pubDate>Tue, 25 Feb 2020 15:01:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch10/</guid>
+      <description>标准库未给容器添加大量功能，而是提供一组独立于容器的泛型算法 算法：它们实现了一些经典算法的公共接口 泛型：它们可用于不同类型的容器和不同类型的</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第9章 顺序容器</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch9/</link>
+      <pubDate>Wed, 19 Feb 2020 13:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch9/</guid>
+      <description>一个容器是特定类型对象的集合 顺序容器中元素的顺序与其加入容器的位置对应 关联容器中元素的顺序由其关联的关键字决定，关联容器分为有序关联容器和无</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第8章 IO库</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch8/</link>
+      <pubDate>Sat, 15 Feb 2020 21:15:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch8/</guid>
+      <description>C++语言不直接处理输入输出，而是通过标准库中的一组类来处理IO 这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第7章 类</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch7/</link>
+      <pubDate>Thu, 13 Feb 2020 18:02:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch7/</guid>
+      <description>C++中可用类定义自己的数据类型 数据抽象能帮助将对象的具体实现与对象能执行的操作分离 类的基本思想是数据抽象和封装 数据抽象：接口和实现分离的编</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第6章 函数</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch6/</link>
+      <pubDate>Tue, 11 Feb 2020 16:38:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch6/</guid>
+      <description>函数是一个命名了的代码块，通过调用函数来执行相应代码。 函数可有0个或多个参数，可能产生0个或1个结果。 函数可以重载，即一个名字对应多个不同函</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第5章 语句</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch5/</link>
+      <pubDate>Sun, 09 Feb 2020 21:59:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch5/</guid>
+      <description>C++提供了一组控制流语句，包括条件执行语句、循环语句、跳转语句。 简单语句 一个表达式末尾加上分号就成了表达式语句。表达式语句的作用是：执行表</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第4章 表达式</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch4/</link>
+      <pubDate>Sat, 08 Feb 2020 14:55:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch4/</guid>
+      <description>C++提供了一套运算符并定义了它们作用于内置类型时的操作 运算对象是类类型时，允许重载运算符 表达式由一个或多个运算对象组成，对表达式求值返回结</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第3章 字符串、向量和数组</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch3/</link>
+      <pubDate>Mon, 03 Feb 2020 15:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch3/</guid>
+      <description>string和vector是两类最重要的标准库类型，strng表示可变长的字符序列，vector存放某种给定类型对象的可变长序列。 迭代器是s</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第2章 变量和基本类型</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch2/</link>
+      <pubDate>Thu, 30 Jan 2020 17:07:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch2/</guid>
+      <description>C++定义了一些基本内置类型（字符、整型、浮点等），也提供了自定义数据类型的机制，标准库还定义了一些复杂的数据类型。 数据类型决定了程序中数据</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第1章 开始</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch1/</link>
+      <pubDate>Sun, 26 Jan 2020 23:54:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch1/</guid>
+      <description>编写一个简单的程序 函数：包含4部分：返回类型，函数名，形参列表，函数体。其中函数体是一个语句块。 main函数：每个cpp程序都有且仅有一个m</description>
+    </item>
+    
+    <item>
+      <title>HDU1240 - Asteroids!</title>
+      <link>http://localhost:1313/post/oj/hdu1240/</link>
+      <pubDate>Fri, 27 Dec 2019 15:01:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1240/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1240 Task You&amp;rsquo;re in space. You want to get home. There are asteroids. You don&amp;rsquo;t want to hit them. Input Input to this problem will consist of a (non-empty) series of up to</description>
+    </item>
+    
+    <item>
+      <title>POJ3414 - Pots</title>
+      <link>http://localhost:1313/post/oj/poj3414/</link>
+      <pubDate>Sat, 21 Dec 2019 19:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj3414/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-3414 Task You are given two pots, having the volume of A and B liters respectively. The following operations can be performed: 1.FILL(i) fill the pot i (1 ≤ i ≤ 2) from</description>
+    </item>
+    
+    <item>
+      <title>一些报告</title>
+      <link>http://localhost:1313/post/ml/presentations/</link>
+      <pubDate>Sat, 21 Dec 2019 15:50:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/ml/presentations/</guid>
+      <description>多媒体与通信报告 (Searching for MobileNetV3)： 数据挖掘报告 (Cognitive Graph for Multi-Hop Reading Comprehension at Scale)： CTA脑血管分割方法调研：</description>
+    </item>
+    
+    <item>
+      <title>POJ3126 - Prime Path</title>
+      <link>http://localhost:1313/post/oj/poj3126/</link>
+      <pubDate>Sun, 15 Dec 2019 05:05:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj3126/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-3126 Task The ministers of the cabinet were quite upset by the message from the Chief of Security stating that they would all have to change the four-digit room numbers on their offices.</description>
+    </item>
+    
+    <item>
+      <title>POJ1426 - Find The Multiple</title>
+      <link>http://localhost:1313/post/oj/poj1426/</link>
+      <pubDate>Fri, 13 Dec 2019 05:23:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj1426/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-1426 Task Given a positive integer n, write a program to find out a nonzero multiple m of n whose decimal representation contains only the digits 0 and 1. You may assume that</description>
+    </item>
+    
+    <item>
+      <title>POJ3278 - Catch That Cow</title>
+      <link>http://localhost:1313/post/oj/poj3278/</link>
+      <pubDate>Wed, 11 Dec 2019 14:53:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj3278/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-3278 Task Farmer John has been informed of the location of a fugitive cow and wants to catch her immediately. He starts at a point N (0 ≤ N ≤ 100,000) on a</description>
+    </item>
+    
+    <item>
+      <title>HDU1312 - Red and Black</title>
+      <link>http://localhost:1313/post/oj/hdu1312/</link>
+      <pubDate>Tue, 10 Dec 2019 16:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1312/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1312 Task There is a rectangular room, covered with square tiles. Each tile is colored either red or black. A man is standing on a black tile. From a tile, he can move</description>
+    </item>
+    
+    <item>
+      <title>HDU1716 - 排列2</title>
+      <link>http://localhost:1313/post/oj/hdu1716/</link>
+      <pubDate>Tue, 10 Dec 2019 11:16:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1716/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1716 Task Ray又对数字的列产生了兴趣： 现有四张卡片，用这四张卡片能排列</description>
+    </item>
+    
+    <item>
+      <title>HDU1027 - Ignatius and the Princess II</title>
+      <link>http://localhost:1313/post/oj/hdu1027/</link>
+      <pubDate>Tue, 10 Dec 2019 01:21:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1027/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1027 Task Now our hero finds the door to the BEelzebub feng5166. He opens the door and finds feng5166 is about to kill our pretty Princess. But now the BEelzebub has to beat</description>
+    </item>
+    
+    <item>
+      <title>HDU2648 - Shopping</title>
+      <link>http://localhost:1313/post/oj/hdu2648/</link>
+      <pubDate>Mon, 09 Dec 2019 23:17:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu2648/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-2648 Task Every girl likes shopping,so does dandelion.Now she finds the shop is increasing the price every day because the Spring Festival is coming .She is fond of a shop which is called</description>
+    </item>
+    
+    <item>
+      <title>HDU2094 - 产生冠军</title>
+      <link>http://localhost:1313/post/oj/hdu2094/</link>
+      <pubDate>Sun, 08 Dec 2019 11:31:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu2094/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-2094 Task 有一群人，打乒乓球比赛，两两捉对撕杀，每两个人之间最多打一场比</description>
+    </item>
+    
+    <item>
+      <title>HDU1276 - 士兵队列训练问题</title>
+      <link>http://localhost:1313/post/oj/hdu1276/</link>
+      <pubDate>Sun, 08 Dec 2019 10:48:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1276/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1276 Task 某部队进行新兵队列训练，将新兵从一开始按顺序依次编号，并排成一</description>
+    </item>
+    
+    <item>
+      <title>HDU1873 - 看病要排队</title>
+      <link>http://localhost:1313/post/oj/hdu1873/</link>
+      <pubDate>Fri, 06 Dec 2019 22:20:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1873/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1873 Task 看病要排队这个是地球人都知道的常识。 不过经过细心的0068的观</description>
+    </item>
+    
+    <item>
+      <title>HDU1702 - ACboy needs your help again!</title>
+      <link>http://localhost:1313/post/oj/hdu1702/</link>
+      <pubDate>Fri, 06 Dec 2019 21:35:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1702/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1702 Task ACboy was kidnapped!! he miss his mother very much and is very scare now.You can&amp;rsquo;t image how dark the room he was put into is, so poor :(. As a smart</description>
+    </item>
+    
+    <item>
+      <title>HDU1425 - sort</title>
+      <link>http://localhost:1313/post/oj/hdu1425/</link>
+      <pubDate>Fri, 06 Dec 2019 20:51:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1425/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1425 给你n个整数，请按从大到小的顺序输出其中前m大的数。 Input 每组测试数</description>
+    </item>
+    
+    <item>
+      <title>HDU4841 - 圆桌问题</title>
+      <link>http://localhost:1313/post/oj/hud4841/</link>
+      <pubDate>Fri, 06 Dec 2019 20:51:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hud4841/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-4841 Task 圆桌上围坐着2n个人。其中n个人是好人，另外n个人是坏人。如果</description>
+    </item>
+    
+    <item>
+      <title>HDU3233 - Download Manager</title>
+      <link>http://localhost:1313/post/oj/hdu3233/</link>
+      <pubDate>Fri, 06 Dec 2019 20:50:58 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu3233/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-3233 Task Jiajia downloads a lot, a lot more than you can even imagine. Some say that he starts downloading up to 20,000 files together. If 20,000 files try to share a limited</description>
+    </item>
+    
+    <item>
+      <title>HDU1237 - 简单计算器</title>
+      <link>http://localhost:1313/post/oj/hdu1237/</link>
+      <pubDate>Fri, 06 Dec 2019 20:49:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1237/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1237 Task 读入一个只包含 +, -, *, / 的非负整数计算表达式，计算该表达式的值。</description>
+    </item>
+    
+    <item>
+      <title>HDU1062 - Text Reverse</title>
+      <link>http://localhost:1313/post/oj/hdu1062/</link>
+      <pubDate>Fri, 06 Dec 2019 20:49:09 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1062/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1062 Task Ignatius likes to write words in reverse way. Given a single line of text which is written by Ignatius, you should reverse all the words and then output them. Input The</description>
+    </item>
+    
+    <item>
+      <title>HDU1090 - A&#43;B for Input-Output Practice (II)</title>
+      <link>http://localhost:1313/post/oj/hdu1090/</link>
+      <pubDate>Fri, 06 Dec 2019 14:13:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1090/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1090 Task Your task is to Calculate a + b. Input Input contains an integer N in the first line, and then N lines follow. Each line consists of a pair of integers</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/readme/</guid>
+      <description>blog_src 博客的源码</description>
+    </item>
+    
+  </channel>
+</rss>

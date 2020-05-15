@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C&#43;&#43; primer 第7章 类 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="C&#43;&#43;中可用类定义自己的数据类型 数据抽象能帮助将对象的具体实现与对象能执行的操作分离 类的基本思想是数据抽象和封装 数据抽象：接口和实现分离的编" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cpp/cppprimer_ch7/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C&#43;&#43; primer 第7章 类" />
+<meta property="og:description" content="C&#43;&#43;中可用类定义自己的数据类型 数据抽象能帮助将对象的具体实现与对象能执行的操作分离 类的基本思想是数据抽象和封装 数据抽象：接口和实现分离的编" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cpp/cppprimer_ch7/" />
+<meta property="article:published_time" content="2020-02-13T18:02:00+08:00" />
+<meta property="article:modified_time" content="2020-02-13T18:02:00+08:00" />
+<meta itemprop="name" content="C&#43;&#43; primer 第7章 类">
+<meta itemprop="description" content="C&#43;&#43;中可用类定义自己的数据类型 数据抽象能帮助将对象的具体实现与对象能执行的操作分离 类的基本思想是数据抽象和封装 数据抽象：接口和实现分离的编">
+<meta itemprop="datePublished" content="2020-02-13T18:02:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-13T18:02:00&#43;08:00" />
+<meta itemprop="wordCount" content="9991">
+
+
+
+<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43; primer 第7章 类"/>
+<meta name="twitter:description" content="C&#43;&#43;中可用类定义自己的数据类型 数据抽象能帮助将对象的具体实现与对象能执行的操作分离 类的基本思想是数据抽象和封装 数据抽象：接口和实现分离的编"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C&#43;&#43; primer 第7章 类</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-13 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+            <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+            </div>
+          <span class="more-meta"> 约 9991 字 </span>
+          <span class="more-meta"> 预计阅读 20 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#定义抽象数据类型">定义抽象数据类型</a>
+      <ul>
+        <li><a href="#设计sales_data类">设计Sales_data类</a></li>
+        <li><a href="#定义改进的sales_data类">定义改进的Sales_data类</a></li>
+        <li><a href="#定义类相关的非成员函数">定义类相关的非成员函数</a></li>
+        <li><a href="#构造函数">构造函数</a></li>
+        <li><a href="#拷贝赋值和析构">拷贝、赋值和析构</a></li>
+      </ul>
+    </li>
+    <li><a href="#访问控制与封装">访问控制与封装</a>
+      <ul>
+        <li><a href="#友元">友元</a></li>
+      </ul>
+    </li>
+    <li><a href="#类的其他特性">类的其他特性</a>
+      <ul>
+        <li><a href="#类成员再探">类成员再探</a></li>
+        <li><a href="#返回this的成员函数">返回*this的成员函数</a></li>
+        <li><a href="#类类型">类类型</a></li>
+        <li><a href="#友元再探">友元再探</a></li>
+      </ul>
+    </li>
+    <li><a href="#类的作用域">类的作用域</a>
+      <ul>
+        <li><a href="#名字查找与类的作用域">名字查找与类的作用域</a></li>
+      </ul>
+    </li>
+    <li><a href="#构造函数再探">构造函数再探</a>
+      <ul>
+        <li><a href="#构造函数初值列表">构造函数初值列表</a></li>
+        <li><a href="#委托构造函数">委托构造函数</a></li>
+        <li><a href="#默认构造函数的作用">默认构造函数的作用</a></li>
+        <li><a href="#隐式的类类型转换">隐式的类类型转换</a></li>
+        <li><a href="#聚合类">聚合类</a></li>
+        <li><a href="#字面值常量类">字面值常量类</a></li>
+      </ul>
+    </li>
+    <li><a href="#类的静态成员">类的静态成员</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>C++中可用类定义自己的数据类型</li>
+<li>数据抽象能帮助将对象的具体实现与对象能执行的操作分离</li>
+<li>类的基本思想是<code>数据抽象</code>和<code>封装</code></li>
+<li><code>数据抽象</code>：接口和实现分离的编程/设计技术。<code>接口</code>包括用户能执行的操作，<code>实现</code>包括类的数据成员、接口实现的函数体、定义类所需的各种私有函数</li>
+<li><code>封装</code>：实现了类的接口和实现的分离，封装后的类隐藏了它的实现细节。用户只能使用接口而无法访问实现部分</li>
+<li>类要实现数据抽象和封装，需定义一个<code>抽象数据类型</code>，由类的设计者考虑类的实现，使用类的程序员只需知道类做了什么，不需了解工作细节</li>
+</ul>
+<h2 id="定义抽象数据类型">定义抽象数据类型</h2>
+<ul>
+<li>允许用户访问其所有成员且需要用户实现操作的类不是抽象数据类型。</li>
+</ul>
+<h3 id="设计sales_data类">设计Sales_data类</h3>
+<ul>
+<li>类的用户是程序员，而非程序的最终使用者</li>
+<li>设计类的接口时应考虑如何才能易于使用，使用时不应再顾及实现机制</li>
+<li>设计良好的类既要有直观且易于使用的接口，也要有高效的实现</li>
+</ul>
+<h3 id="定义改进的sales_data类">定义改进的Sales_data类</h3>
+<ul>
+<li><code>成员函数</code>的声明必须在类的内部，但其定义可在类内或类外。若定义也在类内，就是隐式的<code>inline函数</code></li>
+<li>组成接口的非成员函数其声明和定义都在类外</li>
+<li>调用成员函数时，是在替对象调用。成员函数通过名为<code>this指针</code>的<code>隐式形参</code>来访问调用它的对象，调用成员函数时，用请求该函数的对象地址初始化this指针</li>
+<li><code>this指针</code>是成员函数的<code>隐式形参</code>，调用时传入的实参是<code>对象的地址</code></li>
+<li>成员函数体内部可直接使用调用它的对象的成员，不需要显式写出this和成员访问符。因为<code>成员函数定义的作用域在类作用域的内部</code>（不管是类内定义还是类外定义）</li>
+<li>任何自定义名为this的变量都是非法的</li>
+<li>例子：this指针隐式传入对象地址</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="n">total</span><span class="p">;</span>
+<span class="n">total</span><span class="p">.</span><span class="n">isbn</span><span class="p">();</span>               <span class="c1">//调用该对象的成员函数
+</span><span class="c1"></span><span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>   <span class="c1">//上一行对应的伪代码，说明调用成员函数时隐式传入对象地址
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>this指针是一个常量指针</code>，对象创建后this指针指向的地址不会变。</li>
+<li>默认<code>this指针指向的对象非常量</code>，因此不能在const对象上调用普通成员函数。</li>
+<li><code>const成员函数</code>：在成员函数声明时，形参列表后加const关键字。这个const使得隐式传入该函数的this指针成为<code>指向常量的指针</code>，因此const成员函数不可修改对象内容，可被const对象调用。</li>
+<li>常量对象、常量对象的指针/引用，都只能调用const成员函数</li>
+<li>将成员函数设置为const有助于提高灵活性，使const对象和非const对象都可调用。</li>
+<li>例子：const成员函数传入指向const对象的this指针</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>                       <span class="c1">//实际的定义
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">bookNo</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">string</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">*</span><span class="k">const</span> <span class="k">this</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//上一个对应的伪代码，说明const成员函数
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">bookNo</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>类本身就是一个作用域</code>，成员函数的定义嵌套在类的作用域中，无论成员函数在类的内部还是外部定义</li>
+<li>编译器分<code>两步处理类</code>（因此成员函数体可随意使用类中的成员，无需在意它们出现的顺序）：
+<ul>
+<li>编译成员的声明</li>
+<li>如果有函数体，再编译函数体</li>
+</ul>
+</li>
+<li>在类外部定义成员函数时，定义必须与类内的声明匹配。如类内被声明为const成员函数，则定义时也需要const</li>
+<li>在类外部定义的成员，其名字必须包含类名的<code>作用域</code>。这时，其后的形参列表和函数体都会属于该类的命名空间，但前面的返回类型不属于。</li>
+<li>成员函数也可<code>返回this指针</code>，将返回类型写为类名，返回用<code>return *this;</code>即可。若要返回<code>左值</code>，则需将返回类型写为引用。</li>
+<li>例子：成员函数返回this指针</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">Sales_data</span><span class="o">::</span><span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span> <span class="c1">//返回类型是该对象的引用，是左值
+</span><span class="c1"></span>    <span class="n">units_sold</span><span class="o">+=</span><span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span><span class="p">;</span>
+    <span class="n">revenue</span><span class="o">+=</span><span class="n">rhs</span><span class="p">.</span><span class="n">revenue</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>                                       <span class="c1">//返回调用该函数的对象，对this指针解引用
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="定义类相关的非成员函数">定义类相关的非成员函数</h3>
+<ul>
+<li>如果函数概念上属于类（即，是类接口的一部分）但不是类的成员，则它一般与类声明在同一头文件中</li>
+<li>IO类是不能被拷贝的类型，只能用引用传参。由于读写会改变流，使用时都是普通引用，不是常量引用</li>
+<li>默认情况下，拷贝类的对象其实是拷贝数据成员</li>
+</ul>
+<h3 id="构造函数">构造函数</h3>
+<ul>
+<li><code>构造函数</code>：控制类对象的初始化过程</li>
+<li>构造函数的名字和类名相同，没有返回类型</li>
+<li>只要类的对象被创建，就会执行构造函数。</li>
+<li>每个类有一个或多个构造函数，类似于重载，以形参列表区分。</li>
+<li><code>构造函数不能是const成员函数</code>，因为构造时要改变类。即使是const对象，也是完成初始化过程后才成为常量，初始化过程中可写</li>
+<li>类默认初始化时，调用<code>默认构造函数</code>，它不需要任何实参</li>
+<li>如果类没有显式定义构造函数，编译器会隐式定义默认构造函数，被称为<code>合成的默认构造函数</code></li>
+<li>合成的默认构造函数对成员初始化：
+<ul>
+<li>如果成员存在类内初始值，则用该值初始化</li>
+<li>如果成员没有类内初始值，则用默认初始化</li>
+</ul>
+</li>
+<li><code>类内初始值</code>：C++11允许成员在类中声明时同时提供一个初始值，该初始值会在构造时被构造函数使用。</li>
+<li>经常<code>需要定义自己的默认构造函数</code>，原因：
+<ul>
+<li>只有类没有声明任何构造函数时才会合成构造函数。（如果一个类在某种情况下需要手动控制初始化，则编译器认为它在任何情况下都需要手动控制初始化）</li>
+<li>合成的默认构造函数可能产生未定义，如块中的内置类型或复合类型（引用/指针）未提供类内初始值时，它们被默认初始化的值未定义</li>
+<li>编译器不能为某些类合成默认构造函数，如类内的某成员不存在默认构造函数，因而不能被默认初始化时</li>
+</ul>
+</li>
+<li>可用<code>constructor()=default;</code>手动定义一个构造函数由编译器合成。它可用于类内和类外的定义。</li>
+<li><code>构造函数初值列表</code>：负责初始化新创建的对象的一些成员。形式是成员名字的列表，每个名字后紧跟括号（或花括号）括起来的初值</li>
+<li>被构造函数初值列表忽略的成员，会执行类似合成默认构造函数的隐式初始化。（即初始化为<code>类内初始值</code>，或<code>默认初始化</code>）</li>
+<li>成员<code>初始化</code>流程（<code>优先级：构造函数初值列表-&gt;类内初始值-&gt;默认初始化</code>）：
+<ol>
+<li>如果成员在构造函数初值列表中，则初始化为<code>构造函数初值列表</code>提供的值</li>
+<li>如果成员不在构造函数初值列表中但有类内初始值，则初始化为<code>类内初始值</code></li>
+<li>如果成员既不在构造函数初值列表中又没有类内初始值，则<code>默认初始化</code></li>
+</ol>
+</li>
+<li>每个内置类型成员都应被构造函数初值列表或类内初始值初始化，否则默认初始化为未定义</li>
+<li>例子：构造函数初值列表</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>      <span class="c1">//冒号开头
+</span><span class="c1"></span>            <span class="n">boolNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{}</span>   <span class="c1">//初值列表
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="拷贝赋值和析构">拷贝、赋值和析构</h3>
+<ul>
+<li>对象在一些情况下会被<code>拷贝</code>，如初始化变量，以及以传值方式传递一个对象等</li>
+<li>使用赋值运算符<code>=</code>时，对象会被<code>赋值</code></li>
+<li>对象不存在时需要<code>析构</code></li>
+<li>如果不手动定义拷贝、赋值、析构，编译器也会自动合成它们。这样的版本将对对象的每个成员分别拷贝、赋值、析构</li>
+<li>对于某些类，合成的版本无法正常工作。特别是当类需要<code>分配对象之外的资源</code>时，例如管理动态内存的类</li>
+<li>一些需要管理动态内存的类可通过<code>vector</code>或<code>string</code>管理，它们可被合成的版本正确拷贝、赋值、析构</li>
+<li>在不手动定义拷贝、赋值、析构的情况下，类中分配的资源都应以数据成员的形式存储。</li>
+</ul>
+<h2 id="访问控制与封装">访问控制与封装</h2>
+<ul>
+<li><code>访问说明符</code>可加强类的封装性
+<ul>
+<li>定义在<code>public</code>说明符后的成员在整个程序内可被访问，即<code>public定义接口</code></li>
+<li>定义在<code>private</code>说明符后的成员只能在类内被访问，即<code>private封装实现</code></li>
+</ul>
+</li>
+<li>一个类可包含0个或多个访问说明符，对它们的出现次数无限定。</li>
+<li>每个访问说明符指定了接下来的成员的访问级别，其有效范围直到出现下一个访问说明符或到达类结尾</li>
+<li>用<code>struct</code>定义类，则定义在第一个访问说明符之前的成员默认是public。用<code>class</code>定义类，则定义在第一个访问说明符之前的成员默认是private。<code>struct和class的唯一区别是默认访问权限</code></li>
+</ul>
+<h3 id="友元">友元</h3>
+<ul>
+<li><code>友元</code>：类可允许其他类或函数访问它的非公有成员，方法是令其他类或函数成为它的友元</li>
+<li>要把一个函数声明为类的友元，只需在类中加一条<code>friend</code>关键字开头的函数声明。</li>
+<li>友元声明必须在类的内部，但最好在类的开始或结束处集中声明</li>
+<li>友元不是类的成员，也不受它所在的区域的访问控制级别的约束</li>
+<li>封装的好处：
+<ul>
+<li>确保用户代码不会无意间破坏类的状态</li>
+<li>被封装的类的细节可随时改变。只要接口不变就不需要修改用户代码</li>
+</ul>
+</li>
+<li>友元的声明仅指定访问权限，不是通常意义的声明。如果要使用，还需要在类外独立声明一次。</li>
+<li>为使友元对类的用户可见，通常把友元的独立声明和类的声明放在同一头文件</li>
+</ul>
+<h2 id="类的其他特性">类的其他特性</h2>
+<h3 id="类成员再探">类成员再探</h3>
+<ul>
+<li>类可以自定义某种类型在其中的别名，这些类型别名和其他名字一样受访问控制的约束</li>
+<li>用于定义类型的类型成员必须先定义后使用，这与普通成员不一样。因此<code>类型成员通常出现在类开始处</code></li>
+<li>定义在类内的成员函数是隐式inline函数，在类外定义的成员函数也可使用inline关键字显式定义为inline函数</li>
+<li>可以但没必要在成员函数声明和定义处都说明inline，最好只在类外定义时才用</li>
+<li>inline成员函数可重复定义，只需多个定义相同。因此应和类定义在同一头文件中</li>
+<li>成员函数可<code>重载</code>，其匹配过程类似于非成员函数的匹配</li>
+<li><code>可变数据成员</code>：这种成员永远不会是const，即使是在const对象内。只需在成员声明前加<code>mutable</code>关键字</li>
+<li>const成员函数可修改mutable数据成员</li>
+<li><code>类内初始值</code>：如果构造函数初值列表中无此成员，但该成员在类内声明时提供了一个初始值，则该成员被初始化为该初始值。</li>
+<li>类内初始值只能用<code>=</code>或<code>{}</code>的初始化形式，不可用<code>()</code>，因为会和成员函数声明混淆。</li>
+</ul>
+<h3 id="返回this的成员函数">返回*this的成员函数</h3>
+<ul>
+<li>如果返回<code>*this</code>的成员函数其返回类型是引用，则返回的是对象本身而不是副本，是<code>左值</code></li>
+<li>如果返回<code>*this</code>的成员函数其返回类型不是引用，则返回类型是<code>*this</code>的副本，是对象的拷贝</li>
+<li>若const成员函数以引用形式返回<code>*this</code>，则其返回的是常量引用。因为传入const成员函数的<code>*this</code>就是指向常量的指针</li>
+<li>通过区分成员函数是否是const的，可对其重载。原因是传入的隐式形参<code>*this</code>有<code>底层const</code>的差异</li>
+<li>将返回<code>*this</code>的const成员函数重载为非const成员函数是有必要的，因为非const对象调用它时希望返回一个非const引用</li>
+<li>const对象上只能调用const成员函数，非const对象优先调用非const成员函数</li>
+<li>例子：重载出返回*this的const和非const的成员函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//非常量对象的版本
+</span><span class="c1"></span>    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">display</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">){</span>               <span class="c1">//传入this指针和返回引用都非const
+</span><span class="c1"></span>        <span class="n">do_display</span><span class="p">(</span><span class="n">os</span><span class="p">);</span> <span class="c1">//非const方法调用const方法，传入do_display的this指针是指向const对象
+</span><span class="c1"></span>        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>   <span class="c1">//返回的this指针是非const方法的形参，故指向非const对象
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="c1">//常量对象的版本
+</span><span class="c1"></span>    <span class="k">const</span> <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">display</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>   <span class="c1">//传入指向const的this指针，返回const引用
+</span><span class="c1"></span>        <span class="n">do_display</span><span class="p">(</span><span class="n">os</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">//将底层实现的函数封装为private
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="n">do_display</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>         <span class="c1">//不改变类内容也不返回类的引用，声明为const成员函数
+</span><span class="c1"></span>        <span class="n">os</span><span class="o">&lt;&lt;</span><span class="n">contents</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如上例这种在底层实现函数外套一层接口的方式不会增加运行时开销，因为定义于类内的成员函数都是内联的</li>
+</ul>
+<h3 id="类类型">类类型</h3>
+<ul>
+<li>每个类定义了唯一的类型，两个类即使成员一样也是不同的类型</li>
+<li>可以把类的名字作为类型直接使用，也可把类名跟在关键字class或struct后</li>
+<li>例子：声明类对象的两种方式</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="n">item1</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">Sales_data</span> <span class="n">item2</span><span class="p">;</span> <span class="c1">//等价于上一行，偏C风格
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>前向声明</code>：可以仅声明类而不定义它，只是向程序中引入名字并指明它是一种类类型</li>
+<li><code>不完全类型</code>：在声明之后，定义之前，类是不完全类型</li>
+<li>不完全类型使用的场景很狭窄，只用于<code>既不需要成员也不需要实体</code>的情形，如：可以定义指向不完全类型的指针/引用，可以声明（但不能定义）以不完全类型作为形参/返回类型的函数</li>
+<li>在创建类对象前，类必须有完整的定义，编译器才能知道它需要多少空间。同理，类必须先定义才能用指针/引用访问类的成员</li>
+<li>一旦类名出现，就认为声明过了（而非定义），因此<code>类允许包含指向它自身类型的指针/引用</code>（此时类是不完全类型）</li>
+<li>例子：类包含指向它自身类型的指针/引用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Link_screen</span><span class="p">{</span>
+    <span class="n">Screen</span> <span class="n">window</span><span class="p">;</span>
+    <span class="n">Link_screen</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">Link_screen</span> <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="友元再探">友元再探</h3>
+<ul>
+<li>类可将其他类、其他类的成员函数定义为友元。</li>
+<li>友元可被定义在类内部，这时是内联的</li>
+<li>如果一个类指定了<code>友元类</code>，则友元类的成员函数都可访问此类包括private成员在内的所有成员</li>
+<li><code>友元关系没有传递性</code>，即A是B的友元，B是C的友元，这时A并不是C的友元</li>
+<li>可把另一个类的成员函数作为友元，只是要用类名指定作用域</li>
+<li>如果一个类要把一组重载函数声明为友元，则需对每一个函数分别声明才行</li>
+<li><code>类</code>和<code>非成员函数</code>的声明并不需要在友元声明之前。当一个名字第一次出现在友元声明中时，隐式假定该名字在当前作用域中可见。但友元不一定真的要声明在当前作用域中。</li>
+<li>但<code>类的成员函数</code>的声明必须在友元声明之前（因为需要类提供作用域？）。即，如果类<code>A</code>的成员函数<code>f</code>是类<code>B</code>的友元，则声明顺序为：
+<ul>
+<li>定义<code>A</code>类并在其中声明成员函数<code>f</code>，但此时不能定义。因为定义需要用到<code>B</code>的成员。</li>
+<li>定义<code>B</code>类并在其中声明<code>A::f</code>为友元</li>
+<li>定义<code>A::f</code>，这时它可使用<code>B</code>的成员</li>
+</ul>
+</li>
+<li>友元声明的作用是影响访问权限，它不是普通意义上的声明</li>
+<li>即使友元函数在类的内部被定义了，它也必须在类外独立声明，这样才能可见。</li>
+</ul>
+<h2 id="类的作用域">类的作用域</h2>
+<ul>
+<li>每个类都定义自己的作用域，一个类就是一个作用域</li>
+<li>类外定义成员函数时，一旦遇到了类名，则定义的其余部分（形参列表和函数体）就都在类的作用域内</li>
+<li>类外定义成员函数时，返回类型在类名之前，故不在类的作用域中，若需用到类中的类型需手动指定</li>
+</ul>
+<h3 id="名字查找与类的作用域">名字查找与类的作用域</h3>
+<ul>
+<li><code>名字查找</code>的过程：
+<ul>
+<li>在名字所在的块中寻找声明，只考虑在使用处之前的声明</li>
+<li>如果没找到，继续查找外层作用域</li>
+<li>如果最终没找到声明，报错</li>
+</ul>
+</li>
+<li><code>类的定义</code>过程：
+<ul>
+<li>编译成员的声明</li>
+<li>直到类全部可见后才编译函数体</li>
+</ul>
+</li>
+<li>成员函数体直到整个类可见后才会被处理，因此可使用类中定义的任何名字</li>
+<li>声明中使用的名字，包括返回类型/形参列表中使用的名字，都应该在使用前确保可见</li>
+<li>内层作用域中可重新定义外层作用域中的名字</li>
+<li>在类中，如果成员使用了外层作用域中定义的<code>类型</code>，则类不能在之后再定义该名字</li>
+<li>类型名通常在类的开始处定义，用于确保所有使用它的成员都出现在类型的定义之后</li>
+<li>例子：类型名特殊处理</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">typedef</span> <span class="kt">double</span> <span class="n">Money</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">Account</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Money</span> <span class="n">balance</span><span class="p">(){</span><span class="k">return</span> <span class="n">bal</span><span class="p">;}</span>    <span class="c1">//使用外层作用域定义的Money类型
+</span><span class="c1"></span><span class="k">private</span><span class="o">:</span>
+    <span class="k">typedef</span> <span class="kt">double</span> <span class="n">Money</span><span class="p">;</span>           <span class="c1">//错，类的成员使用了外面定义的类型，则不能在类内之后重新定义该类型
+</span><span class="c1"></span>    <span class="n">Money</span> <span class="n">bal</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>成员函数中使用的<code>名字查找</code>过程：
+<ul>
+<li>在成员函数内部查找，只考虑使用前的声明</li>
+<li>若成员函数内没找到，在类内继续查找，类的所有成员都被考虑</li>
+<li>若类内没找到，则在成员函数定义之前（只看该函数定义的位置，与类定义的位置无关）的作用域内查找</li>
+</ul>
+</li>
+<li>不建议用其他成员的名字作为成员函数的形参，因为在函数体内会屏蔽外面的同名实体（包括类的成员）。这时可手动指定作用域</li>
+<li>例子：手动指定作用域</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">Screen</span><span class="o">::</span><span class="n">dummy_fcn</span><span class="p">(</span><span class="n">pos</span> <span class="n">height</span><span class="p">){</span> <span class="c1">//类Screen的成员height被形参屏蔽
+</span><span class="c1"></span>    <span class="n">cursor</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span>      <span class="c1">//指定该对象中的height成员
+</span><span class="c1"></span>    <span class="n">cursor</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="n">Screen</span><span class="o">::</span><span class="n">height</span><span class="p">;</span>    <span class="c1">//等价于上一句，指定该类作用域中的height
+</span><span class="c1"></span>    <span class="n">cursor</span><span class="o">=</span><span class="n">width</span><span class="o">*::</span><span class="n">height</span><span class="p">;</span>          <span class="c1">//指定全局作用域中的height
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>当成员函数定义在类外部时，名字查找第3步不仅要考虑类定义之前的全局作用域，还要考虑成员函数定义之前的全局作用域</li>
+</ul>
+<h2 id="构造函数再探">构造函数再探</h2>
+<h3 id="构造函数初值列表">构造函数初值列表</h3>
+<ul>
+<li>如果未在<code>构造函数初值列表</code>中显式初始化成员，且未提供<code>类内初始值</code>，则该成员在执行构造函数体之前被<code>默认初始化</code>。</li>
+<li>在构造函数初值列表中显式初始化成员相当于<code>初始化</code>，在构造函数体内赋值相当于<code>赋值</code></li>
+<li>如果成员是<code>引用</code>、<code>const成员</code>等不可被赋值的类型，或是某种<code>不可被默认初始化</code>的类型（未提供默认构造函数），则它们只能放在构造函数初值列表中初始化，或提供类内初始值</li>
+<li>最佳实践：类的成员都放在构造函数初值列表中初始化，或提供类内初始值</li>
+<li>构造函数初值列表只说明用于初始化的值，并未规定<code>求值顺序</code></li>
+<li>成员的初始化顺序只与成员在类定义中出现的<code>声明顺序</code>一致，与在构造函数初值列表中的顺序无关</li>
+<li>最佳实践：
+<ul>
+<li>最好令构造函数初值列表的顺序与成员声明顺序一致</li>
+<li>尽量避免用构造函数初值列表中的一个名字初始化其中的另一个名字</li>
+</ul>
+</li>
+<li>例子：构造函数初值列表未规定求值顺序</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">X</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">X</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span><span class="o">:</span> <span class="n">j</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="p">{}</span>     <span class="c1">//未定义行为
+</span><span class="c1"></span>    <span class="n">X</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span><span class="o">:</span> <span class="n">j</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="p">{}</span>   <span class="c1">//正确行为
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>构造函数中也可用<code>默认实参</code>。若一个构造函数为所有形参提供了默认实参，它实际上定义了<code>默认构造函数</code></li>
+</ul>
+<h3 id="委托构造函数">委托构造函数</h3>
+<ul>
+<li><code>委托构造函数</code>：使用它所属类的其他构造函数执行初始化。即，将其职责委托给其他构造函数</li>
+<li>在委托构造函数的初值列表内只允许有一个名字，即类名，它的参数列表必须与另一个构造函数匹配，表示初始化时是在调用这个构造函数</li>
+<li>例子：委托构造函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Sales_data</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">cnt</span><span class="p">,</span> <span class="kt">double</span> <span class="n">price</span><span class="p">)</span><span class="o">:</span>
+                <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">cnt</span><span class="o">*</span><span class="n">price</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="n">Sales_data</span><span class="p">()</span><span class="o">:</span> <span class="n">Sales_data</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>                     <span class="c1">//委托Sales_data(string s, unsigned cnt, double price)
+</span><span class="c1"></span>    <span class="n">Sales_data</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span><span class="o">:</span> <span class="n">Sales_data</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>              <span class="c1">//委托Sales_data(string s, unsigned cnt, double price)
+</span><span class="c1"></span>    <span class="n">Sales_data</span><span class="p">(</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">)</span><span class="o">:</span> <span class="n">Sales_data</span><span class="p">()</span> <span class="p">{</span><span class="n">read</span><span class="p">(</span><span class="n">is</span><span class="p">,</span><span class="o">*</span><span class="k">this</span><span class="p">);}</span> <span class="c1">//委托Sales_data()
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>执行顺序</code>：当一个构造函数委托给另一个构造函数时，受委托的构造函数的初值列表和函数体依次执行，然后才执行委托构造函数的函数体</li>
+</ul>
+<h3 id="默认构造函数的作用">默认构造函数的作用</h3>
+<ul>
+<li>当对象被默认初始化时执行默认构造函数。<code>默认初始化</code>发生的情形：
+<ul>
+<li>块定义域内不使用初始值就定义一个非静态变量/数组</li>
+<li>类本身含有类类型成员并使用合成的默认构造函数</li>
+<li>类类型成员没有在构造函数初值列表中显式初始化</li>
+</ul>
+</li>
+<li><code>值初始化</code>发生的情形
+<ul>
+<li>数组初始化时提供的初始值小于数组大小</li>
+<li>不使用初始值定义一个局部静态变量</li>
+<li>书写<code>T()</code>的表达式进行显式值初始化，例如vector仅指定元素数量时</li>
+</ul>
+</li>
+<li>使用默认构造函数时，不可用括号</li>
+<li>例子：使用默认构造函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="nf">obj</span><span class="p">();</span>   <span class="c1">//错，编译器认为这是函数声明
+</span><span class="c1"></span><span class="n">Sales_data</span> <span class="n">obj</span><span class="p">;</span>     <span class="c1">//对，默认初始化，调用默认构造函数
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="隐式的类类型转换">隐式的类类型转换</h3>
+<ul>
+<li><code>转换构造函数</code>：如果构造函数只接受一个实参，则它实际上定义了由那种类型转换为该类类型的隐式转换</li>
+<li>编译器只能执行一步隐式类型转换</li>
+<li>例子：转换构造函数一步转换</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">null_book</span><span class="o">=</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">;</span>
+<span class="cm">/* 上下文：item.combine()接受一个Sales_data类型，
+</span><span class="cm"> * 而Sales_data类有一个接受string的构造函数，但没有接受C风格字符串的构造函数
+</span><span class="cm"> */</span>
+<span class="n">item</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">null_book</span><span class="p">);</span>        <span class="c1">//对，需要一步转换：string-&gt;Sales_data，用string创建临时量Sales_data传入
+</span><span class="c1"></span><span class="n">item</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">);</span>  <span class="c1">//错，需要两步转换：字符串字面值-&gt;string-&gt;Sales_data
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可将构造函数声明为<code>explicit</code>以禁止发生隐式类型转换，但仍可用<code>static_cast</code>做显式类型转换，此时会创建一个临时量</li>
+<li>explicit只对一个实参的构造函数使用，其他构造函数也不会被隐式转换。</li>
+<li>只能在类内声明构造函数时使用explicit，类外定义时不应重复</li>
+<li>explicit声明构造函数时，只能直接初始化（调用构造函数），不能用隐式转换拷贝初始化</li>
+<li>例子：explicit</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Sales_data</span><span class="p">()</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>
+    <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>
+                <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="k">explicit</span> <span class="nf">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">S</span><span class="p">)</span><span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="k">explicit</span> <span class="nf">Sales_data</span><span class="p">(</span><span class="n">istream</span> <span class="o">&amp;</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="k">explicit</span> <span class="nf">Sales_data</span><span class="p">(</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">)</span> <span class="p">{</span><span class="n">read</span><span class="p">(</span><span class="n">is</span><span class="p">,</span><span class="o">*</span><span class="k">this</span><span class="p">);}</span> <span class="c1">//错，定义时不应用explicit
+</span><span class="c1"></span><span class="n">string</span> <span class="n">null_book</span><span class="o">=</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">;</span>
+<span class="cm">/* 上下文：item.combine()接受一个Sales_data类型 */</span>
+<span class="n">item</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">null_book</span><span class="p">)</span>                     <span class="c1">//错，string的构造函数是explixit，不可隐式转换
+</span><span class="c1"></span><span class="n">item</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">cin</span><span class="p">)</span>                           <span class="c1">//错，istream的构造函数是explixit，不可隐式转换
+</span><span class="c1"></span><span class="n">Sales_data</span> <span class="n">item1</span><span class="p">(</span><span class="n">null_book</span><span class="p">);</span>                <span class="c1">//对，直接初始化，显式调用构造函数
+</span><span class="c1"></span><span class="n">Sales_data</span> <span class="n">item2</span><span class="o">=</span><span class="n">null_book</span><span class="p">;</span>                 <span class="c1">//错，不可用隐式转换的拷贝初始化
+</span><span class="c1"></span><span class="n">item</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">Sales_data</span><span class="p">(</span><span class="n">null_book</span><span class="p">));</span>        <span class="c1">//对，显式构造
+</span><span class="c1"></span><span class="n">item</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Sales_data</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cin</span><span class="p">));</span> <span class="c1">//对，显式转换，创建了临时的Sales_data对象
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>接受单一参数<code>const char *</code>的string构造函数不是explicit</li>
+<li>接受单一容量参数的vector构造函数是explicit</li>
+</ul>
+<h3 id="聚合类">聚合类</h3>
+<ul>
+<li><code>聚合类</code>：满足以下条件：
+<ul>
+<li>所有成员都public</li>
+<li>没有定义构造函数</li>
+<li>没有类内初始值</li>
+<li>没有基类和虚函数</li>
+</ul>
+</li>
+<li>可以提供花括号的初值列表用于<code>列表初始化</code>聚合类的数据成员，初始值的顺序必须和声明顺序一致</li>
+<li>如果花括号初始化聚合类时参数较少，则靠后的成员被<code>值初始化</code>，类似数组</li>
+<li>像这样显式列表初始化类的对象的成员的缺点：
+<ul>
+<li>要求成员都public</li>
+<li>将正确初始化的任务交给用户</li>
+<li>修改成员时需要修改用户代码</li>
+</ul>
+</li>
+</ul>
+<h3 id="字面值常量类">字面值常量类</h3>
+<ul>
+<li>一般的字面值常量是算术类型、引用/指针，某些类也可以是字面值类型</li>
+<li>字面值类型的类可能含有constexpr成员，这样的成员必须符合constexpr的所有要求，它是隐式的const成员</li>
+<li>数据成员都是字面值类型的聚合类是字面值常量类。如果一个类不是聚合类但满足以下要求，也是字面值常量类：
+<ul>
+<li>数据成员都是字面值类型</li>
+<li>至少有一个constexpr构造函数</li>
+<li>若数据成员有类内初始值，则内置类型成员的初值必须是常量表达式，类类型成员的初值必须用它自己的constexpr构造函数</li>
+<li>必须用析构函数的默认定义</li>
+</ul>
+</li>
+<li>虽然构造函数不能是const的，但字面值常量类的构造函数可以是constexpr的，且必须提供至少一个constexpr构造函数</li>
+<li>constexpr构造函数可声明为<code>=default</code>或<code>删除函数</code>。否则，constexpr构造函数必须既是构造函数（不能return）又是constexpr函数（唯一可执行的语句就是return）。因此<code>constexpr函数体一般是空的</code>，只使用初值列表</li>
+<li>constexpr构造函数必须初始化所有数据成员，初始值或者用常量表达式（内置类型），或者用constexpr构造函数（类类型）</li>
+<li>constexpr构造函数用于生成constexpr对象以及constexpr函数的参数/返回类型</li>
+<li>例子：字面值常量类和constexpr构造函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//定义一个字面值常量类
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Debug</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">constexpr</span> <span class="n">Debug</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span><span class="o">:</span> <span class="n">hw</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">io</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">other</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{}</span>             <span class="c1">//constexpr构造函数，仅使用初值列表
+</span><span class="c1"></span>    <span class="k">constexpr</span> <span class="nf">Debug</span><span class="p">(</span><span class="kt">bool</span> <span class="n">h</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">i</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">hw</span><span class="p">(</span><span class="n">h</span><span class="p">),</span> <span class="n">io</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">other</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="p">{}</span>  <span class="c1">//constexpr构造函数，仅使用初值列表
+</span><span class="c1"></span>    <span class="k">constexpr</span> <span class="kt">bool</span> <span class="nf">any</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="n">hw</span><span class="o">||</span><span class="n">io</span><span class="o">||</span><span class="n">other</span><span class="p">;}</span>
+    <span class="kt">void</span> <span class="nf">set_hw</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">){</span><span class="n">hw</span><span class="o">=</span><span class="n">b</span><span class="p">;}</span>
+    <span class="kt">void</span> <span class="nf">set_io</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">){</span><span class="n">io</span><span class="o">=</span><span class="n">b</span><span class="p">;}</span>
+    <span class="kt">void</span> <span class="nf">set_other</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="p">){</span><span class="n">other</span><span class="o">=</span><span class="n">b</span><span class="p">;}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">hw</span><span class="p">;</span>    <span class="c1">//硬件错误
+</span><span class="c1"></span>    <span class="kt">bool</span> <span class="n">io</span><span class="p">;</span>    <span class="c1">//io错误
+</span><span class="c1"></span>    <span class="kt">bool</span> <span class="n">other</span><span class="p">;</span> <span class="c1">//其他错误
+</span><span class="c1"></span><span class="p">};</span>
+<span class="k">constexpr</span> <span class="n">Debug</span> <span class="nf">io_sub</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="nb">false</span><span class="p">);</span>   <span class="c1">//字面值常量类的对象，调试io
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">io_sub</span><span class="p">.</span><span class="n">any</span><span class="p">())</span>                            <span class="c1">//等价于 if(true)
+</span><span class="c1"></span>    <span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&#34;print appropriate error messages&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">constexpr</span> <span class="n">Debug</span> <span class="nf">prod</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>                <span class="c1">//字面值常量类的对象，无调试
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">prod</span><span class="p">.</span><span class="n">any</span><span class="p">())</span>                              <span class="c1">//等价于 if(false)
+</span><span class="c1"></span>    <span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&#34;print an error message&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>    
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="类的静态成员">类的静态成员</h2>
+<ul>
+<li>类的<code>静态成员</code>只与类本身相关，与其任何对象都无关。形式是在成员声明前加<code>static</code>关键字</li>
+<li>静态成员可以是public或private，类型可是常量、引用、指针、类类型等</li>
+<li>类的静态成员存在于任何对象之外，任何对象中都不包含与之相关的数据</li>
+<li>静态成员不与任何对象绑定，故不存在<code>this指针</code>。因此既不能在函数体内使用this指针，也不能被声明为const成员函数。</li>
+<li>静态成员函数调用非静态成员时，并不知道是哪个对象的成员</li>
+<li>可用类的<code>作用域运算符</code>直接访问静态成员，也可用类的对象、引用、指针来访问静态成员</li>
+<li>成员函数不用通过作用域运算符就可访问静态成员</li>
+<li><code>静态成员函数</code>可在类内或类外定义，在类外定义时不可重复static关键字，<code>static只出现在声明中</code>。</li>
+<li><code>静态数据成员</code>并非在创建类时被定义，因此<code>静态数据成员不由构造函数初始化</code>。</li>
+<li>不能在类内部初始化<code>静态数据成员</code>，<code>静态数据成员必须在类外定义和初始化</code>，一个静态数据成员只能被定义一次</li>
+<li>静态数据成员定义在任何函数之外，一旦被定义就存在于程序整个生命周期。</li>
+<li>为确保静态数据成员只被定义一次，最好将其定义与其他非内联函数的定义放在同一头文件</li>
+<li><code>静态成员函数可在类内和类外定义，静态数据成员只能在类外定义和初始化</code></li>
+<li>例子：声明、定义、访问静态成员</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//声明静态成员
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Account</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">calculate</span><span class="p">()</span> <span class="p">{</span><span class="n">amount</span><span class="o">+=</span><span class="n">amount</span><span class="o">*</span><span class="n">interestRate</span><span class="p">;}</span>
+    <span class="k">static</span> <span class="kt">double</span> <span class="nf">rate</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="n">interestRate</span><span class="p">;}</span> <span class="c1">//静态成员函数，它可在类内也可在类外定义
+</span><span class="c1"></span>    <span class="k">static</span> <span class="kt">void</span> <span class="nf">rate</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>                   <span class="c1">//静态成员函数
+</span><span class="c1"></span><span class="k">private</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">owner</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">amount</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">double</span> <span class="n">interestRate</span><span class="p">;</span>                 <span class="c1">//静态成员变量
+</span><span class="c1"></span>    <span class="k">static</span> <span class="kt">double</span> <span class="nf">initRate</span><span class="p">();</span>                   <span class="c1">//静态成员函数
+</span><span class="c1"></span><span class="p">};</span>
+<span class="c1">//定义静态成员
+</span><span class="c1"></span><span class="kt">void</span> <span class="n">Account</span><span class="o">::</span><span class="n">rate</span><span class="p">(</span><span class="kt">double</span> <span class="n">newRate</span><span class="p">){</span>         <span class="c1">//定义静态成员函数，它可在类内也可在类外定义
+</span><span class="c1"></span>    <span class="n">interestRate</span><span class="o">=</span><span class="n">newRate</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">double</span> <span class="n">Account</span><span class="o">::</span><span class="n">interestRate</span><span class="o">=</span><span class="n">initRate</span><span class="p">();</span>    <span class="c1">//定义静态成员变量，它只能在类外定义和初始化
+</span><span class="c1">//访问静态成员
+</span><span class="c1"></span><span class="kt">double</span> <span class="n">r</span><span class="p">;</span>
+<span class="n">r</span><span class="o">=</span><span class="n">Account</span><span class="o">::</span><span class="n">rate</span><span class="p">();</span>  <span class="c1">//通过作用域访问
+</span><span class="c1"></span><span class="n">Account</span> <span class="n">ac1</span><span class="p">;</span>
+<span class="n">Account</span> <span class="o">*</span><span class="n">ac2</span><span class="o">=&amp;</span><span class="n">ac1</span><span class="p">;</span>
+<span class="n">r</span><span class="o">=</span><span class="n">ac1</span><span class="p">.</span><span class="n">rate</span><span class="p">();</span>       <span class="c1">//通过类引用访问
+</span><span class="c1"></span><span class="n">r</span><span class="o">=</span><span class="n">ac2</span><span class="o">-&gt;</span><span class="n">rate</span><span class="p">();</span>      <span class="c1">//通过类指针访问
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>通常，类的静态数据成员不应在类内初始化。特例是，可为静态数据成员提供<code>const整型</code>的<code>类内初始值</code>，且该静态数据成员必须是<code>constexpr类型</code>，初值必须是常量表达式。它们可用到任何需要常量表达式的地方</li>
+<li>例子：类内初始化的静态数据成员必须是字面值常量类型的constexpr</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Account</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">static</span> <span class="kt">double</span> <span class="n">rate</span><span class="p">(){</span><span class="k">return</span> <span class="n">interestRate</span><span class="p">;}</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="nf">rate</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">period</span><span class="o">=</span><span class="mi">30</span><span class="p">;</span> <span class="c1">//常量表达式
+</span><span class="c1"></span>    <span class="kt">double</span> <span class="n">daily_tbl</span><span class="p">[</span><span class="n">period</span><span class="p">];</span>       <span class="c1">//可用于需要常量表达式的地方
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果某个静态成员的应用场景仅限于编译器可替换其值的情况，则一个初始化的const或constexpr static不需要分别定义。相反，如果将其用于值不能替换的场景，则该成员必须有定义语句。</li>
+<li>例子：必须在类外定义的情形</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//如果要把Account::period传给接受const int &amp;的函数，则必须在类外定义
+</span><span class="c1">//类内已提供初始值，则不可重复提供
+</span><span class="c1"></span><span class="k">constexpr</span> <span class="kt">int</span> <span class="n">Account</span><span class="o">::</span><span class="n">period</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果类内部提供了一个初值，则成员定义不可再提供初值。</li>
+<li>即使一个常量静态数据成员在类内被初始化了，通常也应在类外部定义一下（不提供初值）</li>
+<li>在某些非静态成员非法的场合，静态成员可正常使用，如静态成员可以是不完全类型，特别的，静态数据成员的类型可以是他所属的类类型。而非静态数据成员只能被声明为它所属的类的指针或引用</li>
+<li>例子：静态数据成员的类型可以是他所属的类类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Bar</span><span class="p">{</span>
+    <span class="k">static</span> <span class="n">Bar</span> <span class="n">mem1</span><span class="p">;</span>    <span class="c1">//对，静态成员可以是不完全类型
+</span><span class="c1"></span>    <span class="n">Bar</span> <span class="o">*</span><span class="n">mem2</span><span class="p">;</span>          <span class="c1">//对，指针可以是不完全类型
+</span><span class="c1"></span>    <span class="n">Bar</span> <span class="n">mem3</span><span class="p">;</span>           <span class="c1">//错，数据成员必须是完全类型
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可用静态成员做默认实参，非静态不可，因为它的值属于对象的一部分，读到声明时类未完全定义</li>
+<li>例子：静态成员做默认实参</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">clear</span><span class="p">(</span><span class="kt">char</span><span class="o">=</span><span class="n">bkground</span><span class="p">);</span> <span class="c1">//用静态成员做默认实参
+</span><span class="c1"></span><span class="k">private</span><span class="o">:</span>
+    <span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">bkground</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-02-13
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/c&#43;&#43;-primer/">C&#43;&#43; primer</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/cppprimer_ch8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C&#43;&#43; primer 第8章 IO库</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cppprimer_ch6/">
+            <span class="next-text nav-default">C&#43;&#43; primer 第6章 函数</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/cpp/cppprimer_ch7/" class="leancloud_visitors" data-flag-title="C&#43;&#43; primer 第7章 类">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

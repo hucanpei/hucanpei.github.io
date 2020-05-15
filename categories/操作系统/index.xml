@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>操作系统 on pi</title>
+    <link>http://localhost:1313/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+    <description>Recent content in 操作系统 on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 Mar 2020 00:11:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>趣谈Linux操作系统10-14：进程、线程、进程数据结构</title>
+      <link>http://localhost:1313/post/os/linux_interest_10-14/</link>
+      <pubDate>Fri, 27 Mar 2020 00:11:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/linux_interest_10-14/</guid>
+      <description>10-进程：公司接这么多项目，如何管？ 11-线程：如何让复杂的项目并行执行？ 12-进程数据结构（上）：项目多了就需要项目管理系统 13-进程数</description>
+    </item>
+    
+    <item>
+      <title>趣谈Linux操作系统6-9：架构、启动、初始化、系统调用</title>
+      <link>http://localhost:1313/post/os/linux_interest_6-9/</link>
+      <pubDate>Tue, 24 Mar 2020 23:17:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/linux_interest_6-9/</guid>
+      <description>06-x86架构：有了开放的架构，才能打造开放的营商环境 x86是一个统一、开放的架构，保证系统运行的硬件环境单一稳定 计算机的工作模式是什么样</description>
+    </item>
+    
+    <item>
+      <title>趣谈Linux操作系统3-5：概述、命令、系统调用</title>
+      <link>http://localhost:1313/post/os/linux_interest_3-5/</link>
+      <pubDate>Tue, 24 Mar 2020 16:02:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/linux_interest_3-5/</guid>
+      <description>03-你可以把Linux内核当成一家软件外包公司的老板 操作系统其实就像一个软件外包公司，其内核就相当于这家外包公司的老板。所以接下来的整个课</description>
+    </item>
+    
+  </channel>
+</rss>

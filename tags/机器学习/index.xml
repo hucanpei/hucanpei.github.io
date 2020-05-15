@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>机器学习 on pi</title>
+    <link>http://localhost:1313/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 机器学习 on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 21 Dec 2019 15:50:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>一些报告</title>
+      <link>http://localhost:1313/post/ml/presentations/</link>
+      <pubDate>Sat, 21 Dec 2019 15:50:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/ml/presentations/</guid>
+      <description>多媒体与通信报告 (Searching for MobileNetV3)： 数据挖掘报告 (Cognitive Graph for Multi-Hop Reading Comprehension at Scale)： CTA脑血管分割方法调研：</description>
+    </item>
+    
+  </channel>
+</rss>

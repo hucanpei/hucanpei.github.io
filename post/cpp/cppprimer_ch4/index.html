@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C&#43;&#43; primer 第4章 表达式 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="C&#43;&#43;提供了一套运算符并定义了它们作用于内置类型时的操作 运算对象是类类型时，允许重载运算符 表达式由一个或多个运算对象组成，对表达式求值返回结" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cpp/cppprimer_ch4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C&#43;&#43; primer 第4章 表达式" />
+<meta property="og:description" content="C&#43;&#43;提供了一套运算符并定义了它们作用于内置类型时的操作 运算对象是类类型时，允许重载运算符 表达式由一个或多个运算对象组成，对表达式求值返回结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cpp/cppprimer_ch4/" />
+<meta property="article:published_time" content="2020-02-08T14:55:00+08:00" />
+<meta property="article:modified_time" content="2020-02-08T14:55:00+08:00" />
+<meta itemprop="name" content="C&#43;&#43; primer 第4章 表达式">
+<meta itemprop="description" content="C&#43;&#43;提供了一套运算符并定义了它们作用于内置类型时的操作 运算对象是类类型时，允许重载运算符 表达式由一个或多个运算对象组成，对表达式求值返回结">
+<meta itemprop="datePublished" content="2020-02-08T14:55:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T14:55:00&#43;08:00" />
+<meta itemprop="wordCount" content="5794">
+
+
+
+<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43; primer 第4章 表达式"/>
+<meta name="twitter:description" content="C&#43;&#43;提供了一套运算符并定义了它们作用于内置类型时的操作 运算对象是类类型时，允许重载运算符 表达式由一个或多个运算对象组成，对表达式求值返回结"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C&#43;&#43; primer 第4章 表达式</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-08 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+            <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+            </div>
+          <span class="more-meta"> 约 5794 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础">基础</a>
+      <ul>
+        <li><a href="#基本概念">基本概念</a></li>
+        <li><a href="#优先级与结合律">优先级与结合律</a></li>
+        <li><a href="#求值顺序">求值顺序</a></li>
+      </ul>
+    </li>
+    <li><a href="#算术运算符">算术运算符</a></li>
+    <li><a href="#逻辑和关系运算符">逻辑和关系运算符</a></li>
+    <li><a href="#赋值运算符">赋值运算符</a></li>
+    <li><a href="#递增和递减运算符">递增和递减运算符</a></li>
+    <li><a href="#成员访问运算符">成员访问运算符</a></li>
+    <li><a href="#条件运算符">条件运算符</a></li>
+    <li><a href="#位运算符">位运算符</a></li>
+    <li><a href="#sizeof运算符">sizeof运算符</a></li>
+    <li><a href="#逗号运算符">逗号运算符</a></li>
+    <li><a href="#类型转换">类型转换</a>
+      <ul>
+        <li><a href="#算术转换">算术转换</a></li>
+        <li><a href="#其他隐式类型转换">其他隐式类型转换</a></li>
+        <li><a href="#显式转换">显式转换</a></li>
+      </ul>
+    </li>
+    <li><a href="#运算符优先级表">运算符优先级表</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>C++提供了一套<code>运算符</code>并定义了它们作用于<code>内置类型</code>时的操作</li>
+<li>运算对象是类类型时，允许<code>重载</code>运算符</li>
+<li><code>表达式</code>由一个或多个<code>运算对象</code>组成，对表达式求值返回<code>结果</code>。把<code>运算符</code>和<code>运算对象</code>组合可得到复杂表达式。</li>
+</ul>
+<h2 id="基础">基础</h2>
+<h3 id="基本概念">基本概念</h3>
+<ul>
+<li><code>一元运算符</code>作用于一个对象，<code>二元运算符</code>作用于两个对象，还有<code>三元运算符?:</code>。<code>函数调用</code>也是特殊的运算符，其运算对象数量没有限制。</li>
+<li>一个符号是什么运算符由上下文指定，如<code>*</code></li>
+<li>理解表达式的含义，首先要知道运算符的<code>优先级</code>、<code>结合律</code>，以及运算对象的<code>求值顺序</code>。</li>
+<li>运算符中经常进行<code>类型转换</code>，常见的是<code>整型提升</code>，如小整型（bool、char、short）被提升为int</li>
+<li><code>重载运算符</code>：为已存在的运算符赋予另外的操作。其中，运算对象和返回值的类型、操作方式都可重载，运算对象的个数、运算符的优先级和结合律不可重载。</li>
+<li>C++的表达式都是右值或左值。它们的含义不仅仅是能不能位于赋值语句的左侧（反例如const等）。</li>
+<li><code>当对象被用作右值时，用的是对象的值（内容）。当对象被用作左值时，用的是对象的身份（在内存中的位置）。</code></li>
+<li>除右值引用外，需要右值的地方都能用左值代替，反之不可。当左值被作为右值使用时，用的是它的值。</li>
+<li>运算符的左右值要求：
+<ul>
+<li>赋值符<code>=</code>需要非常量左值作为左侧对象，返回结果也是左值</li>
+<li>取地址符<code>&amp;</code>作用于左值对象，返回指向该对象的指针，该指针是右值</li>
+<li>内置解引用<code>*</code>、内置下标<code>[]</code>、迭代器解引用<code>*</code>、string和vector的下标<code>[]</code>，它们返回的结果都是左值</li>
+<li>内置和迭代器的递增<code>++</code>递减<code>--</code>作用于左值对象，其前置版本返回左值</li>
+</ul>
+</li>
+<li>若表达式求值结果是左值，则decltype的结果是引用类型。例如<code>int *p;</code>求<code>decltype(*p)</code>的结果是<code>int &amp;</code></li>
+</ul>
+<h3 id="优先级与结合律">优先级与结合律</h3>
+<ul>
+<li><code>复合表达式</code>是含有两个或多个运算符的表达式</li>
+<li><code>优先级</code>和<code>结合律</code>决定了运算对象的组合方式。先看优先级，一致时看结合律</li>
+<li>括号<code>()</code>无视优先级和结合律</li>
+<li>算术运算符和IO运算符都满足<code>左结合律</code></li>
+</ul>
+<h3 id="求值顺序">求值顺序</h3>
+<ul>
+<li><code>求值顺序</code>定义了多个运算对象哪个先被求值，如<code>f1()*f2()</code>中哪个函数先被调用</li>
+<li>对于未指定求值顺序的运算符，若表达式指向并修改了同一个对象，则行为未定义。如<code>cout&lt;&lt;i&lt;&lt;i++;</code></li>
+<li>明确规定求值顺序的4种运算符：逻辑与<code>&amp;&amp;</code>、逻辑或<code>||</code>、条件<code>?:</code>、逗号<code>,</code></li>
+<li>最佳实践：
+<ul>
+<li>拿不准优先级和结合律时，用括号。</li>
+<li>若表达式某处改变了某对象的值，则其他地方不要使用它。例外：<code>*++iter</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="算术运算符">算术运算符</h2>
+<p><img src="../cpp_figs/CPPprimer_ch4-tab_4_1.png" alt="tab_4_1"></p>
+<ul>
+<li>如上表是算术运算符，其中一元运算符优先级最高，其次乘除和求余，最后加减。</li>
+<li>算术运算符都满足<code>左结合律</code></li>
+<li>算术运算符的运算对象和结果都是<code>右值</code>。</li>
+<li>算术表达式求值前，小整型都会被提升。所有对象最终都转换成同一种类型</li>
+<li>一元正号、加减都可用于指针。一元正号作用于指针或算术值时，返回（提升后的）<code>副本</code>，一元负号对对象的值取负后，返回（提升后的）<code>副本</code>。</li>
+<li>算术运算符的结果可能<code>溢出</code>，其结果与机器相关，不可预知</li>
+<li>参与取余<code>%</code>的运算对象必须都是整型，不可用浮点做转换</li>
+<li>除法运算<code>/</code>中，C++的早期版本允许结果为负时向上或向下取整，C++11之后规定<code>商一律向0取整</code>，即直接切除小数部分。</li>
+<li>取余运算<code>%</code>中，若<code>m</code>和<code>n</code>是整数且<code>n</code>非0，则表达式<code>(m/n)*n+m%n</code>的结果为<code>m</code>。即，若<code>m%n</code>不为0，则其符号与<code>m</code>相同。C++的早期版本允许<code>m%n</code>的符号匹配<code>n</code>的符号且商向负无穷侧取整，但在C++11中被禁止了。除了<code>-m</code>导致溢出的特殊情况，<code>(-m)/n</code>和<code>m/(-n)</code>都等于<code>-(m/n)</code>，<code>m%(-n)</code>等于<code>m%n</code>，<code>(-m)%n</code>等于<code>-(m%n)</code></li>
+<li>例子：负数的除法和取余</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="mi">21</span><span class="o">%</span><span class="mi">6</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>     <span class="mi">21</span><span class="o">/</span><span class="mi">6</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>
+<span class="mi">21</span><span class="o">%</span><span class="mi">7</span><span class="p">;</span>   <span class="cm">/*结果是0*/</span>     <span class="mi">21</span><span class="o">/</span><span class="mi">7</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>
+<span class="o">-</span><span class="mi">21</span><span class="o">%-</span><span class="mi">8</span><span class="p">;</span> <span class="cm">/*结果是-5*/</span>    <span class="o">-</span><span class="mi">21</span><span class="o">/-</span><span class="mi">8</span><span class="p">;</span> <span class="cm">/*结果是2*/</span>
+<span class="mi">21</span><span class="o">%-</span><span class="mi">5</span><span class="p">;</span>  <span class="cm">/*结果是1*/</span>     <span class="mi">21</span><span class="o">/-</span><span class="mi">5</span><span class="p">;</span>  <span class="cm">/*结果是-4*/</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="逻辑和关系运算符">逻辑和关系运算符</h2>
+<p><img src="../cpp_figs/CPPprimer_ch4-tab_4_2.png" alt="tab_4_2"></p>
+<ul>
+<li>关系运算符作用于算术或指针类型，逻辑运算符作用于任何能转换为bool的类型。它们的返回类型都是bool型<code>右值</code>。</li>
+<li>逻辑与<code>&amp;&amp;</code>、逻辑或<code>||</code>都是<code>短路求值</code>，先求左侧，仅由左侧无法确定表达式结果时再求右侧。
+<ul>
+<li>逻辑与<code>&amp;&amp;</code>仅当左侧为<code>真</code>时才求右侧</li>
+<li>逻辑或<code>||</code>仅当左侧为<code>假</code>时才求右侧</li>
+</ul>
+</li>
+<li>使用中，可由逻辑与或的短路求值特性保证访问安全，例如<code>index!=s.size() &amp;&amp; !isspace(s[index])</code></li>
+<li>访问大对象时尽量用引用，避免发生拷贝</li>
+<li>逻辑与或都满足左结合律，逻辑非满足右结合律。</li>
+<li>关系运算符都满足左结合律，因此不能出现<code>i&lt;j&lt;k</code>这种写法。</li>
+<li>进行比较时除非比较对象都是严格的bool类型， 否则不要用<code>==true</code>等字面值，因为true提升为整型时是1，不是任何非零值都能<code>==true</code></li>
+</ul>
+<h2 id="赋值运算符">赋值运算符</h2>
+<ul>
+<li>赋值运算符的左侧对象必须是可修改的<code>左值</code>，其返回结果就是左侧对象，也是<code>左值</code>。</li>
+<li>如果左右类型不匹配，将右侧转为左侧类型。</li>
+<li>类类型的赋值运算符由类本身决定，如vector模板<code>重载</code>了赋值运算符使其可接收花括号列表作为初值。</li>
+<li>无论左侧对象的类型是什么，初始值列表都可为空。此时编译器创建一个值初始化的<code>临时量</code>来初始化。</li>
+<li>赋值运算满足<code>右结合律</code>，即多重赋值语句<code>a=b=c;</code>解读为<code>a=(b=c);</code>，前面所有类型或者和最右侧类型相同，或者可由最右侧类型转换得到。</li>
+<li>C++允许赋值运算的结果作为条件，所以<code>=</code>和<code>==</code>要分清。</li>
+<li>复合赋值运算符：
+<ul>
+<li>算术运算符： <code>+=</code>    <code>-=</code>    <code>*=</code>    <code>/=</code>    <code>%=</code></li>
+<li>位运算符：   <code>&lt;&lt;=</code>   <code>&gt;&gt;=</code>   <code>&amp;=</code>    <code>|=</code>    <code>^=</code></li>
+</ul>
+</li>
+<li>复合运算符更快：复合运算符<code>a+=b</code>仅求值一次，普通运算符<code>a=a+b</code>求值两次，一次加法一次赋值。</li>
+</ul>
+<h2 id="递增和递减运算符">递增和递减运算符</h2>
+<ul>
+<li>由于很多<code>迭代器</code>不支持算术运算，故<code>++</code>和<code>--</code>的存在有其意义。</li>
+<li>递增和递减符都作用于<code>左值</code>对象。</li>
+<li><code>++i</code>被称为<code>前置版本</code>，<code>i++</code>被称为<code>后置版本</code>。</li>
+<li><code>前置版本和后置版本的区别</code>：
+<ul>
+<li>前置版本将对象+1或-1后，将对象<code>本身</code>作为<code>左值</code>返回</li>
+<li>后置版本将对象+1或-1后，将对象<code>原始值</code>的<code>副本</code>作为<code>右值</code>返回</li>
+</ul>
+</li>
+<li>应尽量使用前置版本，因为比后置版本少一次拷贝，避免了不必要的工作。</li>
+<li>混用解引用和递增可实现简洁性：<code>cout&lt;&lt;*iter++;</code>等价于<code>cout&lt;&lt;*iter; ++iter;</code></li>
+<li>由于求值顺序经常未指定，所以不要在一条语句中出现<code>a</code>和<code>a++</code>，如<code>*beg=toupper(*beg++);</code>未定义，可被解读为<code>*beg=toupper(*beg)</code>或<code>*(beg+1)=toupper(*beg)</code></li>
+</ul>
+<h2 id="成员访问运算符">成员访问运算符</h2>
+<ul>
+<li>点运算符<code>.</code>获取类对象的一个成员，箭头运算符<code>-&gt;</code>由解引用<code>*</code>和点运算符<code>.</code>组成，即<code>ptr-&gt;mem</code>等价于<code>(*ptr).mem</code>，括号不可省略，因为点优先级比解引用高。</li>
+<li>箭头运算符作用于指针，得到对象的成员，结果是<code>左值</code>。（因为解引用得到的一定是引用，引用是左值）</li>
+<li>点运算符取决于对象：对象是左值就返回左值，对象是右值就返回右值。</li>
+</ul>
+<h2 id="条件运算符">条件运算符</h2>
+<ul>
+<li>条件运算符<code>?:</code>允许把简单的if-else逻辑嵌入单个表达式。用法如<code>cond?expr1:expr2</code></li>
+<li>条件运算符定义了求值顺序，类似于短路求值，根据<code>cond</code>的结果来决定执行<code>expr1</code>还是<code>expr2</code>，只会执行一个。</li>
+<li>如果<code>expr1</code>和<code>expr2</code>都是左值或能转换为同一种左值类型，则运算结果是左值。否则是右值。</li>
+<li>条件运算符满足<code>右结合律</code>，即<code>a?b:c?d:e</code>应解读为<code>a?b:(c?d:e)</code></li>
+</ul>
+<h2 id="位运算符">位运算符</h2>
+<ul>
+<li>位运算符作用于<code>整型</code>对象。另外，一种名为<code>bitset</code>的标准库类型也可表示任意大小的二进制位集合，位运算符也可作用于<code>bitset</code>对象。
+<img src="../cpp_figs/CPPprimer_ch4-tab_4_3.png" alt="tab_4_3"></li>
+<li>位运算符遇到小整型（如bool、char、short等），会先将其自动提升再运算。</li>
+<li>如果位运算符的运算对象是signed且值为负，则处理符号位的方式取决于机器。左移右移会改变符号位，是未定义行为。</li>
+<li>移位运算符<code>&lt;&lt;</code>和<code>&gt;&gt;</code>：首先令左侧运算对象按照右侧运算对象的要求移动指定位数，然后将移动后的（可能被提升了）左侧对象的<code>拷贝</code>作为结果。其中右侧对象一定不能为负，且值必须严格小于左侧位数。移出边界的位被舍弃。</li>
+<li>移位运算符满足<code>左结合律</code></li>
+<li>左移运算符向右侧插入0，右移运算符向左侧插入的数值取决于类型和机器：unsigned类型插入0，signed类型取决于机器和编码方式。</li>
+<li>例子：移位和整型提升</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">bits</span><span class="o">=</span><span class="mo">0233</span><span class="p">;</span>    <span class="c1">//10011011
+</span><span class="c1"></span><span class="n">bits</span><span class="o">&lt;&lt;</span><span class="mi">8</span><span class="p">;</span>    <span class="c1">//提升为int大小，再左移8位，00000000 00000000 10011011 00000000
+</span><span class="c1"></span><span class="n">bits</span><span class="o">&lt;&lt;</span><span class="mi">31</span><span class="p">;</span>   <span class="c1">//提升为int大小，再左移31位，10000000 00000000 00000000 00000000
+</span><span class="c1"></span><span class="n">bits</span><span class="o">&gt;&gt;</span><span class="mi">3</span><span class="p">;</span>    <span class="c1">//提升为int大小，再右移3位，00000000 00000000 00000000 00010011
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对char等小整型按位取反<code>~</code>也会先提升为int大小再取反。</li>
+</ul>
+<h2 id="sizeof运算符">sizeof运算符</h2>
+<ul>
+<li>sizeof运算符返回一条<code>表达式</code>或一个<code>类型</code>所占的<code>字节数</code>，满足<code>右结合律</code>，返回值是<code>size_t</code>类型的<code>常量表达式</code>。</li>
+<li>两种形式：<code>sizeof(type)</code>、<code>sizeof expr</code></li>
+<li>sizeof不会计算运算对象的值，所以可以：
+<ul>
+<li>可在sizeof里解引用无效指针，因为不会真的解引用。</li>
+<li>可在sizeof里用域操作符<code>::</code>获取类成员大小，而不需要对象和成员。</li>
+</ul>
+</li>
+<li>sizeof的结果取决于运算对象的类型：
+<ul>
+<li>char型表达式返回1</li>
+<li>引用做sizeof返回被<code>引用对象</code>所占空间大小</li>
+<li>指针做sizeof返回<code>指针本身</code>所占空间大小</li>
+<li>解引用指针做sizeof返回<code>指向对象</code>所占空间大小</li>
+<li>数组做sizeof得到<code>整个数组</code>所占空间大小，（attention：sizeof不会把数组当指针处理）</li>
+<li>string或vector求sizeof只返回<code>固定部分</code>的大小，不会计算对象实际占用空间</li>
+</ul>
+</li>
+<li>常用于计算数组长度的方法是：<code>sizeof(ia)/sizeof(*ia)</code>，结果是constexpr，可用于声明新数组。</li>
+</ul>
+<h2 id="逗号运算符">逗号运算符</h2>
+<ul>
+<li>接受两个对象，遵循<code>从左往右</code>的求值顺序</li>
+<li>计算过程：对左侧求值，将结果丢弃，再对右侧求值，返回右侧求值结果。如果右侧是左值，则返回也是左值。</li>
+<li>实质上是将多个顺序执行的表达式写为一行的手段。</li>
+</ul>
+<h2 id="类型转换">类型转换</h2>
+<ul>
+<li><code>隐式转换</code>自动执行，不需程序员介入。算术类型的隐式转换被设计为尽量避免损失精度。</li>
+<li>隐式转换发生的情形：
+<ul>
+<li>整型提升</li>
+<li>条件中非bool转bool</li>
+<li>初始化时初始值转为变量类型，赋值时右侧对象转为左侧类型</li>
+<li>算术运算或关系运算中有多种类型，最终会统一</li>
+<li>函数调用时也会有类型转换</li>
+</ul>
+</li>
+</ul>
+<h3 id="算术转换">算术转换</h3>
+<ul>
+<li><code>算术转换</code>：把运算对象（算术类型）转为最宽的类型，同时有整型和浮点时将整型转浮点。</li>
+<li><code>整型提升</code>：把小整型转为大整型。
+<ul>
+<li>小整型（bool、char、signed char、unsigned char、short、unsigned short等），只要值能放进int就转为int，放不进int就放进unsigned int</li>
+<li>宽字符（wchar_t、char16_t、char32_t）提升为int、unsigned int、long、unsigned long、long long、unsigned long long中能装进去的最小者</li>
+</ul>
+</li>
+<li><code>signed和unsigned的转换</code>：
+<ul>
+<li>若unsigned类型不小于signed类型，直接将signed转为unsigned</li>
+<li>若unsigned类型小于signed类型，且该unsigned类型的值都能装进该signed类型，则unsigned转为signed</li>
+<li>若unsigned类型小于signed类型，且该unsigned类型的值不都能装进该signed类型，则signed转为unsigned</li>
+</ul>
+</li>
+<li>例子：算术转换</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">bool</span>    <span class="n">flag</span><span class="p">;</span>   <span class="kt">char</span>            <span class="n">cval</span><span class="p">;</span>
+<span class="kt">short</span>   <span class="n">sval</span><span class="p">;</span>   <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">usval</span><span class="p">;</span>
+<span class="kt">int</span>     <span class="n">ival</span><span class="p">;</span>   <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">uival</span><span class="p">;</span>
+<span class="kt">long</span>    <span class="n">lval</span><span class="p">;</span>   <span class="kt">unsigned</span> <span class="kt">long</span>   <span class="n">ulval</span><span class="p">;</span>
+<span class="kt">float</span>   <span class="n">fval</span><span class="p">;</span>   <span class="kt">double</span>          <span class="n">dval</span><span class="p">;</span>
+<span class="mf">3.14159</span><span class="n">L</span><span class="o">+</span><span class="sc">&#39;a&#39;</span><span class="p">;</span>   <span class="c1">//&#39;a&#39;提升为int，再转为long double
+</span><span class="c1"></span><span class="n">dval</span><span class="o">+</span><span class="n">ival</span><span class="p">;</span>      <span class="c1">//ival转double
+</span><span class="c1"></span><span class="n">dval</span><span class="o">+</span><span class="n">fval</span><span class="p">;</span>      <span class="c1">//fval转double
+</span><span class="c1"></span><span class="n">ival</span><span class="o">=</span><span class="n">dval</span><span class="p">;</span>      <span class="c1">//dval切除小数部分转int
+</span><span class="c1"></span><span class="n">flag</span><span class="o">=</span><span class="n">dval</span><span class="p">;</span>      <span class="c1">//dval是0则false，否则true
+</span><span class="c1"></span><span class="n">cval</span><span class="o">+</span><span class="n">fval</span><span class="p">;</span>      <span class="c1">//cval提升为int，再转float
+</span><span class="c1"></span><span class="n">sval</span><span class="o">+</span><span class="n">cval</span><span class="p">;</span>      <span class="c1">//sval和cval都提升为int
+</span><span class="c1"></span><span class="n">cval</span><span class="o">+</span><span class="n">lval</span><span class="p">;</span>      <span class="c1">//cval转long
+</span><span class="c1"></span><span class="n">ival</span><span class="o">+</span><span class="n">ulval</span><span class="p">;</span>     <span class="c1">//ival转unsigned long
+</span><span class="c1"></span><span class="n">usval</span><span class="o">+</span><span class="n">ival</span><span class="p">;</span>     <span class="c1">//未定义，根据unsigned short和int所占空间大小做转换
+</span><span class="c1"></span><span class="n">uival</span><span class="o">+</span><span class="n">lval</span><span class="p">;</span>     <span class="c1">//未定义，根据unsigned int和long所占空间大小做转换
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="其他隐式类型转换">其他隐式类型转换</h3>
+<ul>
+<li>数组转指针：
+<ul>
+<li>大多数用到数组的表达式中，数组自动转为指向首元素的指针</li>
+<li>在表达式中使用函数类型也会转为<code>函数指针</code></li>
+<li>例外：<code>decltype</code>、取地址<code>&amp;</code>、<code>sizeof</code>、<code>typeid</code>运算符不会将数组转指针</li>
+<li>例外：用引用初始化数组时也不会转指针</li>
+</ul>
+</li>
+<li>指针的转换：
+<ul>
+<li><code>0</code>或<code>nullpt</code>r可转为任意指针类型</li>
+<li>指向任意非常量的指针能转为<code>void *</code></li>
+<li>指向任意对象的指针能转为<code>const void *</code></li>
+</ul>
+</li>
+<li>转换为常量：允许将指向非常量的指针或引用转为指向常量的指针或引用。但反之不可，底层const不可删除。</li>
+<li>类类型的转换：类类型可定义转换，但编译器只能执行一步转换。</li>
+</ul>
+<h3 id="显式转换">显式转换</h3>
+<ul>
+<li><code>强制类型转换</code>：手动指定要转换的变量和要转换为的类型，经常是很危险的。</li>
+<li>显式转换形式为<code>cast-name&lt;type&gt;(expression)</code>，若type是引用类型，则返回<code>左值</code>。cast-name是<code>static_cast</code>、<code>dynamic_cast</code>、<code>const_cast</code>、<code>reinterpret_cast</code>中的一种。</li>
+<li><code>static_cast</code>：只要不包含底层const，都可使用。例如将大算术类型转为小算术类型、浮点转整型、编译器无法自动执行的类型转换</li>
+<li>可用static_cast找回存在于void *指针中的值，将其强制转换为原来的类型。</li>
+<li>例子：static_cast找回void *指针中的值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">double</span> <span class="n">d</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">d</span><span class="p">;</span>                             <span class="c1">//任何非常量对象的地址都能放进void *指针
+</span><span class="c1"></span><span class="kt">double</span> <span class="o">*</span><span class="n">dp</span><span class="o">=</span><span class="n">stataic_cast</span><span class="o">&lt;</span><span class="kt">double</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>   <span class="c1">//将指针转回指向double型
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>const_cast</code>：只能改变对象的底层const。（attention，用const_cast去掉底层const之后不可对其写入，这是未定义行为）</li>
+<li>如果对象是常量，用const_cast去掉常量后执行写操作是未定义行为。</li>
+<li>const_cast常用于有函数重载的上下文，其他情况下不可使用。</li>
+<li><code>reinterpret_cast</code>：为运算对象的位模式提供较低层次上的重新解释，即内存中的bits不变，改变解读方式。它依赖于机器，非常危险。</li>
+<li>建议避免使用强制类型转换，尤其是reinterpret_cast</li>
+<li>早期C++中，显式类型转换的形式为<code>type(expr)</code>和<code>(type)expr</code>。在某处使用旧式强制转换时，若换为const_cast和static_cast也合法，就当作const_cast和static_cast，否则当作reinterpret_cast。因为指代不明，故建议不使用。</li>
+</ul>
+<h2 id="运算符优先级表">运算符优先级表</h2>
+<p>下表列出了C++的全部运算符，双横线分为若干组，组越靠前优先级越高，同一组内优先级相同。
+<img src="../cpp_figs/CPPprimer_ch4-tab_4_4.png" alt="tab_4_4"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-02-08
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/c&#43;&#43;-primer/">C&#43;&#43; primer</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/cppprimer_ch5/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C&#43;&#43; primer 第5章 语句</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cppprimer_ch3/">
+            <span class="next-text nav-default">C&#43;&#43; primer 第3章 字符串、向量和数组</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/cpp/cppprimer_ch4/" class="leancloud_visitors" data-flag-title="C&#43;&#43; primer 第4章 表达式">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

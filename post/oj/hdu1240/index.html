@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>HDU1240 - Asteroids! - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="链接：https://vjudge.net/problem/HDU-1240 Task You&amp;rsquo;re in space. You want to get home. There are asteroids. You don&amp;rsquo;t want to hit them. Input Input to this problem will consist of a (non-empty) series of up to" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/oj/hdu1240/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="HDU1240 - Asteroids!" />
+<meta property="og:description" content="链接：https://vjudge.net/problem/HDU-1240 Task You&rsquo;re in space. You want to get home. There are asteroids. You don&rsquo;t want to hit them. Input Input to this problem will consist of a (non-empty) series of up to" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/oj/hdu1240/" />
+<meta property="article:published_time" content="2019-12-27T15:01:00+08:00" />
+<meta property="article:modified_time" content="2019-12-27T15:01:00+08:00" />
+<meta itemprop="name" content="HDU1240 - Asteroids!">
+<meta itemprop="description" content="链接：https://vjudge.net/problem/HDU-1240 Task You&rsquo;re in space. You want to get home. There are asteroids. You don&rsquo;t want to hit them. Input Input to this problem will consist of a (non-empty) series of up to">
+<meta itemprop="datePublished" content="2019-12-27T15:01:00&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-27T15:01:00&#43;08:00" />
+<meta itemprop="wordCount" content="963">
+
+
+
+<meta itemprop="keywords" content="online judge,BFS," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HDU1240 - Asteroids!"/>
+<meta name="twitter:description" content="链接：https://vjudge.net/problem/HDU-1240 Task You&rsquo;re in space. You want to get home. There are asteroids. You don&rsquo;t want to hit them. Input Input to this problem will consist of a (non-empty) series of up to"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">HDU1240 - Asteroids!</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-27 </span>
+        <div class="post-category">
+            <a href="/categories/online-judge/"> online judge </a>
+            <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E9%A2%98%E5%8D%95/"> 《算法竞赛入门到进阶》题单 </a>
+            </div>
+          <span class="more-meta"> 约 963 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#task">Task</a></li>
+    <li><a href="#input">Input</a></li>
+    <li><a href="#output">Output</a></li>
+    <li><a href="#sample">Sample</a></li>
+    <li><a href="#solution">Solution</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>链接：<a href="https://vjudge.net/problem/HDU-1240">https://vjudge.net/problem/HDU-1240</a></p>
+<h2 id="task">Task</h2>
+<p>You&rsquo;re in space.
+You want to get home.
+There are asteroids.
+You don&rsquo;t want to hit them.</p>
+<h2 id="input">Input</h2>
+<p>Input to this problem will consist of a (non-empty) series of up to 100 data sets. Each data set will be formatted according to the following description, and there will be no blank lines separating data sets.</p>
+<p>A single data set has 5 components:</p>
+<p>Start line - A single line, &ldquo;START N&rdquo;, where 1 &lt;= N &lt;= 10.</p>
+<p>Slice list - A series of N slices. Each slice is an N x N matrix representing a horizontal slice through the asteroid field. Each position in the matrix will be one of two values:</p>
+<p>&lsquo;O&rsquo; - (the letter &ldquo;oh&rdquo;) Empty space</p>
+<p>&lsquo;X&rsquo; - (upper-case) Asteroid present</p>
+<p>Starting Position - A single line, &ldquo;A B C&rdquo;, denoting the &lt;A,B,C&gt; coordinates of your craft&rsquo;s starting position. The coordinate values will be integers separated by individual spaces.</p>
+<p>Target Position - A single line, &ldquo;D E F&rdquo;, denoting the &lt;D,E,F&gt; coordinates of your target&rsquo;s position. The coordinate values will be integers separated by individual spaces.</p>
+<p>End line - A single line, &ldquo;END&rdquo;</p>
+<p>The origin of the coordinate system is &lt;0,0,0&gt;. Therefore, each component of each coordinate vector will be an integer between 0 and N-1, inclusive.</p>
+<p>The first coordinate in a set indicates the column. Left column = 0.</p>
+<p>The second coordinate in a set indicates the row. Top row = 0.</p>
+<p>The third coordinate in a set indicates the slice. First slice = 0.</p>
+<p>Both the Starting Position and the Target Position will be in empty space.</p>
+<h2 id="output">Output</h2>
+<p>For each data set, there will be exactly one output set, and there will be no blank lines separating output sets.</p>
+<p>A single output set consists of a single line. If a route exists, the line will be in the format &ldquo;X Y&rdquo;, where X is the same as N from the corresponding input data set and Y is the least number of moves necessary to get your ship from the starting position to the target position. If there is no route from the starting position to the target position, the line will be &ldquo;NO ROUTE&rdquo; instead.</p>
+<p>A move can only be in one of the six basic directions: up, down, left, right, forward, back. Phrased more precisely, a move will either increment or decrement a single component of your current position vector by 1.</p>
+<h2 id="sample">Sample</h2>
+<p>input:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">START 1
+O
+0 0 0
+0 0 0
+END
+START 3
+XXX
+XXX
+XXX
+OOO
+OOO
+OOO
+XXX
+XXX
+XXX
+0 0 1
+2 2 1
+END
+START 5
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+XXXXX
+XXXXX
+XXXXX
+XXXXX
+XXXXX
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+0 0 0
+4 4 4
+END
+</code></pre></td></tr></table>
+</div>
+</div><p>output:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">1 0
+3 4
+NO ROUTE
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="solution">Solution</h2>
+<p>用node来表示一个状态，包含位置<code>x,y,z</code>和从起点走到这里的步数<code>d</code>，定义起点<code>begin_pos</code>终点<code>end_pos</code>，每个位置处可能走的6个方向<code>direction</code>。<code>map</code>记录迷宫，<code>1</code>表示可以走；<code>visit</code>记录一个位置有没有被走过。
+用BFS，每个节点处对下一步可能走的6个方向遍历，如果在迷宫中，且允许走，且没走过，就把visit置1。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span><span class="cpf">&lt;cstdio&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;cstring&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;queue&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="c1">// max length is 10, consider &#39;\0&#39;, is 11
+</span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="n">MAX_N</span><span class="o">=</span><span class="mi">11</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="n">MAX_N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">map</span><span class="p">[</span><span class="n">MAX_N</span><span class="p">][</span><span class="n">MAX_N</span><span class="p">][</span><span class="n">MAX_N</span><span class="p">],</span> <span class="n">visit</span><span class="p">[</span><span class="n">MAX_N</span><span class="p">][</span><span class="n">MAX_N</span><span class="p">][</span><span class="n">MAX_N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">direction</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
+<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">;</span>
+    <span class="n">node</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">z</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span><span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">z</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">d</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+<span class="c1">// start and end
+</span><span class="c1"></span><span class="n">node</span> <span class="nf">begin_pos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">end_pos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">BFS</span><span class="p">(){</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">begin_pos</span><span class="p">);</span>
+    <span class="n">visit</span><span class="p">[</span><span class="n">begin_pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">begin_pos</span><span class="p">.</span><span class="n">y</span><span class="p">][</span><span class="n">begin_pos</span><span class="p">.</span><span class="n">z</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="n">node</span> <span class="n">n1</span><span class="o">=</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">x1</span><span class="o">=</span><span class="n">n1</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">n1</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">z1</span><span class="o">=</span><span class="n">n1</span><span class="p">.</span><span class="n">z</span><span class="p">,</span> <span class="n">d1</span><span class="o">=</span><span class="n">n1</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+        <span class="c1">// return at end position
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">x1</span><span class="o">==</span><span class="n">end_pos</span><span class="p">.</span><span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">y1</span><span class="o">==</span><span class="n">end_pos</span><span class="p">.</span><span class="n">y</span> <span class="o">&amp;&amp;</span> <span class="n">z1</span><span class="o">==</span><span class="n">end_pos</span><span class="p">.</span><span class="n">z</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">d1</span><span class="p">;</span>
+        <span class="c1">// 6 directions
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="c1">// new position
+</span><span class="c1"></span>            <span class="kt">int</span> <span class="n">x2</span><span class="o">=</span><span class="n">x1</span><span class="o">+</span><span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y2</span><span class="o">=</span><span class="n">y1</span><span class="o">+</span><span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">z2</span><span class="o">=</span><span class="n">z1</span><span class="o">+</span><span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+            <span class="c1">// in map &amp;&amp; reachable &amp;&amp; not visited
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">x2</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">x2</span><span class="o">&lt;</span><span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">y2</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y2</span><span class="o">&lt;</span><span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">z2</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">z2</span><span class="o">&lt;</span><span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">map</span><span class="p">[</span><span class="n">x2</span><span class="p">][</span><span class="n">y2</span><span class="p">][</span><span class="n">z2</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visit</span><span class="p">[</span><span class="n">x2</span><span class="p">][</span><span class="n">y2</span><span class="p">][</span><span class="n">z2</span><span class="p">])</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">z2</span><span class="p">,</span><span class="n">d1</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+                <span class="n">visit</span><span class="p">[</span><span class="n">x2</span><span class="p">][</span><span class="n">y2</span><span class="p">][</span><span class="n">z2</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="c1">// &#34;START&#34;
+</span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">){</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">visit</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">visit</span><span class="p">));</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">z</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">z</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">y</span><span class="p">){</span>
+                <span class="c1">// read a line
+</span><span class="c1"></span>                <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="n">line</span><span class="p">);</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">x</span><span class="p">){</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;X&#39;</span><span class="p">)</span> <span class="n">map</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                    <span class="k">else</span>             <span class="n">map</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d %d %d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="p">(</span><span class="n">begin_pos</span><span class="p">.</span><span class="n">x</span><span class="p">),</span><span class="o">&amp;</span><span class="p">(</span><span class="n">begin_pos</span><span class="p">.</span><span class="n">y</span><span class="p">),</span><span class="o">&amp;</span><span class="p">(</span><span class="n">begin_pos</span><span class="p">.</span><span class="n">z</span><span class="p">));</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d %d %d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="p">(</span><span class="n">end_pos</span><span class="p">.</span><span class="n">x</span><span class="p">)</span>  <span class="p">,</span><span class="o">&amp;</span><span class="p">(</span><span class="n">end_pos</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>  <span class="p">,</span><span class="o">&amp;</span><span class="p">(</span><span class="n">end_pos</span><span class="p">.</span><span class="n">z</span><span class="p">)</span>  <span class="p">);</span>
+        <span class="c1">// &#34;END&#34;
+</span><span class="c1"></span>        <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="n">line</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">result</span><span class="o">=</span><span class="n">BFS</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&#34;NO ROUTE</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">else</span>           <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-12-27
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/online-judge/">online judge</a>
+          <a href="/tags/bfs/">BFS</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/cppprimer_ch1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C&#43;&#43; primer 第1章 开始</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/oj/poj3414/">
+            <span class="next-text nav-default">POJ3414 - Pots</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/oj/hdu1240/" class="leancloud_visitors" data-flag-title="HDU1240 - Asteroids!">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

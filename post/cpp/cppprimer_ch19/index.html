@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C&#43;&#43; primer 第19章 特殊工具与技术 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cpp/cppprimer_ch19/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C&#43;&#43; primer 第19章 特殊工具与技术" />
+<meta property="og:description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cpp/cppprimer_ch19/" />
+<meta property="article:published_time" content="2020-05-11T15:44:00+08:00" />
+<meta property="article:modified_time" content="2020-05-11T15:44:00+08:00" />
+<meta itemprop="name" content="C&#43;&#43; primer 第19章 特殊工具与技术">
+<meta itemprop="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet">
+<meta itemprop="datePublished" content="2020-05-11T15:44:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-11T15:44:00&#43;08:00" />
+<meta itemprop="wordCount" content="7335">
+
+
+
+<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43; primer 第19章 特殊工具与技术"/>
+<meta name="twitter:description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C&#43;&#43; primer 第19章 特殊工具与技术</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-11 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+            <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+            </div>
+          <span class="more-meta"> 约 7335 字 </span>
+          <span class="more-meta"> 预计阅读 15 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#控制内存分配">控制内存分配</a>
+      <ul>
+        <li><a href="#重载new和delete">重载new和delete</a></li>
+        <li><a href="#定位new表达式">定位new表达式</a></li>
+      </ul>
+    </li>
+    <li><a href="#运行时类型识别">运行时类型识别</a>
+      <ul>
+        <li><a href="#dynamic_cast算符">dynamic_cast算符</a></li>
+        <li><a href="#typeid算符">typeid算符</a></li>
+        <li><a href="#使用rtti">使用RTTI</a></li>
+        <li><a href="#type_info类">type_info类</a></li>
+      </ul>
+    </li>
+    <li><a href="#枚举类型">枚举类型</a></li>
+    <li><a href="#类成员指针">类成员指针</a>
+      <ul>
+        <li><a href="#数据成员指针">数据成员指针</a></li>
+        <li><a href="#成员函数指针">成员函数指针</a></li>
+        <li><a href="#将成员函数用作可调用对象">将成员函数用作可调用对象</a></li>
+      </ul>
+    </li>
+    <li><a href="#嵌套类">嵌套类</a></li>
+    <li><a href="#union一种节省空间的类">union：一种节省空间的类</a></li>
+    <li><a href="#局部类">局部类</a></li>
+    <li><a href="#固有的不可移植的特性">固有的不可移植的特性</a>
+      <ul>
+        <li><a href="#位域">位域</a></li>
+        <li><a href="#volatile限定符">volatile限定符</a></li>
+        <li><a href="#链接指示extern-c">链接指示：extern &ldquo;C&rdquo;</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="控制内存分配">控制内存分配</h2>
+<ul>
+<li>某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制</li>
+<li>重载<code>new</code>和<code>delete</code>算符可控制内存分配的过程</li>
+</ul>
+<h3 id="重载new和delete">重载new和delete</h3>
+<ul>
+<li>说法“重载new和delete”，但重载new和delete与重载其他算符的过程非常不同</li>
+<li>使用<code>new</code>/<code>new []</code>表达式的过程：
+<ol>
+<li>调用名为<code>operator new</code>/<code>operator new[]</code>的标准库函数，分配足够大的原始的未命名的内存空间</li>
+<li>编译器运行对应的构造函数以构造对象，并传入初值</li>
+<li>返回指向该对象的指针</li>
+</ol>
+</li>
+<li>使用<code>delete</code>/<code>delete []</code>表达式的过程：
+<ol>
+<li>对指针所指对象或数组中的元素执行对应的析构函数</li>
+<li>调用名为<code>operator delete</code>/<code>operator delete[]</code>的标准库函数，释放内存空间</li>
+</ol>
+</li>
+<li>若程序希望控制内存分配的过程，则需要定义自己的<code>operator new</code>/<code>operator delete</code>函数。即使标准库中已有它们的定义也可自定义，编译器将使用自定义的版本代替标准库的版本</li>
+<li>自定义了全局的<code>operator new</code>/<code>operator delete</code>函数后，程序负责控制动态内存</li>
+<li><code>operator new</code>/<code>operator delete</code>函数只能在<code>全局作用域</code>和<code>类作用域</code>中定义</li>
+<li>编译器处理new/delete表达式时查找operator的过程（对象是类类型）：
+<ol>
+<li>查找类类型及其基类类型的作用域中的operator</li>
+<li>查找全局作用域中的operator</li>
+<li>使用标准库的operator</li>
+</ol>
+</li>
+<li>可使用作用域算符令new和delete表达式忽略定义在类中的operator函数，直接执行全局作用域的版本，如<code>::new</code>只查找全局作用域中的operator new</li>
+<li>标准库定义了<code>operator new</code>/<code>operator delete</code>的8个重载：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="o">*</span><span class="k">operator</span> <span class="nf">new</span><span class="p">(</span><span class="n">size_t</span><span class="p">);</span>
+<span class="kt">void</span> <span class="o">*</span><span class="k">operator</span> <span class="k">new</span><span class="p">[](</span><span class="n">size_t</span><span class="p">);</span>
+<span class="kt">void</span> <span class="k">operator</span> <span class="nf">delete</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+<span class="kt">void</span> <span class="k">operator</span> <span class="k">delete</span><span class="p">[](</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="k">operator</span> <span class="nf">new</span><span class="p">(</span><span class="n">size_t</span><span class="p">,</span><span class="n">nothrow_t</span> <span class="o">&amp;</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+<span class="kt">void</span> <span class="o">*</span><span class="k">operator</span> <span class="k">new</span><span class="p">[](</span><span class="n">size_t</span><span class="p">,</span><span class="n">nothrow_t</span> <span class="o">&amp;</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+<span class="kt">void</span> <span class="k">operator</span> <span class="nf">delete</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">,</span><span class="n">nothrow_t</span> <span class="o">&amp;</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+<span class="kt">void</span> <span class="k">operator</span> <span class="k">delete</span><span class="p">[](</span><span class="kt">void</span> <span class="o">*</span><span class="p">,</span><span class="n">nothrow_t</span> <span class="o">&amp;</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>类型<code>nothrow_t</code>是定义于头文件<code>new</code>的一个struct，该类型不包含任何成员。同时定义了一个名为<code>nothrow</code>的const对象，通过该对象可手动请求new的非抛出版本</li>
+<li>operator delete不允许抛出异常（类似析构函数），重载它时必须指定<code>noexcept</code></li>
+<li>应用程序可自定义8个operator重载中的任一个，只要自定义的版本位于全局作用域或类作用域</li>
+<li>operator new在对象构造之前而operator delete在对象析构之后，故将这些operator定义为类的成员时是隐式的<code>static</code>，且不能操作类的任何数据成员</li>
+<li>对于operator new/operator new[]：
+<ul>
+<li>返回类型必须是void *，第一个形参必须是size_t且该形参不能有默认实参</li>
+<li>编译器调用operator new时，将存储指定类型对象所需的byte数传给size_t形参</li>
+<li>编译器调用operator new[]时，将存储数组中所有元素所需的空间传给size_t形参</li>
+<li>自定义operator new时可提供额外形参，此时使用它的new表达式必须用<code>定位new</code>形式传递实参</li>
+<li>函数<code>void *operator new(size_t,void *);</code>不可被用户重载，它只供标准库使用</li>
+</ul>
+</li>
+<li>对于operator delete/operator delete[]：
+<ul>
+<li>返回类型必须是void，第一个形参必须是void *</li>
+<li>执行delete表达式将调用相应的operator函数，用指向待释放内存的指针初始化void *形参</li>
+<li>定义为类的成员时，该函数可包含另外一个size_t形参，该形参的初始值是void *形参所指对象的字节数</li>
+<li>size_t形参可用于删除继承体系的对象，若基类有虚析构函数则传给size_t形参的字节数由void *所指对象的动态类型决定，且operator delete的版本也由对象的动态类型决定</li>
+</ul>
+</li>
+<li>重定义operator new/delete的目的在于改变内存分配的方式，并未重载new/delete表达式（与其他重载算符不同），这两个表达式的行为不可改变</li>
+<li>C++从C中继承了<code>malloc</code>/<code>free</code>函数，它们定义于<code>cstdlib</code>头文件，用于控制内存的分配
+<ul>
+<li><code>malloc</code>函数接受一个表示待分配字节数的size_t，返回指向分配空间的指针，或返回0表示分配失败</li>
+<li><code>free</code>函数接受一个void *，它是malloc返回的指针的副本，free将相关内存返回给系统。free(0)无意义</li>
+</ul>
+</li>
+<li>例子：使用malloc/free重新定义operator new/delete</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//使用malloc重新定义operator new
+</span><span class="c1"></span><span class="kt">void</span> <span class="o">*</span><span class="k">operator</span> <span class="nf">new</span><span class="p">(</span><span class="n">size_t</span> <span class="n">size</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">mem</span><span class="o">=</span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">mem</span><span class="p">;</span>                         <span class="c1">//若分配成功则返回指针
+</span><span class="c1"></span>    <span class="k">else</span>
+        <span class="k">throw</span> <span class="n">bad_alloc</span><span class="p">();</span>                  <span class="c1">//若分配失败则抛出异常
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">//使用free重新定义operator delete
+</span><span class="c1"></span><span class="kt">void</span> <span class="k">operator</span> <span class="nf">delete</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">mem</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>  <span class="c1">//不应该抛出异常，用noexcept
+</span><span class="c1"></span>    <span class="n">free</span><span class="p">(</span><span class="n">mem</span><span class="p">);</span>                              <span class="c1">//使用free时不需要考虑指针是否为空，直接释放
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="定位new表达式">定位new表达式</h3>
+<ul>
+<li>operator new/delete可用于new/delete表达式，但也可被用户代码手动调用，实现分配空间和构造对象的分离：
+<ul>
+<li>operator new用于分配空间</li>
+<li>传递地址的定位new用于在已分配的空间中构造对象</li>
+</ul>
+</li>
+<li>operator new/delete的行为和<code>allocator</code>类的<code>allocate</code>/<code>deallocate</code>成员函数很相似，都只负责空间的分配/释放，不会构造/销毁对象。在C++11引入allocator之前，常用operator new/delete</li>
+<li>operator new的行为类似allocator::allocate，它们的区别：
+<ul>
+<li>allocator::allocate应使用allocator::construct构造对象</li>
+<li>operator new应使用传递地址的定位new构造对象</li>
+</ul>
+</li>
+<li>使用operator new分配的内存空间应使用<code>定位new</code>来构造对象，可向定位new传递一个地址，在该地址中构造对象</li>
+<li>传递地址的定位new形式：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">new</span><span class="p">(</span><span class="n">place_address</span><span class="p">)</span> <span class="n">type</span>
+<span class="k">new</span><span class="p">(</span><span class="n">place_address</span><span class="p">)</span> <span class="n">type</span><span class="p">(</span><span class="n">initializers</span><span class="p">)</span>
+<span class="k">new</span><span class="p">(</span><span class="n">place_address</span><span class="p">)</span> <span class="n">type</span><span class="p">[</span><span class="n">size</span><span class="p">]</span>
+<span class="k">new</span><span class="p">(</span><span class="n">place_address</span><span class="p">)</span> <span class="n">type</span><span class="p">[</span><span class="n">size</span><span class="p">]{</span><span class="n">braced</span> <span class="n">initializer</span> <span class="n">list</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>其中<code>place_address</code>是指针，<code>initializers</code>提供实参调用<code>type</code>类型的构造函数，<code>size</code>是构造元素的数量</li>
+<li>向定位new传递地址时，使用<code>void *operator new(size_t,void *);</code>来分配内存。该函数并不分配任何内存，且不能被用户重定义。因此，传递地址的定位new可用于在一个已分配好的内存地址上构造对象</li>
+<li>传递地址的定位new的行为类似allocator::construct，它们的区别：
+<ul>
+<li>传给allocator::construct的指针必须指向allocator对象分配的空间</li>
+<li>传给定位new的指针不需指向operator new分配的内存，甚至不需要指向动态内存</li>
+</ul>
+</li>
+<li>析构函数可被对象/引用/指针显式调用，类似allocator分配的对象用allocator::destroy销毁</li>
+<li>析构函数调用时清除给定对象，但不释放内存，类似allocator::destroy</li>
+</ul>
+<h2 id="运行时类型识别">运行时类型识别</h2>
+<ul>
+<li><code>运行时类型识别(RTTI)</code>的功能由两个算符实现：
+<ul>
+<li><code>typeid</code>算符用于返回表达式的类型</li>
+<li><code>dynamic_cast</code>算符用于将基类引用/指针安全地转换为派生类引用/指针</li>
+</ul>
+</li>
+<li>将typeid和dynamic_cast用于某种类型的指针/引用，且该类型有虚函数时，算符将使用指针/引用所指对象的动态类型</li>
+<li>若想使用基类引用/指针来执行派生类操作，且该操作不是虚函数（应尽量使用虚函数，但有时无法定义虚函数，如static/inline/构造函数），则可使用RTTI</li>
+<li>与虚函数相比，RTTI风险更多：程序员必须知道转换的目标类型，且必须检查类型转换是否成功执行</li>
+<li>应尽量使用虚函数而不是RTTI</li>
+</ul>
+<h3 id="dynamic_cast算符">dynamic_cast算符</h3>
+<ul>
+<li>dynamic_cast的使用形式：
+<ul>
+<li><code>dynamic_cast&lt;type *&gt;(e)</code>，e必须是有效的指针</li>
+<li><code>dynamic_cast&lt;type &amp;&gt;(e)</code>，e必须是左值</li>
+<li><code>dynamic_cast&lt;type &amp;&amp;&gt;(e)</code>，e必须是右值</li>
+<li><code>type</code>是目标类型，必须是类类型，通常还应该有虚函数</li>
+<li><code>e</code>的类型必须是type的公有派生类/公有基类/type本身，否则转换失败</li>
+</ul>
+</li>
+<li>dynamic_cast转换失败时：
+<ul>
+<li>若目标是指针类型且失败，则结果为0</li>
+<li>若目标是引用类型且失败，则抛出<code>std::bad_cast</code>异常，该异常定义于<code>typeinfo</code>头文件</li>
+</ul>
+</li>
+<li>对空指针执行dynamic_cast的结果是所需类型的空指针</li>
+<li>对于指针类型，在条件部分使用dynamic_cast可确保一条表达式中同时完成类型转换和结果检查</li>
+<li>例子：对指针类型的dynamic_cast使用if来处理失败情形</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//转换成功执行if，转换失败执行else，且dp在if外不可访问，确保转换失败时安全
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">Derived</span> <span class="o">*</span><span class="n">dp</span><span class="o">=</span><span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">bp</span><span class="p">)){</span>
+    <span class="cm">/* 使用dp指向的Derived对象 */</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="p">{</span>
+    <span class="cm">/* 使用bp指向的Base对象 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对于引用类型，不存在空引用，故无法使用与指针相同的报错策略，只能使用bad_cast抛出异常</li>
+<li>例子：对引用类型的dynamic_cast使用try-catch来处理失败情形</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">){</span>
+    <span class="k">try</span><span class="p">{</span>
+        <span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;</span><span class="n">d</span><span class="o">=</span><span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+        <span class="cm">/* 使用d引用的Derived对象 */</span>
+    <span class="p">}</span>
+    <span class="k">catch</span><span class="p">(</span><span class="n">bad_cast</span><span class="p">){</span>
+        <span class="cm">/* 处理转换失败的情况 */</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="typeid算符">typeid算符</h3>
+<ul>
+<li>typeid算符允许程序询问表达式的对象类型</li>
+<li>typeid表达式的形式是<code>typeid(e)</code>
+<ul>
+<li>形参<code>e</code>是任意表达式或类型名</li>
+<li>返回值是一个常量对象的引用，该对象的类型是<code>type_info</code>或其公有派生类。type_info类定义于头文件<code>typeinfo</code></li>
+</ul>
+</li>
+<li>typeid算符可作用于任意类型的表达式，在求类型时：
+<ul>
+<li>表达式中的顶层const被忽略</li>
+<li>若表达式是引用，则返回所引对象的类型</li>
+<li>若表达式是数组/函数，不会转换为对应的指针</li>
+<li>若表达式不是类类型，或是不包含虚函数的类类型，则返回静态类型</li>
+<li>若表达式是定义了虚函数的类的左值，则返回动态类型，即运行时才可知</li>
+<li>若表达式是指针，即使所指对象是有虚函数的类类型，仍返回该指针的静态类型</li>
+</ul>
+</li>
+<li>通常使用typeid比较两条表达式的类型是否相同，或是比较一条表达式的类型与指定类型是否相同</li>
+<li>例子：使用typeid判断类型是否相同</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Derived</span> <span class="o">*</span><span class="n">dp</span><span class="o">=</span><span class="k">new</span> <span class="n">Derived</span><span class="p">;</span>
+<span class="n">Base</span> <span class="o">*</span><span class="n">bp</span><span class="o">=</span><span class="n">dp</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">bp</span><span class="p">)</span><span class="o">==</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">dp</span><span class="p">)){}</span>      <span class="c1">//解引用得到对象的引用，由于指向同一对象，故true
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">bp</span><span class="p">)</span><span class="o">==</span><span class="k">typeid</span><span class="p">(</span><span class="n">Derived</span><span class="p">)){}</span>  <span class="c1">//bp实际指向Derived类型对象，故true
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="k">typeid</span><span class="p">(</span><span class="n">bp</span><span class="p">)</span><span class="o">==</span><span class="k">typeid</span><span class="p">(</span><span class="n">Derived</span><span class="p">)){}</span>   <span class="c1">//指针未解引用，推出类型是静态类型的指针，故永远是false
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>typeid中的表达式是否会被求值，取决于是否需要运行时检查：
+<ul>
+<li>只有类型含有虚函数时，才会在运行时检查</li>
+<li>类型不含虚函数时，返回静态类型，不需对表达式求值</li>
+</ul>
+</li>
+<li>若表达式的动态类型可能与静态类型不同，则必须在运行时求值。</li>
+<li>对于类似typeid(*p)的表达式，
+<ul>
+<li>若p所指类型有虚函数，则必须求值才能得知类型，故p不可为空指针，否则抛出bad_typeid异常</li>
+<li>若p所指类型没有虚函数，则不需求值，故p可为空指针</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用rtti">使用RTTI</h3>
+<ul>
+<li>若想为继承体系中的类实现相等算符，RTTI非常有用。</li>
+<li>若两个对象的类型相同且对应数据成员的值相等则这两个对象相等。</li>
+<li>设计：
+<ul>
+<li>派生类的相等算符必须考虑派生类新加的成员</li>
+<li>容易想到的方案是：定义一套虚函数equal，在继承体系的各个层次上分别判断成员相等</li>
+<li>存在的问题：
+<ul>
+<li>虚函数的基类版本和派生类版本必须有相同的形参</li>
+<li>若定义虚函数equal则形参必须是基类的引用，此时只能使用基类成员，无法比较派生类</li>
+</ul>
+</li>
+<li>解决方案：
+<ul>
+<li>先比较类型，类型不相同直接false</li>
+<li>使用typeid比较对象的运行时类型，类型相同才调用虚函数equal逐级比较</li>
+<li>这些equal的形参都是基类引用，但在两边类型相同时可以安全地把两边都转为self的类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>例子：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义基类
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Base</span><span class="p">{</span>
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="p">,</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="p">);</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">equal</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="cm">/* 其他成员 */</span>
+<span class="p">};</span>
+<span class="c1">//定义派生类
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Derived</span><span class="o">:</span> <span class="k">public</span> <span class="n">Base</span><span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">equal</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="cm">/* 其他成员 */</span>
+<span class="p">};</span>
+<span class="c1">//委托虚函数equal实现operator==
+</span><span class="c1">//传入基类类型的常量引用，确保可对基类和派生类同样适用
+</span><span class="c1"></span><span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span>
+    <span class="c1">//使用typeid运行时求类型，类型不相等时根据&amp;&amp;的短路求值，直接false
+</span><span class="c1"></span>    <span class="c1">//类型相等后执行虚函数equal，执行的是动态类型对应的版本
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nf">typeid</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span><span class="o">==</span><span class="k">typeid</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">lhs</span><span class="p">.</span><span class="n">equal</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//定义派生类的equal函数
+</span><span class="c1">//由于派生类的虚函数形参必须和基类相同，故传入基类引用
+</span><span class="c1"></span><span class="kt">bool</span> <span class="n">Derived</span><span class="o">::</span><span class="n">equal</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>
+    <span class="c1">//只有将基类引用转为派生类引用才能比较派生类的数据成员
+</span><span class="c1"></span>    <span class="c1">//由于equal是虚函数，执行的是动态版本，故比较派生类版本时将引用转换为派生类引用即可
+</span><span class="c1"></span>    <span class="k">auto</span> <span class="n">r</span><span class="o">=</span><span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;&gt;</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span>
+    <span class="c1">//执行比较两个Derived对象的操作并返回结果
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">//定义基类的equal函数
+</span><span class="c1"></span><span class="kt">bool</span> <span class="n">Base</span><span class="o">::</span><span class="n">equal</span><span class="p">(</span><span class="k">const</span> <span class="n">Base</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>
+    <span class="c1">//执行比较两个Base对象的操作并返回结果
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="type_info类">type_info类</h3>
+<ul>
+<li>type_info类的精确定义随编译器的不同略有差异</li>
+<li>C++标准规定<code>type_info</code>类必须定义于头文件<code>typeinfo</code>，且至少提供表19.1所示操作：
+<img src="../cpp_figs/CPPprimer_ch19-tab_19_1.png" alt="tab_19_1"></li>
+<li>由于tpye_info一般是作为基类出现（需要提供额外的类型信息时通常在其派生类中完成），故有public的虚析构函数</li>
+<li>创建type_info对象的唯一途径是使用<code>typeid</code>算符：type_info没有默认构造函数，且拷贝/移动构造函数和赋值算符都被定义为删除的。因此无法定义/拷贝/移动type_info类型的对象，也不能为type_info类型对象赋值。</li>
+<li>type_info类的name成员函数返回C风格字符串，表示对象的类型名字
+<ul>
+<li>name的返回值因编译器而异，不一定与程序中使用的类型名一致</li>
+<li>对name返回值的唯一要求是：不同类型的返回字符串必须有所区别</li>
+</ul>
+</li>
+<li>有的编译器会为type_info提供额外的成员函数以提供类型的额外信息，使用时应阅读编译器手册</li>
+</ul>
+<h2 id="枚举类型">枚举类型</h2>
+<ul>
+<li><code>枚举类型</code>可将一组整型常量组织在一起，每个枚举类型定义了一种新类型。枚举是字面值常量类型</li>
+<li>C++包含两种枚举：
+<ul>
+<li><code>限定作用域的枚举</code>（C++11引入）：关键字<code>enum class/struct</code>后接枚举类型名和花括号括起来的枚举成员列表，以分号结束</li>
+<li><code>不限定作用域的枚举</code>：省略关键字<code>class/struct</code>，枚举类型名可选</li>
+</ul>
+</li>
+<li>在不限定作用域的枚举中，若无枚举类型名则只能在定义枚举时在花括号和分号之间定义它的对象，类似定义类的同时定义对象</li>
+<li>例子：定义枚举类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="k">class</span> <span class="nc">open_modes</span><span class="p">{</span><span class="n">input</span><span class="p">,</span><span class="n">output</span><span class="p">,</span><span class="n">append</span><span class="p">};</span>             <span class="c1">//限定作用域的枚举
+</span><span class="c1"></span><span class="k">enum</span> <span class="nc">color</span><span class="p">{</span><span class="n">red</span><span class="p">,</span><span class="n">yellow</span><span class="p">,</span><span class="n">green</span><span class="p">};</span>                           <span class="c1">//不限定作用域的枚举
+</span><span class="c1"></span><span class="k">enum</span> <span class="p">{</span><span class="n">floatPrec</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">doublePrec</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">double_doublePrec</span><span class="o">=</span><span class="mi">10</span><span class="p">};</span>  <span class="c1">//未命名的不限定作用域的枚举
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>限定作用域的枚举中，枚举成员名字的作用域在枚举类型内部</li>
+<li>不限定作用域的枚举中，枚举成员名字的作用域与枚举类型本身的作用域相同</li>
+<li>例子：不限定作用域的枚举和限定作用域的枚举</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="nc">color</span><span class="p">{</span><span class="n">red</span><span class="p">,</span><span class="n">yellow</span><span class="p">,</span><span class="n">green</span><span class="p">};</span>           <span class="c1">//对，是不限定作用域的枚举，成员作用域和枚举类型相同
+</span><span class="c1"></span><span class="k">enum</span> <span class="nc">stoplight</span><span class="p">{</span><span class="n">red</span><span class="p">,</span><span class="n">yellow</span><span class="p">,</span><span class="n">green</span><span class="p">};</span>       <span class="c1">//错，是不限定作用域的枚举，成员作用域和枚举类型相同，名字和上一行冲突
+</span><span class="c1"></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">peppers</span><span class="p">{</span><span class="n">red</span><span class="p">,</span><span class="n">yellow</span><span class="p">,</span><span class="n">green</span><span class="p">};</span>   <span class="c1">//对，是限定作用域的枚举，成员的作用域在枚举类型内部
+</span><span class="c1"></span><span class="n">color</span> <span class="n">eyes</span><span class="o">=</span><span class="n">green</span><span class="p">;</span>                       <span class="c1">//对，color的枚举成员在全局作用域
+</span><span class="c1"></span><span class="n">peppers</span> <span class="n">p</span><span class="o">=</span><span class="n">green</span><span class="p">;</span>                        <span class="c1">//错，peppers的枚举成员不在全局作用域
+</span><span class="c1"></span><span class="n">color</span> <span class="n">hair</span><span class="o">=</span><span class="n">color</span><span class="o">::</span><span class="n">red</span><span class="p">;</span>                  <span class="c1">//对，使用color枚举类中的red
+</span><span class="c1"></span><span class="n">peppers</span> <span class="n">p2</span><span class="o">=</span><span class="n">peppers</span><span class="o">::</span><span class="n">red</span><span class="p">;</span>                <span class="c1">//对，使用peppers枚举类中的red
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>默认枚举成员的值从0开始依次+1，也可为一个或几个枚举成员指定专门的值。</li>
+<li>不同枚举成员可以有相同的值</li>
+<li>若未显式提供枚举成员的值，则当前枚举成员的值等于它左侧枚举成员的值+1</li>
+<li>枚举成员是<code>const</code>，故初始化枚举成员时提供的初始值必须是<code>constexpr</code>。</li>
+<li>每个枚举成员本身是constexpr，可在任何需要constexpr的地方使用枚举成员</li>
+<li>枚举成员是constexpr：
+<ul>
+<li>可将枚举类型的对象作为<code>switch</code>语句的表达式，将枚举值作为case标签</li>
+<li>可将枚举类型作为非类型模板的形参</li>
+<li>可在类的定义中初始化枚举类型的static数据成员</li>
+</ul>
+</li>
+<li>例子：枚举成员的值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="k">class</span> <span class="nc">intTypes</span><span class="p">{</span>
+    <span class="n">charTyp</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">shortTyp</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">intTyp</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>            <span class="c1">//不同枚举成员的值可相同
+</span><span class="c1"></span>    <span class="n">longTyp</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span><span class="n">long_longTyp</span><span class="o">=</span><span class="mi">64</span>
+<span class="p">};</span>
+<span class="k">constexpr</span> <span class="n">intTypes</span> <span class="n">charbits</span><span class="o">=</span><span class="n">intTypes</span><span class="o">::</span><span class="n">charTyp</span><span class="p">;</span>  <span class="c1">//枚举成员是constexpr
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>只要枚举类型有名字，就可定义并初始化该类型的对象。要想初始化枚举对象或为其赋值，必须使用该类型的枚举成员或该类型的枚举类对象，而不能用整型</li>
+<li>不限定作用域的枚举类型对象或枚举成员会自动转换成整型，可在任何需要整型的地方使用它们。而限定作用域的枚举对象/枚举成员不会转换为整型</li>
+<li>例子：整型和枚举类型的转换</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="k">class</span> <span class="nc">open_modes</span><span class="p">{</span><span class="n">input</span><span class="p">,</span><span class="n">output</span><span class="p">,</span><span class="n">append</span><span class="p">};</span>
+<span class="n">open_modes</span> <span class="n">om</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>        <span class="c1">//错，不可用整型初始化枚举类型对象
+</span><span class="c1"></span><span class="n">om</span><span class="o">=</span><span class="n">open_modes</span><span class="o">::</span><span class="n">input</span><span class="p">;</span>   <span class="c1">//对，可用枚举类型的成员初始化枚举类型对象
+</span><span class="c1"></span><span class="k">enum</span> <span class="nc">color</span><span class="p">{</span><span class="n">red</span><span class="p">,</span><span class="n">yellow</span><span class="p">,</span><span class="n">green</span><span class="p">};</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">peppers</span><span class="p">{</span><span class="n">red</span><span class="p">,</span><span class="n">yellow</span><span class="p">,</span><span class="n">green</span><span class="p">};</span>
+<span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">color</span><span class="o">::</span><span class="n">red</span><span class="p">;</span>       <span class="c1">//对，不限定作用域的枚举成员可隐式转换为整型
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">peppers</span><span class="o">::</span><span class="n">red</span><span class="p">;</span>     <span class="c1">//错，限定作用域的枚举成员不可隐式转换为整型
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>尽管每个枚举类型都定义了唯一的类型，但枚举成员和枚举对象都是由某种整型表示的</li>
+<li>C++11中，可在枚举类型名后加冒号<code>:</code>和类型名来表明使用该类型（<code>潜在类型</code>）来表示该枚举</li>
+<li>若未指定枚举类型的潜在类型，则默认：
+<ul>
+<li>限定作用域的枚举成员类型默认是int</li>
+<li>不限定作用域的枚举成员不存在默认类型，只知道潜在类型足够大，可容纳枚举值</li>
+</ul>
+</li>
+<li>若指定了枚举成员的潜在类型（包括限定作用域默认指定为int）而某个枚举成员的值发生溢出，则引发错误</li>
+<li>例子：枚举类型指定潜在类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="nc">intValues</span><span class="o">:</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">{</span>
+    <span class="n">charTyp</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span><span class="n">shortTyp</span><span class="o">=</span><span class="mi">65535</span><span class="p">,</span><span class="n">intTyp</span><span class="o">=</span><span class="mi">65535</span><span class="p">,</span>
+    <span class="n">longTyp</span><span class="o">=</span><span class="mi">4294967295UL</span><span class="p">,</span>
+    <span class="n">long_longTyp</span><span class="o">=</span><span class="mi">18446744073709551615ULL</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>C++11中可对枚举类型使用前置声明，但前置声明时必须指定枚举成员的大小（显式或隐式）</li>
+<li>不限定作用域的枚举类型前置声明必须手动指明大小，限定作用域的枚举类型前置声明可被隐式指定为int</li>
+<li>枚举类型的前置声明必须和定义匹配：
+<ul>
+<li>前置声明和定义中的成员大小必须一致</li>
+<li>同一个上下文中对同一枚举类型的前置声明和定义，必须都是限定作用域或都是不限定作用域</li>
+</ul>
+</li>
+<li>例子：前置声明枚举类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="nc">intValues</span><span class="o">:</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span> <span class="c1">//不限定作用域的枚举类型前置声明必须指定成员大小
+</span><span class="c1"></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">open_modes</span><span class="p">;</span>              <span class="c1">//限定作用域的枚举类型前置声明可将成员大小隐式指定为int
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>要想初始化一个枚举类型对象，必须使用该枚举类型的另一对象，或是该枚举类型的成员。不可使用整型初始化/赋值</li>
+<li>枚举对象的大小与该枚举类型的成员大小一样</li>
+<li>可使用不限定作用域的枚举类型对象或枚举成员对整型进行初始化/赋值，此时枚举值可能被提升为int或更大的整型</li>
+<li>例子：整型和枚举类型的转换</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="nc">Tokens</span><span class="p">{</span><span class="n">INLINE</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span><span class="n">VIRTUAL</span><span class="o">=</span><span class="mi">129</span><span class="p">};</span>
+<span class="kt">void</span> <span class="nf">ff</span><span class="p">(</span><span class="n">Tokens</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">ff</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+<span class="n">Tokens</span> <span class="n">curTok</span><span class="o">=</span><span class="n">INLINE</span><span class="p">;</span>
+<span class="n">ff</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span>                    <span class="c1">//匹配ff(int)
+</span><span class="c1"></span><span class="n">ff</span><span class="p">(</span><span class="n">INLINE</span><span class="p">);</span>                 <span class="c1">//匹配ff(Tokens)
+</span><span class="c1"></span><span class="n">ff</span><span class="p">(</span><span class="n">curTok</span><span class="p">);</span>                 <span class="c1">//匹配ff(Tokens)
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">newf</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">newf</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">uc</span><span class="o">=</span><span class="n">VIRTUAL</span><span class="p">;</span>   <span class="c1">//不限定作用域的枚举成员可转换为整型
+</span><span class="c1"></span><span class="n">newf</span><span class="p">(</span><span class="n">VIRTUAL</span><span class="p">);</span>              <span class="c1">//匹配newf(int)，不限定作用域的枚举成员可转换为整型
+</span><span class="c1"></span><span class="n">newf</span><span class="p">(</span><span class="n">uc</span><span class="p">);</span>                   <span class="c1">//匹配newf(unsigned char)
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="类成员指针">类成员指针</h2>
+<ul>
+<li><code>成员指针</code>是可以指向类的非static成员的指针。static成员不属于任何对象故可用普通指针、</li>
+<li>普通指针指向类的对象，成员指针指向类的成员</li>
+<li>成员指针的类型中包括类类型和成员类型</li>
+<li>初始化成员指针时，令其指向类的某个成员，但不指定该成员所属的对象。只有使用成员指针时才指定成员所属的对象</li>
+<li>例子：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">typedef</span> <span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">pos</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="nf">get_cursor</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">contents</span><span class="p">[</span><span class="n">cursor</span><span class="p">];}</span>
+    <span class="kt">char</span> <span class="nf">get</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="nf">get</span><span class="p">(</span><span class="n">pos</span> <span class="n">ht</span><span class="p">,</span><span class="n">pos</span> <span class="n">wd</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">contents</span><span class="p">;</span>
+    <span class="n">pos</span> <span class="n">cursor</span><span class="p">;</span>
+    <span class="n">pos</span> <span class="n">height</span><span class="p">,</span><span class="n">width</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="数据成员指针">数据成员指针</h3>
+<h3 id="成员函数指针">成员函数指针</h3>
+<h3 id="将成员函数用作可调用对象">将成员函数用作可调用对象</h3>
+<h2 id="嵌套类">嵌套类</h2>
+<h2 id="union一种节省空间的类">union：一种节省空间的类</h2>
+<h2 id="局部类">局部类</h2>
+<h2 id="固有的不可移植的特性">固有的不可移植的特性</h2>
+<h3 id="位域">位域</h3>
+<h3 id="volatile限定符">volatile限定符</h3>
+<h3 id="链接指示extern-c">链接指示：extern &ldquo;C&rdquo;</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-05-11
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/c&#43;&#43;-primer/">C&#43;&#43; primer</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/top_cpp/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章归类</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cppprimer_ch18/">
+            <span class="next-text nav-default">C&#43;&#43; primer 第18章 用于大型程序的工具</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/cpp/cppprimer_ch19/" class="leancloud_visitors" data-flag-title="C&#43;&#43; primer 第19章 特殊工具与技术">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

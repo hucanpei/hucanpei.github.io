@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C&#43;&#43; primer 第8章 IO库 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="C&#43;&#43;语言不直接处理输入输出，而是通过标准库中的一组类来处理IO 这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cpp/cppprimer_ch8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C&#43;&#43; primer 第8章 IO库" />
+<meta property="og:description" content="C&#43;&#43;语言不直接处理输入输出，而是通过标准库中的一组类来处理IO 这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cpp/cppprimer_ch8/" />
+<meta property="article:published_time" content="2020-02-15T21:15:00+08:00" />
+<meta property="article:modified_time" content="2020-02-15T21:15:00+08:00" />
+<meta itemprop="name" content="C&#43;&#43; primer 第8章 IO库">
+<meta itemprop="description" content="C&#43;&#43;语言不直接处理输入输出，而是通过标准库中的一组类来处理IO 这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内">
+<meta itemprop="datePublished" content="2020-02-15T21:15:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-15T21:15:00&#43;08:00" />
+<meta itemprop="wordCount" content="4289">
+
+
+
+<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43; primer 第8章 IO库"/>
+<meta name="twitter:description" content="C&#43;&#43;语言不直接处理输入输出，而是通过标准库中的一组类来处理IO 这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C&#43;&#43; primer 第8章 IO库</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-15 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+            <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+            </div>
+          <span class="more-meta"> 约 4289 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#io类">IO类</a>
+      <ul>
+        <li><a href="#io对象无拷贝或赋值">IO对象无拷贝或赋值</a></li>
+        <li><a href="#条件状态">条件状态</a></li>
+        <li><a href="#管理输出缓冲">管理输出缓冲</a></li>
+      </ul>
+    </li>
+    <li><a href="#文件输入输出">文件输入输出</a>
+      <ul>
+        <li><a href="#使用文件流对象">使用文件流对象</a></li>
+        <li><a href="#文件模式">文件模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#string流">string流</a>
+      <ul>
+        <li><a href="#使用istringstream">使用istringstream</a></li>
+        <li><a href="#使用ostringstream">使用ostringstream</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>C++语言不直接处理输入输出，而是通过标准库中的一组类来处理IO</li>
+<li>这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内存IO，即读写字符串</li>
+<li>1.2节介绍的IO库：
+<ul>
+<li><code>istream</code>（输入流）类型，提供输入</li>
+<li><code>ostream</code>（输出流）类型，提供输出</li>
+<li><code>cin</code>，是istream对象，从标准输入读取数据</li>
+<li><code>cout</code>，是ostream对象，向标准输出写数据</li>
+<li><code>cerr</code>，是ostream对象，用于输出错误信息，写到标准错误</li>
+<li><code>&gt;&gt;</code>运算符，从istream对象读输入</li>
+<li><code>&lt;&lt;</code>运算符，向ostream对象写输出</li>
+<li><code>getline</code>函数，从给定的istream读取一行数据，存入string对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="io类">IO类</h2>
+<ul>
+<li>实际程序不仅要从<code>控制台窗口</code>进行IO操作，还需要读写<code>文件</code>，而且用IO操作处理<code>字符串</code>也很方便。另外，程序可能需要读写<code>宽字符</code>文本</li>
+<li>标准库的IO类型在3个头文件中：
+<ul>
+<li><code>iostream</code>头文件定义了读写流的基本类型</li>
+<li><code>fstream</code>头文件定义了读写命名文件的类型</li>
+<li><code>sstream</code>头文件定义了读写string对象的类型</li>
+</ul>
+</li>
+<li>表8.1是标准库中的这些IO类型和头文件
+<img src="../cpp_figs/CPPprimer_ch8-tab_8_1.png" alt="tab_8_1"></li>
+<li>为支持宽字符语言，标准库定义的IO类也可操纵<code>wchar_t</code>类型数据，它对应的类型和函数名以<code>w</code>开始</li>
+<li>设备类型和字符宽度不会影响IO操作，例如<code>&gt;&gt;</code>运算符对控制台窗口、文件、字符串都可用，对char和wchar_t也可用</li>
+<li>通过<code>继承</code>，标准库可忽略这些不同设备和不同字符宽度的流的差异。利用<code>模板</code>，可以使用具有继承关系的类</li>
+<li>声明一个类<code>继承</code>自另一个类，则通常可将<code>派生类</code>当作<code>基类</code>来使用</li>
+<li>类型ifstream和istringstream都继承自istream，即可以像使用istream对象一样使用ifstream和istringstream对象</li>
+<li>本节所述的流特性都可无差别地应用于普通流、文件流、字符串流，以及char和wchar_t版本</li>
+</ul>
+<h3 id="io对象无拷贝或赋值">IO对象无拷贝或赋值</h3>
+<ul>
+<li>不能拷贝IO对象，不能给IO对象赋值，不能将形参或返回类型设为流类型</li>
+<li>进行IO操作的函数通常以<code>引用</code>方式传递和返回流</li>
+<li>读写IO会改变其状态，故传递和返回的引用不能const</li>
+</ul>
+<h3 id="条件状态">条件状态</h3>
+<ul>
+<li>IO很可能发生错误。一些错误可恢复，另一些错误在系统深处，超过了程序可处理的范围</li>
+<li>表8.2定义的函数和标志可帮助访问和操纵流的<code>条件状态</code>
+<img src="../cpp_figs/CPPprimer_ch8-tab_8_2.png" alt="tab_8_2"></li>
+<li>流发生错误的例子：从外部读到的类型和程序中需要的类型不匹配时，流进入错误状态</li>
+<li>一个流一旦发生错误，其上后续的IO操作都会失败。只有无错误才能继续读写</li>
+<li>使用流时应检查状态，将其当作条件。如<code>while(cin&gt;&gt;word)</code>，其中<code>&gt;&gt;</code>返回流的状态，操作成功则流有效</li>
+<li>当流作为条件时，只能知道是否有效，不知道发生了什么</li>
+<li>表8.2中，定义了一个机器无关（？）的<code>iostate</code>类型，可表达流的状态，这个类型是<code>标志位</code>的集合</li>
+<li>表8.2中，定义了4个iostate类型的constexpr值来表示特定的位模式。这些值用于表示特定的条件状态，可与位运算符一起使用来一次检测或设置多个标志位
+<ul>
+<li><code>badbit</code>表示系统级错误，不可恢复。一旦它被置位，流就无法使用</li>
+<li><code>failbit</code>在发生可恢复错误时被置位，如读取类型错误</li>
+<li>读到EOF处，<code>eofbit</code>和failbit都被置位</li>
+<li><code>goodbit</code>的值为0表示无错误</li>
+</ul>
+</li>
+<li>badbit、failbit、eofbit中的任一个被置位，则检测流状态的条件都会失败</li>
+<li>表8.2中，定义了一组函数来查询这些iostate标志位的状态，
+<ul>
+<li><code>good()</code>在所有错误位均未置位时返回true</li>
+<li><code>bad()</code>、<code>fail()</code>、<code>eof()</code>均在对应错误位被置位时返回true</li>
+<li>badbit被置位时，<code>fail()</code>也会返回true</li>
+</ul>
+</li>
+<li>将流当作条件时，等价于判断<code>!fail()</code>，而<code>eof()</code>和<code>bad()</code>操作只能表示特定错误</li>
+<li>表8.2中定义的<code>rdstate()</code>操作返回iostate类型值，表示当前状态</li>
+<li>表8.2中定义的<code>setstate()</code>操作接受iostate类型值，将给定的条件位置位，表示发生了对应错误</li>
+<li>表8.2中定义的<code>clear</code>成员函数有两个版本：
+<ul>
+<li><code>clear()</code>清除所有错误标志位</li>
+<li><code>clear(flags)</code>接受iostate类型值，表示流的新状态</li>
+</ul>
+</li>
+<li>例子：rdstate、setstate、clear</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="n">old_state</span><span class="o">=</span><span class="n">cin</span><span class="p">.</span><span class="n">rdstate</span><span class="p">();</span>                           <span class="c1">//保存cin的状态
+</span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>                                            <span class="c1">//清除错误位，使之有效
+</span><span class="c1"></span><span class="n">process_input</span><span class="p">(</span><span class="n">cin</span><span class="p">);</span>                                     <span class="c1">//使用cin
+</span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">setstate</span><span class="p">(</span><span class="n">old_state</span><span class="p">);</span>                                <span class="c1">//将cin置为原来的状态
+</span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">cin</span><span class="p">.</span><span class="n">rdstate</span><span class="p">()</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">cin</span><span class="p">.</span><span class="n">failbit</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">cin</span><span class="p">.</span><span class="n">badbit</span><span class="p">);</span>  <span class="c1">//复位failbit和badbit，其他位不变
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="管理输出缓冲">管理输出缓冲</h3>
+<ul>
+<li>每个输出流都管理一个缓冲区，用于保存程序读写的数据</li>
+<li>由于写设备很耗时，操作系统将程序的多个输出操作组合成单一的设备写操作，可大幅提高性能</li>
+<li>导致<code>缓冲刷新</code>（即数据真正写到设备/文件）的原因：
+<ul>
+<li>程序<code>正常结束</code>，缓冲刷新作为main的return的一部分</li>
+<li><code>缓冲区满</code>时刷新</li>
+<li>用操纵符如<code>endl</code>、<code>flush</code>、<code>ends</code>显式刷新</li>
+<li>输出操作之后可用操纵符<code>unitbuf</code>设置流的内部状态，使其在每次输出都刷新缓冲。默认时cerr时unitbuf的，即cerr的内容立即刷新</li>
+<li>一个输出流可能被<code>关联</code>到另一个流。读写被关联的流时，关联到的流的缓冲被刷新。例如，cin和cerr关联到cout，故读cin或写cerr都将使cout刷新</li>
+</ul>
+</li>
+<li>操纵符endl、flush、ends显式刷新:
+<ul>
+<li><code>endl</code>输出换行并刷新</li>
+<li><code>flush</code>直接刷新，不输出字符</li>
+<li><code>ends</code>输出空字符并刷新</li>
+</ul>
+</li>
+<li><code>unitbuf</code>操作符告诉流，接下来的每次写操作之后都进行flush</li>
+<li><code>nounitbuf</code>操作符重置流，使其恢复默认刷新</li>
+<li>例子：endl、flush、ends、unitbuf、nounitbuf</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hi!&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//输出&#34;hi!&#34;和换行符，刷新缓冲
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hi!&#34;</span><span class="o">&lt;&lt;</span><span class="n">flush</span><span class="p">;</span> <span class="c1">//输出&#34;hi!&#34;，刷新缓冲
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hi!&#34;</span><span class="o">&lt;&lt;</span><span class="n">ends</span><span class="p">;</span>  <span class="c1">//输出&#34;hi!&#34;和空字符，刷新缓冲
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">unitbuf</span><span class="p">;</span>      <span class="c1">//之后的所有cout输出都将立即刷新缓冲
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">nounitbuf</span><span class="p">;</span>    <span class="c1">//恢复cout的默认刷新
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>若程序异常终止，输出缓冲不会被刷新。因此调试崩溃的程序时要保证输出数据确实被刷新</li>
+<li>当一个输入流被关联到一个输出流时，任何从该输入流读取的操作都刷新关联的输出流</li>
+<li>交互式系统通常应关联输入输出流，保证所有提示信息都在读操作前被打印</li>
+<li><code>tie</code>函数有两个重载的版本
+<ul>
+<li><code>tie()</code>返回指向输出流的指针，若未关联到流则返回空指针</li>
+<li><code>tie(ostream)</code>接受一个指向ostream的指针，将自己关联到此ostream。用法如<code>x.tie(&amp;o)</code>将流<code>x</code>关联到输出流<code>o</code></li>
+</ul>
+</li>
+<li>每个流最多同时关联一个流，但多个流可同时关联到同一个ostream</li>
+<li>例子：流的关联</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cout</span><span class="p">);</span>                     <span class="c1">//将cin关联到cout
+</span><span class="c1"></span><span class="n">ostream</span> <span class="o">*</span><span class="n">old_tie</span><span class="o">=</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>  <span class="c1">//使cin不再关联到任何流
+</span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cerr</span><span class="p">);</span>                     <span class="c1">//将cin关联到cerr
+</span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="o">&amp;</span><span class="n">old_tie</span><span class="p">);</span>                  <span class="c1">//重建cin和cout间的正常关联
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="文件输入输出">文件输入输出</h2>
+<ul>
+<li>头文件<code>fstream</code>定义了3个IO类来读写文件：
+<ul>
+<li>类<code>ifstream</code>从给定文件读数据</li>
+<li>类<code>ofstream</code>向给定文件写数据</li>
+<li>类<code>fstream</code>可读写文件</li>
+</ul>
+</li>
+<li>fstream中的这些类型继承自iostream的对应类型，它们提供的操作类似cin和cout，即<code>&lt;&lt;</code>、<code>&gt;&gt;</code>、<code>getline</code>等，以及8.1节中的所有操作</li>
+<li>表8.3是fstream中比iostream新增的成员
+<img src="../cpp_figs/CPPprimer_ch8-tab_8_3.png" alt="tab_8_3"></li>
+</ul>
+<h3 id="使用文件流对象">使用文件流对象</h3>
+<ul>
+<li>要读写文件时应定义<code>文件流对象</code>，并将对象与文件关联</li>
+<li>表8.3中定义的<code>open(s)</code>将对象与文件关联，定位给定文件并视情况打开为读/写模式</li>
+<li>创建文件流对象时可在构造函数中提供文件名<code>filename</code>，此时<code>open(filename)</code>会被自动调用。在C++11之前，文件名只能是C风格字符串，C++11后文件名可是string对象或C风格字符串</li>
+<li>在要求<code>基类</code>对象的地方，可用<code>派生类</code>对象代替。例如，接受iostream引用/指针的函数，可用对应的fstream/sstream引用/指针来调用</li>
+<li>可以先定义空文件流对象（默认初始化），再调用<code>open</code>与文件关联</li>
+<li>如果调用<code>open</code>失败，则<code>failbit</code>被置位</li>
+<li>对已经关联到文件的流再次调用<code>open</code>会失败，并将<code>failbit</code>置位</li>
+<li>如要将已经关联到文件的流关联到另一个文件，必须先用<code>close</code>关闭已关联的文件</li>
+<li>例子：fstream的open和close</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">ifstream</span> <span class="nf">in</span><span class="p">(</span><span class="n">ifile</span><span class="p">);</span>         <span class="c1">//初始化时关联到文件
+</span><span class="c1"></span><span class="n">ofstream</span> <span class="n">out</span><span class="p">;</span>               <span class="c1">//默认初始化
+</span><span class="c1"></span><span class="n">out</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">ifile</span><span class="o">+</span><span class="s">&#34;.copy&#34;</span><span class="p">);</span>    <span class="c1">//打开文件
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">out</span><span class="p">){</span><span class="cm">/*使用out*/</span><span class="p">}</span>       <span class="c1">//先检查是否成功关联到文件，再使用流
+</span><span class="c1"></span><span class="n">in</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>                 <span class="c1">//一个文件流打开另一个文件前，必须关闭当前文件
+</span><span class="c1"></span><span class="n">in</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">ifile</span><span class="o">+</span><span class="s">&#34;2&#34;</span><span class="p">);</span>         <span class="c1">//打开另一个文件
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>当fstream被正确析构时（例如离开作用域），<code>close</code>会被自动调用，关联文件自动关闭</li>
+</ul>
+<h3 id="文件模式">文件模式</h3>
+<ul>
+<li>表8.4定义了每个文件流都有一个关联的<code>文件模式</code>，用来指出如何使用文件
+<img src="../cpp_figs/CPPprimer_ch8-tab_8_4.png" alt="tab_8_4"></li>
+<li>用open打开文件或用文件名构造文件流对象时，都可指定文件模式</li>
+<li>指定文件模式的限制：
+<ul>
+<li>只可对ofstream或fstream对象设定<code>out</code>模式</li>
+<li>只可对ifstream或fstream对象设定<code>in</code>模式</li>
+<li>只有当out也被设定时才可设定<code>trunc</code>模式</li>
+<li>只要trunc未被设定，就可设定app模式。在<code>app</code>模式下，文件总以out模式被打开</li>
+<li>默认情况下，即使未指定trunc，以out模式打开的文件也会被截断，即默认用out即用了trunc。为<code>避免截断</code>，可指定app模式，使数据追加到文件末尾；或指定in模式，同时读写。</li>
+<li><code>ate</code>和<code>binary</code>模式可用于任何文件流对象，且可与其他任何模式组合</li>
+</ul>
+</li>
+<li>每个文件流类型都定义了默认的文件模式：
+<ul>
+<li><code>ifstream</code>关联的文件默认以in模式打开</li>
+<li><code>ofstream</code>关联的文件默认以out模式打开</li>
+<li><code>fstream</code>关联的文件默认以in和out模式打开</li>
+</ul>
+</li>
+<li>默认方式（out模式）打开ostream时，文件会被丢弃。因为out模式意味着同时使用trunc模式。保留已有数据的方法是显式指定<code>app</code>或<code>in</code>模式</li>
+<li>同一个流，每次用open关联到不同文件时，都可改变模式</li>
+<li>例子：指定模式</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下3条等价，都会截断file1
+</span><span class="c1"></span><span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file1&#34;</span><span class="p">);</span>
+<span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file1&#34;</span><span class="p">,</span> <span class="n">ofstream</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+<span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file1&#34;</span><span class="p">,</span> <span class="n">ofstream</span><span class="o">::</span><span class="n">out</span><span class="o">|</span><span class="n">ofstream</span><span class="o">::</span><span class="n">trunc</span><span class="p">);</span>
+<span class="c1">//以下2条等价，为保留文件内容，显式指定app模式
+</span><span class="c1"></span><span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file2&#34;</span><span class="p">,</span> <span class="n">ofstream</span><span class="o">::</span><span class="n">app</span><span class="p">);</span>
+<span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file2&#34;</span><span class="p">,</span> <span class="n">ofstream</span><span class="o">::</span><span class="n">out</span><span class="o">|</span><span class="n">ofstream</span><span class="o">::</span><span class="n">app</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="string流">string流</h2>
+<ul>
+<li>头文件<code>sstream</code>定义了3个类型来支持内存IO，它们可读写string：
+<ul>
+<li><code>istringstream</code>从string读数据</li>
+<li><code>ostringstream</code>向string写数据</li>
+<li><code>stringstream</code>既可读string又可写string</li>
+</ul>
+</li>
+<li>头文件sstream中定义的类型都继承自iostream中对应的类型</li>
+<li>表8.5是sstream中定义的类型的特有操作
+<img src="../cpp_figs/CPPprimer_ch8-tab_8_5.png" alt="tab_8_5"></li>
+</ul>
+<h3 id="使用istringstream">使用istringstream</h3>
+<ul>
+<li>用<code>getline</code>逐行读取，每次读到的整行文本用<code>istringstream</code>读取单词</li>
+</ul>
+<h3 id="使用ostringstream">使用ostringstream</h3>
+<ul>
+<li>用<code>ostringstream</code>逐步构造输出，最后一起打印</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-02-15
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/c&#43;&#43;-primer/">C&#43;&#43; primer</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/cppprimer_ch9/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C&#43;&#43; primer 第9章 顺序容器</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cppprimer_ch7/">
+            <span class="next-text nav-default">C&#43;&#43; primer 第7章 类</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/cpp/cppprimer_ch8/" class="leancloud_visitors" data-flag-title="C&#43;&#43; primer 第8章 IO库">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

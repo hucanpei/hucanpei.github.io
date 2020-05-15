@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C&#43;&#43; primer 第5章 语句 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="C&#43;&#43;提供了一组控制流语句，包括条件执行语句、循环语句、跳转语句。 简单语句 一个表达式末尾加上分号就成了表达式语句。表达式语句的作用是：执行表" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cpp/cppprimer_ch5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C&#43;&#43; primer 第5章 语句" />
+<meta property="og:description" content="C&#43;&#43;提供了一组控制流语句，包括条件执行语句、循环语句、跳转语句。 简单语句 一个表达式末尾加上分号就成了表达式语句。表达式语句的作用是：执行表" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cpp/cppprimer_ch5/" />
+<meta property="article:published_time" content="2020-02-09T21:59:00+08:00" />
+<meta property="article:modified_time" content="2020-02-09T21:59:00+08:00" />
+<meta itemprop="name" content="C&#43;&#43; primer 第5章 语句">
+<meta itemprop="description" content="C&#43;&#43;提供了一组控制流语句，包括条件执行语句、循环语句、跳转语句。 简单语句 一个表达式末尾加上分号就成了表达式语句。表达式语句的作用是：执行表">
+<meta itemprop="datePublished" content="2020-02-09T21:59:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-09T21:59:00&#43;08:00" />
+<meta itemprop="wordCount" content="3442">
+
+
+
+<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43; primer 第5章 语句"/>
+<meta name="twitter:description" content="C&#43;&#43;提供了一组控制流语句，包括条件执行语句、循环语句、跳转语句。 简单语句 一个表达式末尾加上分号就成了表达式语句。表达式语句的作用是：执行表"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C&#43;&#43; primer 第5章 语句</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-09 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+            <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+            </div>
+          <span class="more-meta"> 约 3442 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简单语句">简单语句</a></li>
+    <li><a href="#语句作用域">语句作用域</a></li>
+    <li><a href="#条件语句">条件语句</a>
+      <ul>
+        <li><a href="#if语句">if语句</a></li>
+        <li><a href="#switch语句">switch语句</a></li>
+      </ul>
+    </li>
+    <li><a href="#迭代语句">迭代语句</a>
+      <ul>
+        <li><a href="#while语句">while语句</a></li>
+        <li><a href="#传统的for语句">传统的for语句</a></li>
+        <li><a href="#范围for语句">范围for语句</a></li>
+        <li><a href="#do-while语句">do-while语句</a></li>
+      </ul>
+    </li>
+    <li><a href="#跳转语句">跳转语句</a>
+      <ul>
+        <li><a href="#break语句">break语句</a></li>
+        <li><a href="#continue语句">continue语句</a></li>
+        <li><a href="#goto语句">goto语句</a></li>
+      </ul>
+    </li>
+    <li><a href="#try语句块和异常处理">try语句块和异常处理</a>
+      <ul>
+        <li><a href="#throw表达式">throw表达式</a></li>
+        <li><a href="#try语句块">try语句块</a></li>
+        <li><a href="#标准异常">标准异常</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>C++提供了一组<code>控制流</code>语句，包括<code>条件执行</code>语句、<code>循环</code>语句、<code>跳转</code>语句。</li>
+</ul>
+<h2 id="简单语句">简单语句</h2>
+<ul>
+<li>一个<code>表达式</code>末尾加上分号就成了<code>表达式语句</code>。表达式语句的作用是：<code>执行表达式，丢弃求值结果</code>。语句中的表达式在求值时经常有其他效果，如赋值等。</li>
+<li>最简单的语句是<code>空语句</code>，是一个单独分号<code>;</code></li>
+<li>多余的分号并不总是无害的，如if、for、while的括号后。</li>
+<li><code>复合语句</code>是用花括号<code>{}</code>括起来的语句和声明序列，也称为<code>块</code>。一个块是一个<code>作用域</code>。块中引入的名字只能在块内（包括嵌套于其中的块内）访问。</li>
+<li>语法上需要一条语句，但逻辑上需要多条语句时使用语句块。如if、for、while的循环体</li>
+<li>块结尾不需要分号。<code>空块</code>是指内部没有语句的一对花括号</li>
+</ul>
+<h2 id="语句作用域">语句作用域</h2>
+<ul>
+<li>可在if、switch、while、for的<code>控制结构内</code>定义变量，定义在控制结构中的变量只在相应的语句内部可见。由于这些变量马上要被使用，故必须初始化。</li>
+</ul>
+<h2 id="条件语句">条件语句</h2>
+<ul>
+<li>C++提供了<code>if</code>和<code>switch</code>两种条件语句</li>
+</ul>
+<h3 id="if语句">if语句</h3>
+<ul>
+<li>if语句作用：判断一个指定条件是否为真，根据结果决定是否执行另一条语句。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+    <span class="n">statement</span>
+<span class="k">else</span>
+    <span class="n">statement2</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>else分支可省略</li>
+<li>if-else语句可嵌套</li>
+<li>多个if或多个else时的匹配问题（悬垂else）：else总与它上面离他最近的尚未匹配的if匹配。</li>
+</ul>
+<h3 id="switch语句">switch语句</h3>
+<ul>
+<li>switch语句使我们可在若干固定选项中做选择</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">switch</span><span class="p">(</span><span class="n">statement</span><span class="p">){</span>
+    <span class="k">case</span> <span class="nl">value1</span><span class="p">:</span>
+        <span class="n">statement1</span>
+    <span class="k">case</span> <span class="nl">value2</span><span class="p">:</span>
+        <span class="n">statement2</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>switch语句先对括号内表达式求值，表达式的值转为整型后与每个case标签的值比较。如匹配成功，则从匹配处开始顺序执行下面的所有case分支，除非显式中断。</li>
+<li>为避免执行所有case分支，常用<code>break</code>中断switch语句。</li>
+<li>case关键字及其对应值一起称为<code>case标签</code>，对应的值必须为整型常量表达式。同一个switch内不能存在相同的case标签。</li>
+<li><code>default</code>也是一种特殊的case标签，当没有一个case标签能匹配求值语句的值时执行default</li>
+<li>例子：合并多个分支：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">switch</span><span class="p">(</span><span class="n">ch</span><span class="p">){</span>
+    <span class="k">case</span> <span class="sc">&#39;a&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;e&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;i&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;o&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;u&#39;</span><span class="o">:</span>
+        <span class="o">++</span><span class="n">vowelCnt</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>C++不允许跨过变量的初始化语句，直接跳转到其作用域的另一个位置。</li>
+<li>例子：case分支中声明和定义变量</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//程序的流程可能绕开初始化，故该switch语句不合法。
+</span><span class="c1"></span><span class="k">case</span> <span class="nb">true</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">file_name</span><span class="p">;</span>       <span class="c1">//错，控制流绕过隐式初始化的变量
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>             <span class="c1">//错，控制流绕过显式初始化的变量
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">jval</span><span class="p">;</span>               <span class="c1">//对，jval未初始化
+</span><span class="c1"></span>    <span class="k">break</span><span class="p">;</span>
+<span class="k">case</span> <span class="nb">false</span><span class="o">:</span>
+    <span class="n">jval</span><span class="o">=</span><span class="n">next_num</span><span class="p">();</span>        <span class="c1">//对，可给jval赋值。它在作用域内但未被初始化
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">file_name</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>  <span class="c1">//file_name在作用域内，但未初始化
+</span><span class="c1"></span>        <span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果要为某case分支定义并初始化一个变量，应该把变量定义在块内，确保对其他case分支不可见</li>
+</ul>
+<h2 id="迭代语句">迭代语句</h2>
+<ul>
+<li>迭代语句通常称为<code>循环</code>。while和for在执行前检查条件，do-while在执行后检查条件。</li>
+</ul>
+<h3 id="while语句">while语句</h3>
+<ul>
+<li>while语句重复执行循环体，直到条件不为真。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">while</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+    <span class="n">statement</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>while的条件部分可以是表达式或是带初始化的变量声明，在条件中或循环体内定义的变量在每次迭代都要重新创建到销毁。</li>
+</ul>
+<h3 id="传统的for语句">传统的for语句</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="n">init</span><span class="o">-</span><span class="n">statement</span><span class="p">;</span> <span class="n">condition</span><span class="p">;</span> <span class="n">expression</span><span class="p">)</span>
+    <span class="n">statement</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>init-statement必须是声明语句、表达式语句、空语句中的一种，它只在循环开始时执行一次，不会重复执行。</li>
+<li>init-statement可定义多个变量，但只能有一条声明语句，故它们基础类型必须相同。</li>
+<li>expression在每次迭代之后执行。</li>
+<li>for语句头可省略init-statement、condition、expression中的一个或全部，但分号不可省略。省略condition相当于用<code>true</code>代替。</li>
+<li>for语句头中定义的名字只在语句头和循环体内可见</li>
+</ul>
+<h3 id="范围for语句">范围for语句</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="nl">declaration</span><span class="p">:</span> <span class="n">expression</span><span class="p">)</span>
+    <span class="n">statement</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>expression必须是<code>序列</code>，如：花括号的初值列表、数组、vector或string等的对象（这些对象都能由begin和end返回迭代器）</li>
+<li>declaration定义一个变量用于访问元素，为确保类型相容经常用auto。如要修改元素，必须声明为<code>引用</code></li>
+<li>每次迭代时都会重新定义循环变量，然后再执行statement</li>
+<li>范围for的定义来源于与之等价的传统for，因此不能在范围for中修改序列的大小（会使迭代器无效）。</li>
+<li>例子：范围for和传统for</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">};</span>
+<span class="c1">//范围for
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">r</span><span class="p">:</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">*=</span><span class="mi">2</span><span class="p">;</span>
+<span class="c1">//对应的传统for
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">beg</span><span class="o">=</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">end</span><span class="o">=</span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">beg</span><span class="o">!=</span><span class="n">end</span><span class="p">;</span> <span class="o">++</span><span class="n">beg</span><span class="p">){</span>
+    <span class="k">auto</span> <span class="o">&amp;</span><span class="n">r</span><span class="o">=*</span><span class="n">beg</span><span class="p">;</span>
+    <span class="n">r</span><span class="o">*=</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="do-while语句">do-while语句</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">do</span>
+    <span class="n">statement</span>
+<span class="nf">while</span><span class="p">(</span><span class="n">condition</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>do-while每次先执行循环体再检查条件。循环体至少执行一次</li>
+<li>该语句最后有分号标志结束</li>
+<li>condition不能为空</li>
+<li>condition使用的变量必须定义在循环体外</li>
+<li>condition中不能定义变量，否则第一次在循环体中使用时未定义。</li>
+</ul>
+<h2 id="跳转语句">跳转语句</h2>
+<ul>
+<li>用于中断当前的执行过程，包括4种：<code>break</code>、<code>continue</code>、<code>goto</code>、<code>return</code></li>
+</ul>
+<h3 id="break语句">break语句</h3>
+<ul>
+<li>break终止离它最近的while、do-while、for、switch，从它们之后的第一条开始执行。break只能出现在循环或switch内</li>
+</ul>
+<h3 id="continue语句">continue语句</h3>
+<ul>
+<li>continue终止最近循环中的当前一次迭代，并开始下一次迭代。只能出现在for、while、do-while内</li>
+</ul>
+<h3 id="goto语句">goto语句</h3>
+<ul>
+<li>goto无条件跳转到同一函数内的另一条语句</li>
+<li>goto的目标是<code>带标签语句</code>，它是在语句前加一个标签标示符和冒号。由于标签标示符独立于变量或其他标示符的名字，故标签标示符可与其他变量同名，不会干扰</li>
+<li>goto不能用于从变量作用域外跳到作用域内（越过声明语句执行），因为未声明。</li>
+<li>goto可以跳转到已定义的对象的定义之前，这意味着该变量将被销毁并重新创建。</li>
+</ul>
+<h2 id="try语句块和异常处理">try语句块和异常处理</h2>
+<ul>
+<li><code>异常</code>：运行时的反常行为，超出了函数正常功能的范畴</li>
+<li>异常处理机制包括：<code>异常检测</code>和<code>异常处理</code></li>
+<li>异常检测部分使用<code>throw表达式</code>表示遇到异常。一般说throw<code>引发（raise）</code>了异常</li>
+<li>异常处理部分使用<code>try语句块</code>来处理。try语句块以try开始，以一个或多个<code>catch子句</code>结束。try语句块中抛出的异常将被某个catch子句处理。</li>
+<li>C++定义了一套<code>异常类</code>，用于在throw表达式和相关catch子句间传递异常的具体信息。</li>
+</ul>
+<h3 id="throw表达式">throw表达式</h3>
+<ul>
+<li>throw表达式包含throw关键字和紧随其后的一个表达式，如<code>throw statement</code>，表达式的类型是抛出异常的类型。</li>
+<li>类型<code>runtime_error</code>是异常类的一种，定义于<code>stdexcept头文件</code>中。runtime_error必须由一个string对象或C风格字符串来初始化。</li>
+</ul>
+<h3 id="try语句块">try语句块</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">try</span><span class="p">{</span>
+    <span class="n">program</span><span class="o">-</span><span class="n">statements</span>
+<span class="p">}</span>
+<span class="k">catch</span><span class="p">(</span><span class="n">exception</span><span class="o">-</span><span class="n">declaration</span><span class="p">){</span>
+    <span class="n">handler</span><span class="o">-</span><span class="n">statements</span>
+<span class="p">}</span>
+<span class="k">catch</span><span class="p">(</span><span class="n">exception</span><span class="o">-</span><span class="n">declaration</span><span class="p">){</span>
+    <span class="n">handler</span><span class="o">-</span><span class="n">statements</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>catch子句括号中是<code>异常声明</code>，按照某种异常类型声明该类型的变量，捕获到该类型异常时，为该变量赋值。</li>
+<li>try中是可能抛出异常的程序，抛出异常后与各catch子句捕获异常的类型对比，并执行匹配的catch子句。</li>
+<li>try语句块中声明的变量在块外无法访问，即使是catch中也不行。</li>
+<li>例子：抛出并处理异常</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">item1</span><span class="o">&gt;&gt;</span><span class="n">item2</span><span class="p">){</span>
+    <span class="k">try</span><span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">!=</span> <span class="n">item2</span><span class="p">.</span><span class="n">isbn</span><span class="p">())</span>
+            <span class="k">throw</span> <span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;Data must refer to same ISBN&#34;</span><span class="p">);</span> <span class="c1">//抛出runtime_error类型异常
+</span><span class="c1"></span>        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">item1</span><span class="o">+</span><span class="n">item2</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">catch</span><span class="p">(</span><span class="n">runtime_error</span> <span class="n">err</span><span class="p">){</span>   <span class="c1">//捕获runtime_error类型异常，存储到变量err中
+</span><span class="c1"></span>        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">()</span>        <span class="c1">//what成员函数得到抛出异常时的信息
+</span><span class="c1"></span>            <span class="o">&lt;&lt;</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Try Again? Enter y or n&#34;</span>
+            <span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cin</span> <span class="o">||</span> <span class="n">c</span><span class="o">==</span><span class="sc">&#39;n&#39;</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果有嵌套的异常处理，即try中可能调用了包含另一个try语句块的函数，则捕获异常顺序与函数调用顺序相反，沿着执行路径回退来找适合的catch</li>
+<li>如果抛出了异常，且不存在匹配的catch，则程序调用标准库函数<code>terminate</code>，该函数使程序非正常退出，其具体行为与系统有关。</li>
+<li>在异常发生期间能正确执行“清理”工作的程序称为<code>异常安全</code>的代码。编写异常安全的代码非常困难，必须清楚异常何时发生，发生后程序如何确保对象有效、资源无泄露、程序处于合理状态，等</li>
+</ul>
+<h3 id="标准异常">标准异常</h3>
+<ul>
+<li>C++定义了一组<code>异常类</code>，定义在4个头文件中
+<ul>
+<li><code>exception头文件</code>定义最通用的异常类<code>exception</code>，它只报告异常的发生，不提供任何信息</li>
+<li><code>stdexcept头文件</code>定义了几种常见异常类，见表5.1</li>
+<li><code>new头文件</code>定义了异常类<code>bad_alloc</code></li>
+<li><code>type_info头文件</code>定义了异常类<code>bad_cast</code>
+<img src="../cpp_figs/CPPprimer_ch5-tab_5_1.png" alt="tab_5_1"></li>
+</ul>
+</li>
+<li>标准库异常类只定义了几种运算：创建、拷贝、赋值。</li>
+<li>对exception、bad_alloc、bad_cast只能使用默认初始化，不可提供初始值。其他异常类相反，不可默认初始化，必须提供string对象或C风格字符串做初值。</li>
+<li>每个异常类定义了<code>what方法</code>，该方法没有参数，返回值是指向C风格字符串的<code>const char *</code>，该字符串提供异常相关的文本。若该异常类型有字符串初始值，则what返回该字符串，若无初始值，则what返回值由编译器决定。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-02-09
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/c&#43;&#43;-primer/">C&#43;&#43; primer</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/cppprimer_ch6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C&#43;&#43; primer 第6章 函数</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cppprimer_ch4/">
+            <span class="next-text nav-default">C&#43;&#43; primer 第4章 表达式</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/cpp/cppprimer_ch5/" class="leancloud_visitors" data-flag-title="C&#43;&#43; primer 第5章 语句">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

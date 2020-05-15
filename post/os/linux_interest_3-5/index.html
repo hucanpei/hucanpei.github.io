@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>趣谈Linux操作系统3-5：概述、命令、系统调用 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="03-你可以把Linux内核当成一家软件外包公司的老板 操作系统其实就像一个软件外包公司，其内核就相当于这家外包公司的老板。所以接下来的整个课" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/os/linux_interest_3-5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="趣谈Linux操作系统3-5：概述、命令、系统调用" />
+<meta property="og:description" content="03-你可以把Linux内核当成一家软件外包公司的老板 操作系统其实就像一个软件外包公司，其内核就相当于这家外包公司的老板。所以接下来的整个课" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/os/linux_interest_3-5/" />
+<meta property="article:published_time" content="2020-03-24T16:02:00+08:00" />
+<meta property="article:modified_time" content="2020-03-24T16:02:00+08:00" />
+<meta itemprop="name" content="趣谈Linux操作系统3-5：概述、命令、系统调用">
+<meta itemprop="description" content="03-你可以把Linux内核当成一家软件外包公司的老板 操作系统其实就像一个软件外包公司，其内核就相当于这家外包公司的老板。所以接下来的整个课">
+<meta itemprop="datePublished" content="2020-03-24T16:02:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-24T16:02:00&#43;08:00" />
+<meta itemprop="wordCount" content="3616">
+
+
+
+<meta itemprop="keywords" content="Linux,操作系统,极客时间专栏," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="趣谈Linux操作系统3-5：概述、命令、系统调用"/>
+<meta name="twitter:description" content="03-你可以把Linux内核当成一家软件外包公司的老板 操作系统其实就像一个软件外包公司，其内核就相当于这家外包公司的老板。所以接下来的整个课"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">趣谈Linux操作系统3-5：概述、命令、系统调用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-24 </span>
+        <div class="post-category">
+            <a href="/categories/linux/"> Linux </a>
+            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"> 操作系统 </a>
+            <a href="/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4%E4%B8%93%E6%A0%8F/"> 极客时间专栏 </a>
+            </div>
+          <span class="more-meta"> 约 3616 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#03-你可以把linux内核当成一家软件外包公司的老板">03-你可以把Linux内核当成一家软件外包公司的老板</a></li>
+    <li><a href="#04-快速上手几个linux命令每家公司都有自己的黑话">04-快速上手几个Linux命令：每家公司都有自己的黑话</a>
+      <ul>
+        <li><a href="#用户和密码">用户和密码</a></li>
+        <li><a href="#浏览文件">浏览文件</a></li>
+        <li><a href="#安装软件">安装软件</a></li>
+        <li><a href="#运行程序">运行程序</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#05-学会几个系统调用咱们公司能接哪些类型的项目">05-学会几个系统调用：咱们公司能接哪些类型的项目？</a>
+      <ul>
+        <li><a href="#立项服务与进程管理">立项服务与进程管理</a></li>
+        <li><a href="#会议室管理与内存管理">会议室管理与内存管理</a></li>
+        <li><a href="#档案库管理与文件管理">档案库管理与文件管理</a></li>
+        <li><a href="#项目异常处理与信号处理">项目异常处理与信号处理</a></li>
+        <li><a href="#项目组间沟通与进程间通信">项目组间沟通与进程间通信</a></li>
+        <li><a href="#公司间沟通与网络通信">公司间沟通与网络通信</a></li>
+        <li><a href="#查看源代码中的系统调用">查看源代码中的系统调用</a></li>
+        <li><a href="#中介与glibc">中介与Glibc</a></li>
+        <li><a href="#总结-1">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="03-你可以把linux内核当成一家软件外包公司的老板">03-你可以把Linux内核当成一家软件外包公司的老板</h2>
+<blockquote>
+<p>操作系统其实就像一个软件外包公司，其内核就相当于这家外包公司的老板。所以接下来的整个课程中，请你将自己的角色切换成这家软件外包公司的老板，设身处地地去理解操作系统是如何协调各种资源，帮客户做成事情的。</p>
+</blockquote>
+<ul>
+<li>下图是操作系统和外包公司的比喻
+<img src="../os_figs/Linux_interest_3_1.jpeg" alt="操作系统和外包公司的比喻"></li>
+<li>下图是操作系统内核体系结构图
+<img src="../os_figs/Linux_interest_3_2.jpeg" alt="操作系统内核体系结构图"></li>
+</ul>
+<h2 id="04-快速上手几个linux命令每家公司都有自己的黑话">04-快速上手几个Linux命令：每家公司都有自己的黑话</h2>
+<h3 id="用户和密码">用户和密码</h3>
+<ul>
+<li>创建用户用<code>useradd</code>（实际上用<code>adduser</code>更方便），<code>passwd</code>改密码</li>
+<li>用<code>-h</code>参数查看help，用<code>man</code>查看详细手册</li>
+<li>用户的信息放在<code>/etc/passwd</code>中，组的信息放在<code>/etc/group</code>中，可用<code>cat</code>输出其内容</li>
+<li>例子：用cat查看/etc/passwd和/etc/group</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+......
+cliu8:x:1000:1000::/home/cliu8:/bin/bash
+<span class="c1"># 用户名 : 密码 : 用户ID : 组ID :: 用户目录 : 默认命令行</span>
+
+$ cat /etc/group
+root:x:0:
+......
+cliu8:x:1000:
+<span class="c1"># 用户名 : 密码 : 用户ID :</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="浏览文件">浏览文件</h3>
+<ul>
+<li><code>cd</code>是change directory，<code>ls</code>是list</li>
+<li>例子：ls -l的内容</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ls -l</span>
+drwxr-xr-x <span class="m">6</span> root root    <span class="m">4096</span> Oct <span class="m">20</span>  <span class="m">2017</span> apt
+-rw-r--r-- <span class="m">1</span> root root     <span class="m">211</span> Oct <span class="m">20</span>  <span class="m">2017</span> hosts
+<span class="c1"># 第一个字段第一个字符是文件类型：-表示普通文件，d表示目录</span>
+<span class="c1"># 第一个字段剩下的字符是模式（权限位），每3个分别代表r(read)、w(write)、x(execute)的权限。</span>
+<span class="c1">#                                    1-3是所属用户的权限，4-6是所属组的权限，7-9是其他用户的权限</span>
+<span class="c1"># 第二个字段是硬链接数目</span>
+<span class="c1"># 第三、四个字段是所属用户、所属组</span>
+<span class="c1"># 第五、六、七个字段是文件大小、修改日期、文件名</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可用<code>chmod</code>来改变文件权限，<code>chown</code>改变所属用户，<code>chgrp</code>改变所属组</li>
+<li>管道<code>|</code>可将左侧程序的输出作为右侧程序的输入</li>
+<li><code>grep</code>用于搜索字符串，支持正则表达式</li>
+</ul>
+<h3 id="安装软件">安装软件</h3>
+<ul>
+<li>centos和ubuntu管理软件的区别：
+<ul>
+<li>centos的安装包是<code>.rpm</code>，用<code>rpm -i</code>安装，<code>rpm -qa</code>查看软件列表，<code>rpm -e</code>删除软件</li>
+<li>ubuntu的安装包是<code>.deb</code>，用<code>dpkg -i</code>安装，<code>dpkg -l</code>查看软件列表，<code>dpkg -r</code>删除软件</li>
+<li>centos的包管理工具是<code>yum</code>，<code>yum search</code>搜索软件，<code>yum install</code>安装软件，<code>yum erase</code>卸载软件</li>
+<li>ubuntu的包管理工具是<code>apt-get</code>，<code>apt-cache search</code>搜索软件，<code>apt-get install</code>安装软件，<code>apt-get purge</code>卸载软件</li>
+<li>centos的源在<code>/etc/yum.repos.d/CentOS-Base.repo</code>中配置</li>
+<li>ubuntu的源在<code>/etc/apt/sources.list</code>中配置</li>
+</ul>
+</li>
+<li>linux的可执行文件放在<code>/usr/bin</code>或<code>/usr/sbin</code>，其他库文件放在<code>/var</code>，配置文件放在<code>/etc</code></li>
+<li><code>wget</code>用于下载文件</li>
+<li><code>tar</code>和<code>unzip</code>用于解压文件</li>
+</ul>
+<h3 id="运行程序">运行程序</h3>
+<ul>
+<li>可用<code>export</code>配置环境变量，但仅在当前命令行会话中有效</li>
+<li>用户目录下的<code>.bashrc</code>在每次用户登录时都运行，其中设置的环境变量自动加载</li>
+<li><code>vim</code>可编辑文件</li>
+<li>linux执行程序的3种方式：
+<ul>
+<li>shell在交互命令行里运行，或者把路径放到PATH里，或者显式指定路径</li>
+<li>nouhp和&amp;实现后台运行，通常和重定位结合：<code>nohup command &gt;out.file 2&gt;&amp;1 &amp;</code>将标准错误(2)合并到标准输出(1)，重定位到out.file</li>
+<li>以服务方式运行：<code>systemctl start</code>启动，<code>systemctl enable</code>开机启动。程序被设为服务时会在<code>/lib/systemd/system</code>创建配置文件<code>XXX.service</code></li>
+</ul>
+</li>
+<li>关闭后台进程：<code>ps -ef |grep 关键字  |awk '{print $2}'|xargs kill -9</code>。<code>ps</code>打印进程列表，<code>grep</code>选出所需行，<code>awk</code>打印第二列的PID，<code>kill</code>向这些进程发送信号</li>
+<li><code>shutdown -h now</code>现在关机，<code>reboot</code>重启</li>
+</ul>
+<h3 id="总结">总结</h3>
+<ul>
+<li>下图是一些基本的Linux命令行
+<img src="../os_figs/Linux_interest_4_1.jpeg" alt="基本Linux命令行"></li>
+</ul>
+<h2 id="05-学会几个系统调用咱们公司能接哪些类型的项目">05-学会几个系统调用：咱们公司能接哪些类型的项目？</h2>
+<h3 id="立项服务与进程管理">立项服务与进程管理</h3>
+<ul>
+<li><code>fork</code>系统调用创建进程，叫fork的原因是通过复制<code>父进程</code>来创建<code>子进程</code>。</li>
+<li>当父进程调用fork创建进程时，子进程将各个子系统为父进程创建的数据结构都拷贝一份，程序代码也拷贝了一份</li>
+<li>下图说明fork产生的子进程拷贝各个子系统为父进程创建的数据结构
+<img src="../os_figs/Linux_interest_5_1.jpeg" alt="fork子进程复制"></li>
+<li>fork产生子进程后，父进程仍做原来的事，子进程调用<code>execve</code>来执行另一个任务（否则它们将没有区别），即产生新的分支</li>
+<li>下图说明fork产生子进程时<code>先拷贝后修改</code>
+<img src="../os_figs/Linux_interest_5_2.jpeg" alt="fork时先拷贝后修改"></li>
+<li>系统启动时先创建一个所有进程的父进程，所有进程都由它fork而来</li>
+<li>父进程可用<code>waitpid</code>来得知子进程是否结束</li>
+</ul>
+<h3 id="会议室管理与内存管理">会议室管理与内存管理</h3>
+<ul>
+<li>每个进程有独立的<code>内存空间</code>，存放<code>代码段</code>、<code>数据段</code>等</li>
+<li>数据段分为静态内存、<code>栈内存</code>、<code>堆内存</code>
+<ul>
+<li>静态内存只在程序执行完才销毁</li>
+<li><code>栈内存</code>存放局部变量，在当前函数执行时起作用，执行完就销毁</li>
+<li><code>堆内存</code>动态分配，会保持较长时间，手动销毁才被释放</li>
+</ul>
+</li>
+<li>进程的内存空间很大，32位机是4G，64位机更大。因此进程只在有需要的时候才会使用内存管理的系统调用来申请空间。但申请了不一定就分配<code>物理内存</code>，只有真正写入数据时发现没有对应的物理内存，才会触发中断分配物理内存</li>
+<li>下图说明进程申请内存空间和物理内存的分配
+<img src="../os_figs/Linux_interest_5_3.jpeg" alt="内存管理"></li>
+<li>分配内存数量少时用<code>brk</code>，分配的内存会和原来的堆数据连在一起。</li>
+<li>分配内存数量大时用<code>mmap</code>，重新划分一块区域。</li>
+</ul>
+<h3 id="档案库管理与文件管理">档案库管理与文件管理</h3>
+<ul>
+<li>对于文件的操作，下面这6个系统调用是最重要的：
+<ul>
+<li>对于已有的文件，可使用<code>open</code>打开，<code>close</code>关闭</li>
+<li>对于没有的文件，可使用<code>creat</code>创建文件</li>
+<li>打开文件后，可使用<code>lseek</code>跳到文件的某个位置</li>
+<li>可对文件的内容读写，读是<code>read</code>，写是<code>write</code></li>
+</ul>
+</li>
+<li>linux里<code>一切皆文件</code>，例如：
+<ul>
+<li>启动进程需要的程序文件是二进制文件。</li>
+<li>配置文件和日志文件是文本文件。</li>
+<li>在命令行上打印也是一个文件，是标准输出stdout文件。</li>
+<li>一个进程的输出可以作为另一个进程的输入，这种方式称为管道，管道也是文件。</li>
+<li>进程可以通过网络和其他进程进行通信，建立的Socket也是文件。</li>
+<li>进程需要访问外部设备，设备也是文件。</li>
+<li>目录也是文件。</li>
+<li>进程运行起来会在/proc下面有对应的进程号，也一系列文件。</li>
+</ul>
+</li>
+<li>对于每个文件，Linux分配一个文件描述符，它是一个整数。</li>
+<li>下图说明一些文件操作和文件底层的保存
+<img src="../os_figs/Linux_interest_5_4.jpeg" alt="文件管理"></li>
+</ul>
+<h3 id="项目异常处理与信号处理">项目异常处理与信号处理</h3>
+<ul>
+<li>遇到异常时需要向进程发送<code>信号</code>，例如：
+<ul>
+<li>执行程序时，在键盘输入“CTRL+C”，这是中断信号，正在执行的命令会中止退出</li>
+<li>非法访问内存</li>
+<li>硬件故障</li>
+<li>用户进程通过<code>kill</code>函数，将一个用户信号发送给另一个进程</li>
+</ul>
+</li>
+<li>对于不严重的信号可以忽略，但对于<code>SIGKILL</code>（用于终止一个进程的信号）和<code>SIGSTOP</code>（用于中止一个进程的信号）不可忽略。</li>
+<li>每种信号定义了默认动作，例如硬件故障默认终止。也可通过<code>sigaction</code>系统调用来注册一个信号处理函数来处理</li>
+</ul>
+<h3 id="项目组间沟通与进程间通信">项目组间沟通与进程间通信</h3>
+<ul>
+<li>进程间发送少量数据可用<code>消息队列</code>。</li>
+<li>用<code>msgget</code>创建新队列，<code>msgsnd</code>将消息发送到队列，<code>msgrcv</code>从队列中取消息</li>
+<li>进程间大量数据交互可用<code>共享内存</code>。</li>
+<li>用<code>shmget</code>创建共享内存块，<code>shmat</code>将共享内存映射到自己的内存空间</li>
+<li>多进程共享内存时存在竞争问题，可用<code>信号量Semaphore</code>来保证不同进程排他地访问共享内存</li>
+<li>对于只允许一个进程访问的资源，可将信号量设为1。进程要访问时调用<code>sem_wait</code>，若无人访问则占用信号量，若有人访问则等待直到它结束访问。结束访问时用<code>sem_post</code>释放信号量</li>
+</ul>
+<h3 id="公司间沟通与网络通信">公司间沟通与网络通信</h3>
+<ul>
+<li>不同机器通过网络通信，要遵循相同的<code>网络协议</code>，即<code>TCP/IP协议栈</code></li>
+<li>Linux内核里有网络协议栈的实现，网络服务是通过<code>套接字Socket</code>来提供服务的（socket有“插口”的含义）</li>
+<li>Socket系统调用建立一个Socket。Socket也是一个文件，也有一个文件描述符，也可以通过读写函数进行通信。</li>
+</ul>
+<h3 id="查看源代码中的系统调用">查看源代码中的系统调用</h3>
+<ul>
+<li>可在<a href="https://www.kernel.org">https://www.kernel.org</a>下载Linux内核源代码</li>
+<li>对于64位操作系统，找到unistd_64.h文件，里面对于系统调用的定义如下：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#define __NR_restart_syscall    0
+</span><span class="cp">#define __NR_exit               1
+</span><span class="cp">#define __NR_fork               2
+</span><span class="cp">#define __NR_read               3
+</span><span class="cp">#define __NR_write              4
+</span><span class="cp">#define __NR_open               5
+</span><span class="cp">#define __NR_close              6
+</span><span class="cp">#define __NR_waitpid            7
+</span><span class="cp">#define __NR_creat              8
+</span><span class="cp"></span><span class="p">......</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="中介与glibc">中介与Glibc</h3>
+<ul>
+<li><code>Glibc</code>是Linux下使用的开源的<code>标准C库</code>，它是GNU发布的libc库</li>
+<li>Glibc为程序员提供丰富的API，除了例如字符串处理、数学运算等用户态服务之外，最重要的是<code>封装</code>了操作系统提供的系统服务，即系统调用的封装。</li>
+<li>Glibc对系统调用的封装：
+<ul>
+<li>每个特定的系统调用对应了至少一个Glibc封装的库函数，如系统提供的打开文件系统调用<code>sys_open</code>对应的是Glibc中的<code>open</code>函数。</li>
+<li>有时候，Glibc一个单独的API可能调用多个系统调用，如Glibc提供的<code>printf</code>函数就会调用如<code>sys_open</code>、<code>sys_mmap</code>、<code>sys_write</code>、<code>sys_close</code>等等系统调用。</li>
+<li>也有时候，多个API也可能只对应同一个系统调用，如Glibc下实现的<code>malloc</code>、<code>calloc</code>、<code>free</code>等函数用来分配和释放内存，都利用了内核的<code>sys_brk</code>的系统调用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结-1">总结</h3>
+<ul>
+<li>如下图是基本的系统调用
+<img src="../os_figs/Linux_interest_5_5.jpeg" alt="基本系统调用"></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-03-24
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+          <a href="/tags/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4%E4%B8%93%E6%A0%8F/">极客时间专栏</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/os/linux_interest_6-9/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">趣谈Linux操作系统6-9：架构、启动、初始化、系统调用</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cpp_iostream_cstdio/">
+            <span class="next-text nav-default">C&#43;&#43;技巧：cin/cout和scanf/printf的速度</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/os/linux_interest_3-5/" class="leancloud_visitors" data-flag-title="趣谈Linux操作系统3-5：概述、命令、系统调用">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

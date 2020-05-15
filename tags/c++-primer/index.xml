@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; primer on pi</title>
+    <link>http://localhost:1313/tags/c&#43;&#43;-primer/</link>
+    <description>Recent content in C&#43;&#43; primer on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 11 May 2020 15:44:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/c++-primer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C&#43;&#43; primer 第19章 特殊工具与技术</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch19/</link>
+      <pubDate>Mon, 11 May 2020 15:44:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch19/</guid>
+      <description>控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第18章 用于大型程序的工具</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch18/</link>
+      <pubDate>Sun, 03 May 2020 22:38:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch18/</guid>
+      <description>大规模引用程序的特殊要求，及C++满足这些要求的工具： 在独立开发的子系统之间协同处理错误：异常处理 使用各种库（可能包含独立开发的库）进行协同</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第17章 标准库特殊设施</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch17/</link>
+      <pubDate>Thu, 23 Apr 2020 01:21:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch17/</guid>
+      <description>C++11极大扩充了标准库的规模和范围，标准库占据了C++11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第16章 模板与泛型编程</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch16/</link>
+      <pubDate>Tue, 14 Apr 2020 15:53:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch16/</guid>
+      <description>面向对象编程(OOP)和泛型编程(GP)都能处理在编写程序时类型未知的情况 OOP能处理运行时获取类型的情况 GP能处理编译期可获取类型的情况 标</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第15章 面向对象程序设计</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch15/</link>
+      <pubDate>Thu, 02 Apr 2020 18:26:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch15/</guid>
+      <description>面向对象程序设计(OOP)基于三个基本概念：数据抽象、继承、动态绑定 继承和动态绑定对程序的影响： 可以更容易地定义与其他类相似但不完全相同的新</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第14章 重载运算与类型转换</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch14/</link>
+      <pubDate>Fri, 20 Mar 2020 15:50:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch14/</guid>
+      <description>当运算符被用于类类型对象时，可利用运算符重载为其指定新含义（以提升可读性） 可自定义类类型之间的转换规则 基本概念 重载的算符是特殊的函数：名字由</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第13章 拷贝控制</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch13/</link>
+      <pubDate>Sun, 15 Mar 2020 16:30:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch13/</guid>
+      <description>定义一个类时，可显式或隐式的指定在此类型对象上拷贝、移动、赋值、销毁时做什么。通过5种成员函数实现拷贝控制操作： 拷贝构造函数：用同类型的另一</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第12章 动态内存</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch12/</link>
+      <pubDate>Sun, 08 Mar 2020 16:18:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch12/</guid>
+      <description>对象的生存期： 全局对象：程序启动时创建，程序结束时销毁 局部static对象：第一次使用前创建，程序结束时销毁 局部自动对象：定义时创建，离开定</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第11章 关联容器</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch11/</link>
+      <pubDate>Mon, 02 Mar 2020 17:07:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch11/</guid>
+      <description>关联容器的元素按照关键字来保存和访问，而顺序容器的元素是按照在容器中的位置来保存和访问 关联容器支持高效的关键字查找和访问 2种关联容器： map</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第10章 泛型算法</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch10/</link>
+      <pubDate>Tue, 25 Feb 2020 15:01:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch10/</guid>
+      <description>标准库未给容器添加大量功能，而是提供一组独立于容器的泛型算法 算法：它们实现了一些经典算法的公共接口 泛型：它们可用于不同类型的容器和不同类型的</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第9章 顺序容器</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch9/</link>
+      <pubDate>Wed, 19 Feb 2020 13:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch9/</guid>
+      <description>一个容器是特定类型对象的集合 顺序容器中元素的顺序与其加入容器的位置对应 关联容器中元素的顺序由其关联的关键字决定，关联容器分为有序关联容器和无</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第8章 IO库</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch8/</link>
+      <pubDate>Sat, 15 Feb 2020 21:15:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch8/</guid>
+      <description>C++语言不直接处理输入输出，而是通过标准库中的一组类来处理IO 这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第7章 类</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch7/</link>
+      <pubDate>Thu, 13 Feb 2020 18:02:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch7/</guid>
+      <description>C++中可用类定义自己的数据类型 数据抽象能帮助将对象的具体实现与对象能执行的操作分离 类的基本思想是数据抽象和封装 数据抽象：接口和实现分离的编</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第6章 函数</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch6/</link>
+      <pubDate>Tue, 11 Feb 2020 16:38:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch6/</guid>
+      <description>函数是一个命名了的代码块，通过调用函数来执行相应代码。 函数可有0个或多个参数，可能产生0个或1个结果。 函数可以重载，即一个名字对应多个不同函</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第5章 语句</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch5/</link>
+      <pubDate>Sun, 09 Feb 2020 21:59:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch5/</guid>
+      <description>C++提供了一组控制流语句，包括条件执行语句、循环语句、跳转语句。 简单语句 一个表达式末尾加上分号就成了表达式语句。表达式语句的作用是：执行表</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第4章 表达式</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch4/</link>
+      <pubDate>Sat, 08 Feb 2020 14:55:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch4/</guid>
+      <description>C++提供了一套运算符并定义了它们作用于内置类型时的操作 运算对象是类类型时，允许重载运算符 表达式由一个或多个运算对象组成，对表达式求值返回结</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第3章 字符串、向量和数组</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch3/</link>
+      <pubDate>Mon, 03 Feb 2020 15:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch3/</guid>
+      <description>string和vector是两类最重要的标准库类型，strng表示可变长的字符序列，vector存放某种给定类型对象的可变长序列。 迭代器是s</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第2章 变量和基本类型</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch2/</link>
+      <pubDate>Thu, 30 Jan 2020 17:07:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch2/</guid>
+      <description>C++定义了一些基本内置类型（字符、整型、浮点等），也提供了自定义数据类型的机制，标准库还定义了一些复杂的数据类型。 数据类型决定了程序中数据</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; primer 第1章 开始</title>
+      <link>http://localhost:1313/post/cpp/cppprimer_ch1/</link>
+      <pubDate>Sun, 26 Jan 2020 23:54:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpp/cppprimer_ch1/</guid>
+      <description>编写一个简单的程序 函数：包含4部分：返回类型，函数名，形参列表，函数体。其中函数体是一个语句块。 main函数：每个cpp程序都有且仅有一个m</description>
+    </item>
+    
+  </channel>
+</rss>

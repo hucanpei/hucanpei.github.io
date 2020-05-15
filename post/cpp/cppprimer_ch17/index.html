@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C&#43;&#43; primer 第17章 标准库特殊设施 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="C&#43;&#43;11极大扩充了标准库的规模和范围，标准库占据了C&#43;&#43;11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cpp/cppprimer_ch17/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C&#43;&#43; primer 第17章 标准库特殊设施" />
+<meta property="og:description" content="C&#43;&#43;11极大扩充了标准库的规模和范围，标准库占据了C&#43;&#43;11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cpp/cppprimer_ch17/" />
+<meta property="article:published_time" content="2020-04-23T01:21:00+08:00" />
+<meta property="article:modified_time" content="2020-04-23T01:21:00+08:00" />
+<meta itemprop="name" content="C&#43;&#43; primer 第17章 标准库特殊设施">
+<meta itemprop="description" content="C&#43;&#43;11极大扩充了标准库的规模和范围，标准库占据了C&#43;&#43;11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t">
+<meta itemprop="datePublished" content="2020-04-23T01:21:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-23T01:21:00&#43;08:00" />
+<meta itemprop="wordCount" content="17498">
+
+
+
+<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43; primer 第17章 标准库特殊设施"/>
+<meta name="twitter:description" content="C&#43;&#43;11极大扩充了标准库的规模和范围，标准库占据了C&#43;&#43;11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C&#43;&#43; primer 第17章 标准库特殊设施</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-23 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+            <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+            </div>
+          <span class="more-meta"> 约 17498 字 </span>
+          <span class="more-meta"> 预计阅读 35 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tuple类型">tuple类型</a>
+      <ul>
+        <li><a href="#定义和初始化tuple">定义和初始化tuple</a></li>
+        <li><a href="#使用tuple返回多个值">使用tuple返回多个值</a></li>
+      </ul>
+    </li>
+    <li><a href="#bitset类型">bitset类型</a>
+      <ul>
+        <li><a href="#定义和初始化bitset">定义和初始化bitset</a></li>
+        <li><a href="#bitset操作">bitset操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#正则表达式">正则表达式</a>
+      <ul>
+        <li><a href="#使用正则表达式库">使用正则表达式库</a></li>
+        <li><a href="#匹配与regex迭代器类型">匹配与regex迭代器类型</a></li>
+        <li><a href="#使用子表达式">使用子表达式</a></li>
+        <li><a href="#使用regex_replace">使用regex_replace</a></li>
+      </ul>
+    </li>
+    <li><a href="#随机数">随机数</a>
+      <ul>
+        <li><a href="#随机数引擎和分布">随机数引擎和分布</a></li>
+        <li><a href="#其他随机数分布">其他随机数分布</a></li>
+      </ul>
+    </li>
+    <li><a href="#io库再探">IO库再探</a>
+      <ul>
+        <li><a href="#格式化输入与输出">格式化输入与输出</a></li>
+        <li><a href="#未格式化的输入输出操作">未格式化的输入/输出操作</a></li>
+        <li><a href="#流随机访问">流随机访问</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>C++11极大扩充了标准库的规模和范围，标准库占据了C++11标准接近2/3的篇幅</li>
+</ul>
+<h2 id="tuple类型">tuple类型</h2>
+<ul>
+<li><code>tuple</code>是类似<code>pair</code>的<code>模板</code>：
+<ul>
+<li>pair和tuple的成员类型都可以不相同</li>
+<li>pair恰好有两个成员，tuple可有任意数量的成员</li>
+</ul>
+</li>
+<li>按照不同参数数量和类型实例化出的tuple是不同类型</li>
+<li>若希望将一些数据组合成单一对象，可使用tuple。可将tuple看作一个“快速而随意”的数据结构</li>
+<li>tuple类型及其伴随类型和函数都在头文件tuple中</li>
+<li>tuple支持的操作见表17.1
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_1.png" alt="tab_17_1"></li>
+</ul>
+<h3 id="定义和初始化tuple">定义和初始化tuple</h3>
+<ul>
+<li>定义一个tuple时，需要指出每个成员的类型。它们是模板参数，故必须在编译期确定</li>
+<li>创建tuple对象时，可使用tuple的默认构造函数，它会对每个成员<code>值初始化</code>。也可为每个成员提供初始值。tuple的接受初始值的构造函数是<code>explicit</code>的，即必须使用直接初始化而不能通过类型转换调用</li>
+<li>可用<code>make_tuple</code>函数（类似<code>make_pair</code>）生成tuple对象，它用实参的类型来推断tuple的类型</li>
+<li>例子：tuple定义和初始化</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">tuple</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">threeD</span><span class="p">;</span>             <span class="c1">//值初始化每个成员
+</span><span class="c1"></span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">someVal</span><span class="p">(</span><span class="s">&#34;constants&#34;</span><span class="p">,{</span><span class="mf">3.14</span><span class="p">,</span><span class="mf">2.718</span><span class="p">},</span><span class="mi">42</span><span class="p">,{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">});</span>
+<span class="n">tuple</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">threeD</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>     <span class="c1">//错，接受初始值的构造函数是explicit，不可类型转换
+</span><span class="c1"></span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">threeD</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>      <span class="c1">//对，可直接初始化
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">item</span><span class="o">=</span><span class="n">make_tuple</span><span class="p">(</span><span class="s">&#34;0-999-78345-X&#34;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">20.00</span><span class="p">);</span>  <span class="c1">//使用make_tuple来构造
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>tuple类型的成员数目没有限制，故其成员都是匿名的，只可用<code>get</code>函数访问</li>
+<li><code>get</code>是函数模板：
+<ul>
+<li>接受一个显式模板实参指出要访问第几个成员，该实参是非类型参数，必须是整型的<code>constexpr</code>（模板参数必须在编译期确定）</li>
+<li>接受一个函数实参指出访问哪个tuple对象</li>
+<li>返回指定成员的引用</li>
+</ul>
+</li>
+<li>若不知道一个tuple的准确类型，可以用两个辅助类模板来查询tuple成员的数量和类别：
+<ul>
+<li><code>tuple_size&lt;tuple_type&gt;::value</code>可查询<code>tuple_type</code>有几个成员</li>
+<li><code>tuple_element&lt;num,tuple_type&gt;::type</code>可查询<code>tuple_type</code>的第<code>num</code>个成员的类型</li>
+</ul>
+</li>
+<li>例子：访问tuple的成员及其类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">item</span><span class="o">=</span><span class="n">make_tuple</span><span class="p">(</span><span class="s">&#34;0-999-78345-X&#34;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">20.00</span><span class="p">);</span>  <span class="c1">//使用make_tuple构造一个tuple
+</span><span class="c1">//访问成员
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">book</span><span class="o">=</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>                         <span class="c1">//取第一个成员
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">cnt</span><span class="o">=</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">price</span><span class="o">=</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">/</span><span class="n">cnt</span><span class="p">;</span>
+<span class="n">get</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">*=</span><span class="mf">0.8</span><span class="p">;</span>                              <span class="c1">//get取的成员是引用，可以修改tuple内部
+</span><span class="c1">//求tuple类型的详细信息
+</span><span class="c1"></span><span class="k">typedef</span> <span class="nf">decltype</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="n">trans</span><span class="p">;</span>                   <span class="c1">//定义类型别名
+</span><span class="c1"></span><span class="n">size_t</span> <span class="n">sz</span><span class="o">=</span><span class="n">tuple_size</span><span class="o">&lt;</span><span class="n">trans</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">;</span>             <span class="c1">//从tuple的类型中得到成员的数量：tuple_size
+</span><span class="c1"></span><span class="n">tuple_element</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">trans</span><span class="o">&gt;::</span><span class="n">type</span> <span class="n">cnt</span><span class="o">=</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>  <span class="c1">//从tuple的类型中得到成员的类型：tuple_element
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>tuple的相等算符和关系算符类似容器：
+<ul>
+<li>只有两个tuple的成员数量相同才可比较</li>
+<li>逐对比较成员，只有成员有<code>==</code>时才可比较tuple的==，只有成员有<code>&lt;</code>时才可比较tuple的&lt;</li>
+</ul>
+</li>
+<li>由于tuple有==和&lt;，故可将其传递给算法。另外，无序容器中可用tuple作为关键字类型</li>
+<li>例子：tuple的相等和关系算符</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">tuple</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">duo</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="s">&#34;2&#34;</span><span class="p">);</span>
+<span class="n">tuple</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">twoD</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">duo</span><span class="o">==</span><span class="n">twoD</span><span class="p">);</span>                         <span class="c1">//错，不能比较元素类型string和size_t
+</span><span class="c1"></span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">threeD</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">twoD</span><span class="o">&lt;</span><span class="n">threeD</span><span class="p">);</span>                            <span class="c1">//错，成员数量不同不能比较
+</span><span class="c1"></span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">origin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">origin</span><span class="o">&lt;</span><span class="n">twoD</span><span class="p">);</span>                            <span class="c1">//对，b为true
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用tuple返回多个值">使用tuple返回多个值</h3>
+<ul>
+<li>tuple的常见用途是从一个函数返回多个值</li>
+<li>例子：使用tuple从函数返回多个值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 背景：Sales_data是一本书的销售资料
+</span><span class="cm"> *      vector&lt;Sales_data&gt;是一家书店所有书的销售资料
+</span><span class="cm"> *      vector&lt;vector&lt;Sales_data&gt;&gt;是多家书店的所有书的销售资料
+</span><span class="cm"> * 任务：给定所有书店的所有书的销售记录，输入一本书名，打印这本书在所有书店的销售记录
+</span><span class="cm"> */</span>
+<span class="c1">//tuple表示一本书在一家书店的销售记录：第一个参数代表第几家书店，第二三个参数代表这本书在这家书店的迭代器范围
+</span><span class="c1"></span><span class="k">using</span> <span class="n">matches</span><span class="o">=</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sales_data</span><span class="o">&gt;::</span><span class="n">size_type</span><span class="p">,</span>
+                    <span class="n">vector</span><span class="o">&lt;</span><span class="n">Sales_data</span><span class="o">&gt;::</span><span class="n">const_iterator</span><span class="p">,</span>
+                    <span class="n">vector</span><span class="o">&lt;</span><span class="n">Sales_data</span><span class="o">&gt;::</span><span class="n">const_iterator</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="c1">//返回tuple的vector，即这本书在所有书店的销售记录
+</span><span class="c1">//参数是所有书店所有书的销售记录files和要查找的书名book
+</span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">matches</span><span class="o">&gt;</span> <span class="n">findBook</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sales_data</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">files</span><span class="p">,</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">){</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">matches</span><span class="o">&gt;</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="c1">//遍历书店
+</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">it</span><span class="o">=</span><span class="n">files</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="n">it</span><span class="o">!=</span><span class="n">files</span><span class="p">.</span><span class="n">cend</span><span class="p">();</span><span class="o">++</span><span class="n">it</span><span class="p">){</span>
+        <span class="c1">//使用equal_range在一家书店的vector中查找相同的书
+</span><span class="c1"></span>        <span class="c1">//equal_range类似关联容器的equal_range，以pair形式返回一个给定值存在的区间（要求相等元素相邻存储）
+</span><span class="c1"></span>        <span class="c1">//使用自定义谓词compareIsbn，书名相等即Sales_data相等
+</span><span class="c1"></span>        <span class="c1">//传入book是string，存在由string到Sales_data的自动转换（由Sales_data的构造函数实现）
+</span><span class="c1"></span>        <span class="k">auto</span> <span class="n">found</span><span class="o">=</span><span class="n">equal_range</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">cbegin</span><span class="p">(),</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">cend</span><span class="p">(),</span><span class="n">book</span><span class="p">,</span><span class="n">compareIsbn</span><span class="p">);</span>
+        <span class="c1">//equal_range返回的迭代器区间若非空，则存在与给定值相等的元素
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">found</span><span class="p">.</span><span class="n">first</span><span class="o">!=</span><span class="n">found</span><span class="p">.</span><span class="n">second</span><span class="p">)</span>
+            <span class="c1">//使用make_tuple构造一个tuple
+</span><span class="c1"></span>            <span class="c1">//it-files.cbegin()是随机访问迭代器的操作，其结果是当前书店的编号（到第一家书店的距离）
+</span><span class="c1"></span>            <span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">it</span><span class="o">-</span><span class="n">files</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="n">found</span><span class="p">.</span><span class="n">first</span><span class="p">,</span><span class="n">found</span><span class="p">.</span><span class="n">second</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//调用上面的函数，打印结果
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">reportResults</span><span class="p">(</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">,</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Salse_data</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">files</span><span class="p">){</span>
+    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">in</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">){</span>
+        <span class="c1">//调用查找的结果，trans是vector&lt;matches&gt;
+</span><span class="c1"></span>        <span class="k">auto</span> <span class="n">trans</span><span class="o">=</span><span class="n">findBook</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">s</span><span class="o">&lt;&lt;</span><span class="s">&#34; not found in any stores&#34;</span><span class="o">&lt;&lt;</span><span class="n">end</span><span class="p">;</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//将auto扩展为const auto &amp;，声明的是这个类型的常量引用
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">store</span><span class="p">:</span><span class="n">trans</span><span class="p">)</span>
+            <span class="c1">//使用get&lt;num&gt;(tuple)来取tuple的成员
+</span><span class="c1"></span>            <span class="n">os</span><span class="o">&lt;&lt;</span><span class="s">&#34;store &#34;</span><span class="o">&lt;&lt;</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">store</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="s">&#34; sales: &#34;</span>
+              <span class="c1">//能用accumulate是因为对Salse_data重载了operator+，求和起点是临时构建的对象
+</span><span class="c1"></span>              <span class="o">&lt;&lt;</span><span class="n">accumulate</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">store</span><span class="p">),</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">store</span><span class="p">),</span><span class="n">Sales_data</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+              <span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="bitset类型">bitset类型</h2>
+<ul>
+<li>标准库定义的<code>bitset</code>使位操作更容易，而且能处理超过整型大小的位集合</li>
+<li><code>bitset</code>是类模板，定义在头文件<code>bitset</code></li>
+</ul>
+<h3 id="定义和初始化bitset">定义和初始化bitset</h3>
+<ul>
+<li>bitset是类模板，实例化时需指定一个模板非类型参数，表示有多少个bit。实例化后大小固定，类似<code>array</code></li>
+<li>由于位集合的大小是模板参数，故必须是<code>constexpr</code></li>
+<li>bitset中的二进制位是匿名的，通过位置编号访问。最<code>低位</code>编号为0，最<code>高位</code>对应最大编号</li>
+<li>bitset的初始化方法见表17.2
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_2.png" alt="tab_17_2"></li>
+<li>使用整型值初始化bitset时，该值先被转换为<code>unsigned long long</code>然后被当作位模式，bitset中的位是它的副本：
+<ul>
+<li>若bitset的位数多于该unsigned long long，则bitset低位填充高位置0</li>
+<li>若bitset的位数少于该unsigned long long，则只使用低位，高位被丢弃</li>
+</ul>
+</li>
+<li>例子：使用整型初始化bitset</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">13</span><span class="o">&gt;</span> <span class="n">bitvec1</span><span class="p">(</span><span class="mh">0xbeef</span><span class="p">);</span> <span class="c1">//ull更长，高位被丢弃：1 1110 1110 1111
+</span><span class="c1"></span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">20</span><span class="o">&gt;</span> <span class="n">bitvec2</span><span class="p">(</span><span class="mh">0xbeef</span><span class="p">);</span> <span class="c1">//bitset更长，高位填0：0000 1011 1110 1110 1111
+</span><span class="c1"></span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">128</span><span class="o">&gt;</span> <span class="n">bitvec3</span><span class="p">(</span><span class="o">~</span><span class="mi">0ULL</span><span class="p">);</span> <span class="c1">//bitset更长，高位填0：低64位是1，高64位是0
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可从字符串（string或字符数组指针）来初始化bitset，此时字符直接表示bit</li>
+<li>使用字符串初始化bitset时，字符串下标最小的字符对应高位，即左侧是高位。</li>
+<li>可使用字符串的子串来初始化bitset</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span> <span class="n">bitvec4</span><span class="p">(</span><span class="s">&#34;1100&#34;</span><span class="p">);</span>             <span class="c1">//字符串下标小的字符对应高位，初始化为1100
+</span><span class="c1"></span><span class="n">string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&#34;1111111000000011001101&#34;</span><span class="p">);</span>
+<span class="n">bitset</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span> <span class="n">bitvec5</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>            <span class="c1">//取子串， 从str[5]开始取4个比他，初始化为1100
+</span><span class="c1"></span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span> <span class="n">bitvec6</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="n">ste</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">4</span><span class="p">);</span>   <span class="c1">//取子串，从倒数第4个开始直到末尾，初始化为1101
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="bitset操作">bitset操作</h3>
+<ul>
+<li>bitset操作见表17.3，定义了多种检测/设置一个/多个二进制位的方法
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_3.png" alt="tab_17_3"></li>
+<li>bitset操作：
+<ul>
+<li>支持内置类型的位运算符，且含义与内置类型的位运算符用于unsigned对象相同</li>
+<li><code>count</code>/<code>size</code>/<code>all</code>/<code>any</code>/<code>none</code>操作不接受参数，返回整个bitset的状态</li>
+<li><code>set</code>/<code>reset</code>/<code>flip</code>用于改变bitset的状态，它们都被重载为有参数和无参数两个版本
+<ul>
+<li>接受一个参数的版本对给定位执行对应操作，参数指定位置。 set还多一个参数用于设置该位置的bit</li>
+<li>不接受参数的版本对整个集合执行给定操作</li>
+</ul>
+</li>
+<li><code>test</code>和下标算符<code>[]</code>接受一个参数。test只用于读指定位，下标算符[]可读可写</li>
+<li><code>to_ulong</code>/<code>to_ullong</code>/<code>to_string</code>由bitset生成对应类型</li>
+<li>输出算符<code>&lt;&lt;</code>将bitset打印为0/1，输入算符<code>&gt;&gt;</code>将0/1读取为bitset</li>
+</ul>
+</li>
+<li>当一个或多个位<code>置位</code>（即为1）时，操作any返回true。</li>
+<li>当所有位<code>复位</code>（即为0）时，操作none返回true。</li>
+<li>当所有位置位时，all返回true</li>
+<li>count和size返回的类型是size_t，count表示对象中置位的位数和，size表示对象的总位数</li>
+<li>size是一个<code>constexpr</code>函数，可用在需要常量表达式的地方</li>
+<li>下标算符[]对const属性进行了重载：
+<ul>
+<li>const版本在指定位置位时返回true（即bool类型）</li>
+<li>非const版本返回bitset定义的一个特殊类型，允许操纵指定位的值</li>
+</ul>
+</li>
+<li>to_ulong和to_ullong都返回一个对应类型的值，只有bitset比该类型更小（即能完整放入）时才能转换，否则抛出<code>overflow_error</code>异常</li>
+<li>输入算符从一个流读取字符，存入临时string对象，直到字符数达到bitset的大小，或是遇到错误（例如遇到非&rsquo;0&rsquo;/&lsquo;1'的字符、文件尾、输入错误），则停止读取。随后用临时string对象来初始化bitset</li>
+<li>例子：bitset操作</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span> <span class="n">bitvec</span><span class="p">(</span><span class="mi">1U</span><span class="p">);</span>
+<span class="c1">//不接受参数的操作
+</span><span class="c1"></span><span class="kt">bool</span> <span class="n">is_set</span><span class="o">=</span><span class="n">bitvec</span><span class="p">.</span><span class="n">any</span><span class="p">();</span>               <span class="c1">//是否有任何一位是1
+</span><span class="c1"></span><span class="kt">bool</span> <span class="n">is_not_set</span><span class="o">=</span><span class="n">bitvec</span><span class="p">.</span><span class="n">none</span><span class="p">();</span>          <span class="c1">//是否全为0
+</span><span class="c1"></span><span class="kt">bool</span> <span class="n">all_set</span><span class="o">=</span><span class="n">bitvec</span><span class="p">.</span><span class="n">all</span><span class="p">();</span>              <span class="c1">//是否全为1
+</span><span class="c1"></span><span class="n">size_t</span> <span class="n">onBits</span><span class="o">=</span><span class="n">bitvec</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>           <span class="c1">//1的个数
+</span><span class="c1"></span><span class="n">size_t</span> <span class="n">sz</span><span class="o">=</span><span class="n">bitvec</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>                <span class="c1">//有多少位
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">flip</span><span class="p">();</span>                          <span class="c1">//翻转所有位
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>                         <span class="c1">//所有位置0
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">set</span><span class="p">();</span>                           <span class="c1">//所有位置1
+</span><span class="c1">//接受参数的操作
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>                         <span class="c1">//将最低位翻转
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">bitvec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>            <span class="c1">//将最高位置1
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>                        <span class="c1">//将最低位置0
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                        <span class="c1">//将第i位置0
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">.</span><span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>                         <span class="c1">//最低位是否为1
+</span><span class="c1">//下标操作
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>                            <span class="c1">//下标可写
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">[</span><span class="mi">31</span><span class="p">]</span><span class="o">=</span><span class="n">bitvec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>                   <span class="c1">//下标可读可写
+</span><span class="c1"></span><span class="n">bitvec</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">flip</span><span class="p">();</span>                       <span class="c1">//可对某一位使用bitset操作
+</span><span class="c1"></span><span class="o">~</span><span class="n">bitvec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>                             <span class="c1">//可对某一位使用内置类型的位运算
+</span><span class="c1"></span><span class="kt">bool</span> <span class="n">b</span><span class="o">=</span><span class="n">bitvec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>                       <span class="c1">//可将某一位赋值给（转换为）bool
+</span><span class="c1">//转换为unsigned long
+</span><span class="c1"></span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">ulong</span><span class="o">=</span><span class="n">bitvec</span><span class="p">.</span><span class="n">to_ulong</span><span class="p">();</span>  <span class="c1">//转为unsigned long
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;ulong=&#34;</span><span class="o">&lt;&lt;</span><span class="n">ulong</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">//IO算符
+</span><span class="c1"></span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">16</span><span class="o">&gt;</span> <span class="n">bits</span><span class="p">;</span>
+<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">bits</span><span class="p">;</span>                              <span class="c1">//将输入的&#39;0&#39;/&#39;1&#39;读为string并初始化bitset
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;bits:&#34;</span><span class="o">&lt;&lt;</span><span class="n">bits</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>              <span class="c1">//将bitset中的bit转为&#39;0&#39;/&#39;1&#39;打印
+</span><span class="c1">//兼容内置类型的位运算
+</span><span class="c1"></span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">quizA</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>                  <span class="c1">//用unsigned long表示至少32个bit
+</span><span class="c1"></span><span class="n">quizA</span><span class="o">|=</span><span class="mi">1UL</span><span class="o">&lt;&lt;</span><span class="mi">27</span><span class="p">;</span>                         <span class="c1">//将第27位置1
+</span><span class="c1"></span><span class="kt">bool</span> <span class="n">status</span><span class="o">=</span><span class="n">quizA</span><span class="o">&amp;</span><span class="p">(</span><span class="mi">1UL</span><span class="o">&lt;&lt;</span><span class="mi">27</span><span class="p">);</span>            <span class="c1">//求第27位的状态
+</span><span class="c1"></span><span class="n">quizA</span><span class="o">&amp;=~</span><span class="p">(</span><span class="mi">1UL</span><span class="o">&lt;&lt;</span><span class="mi">27</span><span class="p">);</span>                      <span class="c1">//将第27位置0
+</span><span class="c1">//与位运算等价的bitset操作，有更好的可读性
+</span><span class="c1"></span><span class="n">bitset</span><span class="o">&lt;</span><span class="mi">30</span><span class="o">&gt;</span> <span class="n">quizB</span><span class="p">;</span>                       <span class="c1">//只需30个bit，用大小为30的bitset
+</span><span class="c1"></span><span class="n">quizB</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">27</span><span class="p">);</span>                          <span class="c1">//将第27位置1
+</span><span class="c1"></span><span class="n">status</span><span class="o">=</span><span class="n">quizB</span><span class="p">[</span><span class="mi">27</span><span class="p">];</span>                       <span class="c1">//求第27位的状态
+</span><span class="c1"></span><span class="n">quizB</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="mi">27</span><span class="p">);</span>                        <span class="c1">//将第27位置0
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="正则表达式">正则表达式</h2>
+<ul>
+<li><code>正则表达式</code>是一种描述字符序列的方法，是极其强大的计算工具。</li>
+<li>C++11在标准库中引入<code>正则表达式库</code>，定义于头文件<code>regex</code>，它包含多个组件，见表17.4
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_4.png" alt="tab_17_4"></li>
+<li><code>regex</code>类表示一个正则表达式，可进行初始化/赋值/其他特定操作</li>
+<li><code>regex_match</code>/<code>regex_search</code>/<code>regex_replace</code>函数用于确定给定的字符序列和给定regex是否匹配：
+<ul>
+<li>若整个输入序列与表达式匹配，则regex_match返回true</li>
+<li>若输入序列的子串与表达式匹配，则regex_search返回true</li>
+<li>regex_replace用于在输入序列中查找并替换</li>
+</ul>
+</li>
+<li><code>sregex_iterator</code>是迭代器适配器，用于遍历输入序列中所有匹配的子串</li>
+<li><code>smatch</code>是容器，用于保存匹配的相关信息（搜索结果等）</li>
+<li><code>ssub_match</code>是容器，用于保存子表达式匹配的相关信息</li>
+<li>regex_match/regex_search的参数见表17.5，它们都返回bool值表示匹配是否成功
+<ul>
+<li>接受3个参数的版本仅查找并返回bool</li>
+<li>接受4个参数的版本，额外参数是smatch，若匹配成功则用于存放匹配的相关信息
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_5.png" alt="tab_17_5"></li>
+</ul>
+</li>
+</ul>
+<h3 id="使用正则表达式库">使用正则表达式库</h3>
+<ul>
+<li>regex默认使用的正则表达式语言是<code>ECMAScript</code></li>
+<li>例子：使用正则表达式查找违反拼写规则“i除非在c之后，否则必须在e之前”的单词</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* ECMAScript正则表达式语法:
+</span><span class="cm"> * [^c]匹配任意非&#39;c&#39;的字符
+</span><span class="cm"> * [^c]ei匹配任意非c的字符后接ei的字符串
+</span><span class="cm"> * [[:alpha:]]匹配任意字母
+</span><span class="cm"> * +和*分别表示“一个或多个”和“零个或多个”匹配
+</span><span class="cm"> * [[:alpha:]]*匹配零个或多个字母
+</span><span class="cm"> * 综上，[[:alpha:]]*[^c]ei[[:alpha:]]*表示：匹配出现任意非c的字符后接ei的字符串的单词
+</span><span class="cm"> */</span>
+<span class="n">string</span> <span class="nf">pattern</span><span class="p">(</span><span class="s">&#34;[^c]ei&#34;</span><span class="p">);</span>
+<span class="n">pattern</span><span class="o">=</span><span class="s">&#34;[[:alpha:]]*&#34;</span><span class="o">+</span><span class="n">pattern</span><span class="o">+</span><span class="s">&#34;[[:alpha:]]*&#34;</span><span class="p">;</span>  <span class="c1">//构建正则表达式的字符串描述
+</span><span class="c1"></span><span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="n">pattern</span><span class="p">);</span>                               <span class="c1">//创建正则表达式regex对象
+</span><span class="c1"></span><span class="n">smatch</span> <span class="n">results</span><span class="p">;</span>                                 <span class="c1">//创建匹配的结果对象
+</span><span class="c1"></span><span class="n">string</span> <span class="n">test_str</span><span class="o">=</span><span class="s">&#34;receipt freind theif receive&#34;</span><span class="p">;</span> <span class="c1">//要查找模式的字符串
+</span><span class="c1">//regex_search匹配字符串的子串，如果匹配成功，返回true并将结果存在results中
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">regex_search</span><span class="p">(</span><span class="n">test_str</span><span class="p">,</span><span class="n">results</span><span class="p">,</span><span class="n">r</span><span class="p">))</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">results</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>                  <span class="c1">//打印匹配的结果，输出将是freind（匹配到的第一个）
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>定义一个regex或是对regex调用<code>assign</code>赋予新值时，可指定一些标志来控制regex对象的处理过程，见表17.6
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_6.png" alt="tab_17_6"></li>
+<li>表17.6的最后6个标志指出编写正则表达式使用的语言，必须指定其中之一。默认使用ECMAScript，即使用<code>ECMA-262</code>规范，这是很多web浏览器使用的正则表达式语言</li>
+<li>表17.6的另外3个标志指定与正则表达式无关的方面，如是否忽略大小写、保存子表达式、权衡性能等</li>
+<li>例子：匹配c++文件名，忽略大小写</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* ECMAScript正则表达式语法:
+</span><span class="cm"> * [[:alnum:]]匹配字母或数字
+</span><span class="cm"> * [[:alnum:]]+匹配一个或多个字母或数字
+</span><span class="cm"> * .匹配任意字符
+</span><span class="cm"> * 由于.在正则表达式语法中有特殊含义，故加上\
+</span><span class="cm"> * 由于\在c++字符串中有特殊含义，故再加一个\
+</span><span class="cm"> * 综上，\\.匹配字符串中的字符&#39;.&#39;
+</span><span class="cm"> * cpp|cxx|cc是或逻辑，匹配cpp或cxx或cc
+</span><span class="cm"> * (cpp|cxx|cc)加上括号是子表达式
+</span><span class="cm"> */</span>
+<span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="s">&#34;[[:alnum:]]+</span><span class="se">\\</span><span class="s">.(cpp|cxx|cc)</span><span class="err">$</span><span class="s">&#34;,regex::icase)</span><span class="p">;</span>   <span class="c1">//匹配时忽略大小写
+</span><span class="c1"></span><span class="n">smatch</span> <span class="n">results</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">filename</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">regex_search</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">results</span><span class="p">,</span><span class="n">r</span><span class="p">))</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">results</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可将正则表达式本身看作一种简单的程序设计语言编写的“程序”，它在运行时regex对象被初始化或赋予新模式时被“编译”</li>
+<li>正则表达式的编写可能不符合正则表达式的语法规范，导致错误</li>
+<li>正则表达式编写错误时，在运行时抛出一个<code>regex_error</code>类型的异常：
+<ul>
+<li>该类型有一个<code>what</code>成员函数用于描述错误</li>
+<li>该类型有一个<code>code</code>成员函数用于返回错误类型对应的数值编码，其返回值由具体实现定义</li>
+<li>RE库能抛出的标准错误见表17.7
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_7.png" alt="tab_17_7"></li>
+</ul>
+</li>
+<li>例子：正则表达式书写错误时抛出异常</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">try</span><span class="p">{</span>
+    <span class="c1">//创建正则表达式时可能抛出异常（由于正则表达式书写错误），用try捕获异常
+</span><span class="c1"></span>    <span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="s">&#34;[[:alnum:]+</span><span class="se">\\</span><span class="s">.(cpp|cxx|cc)</span><span class="err">$</span><span class="s">&#34;,regex::icase)</span><span class="p">;</span>    <span class="c1">//书写错误：[[:alnum:]应为[[:alnum:]]
+</span><span class="c1"></span><span class="p">}</span>
+<span class="k">catch</span><span class="p">(</span><span class="n">regex_error</span> <span class="n">e</span><span class="p">){</span>
+    <span class="c1">//创建正则表达式时抛出的异常regex_error有what和code两个成员函数
+</span><span class="c1"></span>    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&#34; </span><span class="se">\n</span><span class="s">code: &#34;</span><span class="o">&lt;&lt;</span><span class="n">e</span><span class="p">.</span><span class="n">code</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>正则表达式所表示的“程序”是在运行时“编译”的，这个操作非常慢。即创建正则表达式非常慢</li>
+<li>构造regex对象以及向regex对象赋值都很耗时，应尽量避免</li>
+<li>可搜索多种类型的输入序列，字符可保存在string/wstring/char数组/wchar_t数组中。RE库为它们分别定义了不同的类型，见表17.8
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_8.png" alt="tab_17_8"></li>
+<li>regex类根据名字前是否有w，分为2种：
+<ul>
+<li><code>regex</code>类由<code>string/char数组</code>初始化</li>
+<li><code>wregex</code>类由<code>wstring/wchar_t数组</code>初始化</li>
+</ul>
+</li>
+<li>match/sub_match/regex_iterator根据名字s和c，以及名字前是否有w，分为4种：
+<ul>
+<li>前面是<code>s</code>的版本由<code>string</code>初始化</li>
+<li>前面是<code>c</code>的版本由<code>const char *</code>初始化</li>
+<li>前面是<code>ws</code>的版本由<code>wstring</code>初始化</li>
+<li>前面是<code>wc</code>的版本由<code>const wchar_t *</code>初始化</li>
+</ul>
+</li>
+<li>例子：根据类名区分正则表达式类处理的文本类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//regex不区分string和字符数组
+</span><span class="c1"></span><span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="s">&#34;[[:alnum:]]+</span><span class="se">\\</span><span class="s">.(cpp|cxx|cc)</span><span class="err">$</span><span class="s">&#34;,regex::icase)</span><span class="p">;</span>
+<span class="n">smatch</span> <span class="n">results</span><span class="p">;</span>                         <span class="c1">//结果存在string中
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">regex_search</span><span class="p">(</span><span class="s">&#34;myfile.cc&#34;</span><span class="p">,</span><span class="n">results</span><span class="p">,</span><span class="n">r</span><span class="p">))</span> <span class="c1">//错，输入序列&#34;myfile.cc&#34;是字符数组，与smatch不统一
+</span><span class="c1"></span>    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">results</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cmatch</span> <span class="n">results</span><span class="p">;</span>                         <span class="c1">//结果存在字符数组中
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">regex_search</span><span class="p">(</span><span class="s">&#34;myfile.cc&#34;</span><span class="p">,</span><span class="n">results</span><span class="p">,</span><span class="n">r</span><span class="p">))</span> <span class="c1">//对，输入序列&#34;myfile.cc&#34;和cmatch统一
+</span><span class="c1"></span>    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">results</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="匹配与regex迭代器类型">匹配与regex迭代器类型</h3>
+<ul>
+<li>使用regex_search得到的搜索结果默认只取第一个匹配的子串。使用迭代器regex_iterator可获得所有匹配</li>
+<li>regex_iterator迭代器是一种迭代器适配器，被绑定到一个输入序列和一个regex对象</li>
+<li>regex_iterator有4种，操作见表17.9
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_9.png" alt="tab_17_9"></li>
+<li><code>初始化</code>regex_iterator时，
+<ul>
+<li>若使用输入字符串/字符数组和regex来初始化，则调用regex_search在输入字符串/字符数组中查找第一个匹配</li>
+<li>默认初始化为尾后迭代器</li>
+</ul>
+</li>
+<li><code>解引用</code>regex_iterator时，得到对应最近一次搜索结果的match对象</li>
+<li><code>递增</code>regex_iterator时，调用regex_search在输入字符串/字符数组中查找下一个匹配</li>
+<li>例子：使用regex_iterator遍历所有匹配，示意图见图17.1</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="nf">pattern</span><span class="p">(</span><span class="s">&#34;[^c]ei&#34;</span><span class="p">);</span>
+<span class="n">pattern</span><span class="o">=</span><span class="s">&#34;[[:alpha:]]*&#34;</span><span class="o">+</span><span class="n">pattern</span><span class="o">+</span><span class="s">&#34;[[:alpha:]]*&#34;</span><span class="p">;</span>
+<span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="n">regex</span><span class="o">::</span><span class="n">icase</span><span class="p">);</span>
+<span class="c1">//假定file是string类型，保存要搜索的字符串
+</span><span class="c1">//创建两个sregex_iterator，第一个初始化为第一个匹配，第二个初始化为尾后迭代器
+</span><span class="c1">//使用递增来遍历每一个匹配位置
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">sregex_iterator</span> <span class="n">it</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">file</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">r</span><span class="p">),</span><span class="n">end_it</span><span class="p">;</span><span class="n">it</span><span class="o">!=</span><span class="n">end_it</span><span class="p">;</span><span class="o">++</span><span class="n">it</span><span class="p">)</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="../cpp_figs/CPPprimer_ch17-fig_17_1.png" alt="fig_17_1"></p>
+<ul>
+<li>使用match对象来表示一次匹配的结果时，不仅可用str成员函数来得到匹配部分的内容，还能得到其他信息</li>
+<li>match类的操作见表17.10
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_10.png" alt="tab_17_10"></li>
+<li>匹配时经常不仅要知道匹配部分，还要知道其上下文。可使用match的prefix和suffix成员函数得到：
+<ul>
+<li><code>prefix</code>成员函数返回一个sub_match对象，表示输入字符串/字符数组中匹配部分之前的部分</li>
+<li><code>suffix</code>成员函数返回一个sub_match对象，表示输入字符串/字符数组中匹配部分之后的部分</li>
+</ul>
+</li>
+<li>sub_match类有两个名为str和length的成员，分别返回其代表的字符串/字符数组与其大小</li>
+<li>例子：使用prefix和suffix获取匹配部分的上下文，示意图见图17.2</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* for之前的部分和上一个例子一样 */</span>
+<span class="k">for</span><span class="p">(</span><span class="n">sregex_iterator</span> <span class="n">it</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">file</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">r</span><span class="p">),</span><span class="n">end_it</span><span class="p">;</span><span class="n">it</span><span class="o">!=</span><span class="n">end_it</span><span class="p">;</span><span class="o">++</span><span class="n">it</span><span class="p">){</span>
+    <span class="k">auto</span> <span class="n">pos</span><span class="o">=</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">prefix</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+    <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="o">&gt;</span><span class="mi">40</span><span class="o">?</span><span class="n">pos</span><span class="o">-</span><span class="mi">40</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>                    <span class="c1">//若前面不足40个字符，则完整打印前面部分，否则打印前面40个字符
+</span><span class="c1"></span>    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">prefix</span><span class="p">().</span><span class="n">str</span><span class="p">().</span><span class="n">substr</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>    <span class="c1">//打印匹配部分的上文
+</span><span class="c1"></span>        <span class="o">&lt;&lt;</span><span class="s">&#34;</span><span class="se">\n\t</span><span class="s">&gt;&gt;&gt; &#34;</span><span class="o">&lt;&lt;</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&#34; &lt;&lt;&lt;</span><span class="se">\n</span><span class="s">&#34;</span>   <span class="c1">//打印匹配部分，并在两侧加上箭头强调
+</span><span class="c1"></span>        <span class="o">&lt;&lt;</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">suffix</span><span class="p">().</span><span class="n">str</span><span class="p">().</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>   <span class="c1">//打印匹配部分的下文
+</span><span class="c1"></span>        <span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="../cpp_figs/CPPprimer_ch17-fig_17_2.png" alt="fig_17_2"></p>
+<h3 id="使用子表达式">使用子表达式</h3>
+<ul>
+<li>正则表达式中的模式通常包含一个或多个<code>子表达式</code>，它是模式的一部分，表示部分匹配。</li>
+<li>正则表达式的语法通常用括号表示子表达式</li>
+<li>对于含有子表达式的正则表达式，其匹配结果match对象的str成员函数可以有参数：0代表整个匹配部分，1代表第1个子串，以此类推。例如，正则表达式&rdquo;[[:alnum:]]+\.(cpp|cxx|cc)$&rdquo;，输入字符串&quot;foo.cpp&rdquo;，则匹配结果的str(0)是&quot;foo.cpp&rdquo;，str(1)是&quot;foo&rdquo;，str(2)是&quot;cpp&rdquo;</li>
+<li>子表达式的常见用途是验证必须匹配特定格式的数据。即分别验证多个子式，然后验证它们之间必须满足某种关系</li>
+<li>ECMAScript正则表达式的一些语法：
+<ul>
+<li><code>\{d}</code>表示单个数字，<code>\{d}{n}</code>表示n个数字的序列。如<code>\{d}{3}</code>表示3个数字的序列</li>
+<li>方括号<code>[]</code>中的字符集合表示匹配它们中的任一个，<code>.</code>在方括号中没有特殊含义。如<code>[-.]</code>表示匹配&rsquo;-&lsquo;或&rsquo;.&rsquo;</li>
+<li>后接<code>?</code>的组件是可选的。如<code>\{d}{3}[-. ]?\{d}{4}</code>匹配三个数字后接四个数字，中间可以有&rsquo;-&lsquo;或&rsquo;.&lsquo;或&rsquo; '</li>
+<li>在字符前加反斜线<code>\</code>表示是字符本身而不是其特殊含义（类似C++语法）。如<code>\(</code>和<code>\)</code>表示&rsquo;(&lsquo;和&rsquo;)&lsquo;本身而不是特殊字符</li>
+<li>由于<code>\</code>也是C++的特殊字符，故每次正则表达式需要转义时都需要两个<code>\</code></li>
+</ul>
+</li>
+<li>对于有子表达式的正则表达式，其<code>match</code>对象包含多个<code>sub_match</code>对象作为其元素。位置[0]表示整个匹配，[1]表示第一个子表达式的匹配，以此类推。</li>
+<li>每个sub_match表示在完整匹配中，这个子表达式匹配的结果</li>
+<li>sub_match的操作见表17.11
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_11.png" alt="tab_17_11"></li>
+<li>例子：使用子表达式匹配电话号码，对格式有限制</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* ECMAScript正则表达式语法：
+</span><span class="cm"> * (\\()?是子表达式，匹配字符&#39;(&#39;，表示区号部分可选的左括号
+</span><span class="cm"> * (\\d{3})是子表达式，匹配3个数字，表示区号
+</span><span class="cm"> * (\\))?是子表达式，匹配字符&#39;)&#39;，表示区号部分可选的右括号
+</span><span class="cm"> * ([-. ])?是子表达式，匹配字符&#39;-&#39;或&#39;.&#39;或&#39; &#39;，表示区号部分可选的分隔符
+</span><span class="cm"> * (\\d{3})是子表达式，匹配3个数字，表示号码下三位数字
+</span><span class="cm"> * ([-. ])?是子表达式，匹配字符&#39;-&#39;或&#39;.&#39;或&#39; &#39;，表示可选的分隔符
+</span><span class="cm"> * (\\d{4})是子表达式，匹配4个数字，表示号码最后四位
+</span><span class="cm"> */</span>
+<span class="n">string</span> <span class="n">phone</span><span class="o">=</span><span class="s">&#34;(</span><span class="se">\\</span><span class="s">()?(</span><span class="se">\\</span><span class="s">d{3})(</span><span class="se">\\</span><span class="s">))?([-. ])?(</span><span class="se">\\</span><span class="s">d{3})([-. ])?(</span><span class="se">\\</span><span class="s">d{4})&#34;</span><span class="p">;</span>
+<span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="n">phone</span><span class="p">);</span>
+<span class="n">smatch</span> <span class="n">m</span><span class="p">;</span>
+<span class="n">srting</span> <span class="n">s</span><span class="p">;</span>
+<span class="c1">//判断一个被正则表达式匹配到的字符串是否是电话号码（即是否符合进一步的标准）
+</span><span class="c1"></span><span class="kt">bool</span> <span class="nf">valid</span><span class="p">(</span><span class="k">const</span> <span class="n">smatch</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">matched</span><span class="p">)</span>
+        <span class="c1">//若左边括号被匹配到，则右边括号必须也被匹配，且满足某个先验
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">matched</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="n">matched</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">m</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="n">str</span><span class="p">()</span><span class="o">==</span><span class="s">&#34; &#34;</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="c1">//若左边括号未被匹配到，则右边括号也必须未被匹配，且满足某个先验
+</span><span class="c1"></span>        <span class="k">return</span> <span class="o">!</span><span class="n">m</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">matched</span> <span class="o">&amp;&amp;</span> <span class="n">m</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="n">str</span><span class="p">()</span><span class="o">==</span><span class="n">m</span><span class="p">[</span><span class="mi">6</span><span class="p">].</span><span class="n">str</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="c1">//逐行处理匹配到的电话号码
+</span><span class="c1"></span><span class="k">while</span><span class="p">(</span><span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span><span class="n">s</span><span class="p">)){</span>
+    <span class="c1">//使用sregex_iterator遍历一行中的所有匹配
+</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="n">sregex_iterator</span> <span class="n">it</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">r</span><span class="p">),</span><span class="n">end_it</span><span class="p">;</span><span class="n">it</span><span class="o">!=</span><span class="n">end_it</span><span class="p">;</span><span class="o">++</span><span class="n">it</span><span class="p">)</span>
+        <span class="c1">//对每个匹配到的结果通过valid分析子串，进一步判断是否是电话号码
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">valid</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">))</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;valid: &#34;</span><span class="o">&lt;&lt;</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;not valid: &#34;</span><span class="o">&lt;&lt;</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用regex_replace">使用regex_replace</h3>
+<ul>
+<li>使用<code>regex_replace</code>可在输入序列中查找并替换一个正则表达式。除匹配需要一个正则表达式描述匹配格式外，还需要一个字符串用于描述输出（即替换后）的形式</li>
+<li>regex_replace的操作见表17.12
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_12.png" alt="tab_17_12"></li>
+<li>输出的字符串可由匹配的子串组成，用符号$后跟子表达式的索引号来表示该子表达式</li>
+<li>例子：使用regex_replace</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">phone</span><span class="o">=</span><span class="s">&#34;(</span><span class="se">\\</span><span class="s">()?(</span><span class="se">\\</span><span class="s">d{3})(</span><span class="se">\\</span><span class="s">))?([-. ])?(</span><span class="se">\\</span><span class="s">d{3})([-. ])?(</span><span class="se">\\</span><span class="s">d{4})&#34;</span><span class="p">;</span>
+<span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="n">phone</span><span class="p">);</span>
+<span class="n">string</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#34;$2.$5.$7&#34;</span><span class="p">;</span>                      <span class="c1">//定义输出格式为第2,5,7个子串，中间用&#39;.&#39;分隔
+</span><span class="c1"></span><span class="n">string</span> <span class="n">number</span><span class="o">=</span><span class="s">&#34;(908) 555-1800&#34;</span><span class="p">;</span>             <span class="c1">//输入(908) 555-1800
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">regex_replace</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">fmt</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>    <span class="c1">//输出908.555.1800
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>标准库定义了在替换过程中控制匹配或格式的标志，它们可传递给函数regex_search/regex_match，或是类match的format成员</li>
+<li>匹配和格式化标志都是值，它们类型都是<code>match_flag_type</code>，定义在命名空间<code>regex_constants</code>，经常使用<code>using namespace std::regex_constants;</code>来引入该命名空间的所有名字</li>
+<li>匹配和格式化标志见表17.13
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_13.png" alt="tab_17_13"></li>
+<li>默认regex_replace返回整个输入序列，仅将匹配部分替换为指定格式，未匹配部分原样输出。可用format_no_copy来阻止保留未匹配部分</li>
+<li>例子：用format_no_copy来阻止保留未匹配部分</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">phone</span><span class="o">=</span><span class="s">&#34;(</span><span class="se">\\</span><span class="s">()?(</span><span class="se">\\</span><span class="s">d{3})(</span><span class="se">\\</span><span class="s">))?([-. ])?(</span><span class="se">\\</span><span class="s">d{3})([-. ])?(</span><span class="se">\\</span><span class="s">d{4})&#34;</span><span class="p">;</span>
+<span class="n">regex</span> <span class="nf">r</span><span class="p">(</span><span class="n">phone</span><span class="p">);</span>
+<span class="n">string</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#34;$2.$5.$7 &#34;</span><span class="p">;</span>                                 <span class="c1">//定义输出格式为第2,5,7个子串，中间用&#39;.&#39;分隔，末尾加空格
+</span><span class="c1"></span><span class="n">string</span> <span class="n">number</span><span class="o">=</span><span class="s">&#34;morgan (201) 555-2368 862-555-0123&#34;</span><span class="p">;</span>     <span class="c1">//输入morgan (201) 555-2368 862-555-0123
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">regex_replace</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">fmt</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>                <span class="c1">//输出morgan 201.555.2368  862.555.0123
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">regex_replace</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">fmt</span><span class="p">,</span><span class="n">format_no_copy</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//输出201.555.2368 862.555.0123
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="随机数">随机数</h2>
+<ul>
+<li>在C++11之前，C和C++都依赖一个简单的C库函数<code>rand</code>来生成随机数。rand函数生成均匀分布的伪随机整数，范围在0和最大值（与系统相关，至少为32767）之间</li>
+<li>很多时候需要不同范围的随机数、随机浮点数、非均匀分布的随机数，程序员在转换rand生成的随机数的范围、类型、分布时，经常引入非随机性。</li>
+<li>C++11在头文件<code>random</code>中定义了随机数库，通过一组协作的类来生成随机数：
+<ul>
+<li><code>随机数引擎类</code>用于生成一系列unsigned随机数的序列</li>
+<li><code>随机数分布类</code>使用引擎类生成指定类型、指定范围、指定分布的随机数</li>
+</ul>
+</li>
+<li>C++程序不应使用C库函数rand，而应使用C++11的<code>default_random_engine</code>类和恰当的分布类
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_14.png" alt="tab_17_14"></li>
+</ul>
+<h3 id="随机数引擎和分布">随机数引擎和分布</h3>
+<ul>
+<li>随机数引擎是函数对象类，它们定义了调用算符<code>()</code>，该算符不接受参数，返回一个随机unsigned整数</li>
+<li>通过调用随机数引擎对象来生成一个<code>原始随机数</code>，每次调用生成的原始随机数是随机序列中的一个值</li>
+<li>例子：调用随机数引擎生成原始随机数序列</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">default_random_engine</span> <span class="n">e</span><span class="p">;</span>    <span class="c1">//随机数引擎是可调用对象
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">e</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="p">;</span>         <span class="c1">//每次调用生成原始随机序列中的一个值
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>标准库定义了多个随机数引擎类，它们的性能和随机性质量不同，由编译器指定哪一个作为default_random_engine类型。</li>
+<li>标准库定义的随机数引擎类型在附录A.3.2中，随机数引擎的操作见表17.15
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_15.png" alt="tab_17_15"></li>
+<li>大多数场合不能直接使用随机数引擎的输出（原始随机数），因为范围、类型、分布并非所需，而正确转换很难</li>
+<li>为得到指定范围内的随机数，需使用分布类型的对象</li>
+<li>例子：通过分布类型来指定随机数的范围、类型、分布</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">);</span>  <span class="c1">//分布类，指定生成随机数的范围、类型、分布
+</span><span class="c1"></span><span class="n">default_random_engine</span> <span class="n">e</span><span class="p">;</span>                    <span class="c1">//引擎类，用于生成原始随机数
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">u</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="p">;</span>                        <span class="c1">//使用引擎类对象调用分布类对象，生成随机数
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>分布<code>uniform_int_distribution</code>是模板类，用于生成均匀分布。模板参数提供生成随机数的类型，构造函数形参指定取值范围。</li>
+<li>分布类型也是函数对象类，它们定义了调用算符，接受一个随机数引擎对象，使用这个引擎生成原始随机数并映射到自己的分布。</li>
+<li>传递给分布对象的是引擎对象本身而不是其原始随机数，因为某些分布可能需要多次调用引擎才能得到一个值</li>
+<li><code>随机数发生器</code>是指分布对象和引擎对象的组合</li>
+<li>调用引擎类default_random_engine对象的输出类似C库函数rand的输出，区别在于：
+<ul>
+<li>随机数引擎生成的unsigned在系统定义的范围内，该范围可通过调用引擎对象的<code>min</code>和<code>max</code>成员函数获得</li>
+<li>rand生成的unsigned在0到<code>RAND_MAX</code>之间。</li>
+</ul>
+</li>
+<li>同样的随机数发生器产生的随机数序列相同：
+<ul>
+<li>对于一个给定的随机数发生器，每次运行程序时给出的随机数序列都是相同的。解决方案：每次运行时使用不同的种子</li>
+<li>程序内多次以相同的设置来初始化随机数发生器，产生的随机数序列也是相同的。解决方案：将随机数发生器声明为static</li>
+</ul>
+</li>
+<li>程序中需要从同一随机数发生器中多次取随机数时，应将引擎和分布对象都声明为<code>static</code>。因为若每次都以相同的设置创建随机数发生器，则每次生成的序列都相同。</li>
+<li>例子：同样的随机数发生器产生的随机数序列相同，使用static保证不会取到相同的随机序列</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//每次调用都创建随机数发生器，则每次调用生成的随机序列都相同
+</span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">bad_randVec</span><span class="p">(){</span>
+    <span class="n">default_random_engine</span> <span class="n">e</span><span class="p">;</span>
+    <span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">);</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//每次调用bad_randVec都重新创建随机数发生器，故v1和v2内容相同
+</span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span><span class="n">bad_randVec</span><span class="p">());</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">v2</span><span class="p">(</span><span class="n">bad_randVec</span><span class="p">());</span>
+<span class="c1">//将随机数发生器声明为static，避免多次创建。从同一序列中取随机数，保证每次取的值都不同
+</span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">good_randVec</span><span class="p">(){</span>
+    <span class="k">static</span> <span class="n">default_random_engine</span> <span class="n">e</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">);</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//每次调用good_randVec都使用同一个随机数发生器，保证不重复
+</span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">v3</span><span class="p">(</span><span class="n">good_randVec</span><span class="p">());</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">v4</span><span class="p">(</span><span class="n">good_randVec</span><span class="p">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>若在函数中定义了局部的随机数发生器，应将其（引擎和分布对象）声明为static，否则每次调用生成的序列都相同</li>
+<li>随机数发生器生成相同的随机数序列这一特性在调试时很有用，但希望每次运行程序都得到不同的随机数序列，则可在每次运行时提供不同的种子。</li>
+<li><code>种子</code>是一个数值，引擎利用种子从序列的一个新位置重新开始生成随机数。只要种子不同，生成的随机序列就不同</li>
+<li>为引擎设置种子有两种方式：
+<ul>
+<li>创建引擎对象时提供种子</li>
+<li>调用引擎对象的seed成员</li>
+</ul>
+</li>
+<li>例子：指定种子生成随机序列</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">default_random_engine</span> <span class="n">e1</span><span class="p">;</span>               <span class="c1">//e1不指定种子
+</span><span class="c1"></span><span class="n">default_random_engine</span> <span class="nf">e2</span><span class="p">(</span><span class="mi">2147483646</span><span class="p">);</span>   <span class="c1">//e2创建时提供种子2147483646
+</span><span class="c1"></span><span class="n">default_random_engine</span> <span class="n">e3</span><span class="p">;</span>
+<span class="n">e3</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">32767</span><span class="p">);</span>                         <span class="c1">//e3使用seed函数提供种子32767
+</span><span class="c1"></span><span class="n">default_random_engine</span> <span class="nf">e4</span><span class="p">(</span><span class="mi">32767</span><span class="p">);</span>        <span class="c1">//e4创建时提供种子32767
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">seize_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">!=</span><span class="mi">100</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">e1</span><span class="p">()</span><span class="o">==</span><span class="n">e2</span><span class="p">())</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;unseeded match at iteration: &#34;</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//e1和e2种子不同，生成不同的序列
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">e3</span><span class="p">()</span><span class="err">！</span><span class="o">=</span><span class="n">e4</span><span class="p">())</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;seeded differs at iteration: &#34;</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//e3和e4种子相同，生成相同的序列
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>选择恰当的种子很难，经常使用C系统函数<code>time</code>。该函数定义在头文件<code>ctime</code>中
+<ul>
+<li>它返回一个特定时刻到当前共经过了多少秒</li>
+<li>它接受单个指针参数，指向用于写入时间的数据结构，若该指针为空则简单的返回时间</li>
+</ul>
+</li>
+<li>例子：使用time产生种子</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">default_random_engine</span> <span class="nf">e1</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>time返回的时间以秒计，故该方法只适合生成种子的间隔为秒级或更长的应用</li>
+<li>若程序周期性运行，或周期性取time，则它生成的值可能是相同的，不适合当种子</li>
+</ul>
+<h3 id="其他随机数分布">其他随机数分布</h3>
+<ul>
+<li>程序经常需要不同类型、不同分布的随机数，标准库定义不同的随机数分布对象来满足这些需求，分布对象和引擎对象协同工作。</li>
+<li>程序经常需要随机浮点数，特别是0到1之间的随机数。
+<ul>
+<li>C++11之前经常用rand()的结果除以RAND_MAX，但这样精度太低，可生成的数量只有RAND_MAX个</li>
+<li>C++11之后可使用uniform_real_distribution分布类，让标准库处理随机整数到随机浮点数的映射</li>
+</ul>
+</li>
+<li>例子：使用uniform_real_distribution获得随机浮点数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">default_random_engine</span> <span class="n">e</span><span class="p">;</span>                    <span class="c1">//随机数引擎
+</span><span class="c1"></span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>   <span class="c1">//随机数分布，生成0到1之间的均匀随机数
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">u</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>随机数分布类型支持的操作见表17.16
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_16.png" alt="tab_17_16"></li>
+<li>分布类型都是模板，且有一个模板类型参数表示生成随机数的类型（<code>bernoulli_distribution</code>是例外，它不是模板类，总是返回bool值）。这些分布类型只能生成浮点数或整型数</li>
+<li>每个分布模板都有一个默认模板实参，生成浮点值的分布类型默认生成<code>double</code>，生成整型值的分布类型默认生成<code>int</code>。使用默认模板实参时也需要空的尖括号</li>
+<li>C++11可生成非均匀分布的随机数，它定义了20种分布类型，见附录A.3</li>
+<li>例子：可视化正态分布</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">default_random_engine</span> <span class="n">e</span><span class="p">;</span>                        <span class="c1">//随机数引擎
+</span><span class="c1"></span><span class="n">normal_distribution</span><span class="o">&lt;&gt;</span> <span class="n">n</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mf">1.5</span><span class="p">);</span>                 <span class="c1">//随机数分布，生成均值为4标准差为1.5的正态分布
+</span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">vals</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>                       <span class="c1">//用vector存放每个区间内随机数的数量
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">!=</span><span class="mi">200</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>                     <span class="c1">//生成200个随机数
+</span><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">v</span><span class="o">=</span><span class="n">lround</span><span class="p">(</span><span class="n">n</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>                    <span class="c1">//将正态分布的随机数向下取整
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="o">&lt;</span><span class="n">vals</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>                           <span class="c1">//只需判断一侧边界是因为unsigned把负数移到最大值处
+</span><span class="c1"></span>        <span class="o">++</span><span class="n">vals</span><span class="p">[</span><span class="n">v</span><span class="p">];</span>                              <span class="c1">//区间内计数增加
+</span><span class="c1"></span><span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">!=</span><span class="n">vals</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="o">&lt;&lt;</span><span class="s">&#34;: &#34;</span><span class="o">&lt;&lt;</span><span class="n">string</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="sc">&#39;*&#39;</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>   <span class="c1">//以字符&#39;*&#39;的数量可视化区间内随机数的数量
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>二项分布<code>bernoulli_distribution</code>不是类模板，故不接受模板参数，它总是返回bool值。</li>
+<li>bernoulli_distribution返回true的概率是常数，构造时指定，默认为0.5</li>
+</ul>
+<h2 id="io库再探">IO库再探</h2>
+<h3 id="格式化输入与输出">格式化输入与输出</h3>
+<ul>
+<li>除<code>条件状态</code>外，每个<code>iostream</code>对象还维护一个<code>格式状态</code>来控制IO的细节，如整型是几进制、浮点值精度、输出元素宽度等</li>
+<li>标准库定义一组<code>操纵符</code>来修改流的格式状态。一个操纵符是一个函数或对象，能用作输入/输出算符的运算对象，并能影响流的状态。</li>
+<li>大多数操纵符不接受参数，它们定义于头文件<code>iostream</code>中，见表17.17
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_17.png" alt="tab_17_17"></li>
+<li>操纵符返回它所处理的流对象（类似输入/输出算符），故可在语句中组合使用操纵符和数据</li>
+<li><code>endl</code>是一个操纵符，它不是一个值而是一个操作，将其写到输出流的效果是输出一个换行符并刷新缓冲</li>
+<li>操纵符用于两大类输出控制： 控制数值的输出形式、控制补白的数量和位置。</li>
+<li>操纵符改变流的格式状态时，通常改变后的状态对所有后续IO都生效</li>
+<li>大多数改变格式状态的操纵符都是<code>设置/复原成对</code>的：一个操纵符将格式状态设置为新值，另一个操纵符将其复原</li>
+<li>利用操纵符对格式的改变是持久的这一特性，可在一个流上叠加多个操纵符。但不需要特殊格式时应尽快恢复到默认</li>
+<li>默认将bool值打印为0/1，使用<code>boolalpha</code>/<code>noboolalpha</code>可设置bool值打印为0/1或true/false</li>
+<li>例子：使用boolalpha/noboolalpha控制bool打印的内容</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;default bool values: &#34;</span><span class="o">&lt;&lt;</span><span class="nb">true</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="nb">false</span> <span class="c1">//默认设置下打印bool
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">alpha bool values: &#34;</span><span class="o">&lt;&lt;</span><span class="n">boolalpha</span><span class="o">&lt;&lt;</span>      <span class="c1">//使用操纵符boolalpha设置流，后续打印bool都是true/false
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="nb">true</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="nb">false</span>                          <span class="c1">//使用boolalpha的设置下打印bool
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="n">noboolalpha</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>                        <span class="c1">//恢复为默认状态noboolalpha，后续打印bool都是0/1
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>默认整型值的输入输出使用十进制，可使用操纵符<code>hex</code>/<code>oct</code>/<code>dec</code>将其改为十六进制/八进制/十进制，它们只影响整型值，不影响浮点值</li>
+<li>默认打印整型值时不打印表示进制的<code>前导字符</code>，可使用操纵符<code>showbase</code>/<code>noshowbase</code>使流打印整型值时显示/不显示进制：前导<code>0x</code>是十六进制，前导<code>0</code>是八进制，无前导是十进制</li>
+<li>默认十六进制的值和前导字符都以小写打印，可使用操纵符<code>uppercase</code>/<code>nouppercase</code>使十六进制的值和前导字符以大写打印</li>
+<li>例子：使用操纵符控制整型数的的进制</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//调整进制
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;default: &#34;</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>         <span class="c1">//打印：20 1024
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;octal: &#34;</span><span class="o">&lt;&lt;</span><span class="n">oct</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>      <span class="c1">//打印：24 2000
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hex: &#34;</span><span class="o">&lt;&lt;</span><span class="n">hex</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>        <span class="c1">//打印：14 400
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;decimal: &#34;</span><span class="o">&lt;&lt;</span><span class="n">dec</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>    <span class="c1">//打印：20 1024
+</span><span class="c1">//调整前导字符
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">showbase</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;default: &#34;</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>         <span class="c1">//打印：20 1024
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;octal: &#34;</span><span class="o">&lt;&lt;</span><span class="n">oct</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>      <span class="c1">//打印：024 02000
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hex: &#34;</span><span class="o">&lt;&lt;</span><span class="n">hex</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>        <span class="c1">//打印：0x14 0x400
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;decimal: &#34;</span><span class="o">&lt;&lt;</span><span class="n">dec</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>    <span class="c1">//打印：20 1024
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">noshowbase</span><span class="p">;</span>
+<span class="c1">//调整十六进制的大小写
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">uppercase</span><span class="o">&lt;&lt;</span><span class="n">showbase</span><span class="o">&lt;&lt;</span><span class="n">hex</span>                  <span class="c1">//设置以十六进制打印，打印前导字符，以大写打印
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;printed in hexadecimal: &#34;</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="mi">1024</span> <span class="c1">//打印：0X14 0X400
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="n">nouppercase</span><span class="o">&lt;&lt;</span><span class="n">noshowbase</span><span class="o">&lt;&lt;</span><span class="n">dec</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>       <span class="c1">//复原成默认设置
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可以控制浮点数输出三种格式：
+<ul>
+<li>以多高精度/多少个数字打印浮点值，默认按六位数字精度打印</li>
+<li>打印为十六进制/定点十进制/科学记数法，默认非常大和非常小的值打印为科学记数法，其他值打印为定点十进制</li>
+<li>无小数点的浮点数是否打印小数点，默认对无小数点的浮点数不打印小数点</li>
+</ul>
+</li>
+<li>精度控制打印的数字的总数，打印时浮点值按当前精度舍入。可通过调用IO对象的precision成员函数或setprecision操纵符来改变打印精度。
+<ul>
+<li><code>precision成员函数</code>是重载的，一个版本接受int值用于指定精度，并返回旧精度值，另一个版本不接受参数，返回当前精度值</li>
+<li><code>setprecision操纵符</code>接受一个参数，用于设置精度</li>
+</ul>
+</li>
+<li>setprecision和其他接受参数的操纵符都定义在头文件<code>iomanip</code>中，见表17.18
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_18.png" alt="tab_17_18"></li>
+<li>例子：控制浮点数打印的精度</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//precision成员函数得到当前精度
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;precision: &#34;</span><span class="o">&lt;&lt;</span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">()</span>
+    <span class="o">&lt;&lt;</span><span class="s">&#34;, value: &#34;</span><span class="o">&lt;&lt;</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">//precision成员函数将精度设置为12，precision成员函数得到当前精度
+</span><span class="c1"></span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>                     <span class="c1">//使用precision成员函数的形式是cout调用
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;precision: &#34;</span><span class="o">&lt;&lt;</span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">()</span>
+    <span class="o">&lt;&lt;</span><span class="s">&#34;, value: &#34;</span><span class="o">&lt;&lt;</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">//setprecision操纵符将精度设置为3，precision成员函数得到当前精度
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>                  <span class="c1">//使用setprecision操纵符的形式是用输出算符输出
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;precision: &#34;</span><span class="o">&lt;&lt;</span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">()</span>
+    <span class="o">&lt;&lt;</span><span class="s">&#34;, value: &#34;</span><span class="o">&lt;&lt;</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>操纵符<code>scientific</code>可使流使用科学记数法，操纵符<code>fixed</code>可使流使用定点十进制</li>
+<li>C++11可用操纵符<code>hexfloat</code>使流使用十六进制，可用操纵符<code>defaultfloat</code>将流恢复到默认状态，即根据打印值的大小选择科学记数法/定点十进制</li>
+<li>浮点数操纵符会改变精度的默认含义：
+<ul>
+<li>执行scientific/fixed/hexfloat后，精度值是指小数点后的数字位数</li>
+<li>执行defaultfloat后（即默认状态下），精度值是指数字的总位数</li>
+</ul>
+</li>
+<li>默认十六进制数字和科学计数法中的e都是小写，可用<code>uppercase</code>操纵符将它们打印为大写，<code>nouppercase</code>操纵符恢复默认行为</li>
+<li>默认小数部分为0的浮点值不打印小数点和小数部分，可用<code>showpoint</code>操纵符设定为打印小数点和小数部分，<code>noshowpoint</code>操纵符恢复默认行为</li>
+<li>例子：控制浮点数的显示形式</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;default format: &#34;</span><span class="o">&lt;&lt;</span><span class="mi">100</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="sc">&#39;\n&#39;</span>               <span class="c1">//打印：141.421
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;scientific: &#34;</span><span class="o">&lt;&lt;</span><span class="n">scientific</span><span class="o">&lt;&lt;</span><span class="mi">100</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="sc">&#39;\n&#39;</span>       <span class="c1">//打印：1.414214e+002
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;fixed decimal: &#34;</span><span class="o">&lt;&lt;</span><span class="n">fixed</span><span class="o">&lt;&lt;</span><span class="mi">100</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="sc">&#39;\n&#39;</span>         <span class="c1">//打印：141.421356
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;hexadecimal: &#34;</span><span class="o">&lt;&lt;</span><span class="n">hexfloat</span><span class="o">&lt;&lt;</span><span class="mi">100</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>       <span class="c1">//打印：0x1.1ad7bcp+7
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;use defaults: &#34;</span><span class="o">&lt;&lt;</span><span class="n">defaultfloat</span><span class="o">&lt;&lt;</span><span class="mi">100</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>  <span class="c1">//打印：141.421
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mf">10.0</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>                                           <span class="c1">//打印：10
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">showpoint</span><span class="o">&lt;&lt;</span><span class="mf">10.0</span>                                       <span class="c1">//打印：10.000
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="n">noshowpoint</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>                                    <span class="c1">//恢复默认的不打印小数点和小数部分
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>按列打印时，需要用操纵符精细地控制数据格式
+<ul>
+<li><code>setw</code>指定下一个数字或字符串值的最小空间（它是特例，只设置下一个值，不设置整个流）</li>
+<li><code>left</code>指定左对齐输出</li>
+<li><code>right</code>指定右对齐输出，右对齐是默认</li>
+<li><code>internal</code>控制负数的负号位置，它左对齐负号，右对齐数值，用空格填满中间</li>
+<li><code>setfill</code>允许指定一个字符来补白输出，默认是空格</li>
+</ul>
+</li>
+<li>例子：输出补白</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="o">=-</span><span class="mi">16</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">d</span><span class="o">=</span><span class="mf">3.14159</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;i: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span>  <span class="c1">//打印：i:          -16next col
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;d: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">d</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> <span class="c1">//打印：d:      3.14159next col
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">left</span>
+    <span class="o">&lt;&lt;</span><span class="s">&#34;i: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span>  <span class="c1">//打印：i: -16         next col
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;d: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">d</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span>  <span class="c1">//打印：d: 3.14159     next col
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="n">right</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">right</span>
+    <span class="o">&lt;&lt;</span><span class="s">&#34;i: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span>  <span class="c1">//打印：i:          -16next col
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;d: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">d</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> <span class="c1">//打印：d:      3.14159next col
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">internal</span>
+    <span class="o">&lt;&lt;</span><span class="s">&#34;i: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span>  <span class="c1">//打印：i: -         16next col
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;d: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">d</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> <span class="c1">//打印：d:      3.14159next col
+</span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;#&#39;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span><span class="s">&#34;i: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span>  <span class="c1">//打印：i: -#########16next col
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="s">&#34;d: &#34;</span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">d</span><span class="o">&lt;&lt;</span><span class="s">&#34;next col</span><span class="se">\n</span><span class="s">&#34;</span>  <span class="c1">//打印：d: #####3.14159next col
+</span><span class="c1"></span>    <span class="o">&lt;&lt;</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>默认输入算符会忽略空白符（空格符/制表符/换行符/换纸符/回车符），操纵符<code>noskipws</code>会让输入算符读取空白符，操纵符<code>skipws</code>恢复默认行为</li>
+<li>例子：控制输入算符读取空白符</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="n">ch</span><span class="p">;</span>
+<span class="c1">//默认不读取空白
+</span><span class="c1"></span><span class="cm">/* 输入：a b    c
+</span><span class="cm"> *      d
+</span><span class="cm"> * 输出：abcd
+</span><span class="cm"> */</span>
+<span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">ch</span><span class="p">)</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ch</span><span class="p">;</span>
+<span class="c1">//使用noskipws读取空白
+</span><span class="c1"></span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">noskipws</span><span class="p">;</span>
+<span class="cm">/* 输入：a b    c
+</span><span class="cm"> *      d
+</span><span class="cm"> * 输出：a b    c
+</span><span class="cm"> *      d
+</span><span class="cm"> */</span>
+<span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">ch</span><span class="p">)</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ch</span><span class="p">;</span>
+<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">skipws</span><span class="p">;</span>    <span class="c1">//恢复默认行为
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="未格式化的输入输出操作">未格式化的输入/输出操作</h3>
+<ul>
+<li>多使用<code>格式化IO</code>操作，即使用输入输出算符<code>&gt;&gt;</code>/<code>&lt;&lt;</code>根据读取/写入的数据类型来格式化它们。输入算符忽略空白，输出算符应用空白、精度等规则</li>
+<li><code>未格式化IO</code>是标准库提供的底层操作，它们将流当作未解释的字节序列来处理</li>
+<li>有几个未格式化操作每次一个字节地处理流，它们会读取空白符，见表17.19
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_19.png" alt="tab_17_19"></li>
+<li>有时候需要读取一个字符才能知道还未准备好处理它，此时希望将字符放回流中。标准库有3种方法从流中退回字符：
+<ul>
+<li><code>peek</code>返回输入流中下一个字符的副本，但不会将它从流中删除</li>
+<li><code>unget</code>使输入流向后移动，最后读取的值又回到流中</li>
+<li><code>putback</code>是特殊的unget，它退回从流中读取的最后一个值。但它接受一个参数，该参数必须与最后读取的值相同</li>
+</ul>
+</li>
+<li>一般在读取下一个值之前，标准库保证可退回至多一个值。即，标准库不保证在中间不进行读取操作的情况下可连续调用putback/unget</li>
+<li>peek和无参的get都以<code>int</code>（而非char）类型从输入流中返回字符，原因：
+<ul>
+<li>char无法表示EOF</li>
+<li>char是unsigned还是signed取决于机器</li>
+</ul>
+</li>
+<li>返回int的函数将它们要返回的字符先转换为unsigned char（？？），然后将结果提升为int。因此即使字符集中有字符映射到负值，这些操作返回的int也是正值</li>
+<li>标准库用负值表示EOF，这样可保证与任何合法字符都不同。头文件<code>cstdio</code>定义了名为<code>EOF</code>的const，可用它来检测一个值是否是文件尾，而不必记住文件尾的实际数值</li>
+<li>例子：从流中取字符的函数返回int</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">ch</span><span class="p">;</span>                     <span class="c1">//使用int保存流中读取的字符，不可用char
+</span><span class="c1"></span><span class="k">while</span><span class="p">((</span><span class="n">ch</span><span class="o">=</span><span class="n">cin</span><span class="p">.</span><span class="n">get</span><span class="p">())</span><span class="o">!=</span><span class="n">EOF</span><span class="p">)</span>  <span class="c1">//使用EOF常量，不需要记住其具体数值
+</span><span class="c1"></span>    <span class="n">cout</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>一些未格式化IO操作一次处理多个字符，它们速度较快但容易出错，需要程序员自己分配/管理用于存储数据的字符数组</li>
+<li>处理多字符的底层IO操作见表17.20
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_20.png" alt="tab_17_20"></li>
+<li><code>get</code>和<code>getline</code>函数接受相同的参数，表中的<code>sink</code>都是保存数据用的char数组，两函数都一直读数据，直到：已读取<code>size</code>-1个字符/遇到分隔符<code>delim</code>/遇到文件尾
+<ul>
+<li>get遇到分隔符时不读取，将其留作istream的下一个字符</li>
+<li>getline遇到分隔符时读取并丢弃</li>
+</ul>
+</li>
+<li>某些操作从输入读取未知个数的字节，可调用<code>gcount</code>来确定最后一次未格式化的输入操作读取了多少个字符</li>
+<li>应在任何后续的未格式化输入操作之前调用gcount，特别的，将字符退回流的单字符操作也是未格式化的输入，若在peek/unget/putback之后调用gcount，则其返回0</li>
+<li>一般应使用标准库提供的高层抽象来处理IO，避免使用底层IO</li>
+<li>底层IO通常用于读取二进制值的场合，且这些二进制不能直接映射到普通字符和数值</li>
+<li>一个常见的错误是用char而非int来存储get/peek的返回值，且该错误不能被编译器发现</li>
+<li>例子：反例，用char而非int来存储get/peek的返回值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="n">ch</span><span class="p">;</span>                    <span class="c1">//使用char保存流中读取的字符
+</span><span class="c1"></span><span class="k">while</span><span class="p">((</span><span class="n">ch</span><span class="o">=</span><span class="n">cin</span><span class="p">.</span><span class="n">get</span><span class="p">())</span><span class="o">!=</span><span class="n">EOF</span><span class="p">)</span>  <span class="c1">//将读到的int转换为char并与EOF比较
+</span><span class="c1"></span>    <span class="n">cout</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span>
+<span class="cm">/* 若该机器上char是unsigned char：
+</span><span class="cm"> * int被转换为unsigned char，读到EOF（负数）时下溢，
+</span><span class="cm"> * 因此永远不可能满足==EOF，循环永远不会停止
+</span><span class="cm"> */</span>
+<span class="cm">/* 若该机器上char是signed char：
+</span><span class="cm"> * int被转换为signed char，也可能发生溢出，该行为是未定义
+</span><span class="cm"> * 很多机器上可正常工作，除非输入序列有一个字符与EOF匹配
+</span><span class="cm"> * 有的机器上EOF是-1，将-1转换为signed char得到&#39;\377&#39;，若输入中遇到这个值，则提前停止
+</span><span class="cm"> */</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="流随机访问">流随机访问</h3>
+<ul>
+<li>各种流类型通常（除iostream外）都支持对数据的随机访问。可重定位流，使其跳过一些数据</li>
+<li>标准库提供了一对函数：
+<ul>
+<li><code>seek</code>用于定位到流中的指定位置</li>
+<li><code>tell</code>返回当前的位置</li>
+</ul>
+</li>
+<li>随机IO本质上依赖系统，使用这些特性需查询系统文档</li>
+<li>虽然标准库为所有流类型都定义了seek/tell，但它们的意义取决于设备。在多数系统中，对于绑定到<code>cin</code>/<code>cout</code>/<code>cerr</code>/<code>clog</code>的流进行随机访问是无意义的，对它们调用seek/tell会在运行时报错并将流置于无效状态</li>
+<li><code>istream</code>/<code>ostream</code>类型通常不支持随机访问，使用随机访问的情形经常是<code>fstream</code>/<code>sstream</code></li>
+<li>为支持随机访问，IO类型维护一个<code>标记</code>来确定下一个读写操作在哪里进行，它提供两个函数
+<ul>
+<li>seek通过将标记定位到给定位置来重定位它</li>
+<li>tell告知标记的当前位置</li>
+</ul>
+</li>
+<li>标准库定义了两对seek/tell，见表17.21
+<ul>
+<li>后缀是<code>g</code>的版本用于输入流，表示读取数据（get）</li>
+<li>后缀是<code>p</code>的版本用于输出流，表示写入数据（put）
+<img src="../cpp_figs/CPPprimer_ch17-tab_17_21.png" alt="tab_17_21"></li>
+</ul>
+</li>
+<li>逻辑上，只能对可读的流使用g版本，只能对可写的流使用p版本：
+<ul>
+<li>只能对istream及其派生出的ifstream/istringstream使用g版本</li>
+<li>只能对ostream及其派生出的ofstream/ostringstream使用p版本</li>
+<li>iostream/fstream/stringstream既可用g版本又可用p版本</li>
+</ul>
+</li>
+<li>标准库对一个流只维护一个标记，g版本和p版本共用标记，不存在独立的“读标记”和“写标记”</li>
+<li>seek函数有两个重载的版本，一个移动到绝对地址，另一个移动到指定位置的指定偏移量</li>
+<li>表17.21中seek函数的形参pos类型是pos_type，形参off的类型是off_type，它们定义于头文件istream和ostream
+<ul>
+<li><code>pos_type</code>类型表示文件中的绝对位置</li>
+<li><code>off_type</code>类型表示文件中位置的偏移量，可正可负</li>
+</ul>
+</li>
+<li>tell函数返回一个pos_type类型的值表示标记的当前位置，通常用来记住一个位置以便稍后定位回来</li>
+<li>例子：使用流随机访问来读写同一文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 任务：给定文件，在文件尾添加一行，记录每一行的起始在文件中的位置（除第一行外）
+</span><span class="cm">/* 输入：
+</span><span class="cm"> * abcd
+</span><span class="cm"> * efg
+</span><span class="cm"> * hi
+</span><span class="cm"> * j
+</span><span class="cm"> */</span>
+<span class="cm">/* 输出：
+</span><span class="cm"> * abcd
+</span><span class="cm"> * efg
+</span><span class="cm"> * hi
+</span><span class="cm"> * j
+</span><span class="cm"> * 5 9 12 14
+</span><span class="cm"> */</span>
+<span class="c1">//打开文件，定位到末尾，并以可读可写模式打开
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">fstream</span> <span class="n">inOut</span><span class="p">(</span><span class="s">&#34;copyOut&#34;</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="o">::</span><span class="n">ate</span><span class="o">|</span><span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="o">::</span><span class="n">in</span><span class="o">|</span><span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+<span class="c1">//打开文件操作无效时报错并退出
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inOut</span><span class="p">){</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&#34;Unable to open file!&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//记录文件尾的位置，由于打开时已定位到末尾，故返回的是当前位置
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">end_mark</span><span class="o">=</span><span class="n">inOut</span><span class="p">.</span><span class="n">tellg</span><span class="p">();</span>
+<span class="c1">//重定位到文件开始，使用相对位置时可从fstream::beg/fstream::cur/fstream::end开始
+</span><span class="c1"></span><span class="n">inOut</span><span class="p">.</span><span class="n">seekg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="o">::</span><span class="n">beg</span><span class="p">);</span>
+<span class="n">size_t</span> <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>                           <span class="c1">//计数器记录当前位置
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>                       <span class="c1">//string存储每次读取的一行
+</span><span class="c1">//当流还有效、未读到末尾、成功取到一行时
+</span><span class="c1"></span><span class="k">while</span><span class="p">(</span><span class="n">inOut</span> <span class="o">&amp;&amp;</span> <span class="n">inOut</span><span class="p">.</span><span class="n">tellg</span><span class="p">()</span><span class="o">!=</span><span class="n">end_mark</span> <span class="o">&amp;&amp;</span> <span class="n">getline</span><span class="p">(</span><span class="n">inOut</span><span class="p">,</span><span class="n">line</span><span class="p">)){</span>
+    <span class="n">cnt</span><span class="o">+=</span><span class="n">line</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>                 <span class="c1">//计数
+</span><span class="c1"></span>    <span class="k">auto</span> <span class="n">mark</span><span class="o">=</span><span class="n">inOut</span><span class="p">.</span><span class="n">tellg</span><span class="p">();</span>            <span class="c1">//记录当前位置
+</span><span class="c1"></span>    <span class="n">inOut</span><span class="p">.</span><span class="n">seekp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="o">::</span><span class="n">end</span><span class="p">);</span>   <span class="c1">//将流定位到文件末尾
+</span><span class="c1"></span>    <span class="n">inOut</span><span class="o">&lt;&lt;</span><span class="n">cnt</span><span class="p">;</span>                         <span class="c1">//将计数写入文件末尾
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">mark</span><span class="o">!=</span><span class="n">end_mark</span><span class="p">)</span>                  <span class="c1">//若未到达打开时的文件尾，则打印空格，准备写入下一个行号
+</span><span class="c1"></span>        <span class="n">inOut</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="p">;</span>
+    <span class="n">inOut</span><span class="p">.</span><span class="n">seekg</span><span class="p">(</span><span class="n">mark</span><span class="p">);</span>                  <span class="c1">//回到计数时的位置
+</span><span class="c1"></span><span class="p">}</span>
+<span class="n">inOut</span><span class="p">.</span><span class="n">seekp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="o">::</span><span class="n">end</span><span class="p">);</span>
+<span class="n">inOut</span><span class="o">&lt;&lt;</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>                            <span class="c1">//在文件末尾写入换行符
+</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-23
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/c&#43;&#43;-primer/">C&#43;&#43; primer</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/cppprimer_ch18/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C&#43;&#43; primer 第18章 用于大型程序的工具</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cppprimer_ch16/">
+            <span class="next-text nav-default">C&#43;&#43; primer 第16章 模板与泛型编程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/cpp/cppprimer_ch17/" class="leancloud_visitors" data-flag-title="C&#43;&#43; primer 第17章 标准库特殊设施">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/" />
+  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="pi" />
+  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="pi" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="pi" />
+<meta property="og:description" content="Hugo theme even example site." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/" />
+<meta property="og:updated_time" content="2017-08-20T21:38:52+08:00" />
+<meta itemprop="name" content="pi">
+<meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="pi"/>
+<meta name="twitter:description" content="Hugo theme even example site."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch14/">C&#43;&#43; primer 第14章 重载运算与类型转换</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-03-20 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 10349 字 </span>
+        <span class="more-meta"> 预计阅读 21 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      当运算符被用于类类型对象时，可利用运算符重载为其指定新含义（以提升可读性） 可自定义类类型之间的转换规则 基本概念 重载的算符是特殊的函数：名字由
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch14/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch13/">C&#43;&#43; primer 第13章 拷贝控制</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-03-15 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 15446 字 </span>
+        <span class="more-meta"> 预计阅读 31 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      定义一个类时，可显式或隐式的指定在此类型对象上拷贝、移动、赋值、销毁时做什么。通过5种成员函数实现拷贝控制操作： 拷贝构造函数：用同类型的另一
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch13/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch12/">C&#43;&#43; primer 第12章 动态内存</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-03-08 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 12349 字 </span>
+        <span class="more-meta"> 预计阅读 25 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      对象的生存期： 全局对象：程序启动时创建，程序结束时销毁 局部static对象：第一次使用前创建，程序结束时销毁 局部自动对象：定义时创建，离开定
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch12/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch11/">C&#43;&#43; primer 第11章 关联容器</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-03-02 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 5449 字 </span>
+        <span class="more-meta"> 预计阅读 11 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      关联容器的元素按照关键字来保存和访问，而顺序容器的元素是按照在容器中的位置来保存和访问 关联容器支持高效的关键字查找和访问 2种关联容器： map
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch11/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch10/">C&#43;&#43; primer 第10章 泛型算法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-25 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 9641 字 </span>
+        <span class="more-meta"> 预计阅读 20 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      标准库未给容器添加大量功能，而是提供一组独立于容器的泛型算法 算法：它们实现了一些经典算法的公共接口 泛型：它们可用于不同类型的容器和不同类型的
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch10/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch9/">C&#43;&#43; primer 第9章 顺序容器</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-19 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 10186 字 </span>
+        <span class="more-meta"> 预计阅读 21 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      一个容器是特定类型对象的集合 顺序容器中元素的顺序与其加入容器的位置对应 关联容器中元素的顺序由其关联的关键字决定，关联容器分为有序关联容器和无
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch9/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch8/">C&#43;&#43; primer 第8章 IO库</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-15 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 4289 字 </span>
+        <span class="more-meta"> 预计阅读 9 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      C++语言不直接处理输入输出，而是通过标准库中的一组类来处理IO 这些IO类可从设备读写数据，设备可以是文件、控制台窗口等。还有一些类型允许内
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch8/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch7/">C&#43;&#43; primer 第7章 类</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-13 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 9991 字 </span>
+        <span class="more-meta"> 预计阅读 20 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      C++中可用类定义自己的数据类型 数据抽象能帮助将对象的具体实现与对象能执行的操作分离 类的基本思想是数据抽象和封装 数据抽象：接口和实现分离的编
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch7/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch6/">C&#43;&#43; primer 第6章 函数</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-11 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 9490 字 </span>
+        <span class="more-meta"> 预计阅读 19 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      函数是一个命名了的代码块，通过调用函数来执行相应代码。 函数可有0个或多个参数，可能产生0个或1个结果。 函数可以重载，即一个名字对应多个不同函
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch6/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/cppprimer_ch5/">C&#43;&#43; primer 第5章 语句</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-09 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
+          </div>
+        <span class="more-meta"> 约 3442 字 </span>
+        <span class="more-meta"> 预计阅读 7 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      C++提供了一组控制流语句，包括条件执行语句、循环语句、跳转语句。 简单语句 一个表达式末尾加上分号就成了表达式语句。表达式语句的作用是：执行表
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/cppprimer_ch5/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    <a class="prev" href="/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+    <a class="next" href="/page/3/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+  </nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BFS on pi</title>
+    <link>http://localhost:1313/tags/bfs/</link>
+    <description>Recent content in BFS on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 Dec 2019 15:01:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/bfs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HDU1240 - Asteroids!</title>
+      <link>http://localhost:1313/post/oj/hdu1240/</link>
+      <pubDate>Fri, 27 Dec 2019 15:01:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/hdu1240/</guid>
+      <description>链接：https://vjudge.net/problem/HDU-1240 Task You&amp;rsquo;re in space. You want to get home. There are asteroids. You don&amp;rsquo;t want to hit them. Input Input to this problem will consist of a (non-empty) series of up to</description>
+    </item>
+    
+    <item>
+      <title>POJ3414 - Pots</title>
+      <link>http://localhost:1313/post/oj/poj3414/</link>
+      <pubDate>Sat, 21 Dec 2019 19:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj3414/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-3414 Task You are given two pots, having the volume of A and B liters respectively. The following operations can be performed: 1.FILL(i) fill the pot i (1 ≤ i ≤ 2) from</description>
+    </item>
+    
+    <item>
+      <title>POJ3126 - Prime Path</title>
+      <link>http://localhost:1313/post/oj/poj3126/</link>
+      <pubDate>Sun, 15 Dec 2019 05:05:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj3126/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-3126 Task The ministers of the cabinet were quite upset by the message from the Chief of Security stating that they would all have to change the four-digit room numbers on their offices.</description>
+    </item>
+    
+    <item>
+      <title>POJ1426 - Find The Multiple</title>
+      <link>http://localhost:1313/post/oj/poj1426/</link>
+      <pubDate>Fri, 13 Dec 2019 05:23:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj1426/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-1426 Task Given a positive integer n, write a program to find out a nonzero multiple m of n whose decimal representation contains only the digits 0 and 1. You may assume that</description>
+    </item>
+    
+    <item>
+      <title>POJ3278 - Catch That Cow</title>
+      <link>http://localhost:1313/post/oj/poj3278/</link>
+      <pubDate>Wed, 11 Dec 2019 14:53:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/poj3278/</guid>
+      <description>链接：https://vjudge.net/problem/POJ-3278 Task Farmer John has been informed of the location of a fugitive cow and wants to catch her immediately. He starts at a point N (0 ≤ N ≤ 100,000) on a</description>
+    </item>
+    
+  </channel>
+</rss>
