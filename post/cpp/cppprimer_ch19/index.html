@@ -49,7 +49,7 @@
 <meta itemprop="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet">
 <meta itemprop="datePublished" content="2020-05-11T15:44:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-11T15:44:00&#43;08:00" />
-<meta itemprop="wordCount" content="8362">
+<meta itemprop="wordCount" content="10900">
 
 
 
@@ -130,8 +130,8 @@
             <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
             <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
             </div>
-          <span class="more-meta"> 约 8362 字 </span>
-          <span class="more-meta"> 预计阅读 17 分钟 </span>
+          <span class="more-meta"> 约 10900 字 </span>
+          <span class="more-meta"> 预计阅读 22 分钟 </span>
         
       </div>
     </header>
@@ -815,7 +815,7 @@
 <li>声明成员指针时必须包含成员所属的类，应在<code>*</code>之前添加<code>classname::</code>以表示该指针指向<code>classname</code>类的成员</li>
 <li>将成员指针声明为const可使指针既能指向const对象又能指向非const对象，但它不能修改成员</li>
 <li>初始化成员指针或对其赋值时，需使用取地址符<code>&amp;</code>，且需指定它所指的成员名</li>
-<li>C++11中声明并定义成员指针的最好方法是使用<code>auto</code>或<code>decltype</code></li>
+<li>C++11中声明并定义成员指针最简单的方法是使用<code>auto</code>或<code>decltype</code></li>
 <li>例子：声明/定义成员指针</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -904,8 +904,269 @@
 </span></code></pre></td></tr></table>
 </div>
 </div><h3 id="成员函数指针">成员函数指针</h3>
-<h3 id="将成员函数用作可调用对象">将成员函数用作可调用对象</h3>
-<h2 id="嵌套类">嵌套类</h2>
+<ul>
+<li>可以定义指向类的成员函数的指针，最简单的方法是用<code>auto</code>推断类型</li>
+<li>使用<code>classname::*</code>的形式声明指向成员函数的指针，成员函数指针也要指定函数的返回类型和形参列表，若函数是const成员或引用成员，指针也应是const或引用</li>
+<li>若成员函数存在重载问题，则必须显式声明函数类型，以指明想要哪个函数</li>
+<li>书写成员函数类型时，<code>classname::*pointername</code>必须用括号，否则pointername与右侧结合，错误</li>
+<li>在成员函数和指向成员函数的指针之间不存在自动转换（和普通函数指针不同）</li>
+<li>例子：定义成员函数指针</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">pmf</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get_cursor</span><span class="p">;</span>                           <span class="c1">//对，定义时用auto推导类型
+</span><span class="c1"></span><span class="kt">char</span> <span class="p">(</span><span class="n">Screen</span><span class="o">::*</span><span class="n">pmf2</span><span class="p">)(</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">,</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>    <span class="c1">//对，声明时手动指定类型（指定重载版本）
+</span><span class="c1"></span><span class="n">pmf2</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get</span><span class="p">;</span>                                      <span class="c1">//对，给已声明的成员函数指针赋值
+</span><span class="c1"></span><span class="kt">char</span> <span class="n">Screen</span><span class="o">::*</span><span class="n">p</span><span class="p">(</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">,</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>         <span class="c1">//错，书写成员函数指针的类型时括号必不可少，否则是声明普通函数p并返回Screen类的char成员，但普通函数不可有const限定符
+</span><span class="c1"></span><span class="n">pmf</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get</span><span class="p">;</span>                                       <span class="c1">//对，显式取地址得到指针
+</span><span class="c1"></span><span class="n">pmf</span><span class="o">=</span><span class="n">Screen</span><span class="o">::</span><span class="n">get</span><span class="p">;</span>                                        <span class="c1">//错，成员函数不可转换为指针，必须取地址
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用.<em>/-&gt;</em>算符来解引用成员函数指针，并传入对象得到其对应成员函数</li>
+<li>函数调用算符的优先级较高，故声明指向成员函数的指针或使用成员函数指针进行函数调用时，括号必不可少，即<code>(Class::*p)</code>和<code>(obg.*p)(args)</code></li>
+<li>例子：用成员函数指针调用成员函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">pmf</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get_cursor</span><span class="p">;</span>                           <span class="c1">//使用auto定义成员函数指针
+</span><span class="c1"></span><span class="kt">char</span> <span class="p">(</span><span class="n">Screen</span><span class="o">::*</span><span class="n">pmf2</span><span class="p">)(</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">,</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">)</span> <span class="k">const</span><span class="o">=</span><span class="p">;</span>   <span class="c1">//手动声明类型，指定重载的版本
+</span><span class="c1"></span><span class="n">pmf2</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get</span><span class="p">;</span>
+<span class="n">Screen</span> <span class="n">myScreen</span><span class="p">,</span><span class="o">*</span><span class="n">pScreen</span><span class="o">=&amp;</span><span class="n">myScreen</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">c1</span><span class="o">=</span><span class="p">(</span><span class="n">pScreen</span><span class="o">-&gt;*</span><span class="n">pmf</span><span class="p">)();</span>                              <span class="c1">//使用成员函数指针和指向对象的指针来调用成员函数
+</span><span class="c1"></span><span class="kt">char</span> <span class="n">c2</span><span class="o">=</span><span class="p">(</span><span class="n">myScreen</span><span class="p">.</span><span class="o">*</span><span class="n">pmf2</span><span class="p">)(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>                          <span class="c1">//使用成员函数指针和对象来调用成员函数
+</span><span class="c1"></span><span class="n">pScreen</span><span class="o">-&gt;*</span><span class="n">pmf</span><span class="p">();</span>                                        <span class="c1">//错，去掉括号后等价于pScreen-&gt;*(pmf())，然而不存在函数pmf
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用类型别名或typedef可让成员指针更容易理解</li>
+<li>可将成员函数指针作为某个函数的返回类型或形参类型，其中成员指针作为形参时也可拥有默认实参</li>
+<li>例子：成员指针作为形参</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">using</span> <span class="n">Action</span><span class="o">=</span><span class="kt">char</span> <span class="p">(</span><span class="n">Screen</span><span class="o">::*</span><span class="p">)(</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">,</span><span class="n">Screen</span><span class="o">::</span><span class="n">pos</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>   <span class="c1">//为成员函数指针定义类型别名
+</span><span class="c1"></span><span class="n">Action</span> <span class="n">get</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get</span><span class="p">;</span>                                        <span class="c1">//用类型别名定义成员函数指针
+</span><span class="c1"></span><span class="n">Screen</span> <span class="o">&amp;</span><span class="n">action</span><span class="p">(</span><span class="n">Screen</span> <span class="o">&amp;</span><span class="p">,</span><span class="n">Action</span><span class="o">=&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get</span><span class="p">);</span>                   <span class="c1">//成员函数指针用作形参，且默认实参
+</span><span class="c1"></span><span class="n">Screen</span> <span class="n">myScreen</span><span class="p">;</span>
+<span class="n">action</span><span class="p">(</span><span class="n">myScreen</span><span class="p">);</span>                                               <span class="c1">//使用默认实参
+</span><span class="c1"></span><span class="n">action</span><span class="p">(</span><span class="n">myScreen</span><span class="p">,</span><span class="n">get</span><span class="p">);</span>                                           <span class="c1">//使用自己定义的成员函数指针
+</span><span class="c1"></span><span class="n">action</span><span class="p">(</span><span class="n">myScreen</span><span class="p">,</span><span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">get</span><span class="p">);</span>                                  <span class="c1">//使用地址初始化形参中的成员函数指针
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对于普通函数指针和成员函数指针，常见的用法是将其存入函数表（若一个类有几个相同类型的成员函数，可用函数表）</li>
+<li>例子：用函数表管理相同类型的成员函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//类型相同的五个函数
+</span><span class="c1"></span>    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">home</span><span class="p">();</span>
+    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">forward</span><span class="p">();</span>
+    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">back</span><span class="p">();</span>
+    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">up</span><span class="p">();</span>
+    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">down</span><span class="p">();</span>
+    <span class="c1">//上面五个函数类型相同，可使用同一类型的成员函数指针
+</span><span class="c1"></span>    <span class="k">using</span> <span class="n">Action</span><span class="o">=</span><span class="n">Screen</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">Screen</span><span class="o">::*</span><span class="p">)();</span>
+    <span class="c1">//不限定作用域的枚举，代表上面五个函数的索引数
+</span><span class="c1"></span>    <span class="k">enum</span> <span class="nc">Directions</span><span class="p">{</span><span class="n">HOME</span><span class="p">,</span><span class="n">FORWARD</span><span class="p">,</span><span class="n">BACK</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">DOWN</span><span class="p">};</span>
+    <span class="c1">//move函数根据枚举值来调用对应成员函数
+</span><span class="c1"></span>    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">move</span><span class="p">(</span><span class="n">Directions</span><span class="p">);</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">//函数表，用于存储类型相同的函数指针
+</span><span class="c1"></span>    <span class="k">static</span> <span class="n">Action</span> <span class="n">Menu</span><span class="p">[];</span>
+<span class="p">};</span>
+<span class="c1">//定义函数表，表中函数的索引数和对应枚举成员的整型值一一对应
+</span><span class="c1"></span><span class="n">Screen</span><span class="o">::</span><span class="n">Action</span> <span class="n">Screen</span><span class="o">::</span><span class="n">Menu</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">home</span><span class="p">,</span><span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">forward</span><span class="p">,</span><span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">back</span><span class="p">,</span><span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">up</span><span class="p">,</span><span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">down</span><span class="p">};</span>
+<span class="c1">//实现move函数，根据传入的枚举类型调用函数表中的对应函数
+</span><span class="c1"></span><span class="n">Screen</span> <span class="o">&amp;</span><span class="n">Screen</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">Directions</span> <span class="n">cm</span><span class="p">){</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;*</span><span class="n">Menu</span><span class="p">[</span><span class="n">cm</span><span class="p">])();</span>
+<span class="p">}</span>
+<span class="c1">//使用函数表
+</span><span class="c1"></span><span class="n">Screen</span> <span class="n">myScreen</span><span class="p">;</span>
+<span class="n">myScreen</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">Screen</span><span class="o">::</span><span class="n">HOME</span><span class="p">);</span>
+<span class="n">myScreen</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">Screen</span><span class="o">::</span><span class="n">DOWN</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="将成员函数用作可调用对象">将成员函数用作可调用对象</h3>
+<ul>
+<li>要想通过成员函数指针调用函数，必须首先用<code>.*</code>/<code>-&gt;*</code>算符将指针绑定到对象</li>
+<li>成员函数指针本身不是可调用对象，也不可自动转换为函数类型，故不可直接使用调用算符<code>()</code></li>
+<li>由于成员函数指针不可调用，故不可将其传递给需要可调用对象的形参，例如标准库算法</li>
+<li>例子：形参为可调用对象时不可传入成员函数指针</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">fp</span><span class="o">=&amp;</span><span class="n">string</span><span class="o">::</span><span class="n">empty</span><span class="p">;</span>
+<span class="n">find_if</span><span class="p">(</span><span class="n">svec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">svec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">fp</span><span class="p">);</span>    <span class="c1">//错，成员函数指针必须通过对象和`.*`/`-&gt;*`算符调用
+</span><span class="c1">//假设容器svec中的迭代器是it，则find_if中有如下调用：
+</span><span class="c1">//在内部使用圆括号()调用传入的函数指针，因此不可传入成员函数指针
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">fp</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可使用标准库模板<code>function</code>来从成员函数指针中获取可调用对象</li>
+<li>使用function为成员函数生成可调用对象时，需将隐式的this形参变为显式</li>
+<li>当function对象包含有成员函数指针时，function可自动选择正确的算符<code>.*</code>/<code>-&gt;*</code>来执行调用</li>
+<li>定义function对象时，必须指定该对象的调用形式：
+<ul>
+<li>若使用成员函数定义function，则第一个形参必须表示调用该成员的对象的类型（即显式写出this形参）</li>
+<li>提供给function的调用形式必须指明调用该成员函数的对象的传入形式是否是指针/引用</li>
+</ul>
+</li>
+<li>例子：使用function从成员函数指针中获取可调用对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 使用对象的常量引用来调用成员函数指针 */</span>
+<span class="c1">//使用成员函数定义function时，必须在调用形式中显式写出调用该成员函数的对象的类型
+</span><span class="c1"></span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span> <span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">fcn</span><span class="o">=&amp;</span><span class="n">string</span><span class="o">::</span><span class="n">empty</span><span class="p">;</span>
+<span class="n">find_if</span><span class="p">(</span><span class="n">svec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">svec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">fcn</span><span class="p">);</span>
+<span class="c1">//find_if内部以如下形式调用fcn：
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">fcn</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">));</span>
+<span class="c1">//fcn实际将调用转换为如下形式：
+</span><span class="c1"></span><span class="k">if</span><span class="p">(((</span><span class="o">*</span><span class="n">it</span><span class="p">).</span><span class="o">*</span><span class="n">p</span><span class="p">)());</span>
+<span class="cm">/* 使用指向常量对象的指针来调用成员函数指针 */</span>
+<span class="c1">//假设使用指针来调用成员函数
+</span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span> <span class="o">*&gt;</span> <span class="n">pvec</span><span class="p">;</span>
+<span class="c1">//则function的模板实参中必须指出：用于调用该成员函数的是对象的指针
+</span><span class="c1"></span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span> <span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">*</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">fp</span><span class="o">=&amp;</span><span class="n">string</span><span class="o">::</span><span class="n">empty</span><span class="p">;</span>
+<span class="n">find_if</span><span class="p">(</span><span class="n">pvec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">pvec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">fp</span><span class="p">);</span>
+<span class="c1">//显式指明调用该成员函数的是对象指针后，fp实际调用如下形式：
+</span><span class="c1"></span><span class="k">if</span><span class="p">(((</span><span class="o">*</span><span class="n">it</span><span class="p">)</span><span class="o">-&gt;*</span><span class="n">fp</span><span class="p">)());</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用function时必须手动提供成员的调用形式</li>
+<li>可使用标准库函数<code>mem_fn</code>来从成员函数指针生成可调用对象，且可推断成员函数的类型，mem_fn也定义于头文件<code>functional</code></li>
+<li>成员函数通过mem_fn生成的可调用对象，既可被对象调用也可被指向对象的指针调用，可以认为mem_fn生成的可调用对象有一对重载的调用算符，一个接受<code>object *</code>另一个接受<code>object &amp;</code></li>
+<li>例子：使用mem_fn从成员函数指针中获取可调用对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//使用mem_fn自动从成员函数指针中获取可调用对象，在find_if内部绑定到容器的元素上
+</span><span class="c1"></span><span class="n">find_if</span><span class="p">(</span><span class="n">svec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">svec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">mem_fn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">string</span><span class="o">::</span><span class="n">empty</span><span class="p">));</span>
+<span class="c1">//定义mem_fn产生的可调用对象，f可接受对象的引用形式或指针形式
+</span><span class="c1"></span><span class="k">auto</span> <span class="n">f</span><span class="o">=</span><span class="n">mem_fn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">string</span><span class="o">::</span><span class="n">empty</span><span class="p">);</span>
+<span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">svec</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>   <span class="c1">//mem_fn的可调用对象可通过对象调用其成员函数，即使用.*
+</span><span class="c1"></span><span class="n">f</span><span class="p">(</span><span class="o">&amp;</span><span class="n">svec</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>        <span class="c1">//mem_fn的可调用对象课通过对象的指针调用其成员函数，即使用-&gt;*
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可使用标准库函数<code>bind</code>来从成员含指针生成可调用对象
+<ul>
+<li>类似function：若对成员函数使用bind，则必须将隐式的this形参写为显式</li>
+<li>类似mem_fn：可自动推导类型，且生成的可调用对象可用对象调用也可用对象的指针调用</li>
+</ul>
+</li>
+<li>例子：使用bind从成员函数指针中获取可调用对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//使用bind获取可调用对象，成员函数的this形参需显式写出
+</span><span class="c1"></span><span class="n">find_if</span><span class="p">(</span><span class="n">svec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">svec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">string</span><span class="o">::</span><span class="n">empty</span><span class="p">,</span><span class="n">_1</span><span class="p">));</span>
+<span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">svec</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>   <span class="c1">//通过对象调用成员函数
+</span><span class="c1"></span><span class="n">f</span><span class="p">(</span><span class="o">&amp;</span><span class="n">svec</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>        <span class="c1">//通过对象的指针调用成员函数
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="嵌套类">嵌套类</h2>
 <h2 id="union一种节省空间的类">union：一种节省空间的类</h2>
 <h2 id="局部类">局部类</h2>
 <h2 id="固有的不可移植的特性">固有的不可移植的特性</h2>
