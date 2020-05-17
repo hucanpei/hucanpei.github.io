@@ -49,7 +49,7 @@
 <meta itemprop="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet">
 <meta itemprop="datePublished" content="2020-05-11T15:44:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-11T15:44:00&#43;08:00" />
-<meta itemprop="wordCount" content="12052">
+<meta itemprop="wordCount" content="12147">
 
 
 
@@ -130,7 +130,7 @@
             <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
             <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
             </div>
-          <span class="more-meta"> 约 12052 字 </span>
+          <span class="more-meta"> 约 12147 字 </span>
           <span class="more-meta"> 预计阅读 25 分钟 </span>
         
       </div>
@@ -1274,7 +1274,8 @@
 <li>union不能含有引用类型的成员，除此之外可以是绝大多数类型。C++11中，含构造/析构函数的类也可作为union的成员类型</li>
 <li>union可为其成员指定public/protected/private权限，默认为public</li>
 <li>union可定义成员函数（包括构造/析构函数），但unioin不可作为基类/派生类，故union不可有虚函数</li>
-<li>定义union时，</li>
+<li>定义union时，首先是关键字union，随后是可选的名字和花括号后的一组成员声明</li>
+<li>union的名字是一个类型名，默认union是未初始化的，可用一堆花括号内的初始值显式初始化union（类似显式初始化聚合类）</li>
 </ul>
 <h2 id="局部类">局部类</h2>
 <h2 id="固有的不可移植的特性">固有的不可移植的特性</h2>
