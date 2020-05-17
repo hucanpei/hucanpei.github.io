@@ -252,7 +252,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="n">old_state</span><span class="o">=</span><span class="n">cin</span><span class="p">.</span><span class="n">rdstate</span><span class="p">();</span>                           <span class="c1">//保存cin的状态
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">old_state</span><span class="o">=</span><span class="n">cin</span><span class="p">.</span><span class="n">rdstate</span><span class="p">();</span>                           <span class="c1">//保存cin的状态
 </span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>                                            <span class="c1">//清除错误位，使之有效
 </span><span class="c1"></span><span class="n">process_input</span><span class="p">(</span><span class="n">cin</span><span class="p">);</span>                                     <span class="c1">//使用cin
 </span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">setstate</span><span class="p">(</span><span class="n">old_state</span><span class="p">);</span>                                <span class="c1">//将cin置为原来的状态
@@ -292,7 +292,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hi!&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//输出&#34;hi!&#34;和换行符，刷新缓冲
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hi!&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//输出&#34;hi!&#34;和换行符，刷新缓冲
 </span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hi!&#34;</span><span class="o">&lt;&lt;</span><span class="n">flush</span><span class="p">;</span> <span class="c1">//输出&#34;hi!&#34;，刷新缓冲
 </span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hi!&#34;</span><span class="o">&lt;&lt;</span><span class="n">ends</span><span class="p">;</span>  <span class="c1">//输出&#34;hi!&#34;和空字符，刷新缓冲
 </span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">unitbuf</span><span class="p">;</span>      <span class="c1">//之后的所有cout输出都将立即刷新缓冲
@@ -320,7 +320,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cout</span><span class="p">);</span>                     <span class="c1">//将cin关联到cout
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cout</span><span class="p">);</span>                     <span class="c1">//将cin关联到cout
 </span><span class="c1"></span><span class="n">ostream</span> <span class="o">*</span><span class="n">old_tie</span><span class="o">=</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>  <span class="c1">//使cin不再关联到任何流
 </span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cerr</span><span class="p">);</span>                     <span class="c1">//将cin关联到cerr
 </span><span class="c1"></span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="o">&amp;</span><span class="n">old_tie</span><span class="p">);</span>                  <span class="c1">//重建cin和cout间的正常关联
@@ -361,7 +361,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">ifstream</span> <span class="nf">in</span><span class="p">(</span><span class="n">ifile</span><span class="p">);</span>         <span class="c1">//初始化时关联到文件
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">ifstream</span> <span class="nf">in</span><span class="p">(</span><span class="n">ifile</span><span class="p">);</span>         <span class="c1">//初始化时关联到文件
 </span><span class="c1"></span><span class="n">ofstream</span> <span class="n">out</span><span class="p">;</span>               <span class="c1">//默认初始化
 </span><span class="c1"></span><span class="n">out</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">ifile</span><span class="o">+</span><span class="s">&#34;.copy&#34;</span><span class="p">);</span>    <span class="c1">//打开文件
 </span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">out</span><span class="p">){</span><span class="cm">/*使用out*/</span><span class="p">}</span>       <span class="c1">//先检查是否成功关联到文件，再使用流
@@ -409,7 +409,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下3条等价，都会截断file1
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//以下3条等价，都会截断file1
 </span><span class="c1"></span><span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file1&#34;</span><span class="p">);</span>
 <span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file1&#34;</span><span class="p">,</span> <span class="n">ofstream</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
 <span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&#34;file1&#34;</span><span class="p">,</span> <span class="n">ofstream</span><span class="o">::</span><span class="n">out</span><span class="o">|</span><span class="n">ofstream</span><span class="o">::</span><span class="n">trunc</span><span class="p">);</span>

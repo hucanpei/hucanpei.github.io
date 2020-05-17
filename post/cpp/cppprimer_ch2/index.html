@@ -262,7 +262,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="sa">L</span><span class="sc">&#39;a&#39;</span>     <span class="c1">//宽字符型字面值，类型是wchar_t
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="sa">L</span><span class="sc">&#39;a&#39;</span>     <span class="c1">//宽字符型字面值，类型是wchar_t
 </span><span class="c1"></span><span class="sa">u8</span><span class="s">&#34;hi!&#34;</span>  <span class="c1">//utf-8字符串字面值（utf-8用8bit编码一个unicode字符）
 </span><span class="c1"></span><span class="mi">42ULL</span>    <span class="c1">//无符号整型字面值，类型是unsigned long long
 </span><span class="c1"></span><span class="mf">1E-3</span><span class="n">F</span>    <span class="c1">//单精度浮点字面值，类型是float
@@ -295,7 +295,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 <span class="kt">int</span> <span class="nf">a</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
@@ -358,7 +358,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">i2</span><span class="o">=</span><span class="mi">2048</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">i2</span><span class="o">=</span><span class="mi">2048</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="n">i2</span><span class="p">;</span> <span class="c1">//r是绑定到i的引用，未发生拷贝。r2是int型对象，发生了拷贝。
 </span></code></pre></td></tr></table>
 </div>
@@ -381,7 +381,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">ival</span><span class="p">;</span> <span class="c1">//声名符是*p，变量名是p，对val取地址并用地址&amp;val初始化变量p
 </span></code></pre></td></tr></table>
 </div>
@@ -427,7 +427,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">ival</span><span class="p">,</span> <span class="o">*</span><span class="n">pi</span><span class="o">=</span><span class="k">nullptr</span><span class="p">;</span>
 <span class="n">pi</span><span class="o">=&amp;</span><span class="n">ival</span><span class="p">;</span>   <span class="c1">//指针的地址被改变，即所指对象发生改变
 </span><span class="c1"></span><span class="o">*</span><span class="n">pi</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="c1">//指针所指对象的值发生改变
@@ -464,7 +464,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">1024</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">1024</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">pi</span><span class="o">=&amp;</span><span class="n">ival</span><span class="p">;</span> <span class="c1">//pi指向int型数
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">**</span><span class="n">ppi</span><span class="o">=&amp;</span><span class="n">pi</span><span class="p">;</span> <span class="c1">//ppi指向指针pi
 </span></code></pre></td></tr></table>
@@ -482,7 +482,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>     <span class="c1">//指针可不用初始化
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">*&amp;</span><span class="n">r</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>  <span class="c1">//绑定到指针p的引用。
 </span><span class="c1"></span>            <span class="c1">//r是一个引用，引用的对象是指针，该指针是int型，该引用r被绑定到对象p。
@@ -518,7 +518,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//程序员写的代码
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//程序员写的代码
 </span><span class="c1"></span><span class="kt">double</span> <span class="n">dval</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">ri</span><span class="o">=</span><span class="n">dval</span><span class="p">;</span>
 <span class="c1">//编译器产生的代码
@@ -550,7 +550,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//定义“常量指针”
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义“常量指针”
 </span><span class="c1"></span><span class="kt">int</span> <span class="n">errNumb</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">curErr</span><span class="o">=&amp;</span><span class="n">errNumb</span><span class="p">;</span>   <span class="c1">//常量指针。curErr是const，是指针，指向int对象
 </span><span class="c1">//定义“指向常量的指针”和“指向常量的常量指针”
@@ -579,7 +579,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">p1</span><span class="o">=&amp;</span><span class="n">i</span><span class="p">;</span>       <span class="c1">//指针不可变，顶层const
 </span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>        <span class="c1">//基本类型的const都是顶层const
 </span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">p2</span><span class="o">=&amp;</span><span class="n">ci</span><span class="p">;</span>      <span class="c1">//指向对象不可变，底层const
@@ -606,7 +606,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/*接着上一个例子*/</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/*接着上一个例子*/</span>
 <span class="c1">//顶层const不受影响
 </span><span class="c1"></span><span class="n">i</span><span class="o">=</span><span class="n">ci</span><span class="p">;</span>             <span class="c1">//ci是顶层const，可拷贝给顶层非const的i
 </span><span class="c1"></span><span class="n">p2</span><span class="o">=</span><span class="n">p3</span><span class="p">;</span>            <span class="c1">//底层指向对象的类型严格匹配，可将顶层const的p3拷贝给顶层非const的p2
@@ -651,7 +651,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">typedef</span> <span class="kt">double</span> <span class="n">wages</span><span class="p">;</span>   <span class="c1">//wages是double的同义词
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">double</span> <span class="n">wages</span><span class="p">;</span>   <span class="c1">//wages是double的同义词
 </span><span class="c1"></span><span class="k">typedef</span> <span class="n">wages</span> <span class="n">base</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>  <span class="c1">//base是double的同义词，p是double *的同义词
 </span><span class="c1"></span><span class="k">using</span> <span class="n">SI</span><span class="o">=</span><span class="n">Sales_item</span><span class="p">;</span>    <span class="c1">//SI是Sales_item的同义词
 </span></code></pre></td></tr></table>
@@ -669,7 +669,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">typedef</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pstring</span><span class="p">;</span>  <span class="c1">//pstring类型是指向char的指针
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pstring</span><span class="p">;</span>  <span class="c1">//pstring类型是指向char的指针
 </span><span class="c1"></span><span class="k">const</span> <span class="n">pstring</span> <span class="n">cstr</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="c1">//cstr是const pstring类型，即是常量指针，指向char，
 </span><span class="c1"></span>                        <span class="c1">//这一句不能理解为“const char *cstr=0”，
 </span><span class="c1"></span>                        <span class="c1">//后者是指向const char的指针
@@ -691,7 +691,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">i</span><span class="p">;</span>     <span class="c1">//正确，i是整型，p是指向整型的指针
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">i</span><span class="p">;</span>     <span class="c1">//正确，i是整型，p是指向整型的指针
 </span><span class="c1"></span><span class="k">auto</span> <span class="n">sz</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span>  <span class="c1">//错误，sz是整型，pi是浮点
 </span></code></pre></td></tr></table>
 </div>
@@ -712,7 +712,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
 <span class="k">auto</span> <span class="n">a</span><span class="o">=</span><span class="n">r</span><span class="p">;</span>   <span class="c1">//绑定int型的引用做初值，a是int型
 </span><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cr</span><span class="o">=</span><span class="n">ci</span><span class="p">;</span>
 <span class="k">auto</span> <span class="n">b</span><span class="o">=</span><span class="n">ci</span><span class="p">;</span>  <span class="c1">//ci是顶层const，忽略。b是int型
@@ -735,7 +735,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/*接上例*/</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/*接上例*/</span>
 <span class="k">const</span> <span class="k">auto</span> <span class="n">f</span><span class="o">=</span><span class="n">ci</span><span class="p">;</span>  <span class="c1">//手动指定f为顶层const。ci的类型是const int，经过const auto后得到f是const int。
 </span><span class="c1"></span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">g</span><span class="o">=</span><span class="n">ci</span><span class="p">;</span>       <span class="c1">//手动指定g的类型为引用。引用的对象是ci，即g是const int。
 </span><span class="c1"></span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">h</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>       <span class="c1">//错，h是非常量引用。不能为非常量引用绑定字面值，只能绑定对象
@@ -756,7 +756,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cj</span><span class="o">=</span><span class="n">ci</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="kt">int</span> <span class="n">ci</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cj</span><span class="o">=</span><span class="n">ci</span><span class="p">;</span>
 <span class="k">decltype</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="c1">//x的类型是const int，顶层const被保留
 </span><span class="c1"></span><span class="k">decltype</span><span class="p">(</span><span class="n">cj</span><span class="p">)</span> <span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="p">;</span> <span class="c1">//y的类型是引用，引用对象是const int
 </span><span class="c1"></span><span class="k">decltype</span><span class="p">(</span><span class="n">cj</span><span class="p">)</span> <span class="n">z</span><span class="p">;</span>   <span class="c1">//错，z是引用，必须初始化
@@ -778,7 +778,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
 <span class="k">decltype</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="n">a</span><span class="p">;</span>    <span class="c1">//错，r的推导结果是引用，必须初始化
 </span><span class="c1"></span><span class="k">decltype</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">//对，r+0的结果是int，故b是未初始化的int
 </span><span class="c1"></span><span class="k">decltype</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="n">c</span><span class="p">;</span>   <span class="c1">//错，解引用得到的结果是引用，c是绑定到int的引用，必须初始化
@@ -817,7 +817,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//当此头文件第一次被包含时，定义预处理变量SALES_DATA_H，并执行该头文件中的“代码们”
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//当此头文件第一次被包含时，定义预处理变量SALES_DATA_H，并执行该头文件中的“代码们”
 </span><span class="c1">//当此头文件再次被包含时，预处理变量SALES_DATA_H已定义，跳过该头文件中的“代码们”
 </span><span class="c1"></span><span class="cp">#ifndef SALES_DATA_H
 </span><span class="cp">#define SALES_DATA_H

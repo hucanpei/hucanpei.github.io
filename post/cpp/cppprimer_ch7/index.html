@@ -219,7 +219,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="n">total</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Sales_data</span> <span class="n">total</span><span class="p">;</span>
 <span class="n">total</span><span class="p">.</span><span class="n">isbn</span><span class="p">();</span>               <span class="c1">//调用该对象的成员函数
 </span><span class="c1"></span><span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>   <span class="c1">//上一行对应的伪代码，说明调用成员函数时隐式传入对象地址
 </span></code></pre></td></tr></table>
@@ -242,7 +242,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>                       <span class="c1">//实际的定义
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>                       <span class="c1">//实际的定义
 </span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">bookNo</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="n">string</span> <span class="n">Sales_data</span><span class="o">::</span><span class="n">isbn</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">*</span><span class="k">const</span> <span class="k">this</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//上一个对应的伪代码，说明const成员函数
@@ -272,7 +272,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">Sales_data</span><span class="o">::</span><span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span> <span class="c1">//返回类型是该对象的引用，是左值
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">Sales_data</span><span class="o">::</span><span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span> <span class="c1">//返回类型是该对象的引用，是左值
 </span><span class="c1"></span>    <span class="n">units_sold</span><span class="o">+=</span><span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span><span class="p">;</span>
     <span class="n">revenue</span><span class="o">+=</span><span class="n">rhs</span><span class="p">.</span><span class="n">revenue</span><span class="p">;</span>
     <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>                                       <span class="c1">//返回调用该函数的对象，对this指针解引用
@@ -327,7 +327,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>      <span class="c1">//冒号开头
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>      <span class="c1">//冒号开头
 </span><span class="c1"></span>            <span class="n">boolNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{}</span>   <span class="c1">//初值列表
 </span></code></pre></td></tr></table>
 </div>
@@ -414,7 +414,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//非常量对象的版本
 </span><span class="c1"></span>    <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">display</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">){</span>               <span class="c1">//传入this指针和返回引用都非const
@@ -449,7 +449,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="n">item1</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Sales_data</span> <span class="n">item1</span><span class="p">;</span>
 <span class="k">class</span> <span class="nc">Sales_data</span> <span class="n">item2</span><span class="p">;</span> <span class="c1">//等价于上一行，偏C风格
 </span></code></pre></td></tr></table>
 </div>
@@ -470,7 +470,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Link_screen</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Link_screen</span><span class="p">{</span>
     <span class="n">Screen</span> <span class="n">window</span><span class="p">;</span>
     <span class="n">Link_screen</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
     <span class="n">Link_screen</span> <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
@@ -536,7 +536,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">typedef</span> <span class="kt">double</span> <span class="n">Money</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">double</span> <span class="n">Money</span><span class="p">;</span>
 <span class="k">class</span> <span class="nc">Account</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Money</span> <span class="n">balance</span><span class="p">(){</span><span class="k">return</span> <span class="n">bal</span><span class="p">;}</span>    <span class="c1">//使用外层作用域定义的Money类型
@@ -566,7 +566,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">Screen</span><span class="o">::</span><span class="n">dummy_fcn</span><span class="p">(</span><span class="n">pos</span> <span class="n">height</span><span class="p">){</span> <span class="c1">//类Screen的成员height被形参屏蔽
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="n">Screen</span><span class="o">::</span><span class="n">dummy_fcn</span><span class="p">(</span><span class="n">pos</span> <span class="n">height</span><span class="p">){</span> <span class="c1">//类Screen的成员height被形参屏蔽
 </span><span class="c1"></span>    <span class="n">cursor</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span>      <span class="c1">//指定该对象中的height成员
 </span><span class="c1"></span>    <span class="n">cursor</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="n">Screen</span><span class="o">::</span><span class="n">height</span><span class="p">;</span>    <span class="c1">//等价于上一句，指定该类作用域中的height
 </span><span class="c1"></span>    <span class="n">cursor</span><span class="o">=</span><span class="n">width</span><span class="o">*::</span><span class="n">height</span><span class="p">;</span>          <span class="c1">//指定全局作用域中的height
@@ -604,7 +604,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">X</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">X</span><span class="p">{</span>
     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
@@ -634,7 +634,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Sales_data</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">cnt</span><span class="p">,</span> <span class="kt">double</span> <span class="n">price</span><span class="p">)</span><span class="o">:</span>
                 <span class="n">bookNo</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="n">cnt</span><span class="o">*</span><span class="n">price</span><span class="p">)</span> <span class="p">{}</span>
@@ -672,7 +672,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="nf">obj</span><span class="p">();</span>   <span class="c1">//错，编译器认为这是函数声明
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Sales_data</span> <span class="nf">obj</span><span class="p">();</span>   <span class="c1">//错，编译器认为这是函数声明
 </span><span class="c1"></span><span class="n">Sales_data</span> <span class="n">obj</span><span class="p">;</span>     <span class="c1">//对，默认初始化，调用默认构造函数
 </span></code></pre></td></tr></table>
 </div>
@@ -692,7 +692,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">null_book</span><span class="o">=</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">null_book</span><span class="o">=</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">;</span>
 <span class="cm">/* 上下文：item.combine()接受一个Sales_data类型，
 </span><span class="cm"> * 而Sales_data类有一个接受string的构造函数，但没有接受C风格字符串的构造函数
 </span><span class="cm"> */</span>
@@ -728,7 +728,7 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Sales_data</span><span class="p">()</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>
     <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p</span><span class="p">)</span><span class="o">:</span>
@@ -813,7 +813,7 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//定义一个字面值常量类
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义一个字面值常量类
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">Debug</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">constexpr</span> <span class="n">Debug</span><span class="p">(</span><span class="kt">bool</span> <span class="n">b</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span><span class="o">:</span> <span class="n">hw</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">io</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">other</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{}</span>             <span class="c1">//constexpr构造函数，仅使用初值列表
@@ -880,7 +880,7 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//声明静态成员
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//声明静态成员
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">Account</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="kt">void</span> <span class="n">calculate</span><span class="p">()</span> <span class="p">{</span><span class="n">amount</span><span class="o">+=</span><span class="n">amount</span><span class="o">*</span><span class="n">interestRate</span><span class="p">;}</span>
@@ -922,7 +922,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Account</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Account</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">static</span> <span class="kt">double</span> <span class="n">rate</span><span class="p">(){</span><span class="k">return</span> <span class="n">interestRate</span><span class="p">;}</span>
     <span class="k">static</span> <span class="kt">void</span> <span class="nf">rate</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>
@@ -943,7 +943,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//如果要把Account::period传给接受const int &amp;的函数，则必须在类外定义
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//如果要把Account::period传给接受const int &amp;的函数，则必须在类外定义
 </span><span class="c1">//类内已提供初始值，则不可重复提供
 </span><span class="c1"></span><span class="k">constexpr</span> <span class="kt">int</span> <span class="n">Account</span><span class="o">::</span><span class="n">period</span><span class="p">;</span>
 </code></pre></td></tr></table>
@@ -963,7 +963,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Bar</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Bar</span><span class="p">{</span>
     <span class="k">static</span> <span class="n">Bar</span> <span class="n">mem1</span><span class="p">;</span>    <span class="c1">//对，静态成员可以是不完全类型
 </span><span class="c1"></span>    <span class="n">Bar</span> <span class="o">*</span><span class="n">mem2</span><span class="p">;</span>          <span class="c1">//对，指针可以是不完全类型
 </span><span class="c1"></span>    <span class="n">Bar</span> <span class="n">mem3</span><span class="p">;</span>           <span class="c1">//错，数据成员必须是完全类型
@@ -984,7 +984,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Screen</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Screen</span> <span class="o">&amp;</span><span class="n">clear</span><span class="p">(</span><span class="kt">char</span><span class="o">=</span><span class="n">bkground</span><span class="p">);</span> <span class="c1">//用静态成员做默认实参
 </span><span class="c1"></span><span class="k">private</span><span class="o">:</span>

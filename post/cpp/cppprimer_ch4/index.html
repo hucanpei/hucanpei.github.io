@@ -237,7 +237,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="mi">21</span><span class="o">%</span><span class="mi">6</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>     <span class="mi">21</span><span class="o">/</span><span class="mi">6</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="mi">21</span><span class="o">%</span><span class="mi">6</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>     <span class="mi">21</span><span class="o">/</span><span class="mi">6</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>
 <span class="mi">21</span><span class="o">%</span><span class="mi">7</span><span class="p">;</span>   <span class="cm">/*结果是0*/</span>     <span class="mi">21</span><span class="o">/</span><span class="mi">7</span><span class="p">;</span>   <span class="cm">/*结果是3*/</span>
 <span class="o">-</span><span class="mi">21</span><span class="o">%-</span><span class="mi">8</span><span class="p">;</span> <span class="cm">/*结果是-5*/</span>    <span class="o">-</span><span class="mi">21</span><span class="o">/-</span><span class="mi">8</span><span class="p">;</span> <span class="cm">/*结果是2*/</span>
 <span class="mi">21</span><span class="o">%-</span><span class="mi">5</span><span class="p">;</span>  <span class="cm">/*结果是1*/</span>     <span class="mi">21</span><span class="o">/-</span><span class="mi">5</span><span class="p">;</span>  <span class="cm">/*结果是-4*/</span>
@@ -322,7 +322,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">bits</span><span class="o">=</span><span class="mo">0233</span><span class="p">;</span>    <span class="c1">//10011011
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">bits</span><span class="o">=</span><span class="mo">0233</span><span class="p">;</span>    <span class="c1">//10011011
 </span><span class="c1"></span><span class="n">bits</span><span class="o">&lt;&lt;</span><span class="mi">8</span><span class="p">;</span>    <span class="c1">//提升为int大小，再左移8位，00000000 00000000 10011011 00000000
 </span><span class="c1"></span><span class="n">bits</span><span class="o">&lt;&lt;</span><span class="mi">31</span><span class="p">;</span>   <span class="c1">//提升为int大小，再左移31位，10000000 00000000 00000000 00000000
 </span><span class="c1"></span><span class="n">bits</span><span class="o">&gt;&gt;</span><span class="mi">3</span><span class="p">;</span>    <span class="c1">//提升为int大小，再右移3位，00000000 00000000 00000000 00010011
@@ -410,7 +410,7 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">bool</span>    <span class="n">flag</span><span class="p">;</span>   <span class="kt">char</span>            <span class="n">cval</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span>    <span class="n">flag</span><span class="p">;</span>   <span class="kt">char</span>            <span class="n">cval</span><span class="p">;</span>
 <span class="kt">short</span>   <span class="n">sval</span><span class="p">;</span>   <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">usval</span><span class="p">;</span>
 <span class="kt">int</span>     <span class="n">ival</span><span class="p">;</span>   <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="n">uival</span><span class="p">;</span>
 <span class="kt">long</span>    <span class="n">lval</span><span class="p">;</span>   <span class="kt">unsigned</span> <span class="kt">long</span>   <span class="n">ulval</span><span class="p">;</span>
@@ -463,7 +463,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">double</span> <span class="n">d</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">double</span> <span class="n">d</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span>
 <span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="o">=&amp;</span><span class="n">d</span><span class="p">;</span>                             <span class="c1">//任何非常量对象的地址都能放进void *指针
 </span><span class="c1"></span><span class="kt">double</span> <span class="o">*</span><span class="n">dp</span><span class="o">=</span><span class="n">stataic_cast</span><span class="o">&lt;</span><span class="kt">double</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>   <span class="c1">//将指针转回指向double型
 </span></code></pre></td></tr></table>

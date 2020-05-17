@@ -219,7 +219,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//拷贝构造函数，参数是该类类型的引用，经常是const引用
 </span><span class="c1"></span>    <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="p">);</span>
@@ -254,7 +254,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="nf">dots</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="sc">&#39;.&#39;</span><span class="p">);</span>                <span class="c1">//直接初始化
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="nf">dots</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="sc">&#39;.&#39;</span><span class="p">);</span>                <span class="c1">//直接初始化
 </span><span class="c1"></span><span class="n">string</span> <span class="nf">s</span><span class="p">(</span><span class="n">dots</span><span class="p">);</span>                     <span class="c1">//直接初始化
 </span><span class="c1"></span><span class="n">string</span> <span class="n">s2</span><span class="o">=</span><span class="n">dots</span><span class="p">;</span>                     <span class="c1">//拷贝初始化
 </span><span class="c1"></span><span class="n">string</span> <span class="n">null_book</span><span class="o">=</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">;</span>   <span class="c1">//拷贝初始化，发生C风格字符串到const string的隐式转换（临时量）
@@ -290,7 +290,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>     <span class="c1">//对，直接初始化
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>     <span class="c1">//对，直接初始化
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v2</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>      <span class="c1">//错，vector的接受大小的构造函数是explicit
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">);</span>    <span class="c1">//f的参数非引用，需拷贝初始化
 </span><span class="c1"></span><span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>                  <span class="c1">//错，int不可拷贝为vector
@@ -308,7 +308,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//编译器允许将上一行代码改写为下面一行，直接构造。
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//编译器允许将上一行代码改写为下面一行，直接构造。
 </span><span class="c1"></span><span class="n">string</span> <span class="n">null_book</span><span class="o">=</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">;</span>   <span class="c1">//拷贝初始化
 </span><span class="c1"></span><span class="n">string</span> <span class="nf">null_book</span><span class="p">(</span><span class="s">&#34;9-999-99999-9&#34;</span><span class="p">);</span>  <span class="c1">//跳过拷贝构造函数，直接构造
 </span></code></pre></td></tr></table>
@@ -345,7 +345,7 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//拷贝赋值算符，参数是该类类型的引用，经常是const引用，返回该类类型的引用
 </span><span class="c1"></span>    <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">Sales_data</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="p">);</span>
@@ -401,7 +401,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="p">{</span><span class="c1">//进入新作用域
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="p">{</span><span class="c1">//进入新作用域
 </span><span class="c1"></span>    <span class="n">Sales_data</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="k">new</span> <span class="n">Sales_data</span><span class="p">;</span>       <span class="c1">//内置指针
 </span><span class="c1"></span>    <span class="k">auto</span> <span class="n">p2</span><span class="o">=</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Sales_data</span><span class="o">&gt;</span><span class="p">();</span>  <span class="c1">//智能指针
 </span><span class="c1"></span>    <span class="n">Sales_data</span> <span class="nf">item</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span>                <span class="c1">//拷贝构造对象
@@ -452,7 +452,7 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//构造对象时产生动态对象，其指针作为成员
 </span><span class="c1"></span>    <span class="n">HasPtr</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">=</span><span class="n">string</span><span class="p">())</span><span class="o">:</span>
@@ -497,7 +497,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Sales_data</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Sales_data</span><span class="p">()</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>
     <span class="n">Sales_data</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>
@@ -542,7 +542,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">struct</span> <span class="nc">NoDtor</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">NoDtor</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">NoDtor</span><span class="p">()</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>
     <span class="o">~</span><span class="n">NoDtor</span><span class="p">()</span><span class="o">=</span><span class="k">delete</span><span class="p">;</span>   <span class="c1">//删除析构函数
@@ -602,7 +602,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">PrivateCopy</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">PrivateCopy</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">PrivateCopy</span><span class="p">()</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>
     <span class="o">~</span><span class="n">PrivateCopy</span><span class="p">();</span>
@@ -673,7 +673,7 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//构造时分配动态内存
 </span><span class="c1"></span>    <span class="n">HasPtr</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">=</span><span class="n">string</span><span class="p">())</span><span class="o">:</span>
@@ -757,7 +757,7 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//构造函数
 </span><span class="c1"></span>    <span class="n">HasPtr</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">=</span><span class="n">string</span><span class="p">())</span><span class="o">:</span>
@@ -816,7 +816,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下是拷贝值实现swap，假设HasPtr是行为像值的类
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//以下是拷贝值实现swap，假设HasPtr是行为像值的类
 </span><span class="c1"></span><span class="n">HasPtr</span> <span class="n">temp</span><span class="o">=</span><span class="n">v1</span><span class="p">;</span>
 <span class="n">v1</span><span class="o">=</span><span class="n">v2</span><span class="p">;</span>
 <span class="n">v2</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
@@ -846,7 +846,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
     <span class="c1">//声明为友元以访问private
 </span><span class="c1"></span>    <span class="k">friend</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="n">HasPtr</span> <span class="o">&amp;</span><span class="p">,</span><span class="n">HasPtr</span> <span class="o">&amp;</span><span class="p">);</span>
     <span class="cm">/* 其他成员定义，与“行为像值的类”相同 */</span>
@@ -878,7 +878,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//右侧对象按值传递，传进来时已经拷贝了一次，拷贝到形参rhs
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//右侧对象按值传递，传进来时已经拷贝了一次，拷贝到形参rhs
 </span><span class="c1"></span><span class="n">HasPtr</span> <span class="o">&amp;</span><span class="n">HasPtr</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">HasPtr</span> <span class="n">rhs</span><span class="p">){</span>
     <span class="n">swap</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span><span class="n">rhs</span><span class="p">);</span>    <span class="c1">//交换左侧对象与形参rhs
 </span><span class="c1"></span>    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>       <span class="c1">//此时this指针指向右侧对象拷贝出的对象，形参rhs是交换前的左侧对象
@@ -994,7 +994,7 @@
 </span><span class="lnt">80
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Message</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Message</span><span class="p">{</span>
     <span class="k">friend</span> <span class="k">class</span> <span class="nc">Folder</span><span class="p">;</span>                    <span class="c1">//允许Folder访问
 </span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
     <span class="k">explicit</span> <span class="n">Message</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">)</span><span class="o">:</span> <span class="c1">//默认初始化为空字符串
@@ -1192,7 +1192,7 @@
 </span><span class="lnt">95
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//构造函数初始化3个指针为nullptr
 </span><span class="c1"></span>    <span class="n">StrVec</span><span class="p">()</span><span class="o">:</span>
@@ -1329,7 +1329,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
 <span class="kt">int</span> <span class="o">&amp;</span><span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>           <span class="c1">//对
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">&amp;&amp;</span><span class="n">rr</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>         <span class="c1">//错，i是左值，不可绑定到右值引用
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">42</span><span class="p">;</span>       <span class="c1">//错，i*42是右值，不可绑定到左值引用
@@ -1364,7 +1364,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//移动构造函数
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//移动构造函数
 </span><span class="c1"></span><span class="n">StrVec</span><span class="o">::</span><span class="n">StrVec</span><span class="p">(</span><span class="n">StrVec</span> <span class="o">&amp;&amp;</span><span class="n">s</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span>       <span class="c1">//传入右值引用，且声明为noexcept表示不会抛出异常
 </span><span class="c1"></span>              <span class="n">elements</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">elements</span><span class="p">),</span>         <span class="c1">//初值列表中拷贝指针，让该对象接管传入对象的资源
 </span><span class="c1"></span>              <span class="n">first_free</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">first_free</span><span class="p">),</span>
@@ -1408,7 +1408,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//移动赋值算符
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//移动赋值算符
 </span><span class="c1"></span><span class="n">StrVec</span> <span class="o">&amp;</span><span class="n">StrVec</span><span class="o">::</span><span class="n">StrVec</span><span class="p">(</span><span class="n">StrVec</span> <span class="o">&amp;&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>         <span class="c1">//输入是右值引用，且不会抛出异常
 </span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="o">!=&amp;</span><span class="n">rhs</span><span class="p">){</span>                                     <span class="c1">//检查this指针是否等于右侧对象的地址，即是否自赋值
 </span><span class="c1"></span>        <span class="n">free</span><span class="p">();</span>                                         <span class="c1">//释放左侧对象管理的资源
@@ -1466,7 +1466,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">StrVec</span> <span class="n">v1</span><span class="p">,</span><span class="n">v2</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">StrVec</span> <span class="n">v1</span><span class="p">,</span><span class="n">v2</span><span class="p">;</span>
 <span class="n">v1</span><span class="o">=</span><span class="n">v2</span><span class="p">;</span>                      <span class="c1">//右边是左值，拷贝
 </span><span class="c1"></span><span class="n">StrVec</span> <span class="nf">getVec</span><span class="p">(</span><span class="n">istream</span> <span class="o">&amp;</span><span class="p">);</span>   <span class="c1">//返回值非引用，调用返回右值
 </span><span class="c1"></span><span class="n">v2</span><span class="o">=</span><span class="n">getVec</span><span class="p">(</span><span class="n">cin</span><span class="p">);</span>             <span class="c1">//右边是右值，移动
@@ -1491,7 +1491,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Foo</span><span class="p">()</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>      <span class="c1">//定义默认构造函数
 </span><span class="c1"></span>    <span class="n">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span> <span class="o">&amp;</span><span class="p">);</span>   <span class="c1">//定义拷贝构造函数
@@ -1542,7 +1542,7 @@
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
     <span class="k">friend</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="n">HasPtr</span> <span class="o">&amp;</span><span class="p">,</span><span class="n">HasPtr</span> <span class="o">&amp;</span><span class="p">);</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//构造函数
@@ -1614,7 +1614,7 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//工具函数：将给定Message所属的Folder信息“移动”到本Message
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//工具函数：将给定Message所属的Folder信息“移动”到本Message
 </span><span class="c1">//1、将给定Message的Folder集合移动到本Message
 </span><span class="c1">//2、从给定Message所属的各Folder中删除给定Message并添加本Message
 </span><span class="c1">//3、清空给定Message的Folder集合
@@ -1675,7 +1675,7 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//1、分配原来2倍的空间
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//1、分配原来2倍的空间
 </span><span class="c1">//2、把原来的元素依次移动到新空间
 </span><span class="c1">//3、释放原来的空间
 </span><span class="c1">//4、让类的指针接管新的空间
@@ -1710,7 +1710,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="n">cons</span> <span class="n">T</span><span class="o">&amp;</span><span class="p">);</span>    <span class="c1">//拷贝版本，绑定到任意能转换为T的对象（临时量）
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="n">cons</span> <span class="n">T</span><span class="o">&amp;</span><span class="p">);</span>    <span class="c1">//拷贝版本，绑定到任意能转换为T的对象（临时量）
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;&amp;</span><span class="p">);</span>       <span class="c1">//移动版本，只能绑定到类型T的可修改的右值
 </span></code></pre></td></tr></table>
 </div>
@@ -1743,7 +1743,7 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="kt">void</span> <span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span> <span class="c1">//拷贝版本
 </span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="p">);</span>      <span class="c1">//移动版本
@@ -1778,7 +1778,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">s1</span><span class="o">=</span><span class="s">&#34;a value&#34;</span><span class="p">,</span><span class="n">s2</span><span class="o">=</span><span class="s">&#34;another&#34;</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">s1</span><span class="o">=</span><span class="s">&#34;a value&#34;</span><span class="p">,</span><span class="n">s2</span><span class="o">=</span><span class="s">&#34;another&#34;</span><span class="p">;</span>
 <span class="k">auto</span> <span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="n">s1</span><span class="o">+</span><span class="n">s2</span><span class="p">).</span><span class="n">find</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">);</span>   <span class="c1">//在右值对象上调用成员
 </span><span class="c1"></span><span class="n">s1</span><span class="o">+</span><span class="n">s2</span><span class="o">=</span><span class="s">&#34;wow!&#34;</span><span class="p">;</span>               <span class="c1">//向右值赋值
 </span></code></pre></td></tr></table>
@@ -1810,7 +1810,7 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Foo</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span> <span class="o">&amp;</span><span class="p">)</span> <span class="o">&amp;</span><span class="p">;</span> <span class="c1">//有&amp;无const，只能向可修改的左值赋值
 </span><span class="c1"></span>    <span class="cm">/* 其他成员 */</span>
@@ -1861,7 +1861,7 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">Foo</span> <span class="n">sorted</span><span class="p">()</span> <span class="o">&amp;&amp;</span><span class="p">;</span>        <span class="c1">//对右值对象调用，会改变调用对象
 </span><span class="c1"></span>    <span class="n">Foo</span> <span class="nf">sorted</span><span class="p">()</span> <span class="k">const</span> <span class="o">&amp;</span><span class="p">;</span>   <span class="c1">//对左值对象调用，不会改变调用对象

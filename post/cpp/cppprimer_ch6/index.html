@@ -243,7 +243,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">size_t</span> <span class="nf">count_calls</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">size_t</span> <span class="nf">count_calls</span><span class="p">(){</span>
     <span class="k">static</span> <span class="n">size_t</span> <span class="n">ctr</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>    <span class="c1">//调用结束后不会销毁
 </span><span class="c1"></span>    <span class="k">return</span> <span class="o">++</span><span class="n">ctr</span><span class="p">;</span>           <span class="c1">//每次调用时+1，该变量表示该函数被调用的次数
 </span><span class="c1"></span><span class="p">}</span>
@@ -321,7 +321,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//下面两个函数可接受相同参数，故是相同函数，不可重载
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//下面两个函数可接受相同参数，故是相同函数，不可重载
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">fcn</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">i</span><span class="p">){}</span>
 <span class="kt">void</span> <span class="nf">fcn</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">){}</span> <span class="c1">//错，重复定义
 </span></code></pre></td></tr></table>
@@ -346,7 +346,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下3个函数等价，形参类型都是const int *
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//以下3个函数等价，形参类型都是const int *
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="p">);</span>
 <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="p">[]);</span>
 <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="p">[</span><span class="mi">10</span><span class="p">]);</span> <span class="c1">//数组大小传入时被丢弃
@@ -369,7 +369,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cp</span><span class="p">){}</span>                    <span class="c1">//C风格字符串
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cp</span><span class="p">){}</span>                    <span class="c1">//C风格字符串
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">beg</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">end</span><span class="p">){}</span>    <span class="c1">//一对迭代器
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">ia</span><span class="p">[],</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">){}</span>       <span class="c1">//传入大小
 </span></code></pre></td></tr></table>
@@ -387,7 +387,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">arr</span><span class="p">)[</span><span class="mi">10</span><span class="p">]){</span> <span class="c1">//形参是数组的引用，数组不转指针，实参大小也必须符合
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">arr</span><span class="p">)[</span><span class="mi">10</span><span class="p">]){</span> <span class="c1">//形参是数组的引用，数组不转指针，实参大小也必须符合
 </span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">elem</span><span class="p">:</span><span class="n">arr</span><span class="p">)</span>
         <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">elem</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
@@ -404,7 +404,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下两定义等价
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//以下两定义等价
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">matrix</span><span class="p">)[</span><span class="mi">10</span><span class="p">],</span> <span class="kt">int</span> <span class="n">rowSize</span><span class="p">){}</span>    <span class="c1">//指针形式传入二维数组
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="n">matrix</span><span class="p">[][</span><span class="mi">10</span><span class="p">],</span> <span class="kt">int</span> <span class="n">rowSize</span><span class="p">){}</span>     <span class="c1">//数组形式传入二维数组
 </span></code></pre></td></tr></table>
@@ -420,7 +420,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//main的两种定义方式
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//main的两种定义方式
 </span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">){}</span>
 </code></pre></td></tr></table>
@@ -469,7 +469,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">error_msg</span><span class="p">(</span><span class="n">ErrCode</span> <span class="n">e</span><span class="p">,</span> <span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">srting</span><span class="o">&gt;</span> <span class="n">il</span><span class="p">){</span>     <span class="c1">//定义传入initializer_list的函数
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">error_msg</span><span class="p">(</span><span class="n">ErrCode</span> <span class="n">e</span><span class="p">,</span> <span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">srting</span><span class="o">&gt;</span> <span class="n">il</span><span class="p">){</span>     <span class="c1">//定义传入initializer_list的函数
 </span><span class="c1"></span>    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">e</span><span class="p">.</span><span class="n">msg</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&#34;: &#34;</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">elem</span><span class="p">:</span><span class="n">il</span><span class="p">)</span>
         <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">elem</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="p">;</span>
@@ -512,7 +512,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="n">sz</span><span class="o">=</span><span class="n">shorterString</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">).</span><span class="n">size</span><span class="p">();</span> <span class="c1">//调用shorterString返回string对象，可立即取成员
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">sz</span><span class="o">=</span><span class="n">shorterString</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">).</span><span class="n">size</span><span class="p">();</span> <span class="c1">//调用shorterString返回string对象，可立即取成员
 </span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -533,7 +533,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">char</span> <span class="o">&amp;</span><span class="n">get_val</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">ix</span><span class="p">){</span>   <span class="c1">//返回char的引用
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="o">&amp;</span><span class="n">get_val</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">ix</span><span class="p">){</span>   <span class="c1">//返回char的引用
 </span><span class="c1"></span>    <span class="k">return</span> <span class="n">str</span><span class="p">[</span><span class="n">ix</span><span class="p">];</span>                                 <span class="c1">//假定索引有效，不做检查
 </span><span class="c1"></span><span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
@@ -558,7 +558,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">process</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">process</span><span class="p">(){</span>
     <span class="k">if</span><span class="p">(</span><span class="n">expected</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>        <span class="k">return</span> <span class="p">{};</span>                              <span class="c1">//返回vector被值初始化
 </span><span class="c1"></span>    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">expected</span><span class="o">==</span><span class="n">actual</span><span class="p">)</span>   <span class="k">return</span> <span class="p">{</span><span class="s">&#34;functionX&#34;</span><span class="p">,</span><span class="s">&#34;OK&#34;</span><span class="p">};</span>              <span class="c1">//返回vector被列表初始化
 </span><span class="c1"></span>    <span class="k">else</span>                        <span class="k">return</span> <span class="p">{</span><span class="s">&#34;functionX&#34;</span><span class="p">,</span><span class="n">expected</span><span class="p">,</span><span class="n">actual</span><span class="p">};</span>   <span class="c1">//返回vector被列表初始化
@@ -584,7 +584,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">typedef</span> <span class="kt">int</span> <span class="n">arrT</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>   <span class="c1">//arrT等价于长度为10的整型数组，不会转指针
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">int</span> <span class="n">arrT</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>   <span class="c1">//arrT等价于长度为10的整型数组，不会转指针
 </span><span class="c1"></span><span class="k">using</span> <span class="n">arrT</span><span class="o">=</span><span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>     <span class="c1">//等价于上一行，arrT等价于长度为10的整型数组，不会转指针
 </span><span class="c1"></span><span class="n">arrT</span> <span class="o">*</span><span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">);</span>      <span class="c1">//函数返回指向arrT的指针
 </span></code></pre></td></tr></table>
@@ -600,7 +600,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="p">)[</span><span class="mi">10</span><span class="p">];</span> <span class="c1">//尾置返回声明，函数返回一个指针，该指针指向大小为10的int数组
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="p">)[</span><span class="mi">10</span><span class="p">];</span> <span class="c1">//尾置返回声明，函数返回一个指针，该指针指向大小为10的int数组
 </span><span class="c1"></span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">))[</span><span class="mi">10</span><span class="p">];</span>         <span class="c1">//等价于上一行，是它对应的普通声明
 </span></code></pre></td></tr></table>
 </div>
@@ -617,7 +617,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">odd</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">};</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">odd</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">};</span>
 <span class="kt">int</span> <span class="n">even</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span>
 <span class="k">decltype</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="o">*</span><span class="n">arrPtr</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">){</span> <span class="c1">//推导返回类型为数组指针
 </span><span class="c1"></span>    <span class="k">return</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="o">&amp;</span><span class="n">odd</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="o">&amp;</span><span class="n">even</span><span class="p">);</span>
@@ -645,7 +645,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Record</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">Phone</span><span class="p">);</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Record</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">Phone</span><span class="p">);</span>
 <span class="n">Record</span> <span class="nf">lookup</span><span class="p">(</span><span class="k">const</span> <span class="n">Phone</span><span class="p">);</span>     <span class="c1">//顶层const，不可重载，重复声明
 </span><span class="c1"></span><span class="n">Record</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">Phone</span> <span class="o">*</span><span class="p">);</span>
 <span class="n">Record</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">Phone</span> <span class="o">*</span> <span class="k">const</span><span class="p">);</span>   <span class="c1">//顶层const，不可重载，重复声明
@@ -677,7 +677,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//返回两字符串的较短者，输入输出都是常量引用
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//返回两字符串的较短者，输入输出都是常量引用
 </span><span class="c1"></span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">shorterString</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s1</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s2</span><span class="p">){</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&lt;=</span><span class="n">s2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
 <span class="p">}</span>
@@ -723,7 +723,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="nf">screen</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="kt">char</span><span class="o">=</span><span class="sc">&#39; &#39;</span><span class="p">);</span>    <span class="c1">//第一条声明
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="nf">screen</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="kt">char</span><span class="o">=</span><span class="sc">&#39; &#39;</span><span class="p">);</span>    <span class="c1">//第一条声明
 </span><span class="c1"></span><span class="n">string</span> <span class="nf">screen</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="kt">char</span><span class="o">=</span><span class="sc">&#39;*&#39;</span><span class="p">);</span>    <span class="c1">//错，重复声明
 </span><span class="c1"></span><span class="n">string</span> <span class="nf">screen</span><span class="p">(</span><span class="n">sz</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">sz</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="kt">char</span><span class="p">);</span>  <span class="c1">//对，添加默认实参
 </span></code></pre></td></tr></table>
@@ -747,7 +747,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">sz</span> <span class="n">wd</span><span class="o">=</span><span class="mi">80</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">sz</span> <span class="n">wd</span><span class="o">=</span><span class="mi">80</span><span class="p">;</span>
 <span class="kt">char</span> <span class="n">def</span><span class="o">=</span><span class="sc">&#39; &#39;</span><span class="p">;</span>
 <span class="n">sz</span> <span class="nf">ht</span><span class="p">();</span>
 <span class="n">string</span> <span class="nf">screen</span><span class="p">(</span><span class="n">sz</span><span class="o">=</span><span class="n">ht</span><span class="p">(),</span> <span class="n">sz</span><span class="o">=</span><span class="n">wd</span><span class="p">,</span> <span class="kt">char</span><span class="o">=</span><span class="n">def</span><span class="p">);</span> <span class="c1">//声明函数，带有默认实参
@@ -780,7 +780,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">constexpr</span> <span class="kt">int</span> <span class="nf">new_sz</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="mi">42</span><span class="p">;}</span>                         <span class="c1">//返回常量表达式
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">constexpr</span> <span class="kt">int</span> <span class="nf">new_sz</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="mi">42</span><span class="p">;}</span>                         <span class="c1">//返回常量表达式
 </span><span class="c1"></span><span class="k">constexpr</span> <span class="n">size_t</span> <span class="nf">scale</span><span class="p">(</span><span class="n">size_t</span> <span class="n">cnt</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">new_sz</span><span class="p">()</span><span class="o">*</span><span class="n">cnt</span><span class="p">;}</span>   <span class="c1">//形参非常量，返回值非常量
 </span><span class="c1"></span><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">)];</span>  <span class="c1">//对，scale输入常量表达式时输出即是常量表达式
 </span><span class="c1"></span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
@@ -824,7 +824,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">ia</span><span class="p">[],</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">ia</span><span class="p">[],</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">){</span>
 <span class="cp">#ifndef NDEBUG  </span><span class="c1">//只有调试状态才执行中间的代码
 </span><span class="c1"></span>    <span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="n">__func__</span><span class="o">&lt;&lt;</span><span class="s">&#34;: array size is &#34;</span><span class="o">&lt;&lt;</span><span class="n">size</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 <span class="cp">#endif
@@ -867,7 +867,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">f</span><span class="p">();</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">f</span><span class="p">();</span>
 <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
 <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>
 <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span><span class="kt">double</span><span class="o">=</span><span class="mf">3.14</span><span class="p">);</span>
@@ -913,7 +913,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//整型提升
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//整型提升
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">ff</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
 <span class="kt">void</span> <span class="nf">ff</span><span class="p">(</span><span class="kt">short</span><span class="p">);</span>
 <span class="n">ff</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">);</span>        <span class="c1">//char提升为int，调用(int)
@@ -950,7 +950,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">bool</span> <span class="nf">lengthCompare</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span> <span class="c1">//类型是：bool(const string &amp;, const string &amp;)
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">lengthCompare</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span> <span class="c1">//类型是：bool(const string &amp;, const string &amp;)
 </span><span class="c1"></span><span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">pf</span><span class="p">)(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span>         <span class="c1">//声明对应类型的函数指针，未初始化
 </span><span class="c1"></span><span class="n">pf</span><span class="o">=&amp;</span><span class="n">lengthCompare</span><span class="p">;</span>              <span class="c1">//初始化函数指针
 </span><span class="c1"></span><span class="n">pf</span><span class="o">=</span><span class="n">lengthCompare</span><span class="p">;</span>               <span class="c1">//等价于上一句。因为函数名转为指针，故取地址符是可选的
@@ -975,7 +975,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">ff</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">);</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">ff</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">);</span>
 <span class="kt">void</span> <span class="nf">ff</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">);</span>
 <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf1</span><span class="p">)(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="o">=</span><span class="n">ff</span><span class="p">;</span>   <span class="c1">//精确匹配到ff(unsigned int)
 </span><span class="c1"></span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf2</span><span class="p">)(</span><span class="kt">int</span><span class="p">)</span><span class="o">=</span><span class="n">ff</span><span class="p">;</span>            <span class="c1">//错，无精确匹配
@@ -1007,7 +1007,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//类型是：bool(const string &amp;, const string &amp;)
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//类型是：bool(const string &amp;, const string &amp;)
 </span><span class="c1"></span><span class="kt">bool</span> <span class="nf">lengthCompare</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span>
 <span class="c1">//以下两行等价，形参中的函数类型会自动转为指针
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">useBigger</span><span class="p">(</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s1</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s2</span><span class="p">,</span> 
@@ -1050,7 +1050,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">using</span> <span class="n">F</span><span class="o">=</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>              <span class="c1">//是函数类型
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">using</span> <span class="n">F</span><span class="o">=</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>              <span class="c1">//是函数类型
 </span><span class="c1"></span><span class="k">using</span> <span class="n">PF</span><span class="o">=</span><span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>          <span class="c1">//是函数指针类型
 </span><span class="c1"></span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f1</span><span class="p">(</span><span class="kt">int</span><span class="p">))(</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>           <span class="c1">//直接声明
 </span><span class="c1"></span><span class="n">PF</span> <span class="nf">f1</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>                         <span class="c1">//返回指向函数的指针，等价于上一行
@@ -1070,7 +1070,7 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">sumLength</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">sumLength</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span>
 <span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">largerLength</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span>
 <span class="k">decltype</span><span class="p">(</span><span class="n">sumLength</span><span class="p">)</span> <span class="o">*</span><span class="n">getFcn</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span> <span class="c1">//返回指向上面两函数之一的指针
 </span></code></pre></td></tr></table>

@@ -263,7 +263,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//创建对象并返回智能指针
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//创建对象并返回智能指针
 </span><span class="c1"></span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="n">factory</span><span class="p">(</span><span class="n">T</span> <span class="n">arg</span><span class="p">){</span>
     <span class="k">return</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>   <span class="c1">//创建时计数为1，传出拷贝+1，离开作用域-1
 </span><span class="c1"></span><span class="p">}</span>
@@ -353,7 +353,7 @@
 </span><span class="lnt">57
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//定义StrBlob类
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义StrBlob类
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">StrBlob</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//定义类型
@@ -452,7 +452,7 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//默认初始化
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//默认初始化
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">*</span><span class="n">pi</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">;</span>                            <span class="c1">//未定义
 </span><span class="c1"></span><span class="n">string</span> <span class="o">*</span><span class="n">ps</span><span class="o">=</span><span class="k">new</span> <span class="n">string</span><span class="p">;</span>                      <span class="c1">//默认初始化为空字符串
 </span><span class="c1">//直接初始化
@@ -481,7 +481,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="o">*</span><span class="n">p1</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">;</span>            <span class="c1">//若分配失败则抛出bad_alloc异常
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="o">*</span><span class="n">p1</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">;</span>            <span class="c1">//若分配失败则抛出bad_alloc异常
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">*</span><span class="n">p2</span><span class="o">=</span><span class="k">new</span><span class="p">(</span><span class="n">nothrow</span><span class="p">)</span> <span class="kt">int</span><span class="p">;</span>   <span class="c1">//若分配失败则返回空指针
 </span></code></pre></td></tr></table>
 </div>
@@ -507,7 +507,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Foo</span> <span class="o">*</span><span class="nf">factory</span><span class="p">(</span><span class="n">T</span> <span class="n">arg</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Foo</span> <span class="o">*</span><span class="nf">factory</span><span class="p">(</span><span class="n">T</span> <span class="n">arg</span><span class="p">){</span>
     <span class="k">return</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>    <span class="c1">//返回动态对象的指针，调用者负责释放它
 </span><span class="c1"></span><span class="p">}</span>
 <span class="kt">void</span> <span class="nf">use_factory</span><span class="p">(</span><span class="n">T</span> <span class="n">arg</span><span class="p">){</span>
@@ -537,7 +537,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="o">*</span><span class="nf">p</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>    <span class="c1">//分配动态内存
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="o">*</span><span class="nf">p</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>    <span class="c1">//分配动态内存
 </span><span class="c1"></span><span class="k">auto</span> <span class="n">q</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>               <span class="c1">//两个指针同时指向动态对象
 </span><span class="c1"></span><span class="k">delete</span> <span class="n">p</span><span class="p">;</span>               <span class="c1">//释放对象
 </span><span class="c1"></span><span class="n">p</span><span class="o">=</span><span class="k">nullptr</span><span class="p">;</span>              <span class="c1">//将构造动态对象时的指针置为nullptr，但其他指针变为空悬
@@ -563,7 +563,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>       <span class="c1">//错，不可隐式转换
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>       <span class="c1">//错，不可隐式转换
 </span><span class="c1"></span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p2</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">1024</span><span class="p">));</span>      <span class="c1">//对，可以直接构造
 </span><span class="c1"></span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">clone</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nf">int</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>                  <span class="c1">//错，不可隐式转换
@@ -595,7 +595,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">process</span><span class="p">(</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ptr</span><span class="p">){</span>  <span class="c1">//传入时copy，计数+1
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">process</span><span class="p">(</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ptr</span><span class="p">){</span>  <span class="c1">//传入时copy，计数+1
 </span><span class="c1"></span>    <span class="cm">/* 使用ptr */</span>
 <span class="p">}</span>                                   <span class="c1">//离开作用域，计数-1
 </span><span class="c1">//以下为正确用法：
@@ -631,7 +631,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="n">p</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>         <span class="c1">//取底层的内置指针
 </span><span class="c1"></span><span class="p">{</span>
     <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">q</span><span class="p">);</span> <span class="c1">//产生两个互相独立的shared_ptr，进行互相独立的引用计数
@@ -651,7 +651,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">.</span><span class="n">unique</span><span class="p">())</span>                 <span class="c1">//若p不是唯一指向该对象的shared_ptr
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">.</span><span class="n">unique</span><span class="p">())</span>                 <span class="c1">//若p不是唯一指向该对象的shared_ptr
 </span><span class="c1"></span>    <span class="n">p</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">string</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">));</span>    <span class="c1">//将对象拷贝一份，并用p管理这个拷贝
 </span><span class="c1"></span><span class="o">*</span><span class="n">p</span><span class="o">+=</span><span class="n">newVal</span><span class="p">;</span>
 </code></pre></td></tr></table>
@@ -673,7 +673,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">f</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">f</span><span class="p">(){</span>
     <span class="kt">int</span> <span class="o">*</span><span class="n">ip</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>    <span class="c1">//分配资源
 </span><span class="c1"></span>    <span class="cm">/* 这里抛出异常 */</span>
     <span class="k">delete</span> <span class="n">ip</span><span class="p">;</span>              <span class="c1">//函数未正常结束，delete不会被执行
@@ -708,7 +708,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下是C/C++兼容的网络库
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//以下是C/C++兼容的网络库
 </span><span class="c1"></span><span class="k">struct</span> <span class="nc">destination</span><span class="p">;</span>
 <span class="k">struct</span> <span class="nc">connection</span><span class="p">;</span>
 <span class="n">connection</span> <span class="nf">connect</span><span class="p">(</span><span class="n">destination</span> <span class="o">*</span><span class="p">);</span>
@@ -756,7 +756,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">(</span><span class="k">new</span> <span class="n">string</span><span class="p">(</span><span class="s">&#34;Stegosaurus&#34;</span><span class="p">));</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">(</span><span class="k">new</span> <span class="n">string</span><span class="p">(</span><span class="s">&#34;Stegosaurus&#34;</span><span class="p">));</span>
 <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p2</span><span class="p">(</span><span class="n">p1</span><span class="p">);</span>  <span class="c1">//错，不可拷贝
 </span><span class="c1"></span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p3</span><span class="p">;</span>
 <span class="n">p3</span><span class="o">=</span><span class="n">p1</span><span class="p">;</span>                      <span class="c1">//错，不可赋值
@@ -779,7 +779,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">(</span><span class="k">new</span> <span class="n">string</span><span class="p">(</span><span class="s">&#34;Stegosaurus&#34;</span><span class="p">));</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">(</span><span class="k">new</span> <span class="n">string</span><span class="p">(</span><span class="s">&#34;Stegosaurus&#34;</span><span class="p">));</span>
 <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p2</span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="n">release</span><span class="p">());</span>    <span class="c1">//将p1置空并将底层的内置指针交给p2管理
 </span><span class="c1"></span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p3</span><span class="p">(</span><span class="k">new</span> <span class="n">string</span><span class="p">(</span><span class="s">&#34;Trex&#34;</span><span class="p">));</span>
 <span class="n">p2</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="n">p3</span><span class="p">.</span><span class="n">release</span><span class="p">());</span>                 <span class="c1">//释放p2管理的对象，将p3置空并将底层的内置指针交给p2管理
@@ -802,7 +802,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//从函数中返回unique_ptr
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//从函数中返回unique_ptr
 </span><span class="c1"></span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">clone</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
     <span class="k">return</span> <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
 <span class="p">}</span>
@@ -836,7 +836,7 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下是C/C++兼容的网络库
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//以下是C/C++兼容的网络库
 </span><span class="c1"></span><span class="k">struct</span> <span class="nc">destination</span><span class="p">;</span>
 <span class="k">struct</span> <span class="nc">connection</span><span class="p">;</span>
 <span class="n">connection</span> <span class="nf">connect</span><span class="p">(</span><span class="n">destination</span> <span class="o">*</span><span class="p">);</span>
@@ -932,7 +932,7 @@
 </span><span class="lnt">67
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/* 上下文：前面例子中的StrBlob */</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 上下文：前面例子中的StrBlob */</span>
 <span class="k">class</span> <span class="nc">StrBlobPtr</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">StrBlobPtr</span><span class="p">()</span><span class="o">:</span><span class="n">curr</span><span class="p">(</span><span class="mi">0</span><span class="p">){}</span>
@@ -1026,7 +1026,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="o">*</span><span class="n">pia</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>   <span class="c1">//分配动态数组
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="o">*</span><span class="n">pia</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>   <span class="c1">//分配动态数组
 </span><span class="c1"></span><span class="k">typedef</span> <span class="kt">int</span> <span class="n">arrT</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="k">new</span> <span class="n">arrT</span><span class="p">;</span>        <span class="c1">//用数组的类型别名来分配
 </span></code></pre></td></tr></table>
@@ -1056,7 +1056,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//默认初始化
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//默认初始化
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">*</span><span class="n">pia</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 <span class="n">string</span> <span class="o">*</span><span class="n">psa</span><span class="o">=</span><span class="k">new</span> <span class="n">string</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 <span class="c1">//列表初始化
@@ -1082,7 +1082,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">typedef</span> <span class="kt">int</span> <span class="n">arrT</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">int</span> <span class="n">arrT</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="k">new</span> <span class="n">arrT</span><span class="p">;</span>
 <span class="k">delete</span> <span class="p">[]</span><span class="n">p</span><span class="p">;</span>
 </code></pre></td></tr></table>
@@ -1099,7 +1099,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span> <span class="p">[]</span><span class="o">&gt;</span> <span class="n">up</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span> <span class="c1">//在模板参数中指定为动态数组。由于是指针而不是数组，故不写大小
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span> <span class="p">[]</span><span class="o">&gt;</span> <span class="n">up</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span> <span class="c1">//在模板参数中指定为动态数组。由于是指针而不是数组，故不写大小
 </span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">!=</span><span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>                        <span class="c1">//下标访问unique_ptr管理的动态数组
 </span><span class="c1"></span><span class="n">up</span><span class="p">.</span><span class="n">release</span><span class="p">();</span>                       <span class="c1">//自动调用delete []
@@ -1123,7 +1123,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sp</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
                    <span class="p">[](</span><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">){</span><span class="k">delete</span> <span class="p">[]</span><span class="n">p</span><span class="p">;});</span>    <span class="c1">//自定义lambda，使用delete []来释放
 </span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">!=</span><span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
     <span class="o">*</span><span class="p">(</span><span class="n">sp</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="o">+</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>                            <span class="c1">//使用get得到内置指针来访问元素
@@ -1170,7 +1170,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">allocator</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">alloc</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">allocator</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">alloc</span><span class="p">;</span>
 <span class="k">auto</span> <span class="k">const</span> <span class="n">p</span><span class="o">=</span><span class="n">alloc</span><span class="p">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">//分配n个string的内存，返回首指针
 </span><span class="c1"></span><span class="k">auto</span> <span class="n">q</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>                       <span class="c1">//指向分配区域的起始
 </span><span class="c1"></span><span class="n">alloc</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">q</span><span class="o">++</span><span class="p">);</span>           <span class="c1">//构造空字符串，指针推进
@@ -1199,7 +1199,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">allocator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">alloc</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">allocator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">alloc</span><span class="p">;</span>
 <span class="k">auto</span> <span class="n">p</span><span class="o">=</span><span class="n">alloc</span><span class="p">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">vi</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>                 <span class="c1">//分配vi长度两倍的内存
 </span><span class="c1"></span><span class="k">auto</span> <span class="n">q</span><span class="o">=</span><span class="n">uninitialized_copy</span><span class="p">(</span><span class="n">vi</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">vi</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">p</span><span class="p">);</span>   <span class="c1">//将vi拷贝进分配的内存，返回已拷贝区域的尾后迭代器
 </span><span class="c1"></span><span class="n">uninitialized_fill_n</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">vi</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="mi">42</span><span class="p">);</span>               <span class="c1">//剩下的内存初始化未42；
@@ -1245,7 +1245,7 @@ element occurs 112 times:
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">runQueries</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="o">&amp;</span><span class="n">infile</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">runQueries</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="o">&amp;</span><span class="n">infile</span><span class="p">){</span>
     <span class="n">TextQuery</span> <span class="n">tq</span><span class="p">(</span><span class="n">infile</span><span class="p">);</span>                           <span class="c1">//构造查询的类
 </span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">){</span>
         <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;enter word to look for, or q to quit: &#34;</span><span class="p">;</span>
@@ -1301,7 +1301,7 @@ element occurs 112 times:
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">QueryResult</span><span class="p">;</span> <span class="c1">//前向声明
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">QueryResult</span><span class="p">;</span> <span class="c1">//前向声明
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">TextQuery</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//定义行号类型
@@ -1364,7 +1364,7 @@ element occurs 112 times:
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">QueryResult</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">QueryResult</span><span class="p">{</span>
 <span class="c1">//通过友元函数实现接口
 </span><span class="c1"></span><span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="p">,</span><span class="k">const</span> <span class="n">QueryResult</span> <span class="o">&amp;</span><span class="p">);</span>
 <span class="k">public</span><span class="o">:</span>
@@ -1401,7 +1401,7 @@ element occurs 112 times:
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">QueryResult</span> <span class="n">TextQuery</span><span class="o">::</span><span class="n">query</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sought</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">QueryResult</span> <span class="n">TextQuery</span><span class="o">::</span><span class="n">query</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sought</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>
     <span class="c1">//未找到给定单词时返回的空集合。由于只需要一个这样的集合，声明为static避免每次未找到都分配空间
 </span><span class="c1"></span>    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">line_no</span><span class="o">&gt;&gt;</span> <span class="n">nodata</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">line_no</span><span class="o">&gt;</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">loc</span><span class="o">=</span><span class="n">wm</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">sought</span><span class="p">);</span>
@@ -1429,7 +1429,7 @@ element occurs 112 times:
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">,</span><span class="k">const</span> <span class="n">QueryResult</span> <span class="o">&amp;</span><span class="n">qr</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">,</span><span class="k">const</span> <span class="n">QueryResult</span> <span class="o">&amp;</span><span class="n">qr</span><span class="p">){</span>
     <span class="n">os</span><span class="o">&lt;&lt;</span><span class="n">qr</span><span class="p">.</span><span class="n">sought</span><span class="o">&lt;&lt;</span><span class="s">&#34; occurs &#34;</span><span class="o">&lt;&lt;</span><span class="n">qr</span><span class="p">.</span><span class="n">lines</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span>
       <span class="o">&lt;&lt;</span><span class="p">((</span><span class="n">qr</span><span class="p">.</span><span class="n">lines</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="s">&#34; times&#34;</span><span class="o">:</span><span class="s">&#34; time&#34;</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">num</span><span class="p">:</span><span class="o">*</span><span class="n">qr</span><span class="p">.</span><span class="n">lines</span><span class="p">)</span>
@@ -1459,7 +1459,7 @@ element occurs 112 times:
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//文件名：TextQuery.hpp
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//文件名：TextQuery.hpp
 </span><span class="c1"></span><span class="cp">#ifndef __TEXTQUERY_HPP__
 </span><span class="cp">#define __TEXTQUERY_HPP__
 </span><span class="cp">#include</span><span class="cpf">&lt;string&gt;</span><span class="cp">

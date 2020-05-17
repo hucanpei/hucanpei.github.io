@@ -208,7 +208,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span>
     <span class="n">statement</span>
 <span class="k">else</span>
     <span class="n">statement2</span>
@@ -234,7 +234,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">switch</span><span class="p">(</span><span class="n">statement</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">switch</span><span class="p">(</span><span class="n">statement</span><span class="p">){</span>
     <span class="k">case</span> <span class="nl">value1</span><span class="p">:</span>
         <span class="n">statement1</span>
     <span class="k">case</span> <span class="nl">value2</span><span class="p">:</span>
@@ -259,7 +259,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">switch</span><span class="p">(</span><span class="n">ch</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">switch</span><span class="p">(</span><span class="n">ch</span><span class="p">){</span>
     <span class="k">case</span> <span class="sc">&#39;a&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;e&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;i&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;o&#39;</span><span class="o">:</span> <span class="k">case</span> <span class="sc">&#39;u&#39;</span><span class="o">:</span>
         <span class="o">++</span><span class="n">vowelCnt</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
@@ -284,7 +284,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//程序的流程可能绕开初始化，故该switch语句不合法。
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//程序的流程可能绕开初始化，故该switch语句不合法。
 </span><span class="c1"></span><span class="k">case</span> <span class="nb">true</span><span class="o">:</span>
     <span class="n">string</span> <span class="n">file_name</span><span class="p">;</span>       <span class="c1">//错，控制流绕过隐式初始化的变量
 </span><span class="c1"></span>    <span class="kt">int</span> <span class="n">ival</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>             <span class="c1">//错，控制流绕过显式初始化的变量
@@ -313,7 +313,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">while</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">while</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
     <span class="n">statement</span>
 </code></pre></td></tr></table>
 </div>
@@ -327,7 +327,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="n">init</span><span class="o">-</span><span class="n">statement</span><span class="p">;</span> <span class="n">condition</span><span class="p">;</span> <span class="n">expression</span><span class="p">)</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">for</span><span class="p">(</span><span class="n">init</span><span class="o">-</span><span class="n">statement</span><span class="p">;</span> <span class="n">condition</span><span class="p">;</span> <span class="n">expression</span><span class="p">)</span>
     <span class="n">statement</span>
 </code></pre></td></tr></table>
 </div>
@@ -345,7 +345,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="nl">declaration</span><span class="p">:</span> <span class="n">expression</span><span class="p">)</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">for</span><span class="p">(</span><span class="nl">declaration</span><span class="p">:</span> <span class="n">expression</span><span class="p">)</span>
     <span class="n">statement</span>
 </code></pre></td></tr></table>
 </div>
@@ -369,7 +369,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">};</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">};</span>
 <span class="c1">//范围for
 </span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">r</span><span class="p">:</span><span class="n">v</span><span class="p">)</span>
     <span class="n">r</span><span class="o">*=</span><span class="mi">2</span><span class="p">;</span>
@@ -388,7 +388,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">do</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">do</span>
     <span class="n">statement</span>
 <span class="nf">while</span><span class="p">(</span><span class="n">condition</span><span class="p">);</span>
 </code></pre></td></tr></table>
@@ -447,7 +447,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">try</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">try</span><span class="p">{</span>
     <span class="n">program</span><span class="o">-</span><span class="n">statements</span>
 <span class="p">}</span>
 <span class="k">catch</span><span class="p">(</span><span class="n">exception</span><span class="o">-</span><span class="n">declaration</span><span class="p">){</span>
@@ -485,7 +485,7 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">item1</span><span class="o">&gt;&gt;</span><span class="n">item2</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">item1</span><span class="o">&gt;&gt;</span><span class="n">item2</span><span class="p">){</span>
     <span class="k">try</span><span class="p">{</span>
         <span class="k">if</span><span class="p">(</span><span class="n">item1</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">!=</span> <span class="n">item2</span><span class="p">.</span><span class="n">isbn</span><span class="p">())</span>
             <span class="k">throw</span> <span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;Data must refer to same ISBN&#34;</span><span class="p">);</span> <span class="c1">//抛出runtime_error类型异常

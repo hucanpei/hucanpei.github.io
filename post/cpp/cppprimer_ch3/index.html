@@ -209,7 +209,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">s1</span><span class="p">;</span>          <span class="c1">//默认初始化，为空字符串
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">s1</span><span class="p">;</span>          <span class="c1">//默认初始化，为空字符串
 </span><span class="c1"></span><span class="n">string</span> <span class="nf">s2</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>      <span class="c1">//直接初始化，s2是s1的副本
 </span><span class="c1"></span><span class="n">string</span> <span class="n">s2</span><span class="o">=</span><span class="n">s1</span><span class="p">;</span>       <span class="c1">//拷贝初始化，s2是s1的副本，等价于上一行
 </span><span class="c1"></span><span class="n">string</span> <span class="nf">s3</span><span class="p">(</span><span class="s">&#34;hiya&#34;</span><span class="p">);</span>  <span class="c1">//直接初始化，初始化为字面值常量
@@ -255,7 +255,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="nf">s</span><span class="p">(</span><span class="s">&#34;hello,world!&#34;</span><span class="p">);</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="nf">s</span><span class="p">(</span><span class="s">&#34;hello,world!&#34;</span><span class="p">);</span>
 <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">c</span><span class="p">:</span><span class="n">s</span><span class="p">)</span>  <span class="c1">//要改变序列中的元素，必须声明为引用类型
 </span><span class="c1"></span>    <span class="n">c</span><span class="o">=</span><span class="n">toupper</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
 <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">s</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
@@ -274,7 +274,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span><span class="p">(</span><span class="k">decltype</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>             <span class="c1">//用decltype推出string::size_type类型
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">for</span><span class="p">(</span><span class="k">decltype</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>             <span class="c1">//用decltype推出string::size_type类型
 </span><span class="c1"></span>    <span class="n">index</span><span class="o">!=</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isspace</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>  <span class="c1">//逻辑与，只有左侧为真时才检查右侧。故能保证下标合理时才访问
 </span><span class="c1"></span>    <span class="o">++</span><span class="n">index</span><span class="p">)</span>
 <span class="p">{</span><span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">=</span><span class="n">toupper</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]);}</span>
@@ -297,7 +297,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ivec</span><span class="p">;</span>               <span class="c1">//元素是int型对象
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ivec</span><span class="p">;</span>               <span class="c1">//元素是int型对象
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sales_item</span><span class="o">&gt;</span> <span class="n">Sales_vec</span><span class="p">;</span>   <span class="c1">//元素是Sales_item类型的对象
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">file</span><span class="p">;</span>    <span class="c1">//元素是vector&lt;string&gt;类型的对象
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">file</span><span class="p">;</span>   <span class="c1">//C++11之前的写法，元素是vector&lt;string&gt;类型的对象
@@ -325,7 +325,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>         <span class="c1">//有10个元素，都是0
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>         <span class="c1">//有10个元素，都是0
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v2</span><span class="p">{</span><span class="mi">10</span><span class="p">};</span>         <span class="c1">//有1个元素，值是10
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v3</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>       <span class="c1">//有10个元素，都是1
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v4</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>       <span class="c1">//有2个元素，分别是10和1
@@ -402,7 +402,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">char</span> <span class="n">a1</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span><span class="sc">&#39;+&#39;</span><span class="p">,</span><span class="sc">&#39;+&#39;</span><span class="p">};</span>        <span class="c1">//列表初始化，无空字符
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">char</span> <span class="n">a1</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span><span class="sc">&#39;+&#39;</span><span class="p">,</span><span class="sc">&#39;+&#39;</span><span class="p">};</span>        <span class="c1">//列表初始化，无空字符
 </span><span class="c1"></span><span class="kt">char</span> <span class="n">a1</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span><span class="sc">&#39;+&#39;</span><span class="p">,</span><span class="sc">&#39;+&#39;</span><span class="p">,</span><span class="sc">&#39;\0&#39;</span><span class="p">};</span>   <span class="c1">//列表初始化，有空字符
 </span><span class="c1"></span><span class="kt">char</span> <span class="n">a3</span><span class="p">[]</span><span class="o">=</span><span class="s">&#34;C++&#34;</span><span class="p">;</span>                <span class="c1">//字符串字面值初始化，有空字符
 </span><span class="c1"></span><span class="k">const</span> <span class="kt">char</span> <span class="n">a4</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="s">&#34;Daniel&#34;</span><span class="p">;</span>      <span class="c1">//错，没有空间放空字符了
@@ -423,7 +423,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 <span class="kt">int</span> <span class="o">*</span><span class="n">ptrs</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>          <span class="c1">//指针的数组。是长度为10的数组，元素是指针，指向int型
 </span><span class="c1"></span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">refs</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">=</span><span class="cm">/*?*/</span>     <span class="c1">//错，引用不是对象，不存在引用的数组
 </span><span class="c1"></span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">Parray</span><span class="p">)[</span><span class="mi">10</span><span class="p">]</span><span class="o">=&amp;</span><span class="n">arr</span><span class="p">;</span> <span class="c1">//数组的指针。是指针，指向长度为10的数组，元素是int型
@@ -477,7 +477,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">int_arr</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">int_arr</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ivec</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">int_arr</span><span class="p">),</span><span class="n">end</span><span class="p">(</span><span class="n">int_arr</span><span class="p">));</span> <span class="c1">//用数组的一对迭代器初始化vector对象
 </span></code></pre></td></tr></table>
 </div>
@@ -499,7 +499,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="n">ia</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">};</span> <span class="c1">//ia是3元素数组，每个元素是4元素数组，ia三行四列。将前两行初始化，第三行默认初始化
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">ia</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">};</span> <span class="c1">//ia是3元素数组，每个元素是4元素数组，ia三行四列。将前两行初始化，第三行默认初始化
 </span><span class="c1"></span><span class="kt">int</span> <span class="n">ib</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="p">{{</span><span class="mi">0</span><span class="p">},{</span><span class="mi">4</span><span class="p">},{</span><span class="mi">8</span><span class="p">}};</span>     <span class="c1">//ib是3元素数组，每个元素是4元素数组，ia三行四列。将第一列初始化，其余元素默认初始化
 </span><span class="c1"></span><span class="kt">int</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">row</span><span class="p">)[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="n">ia</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="c1">//row是引用，引用一个4元素数组，其元素类型为int，被初始化为ia的第二行
 </span></code></pre></td></tr></table>
@@ -527,7 +527,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">// 修改元素
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// 修改元素
 </span><span class="c1"></span><span class="n">size_t</span> <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">row</span><span class="p">:</span><span class="n">ia</span><span class="p">){</span>      <span class="c1">//遍历行，外层循环声明为引用的原因是避免数组被auto为指针
 </span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">col</span><span class="p">:</span><span class="n">row</span><span class="p">){</span> <span class="c1">//遍历列，内层循环声明为引用的原因是要修改元素

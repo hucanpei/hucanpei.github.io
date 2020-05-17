@@ -209,7 +209,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>          <span class="c1">//默认初始化字典
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>          <span class="c1">//默认初始化字典
 </span><span class="c1"></span><span class="n">string</span> <span class="n">word</span><span class="p">;</span>
 <span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">word</span><span class="p">)</span>
     <span class="o">++</span><span class="n">word_count</span><span class="p">[</span><span class="n">word</span><span class="p">];</span>                 <span class="c1">//关键字存在则递增其值，关键字不存在则初始化其值为0后递增
@@ -234,7 +234,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>              <span class="c1">//默认初始化字典
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>              <span class="c1">//默认初始化字典
 </span><span class="c1"></span><span class="n">set</span><span class="o">&lt;</span><span class="n">stirng</span><span class="o">&gt;</span> <span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s">&#34;The&#34;</span><span class="p">,</span><span class="s">&#34;But&#34;</span><span class="p">,</span><span class="s">&#34;And&#34;</span><span class="p">};</span>    <span class="c1">//列表初始化集合
 </span><span class="c1"></span><span class="n">string</span> <span class="n">word</span><span class="p">;</span>
 <span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">word</span><span class="p">)</span>
@@ -291,7 +291,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//定义严格弱序
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义严格弱序
 </span><span class="c1"></span><span class="kt">bool</span> <span class="nf">compareIsbn</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span>
     <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span><span class="o">&lt;</span><span class="n">rhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">();</span>
 <span class="p">}</span>
@@ -321,7 +321,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">process</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">process</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">v</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">(),</span><span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">size</span><span class="p">()};</span>  <span class="c1">//列表初始化返回值
 </span><span class="c1"></span>    <span class="k">else</span>
@@ -383,7 +383,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">word_count</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="n">word</span><span class="p">,</span><span class="mi">1</span><span class="p">});</span>                                <span class="c1">//花括号列表转为initializer_list
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">word_count</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="n">word</span><span class="p">,</span><span class="mi">1</span><span class="p">});</span>                                <span class="c1">//花括号列表转为initializer_list
 </span><span class="c1"></span><span class="n">word_count</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>                       <span class="c1">//make_pair函数生成pair
 </span><span class="c1"></span><span class="n">word_count</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>             <span class="c1">//显式构造pair
 </span><span class="c1"></span><span class="n">word_count</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>  <span class="c1">//显式构造value_type
@@ -412,7 +412,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>
 <span class="n">string</span> <span class="n">word</span><span class="p">;</span>
 <span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">word</span><span class="p">){</span>
     <span class="c1">//ret的类型是pair&lt;map&lt;string,size_t&gt;::iterator,bool&gt;
@@ -453,7 +453,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>
 <span class="n">word_count</span><span class="p">[</span><span class="s">&#34;Anna&#34;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
 <span class="cm">/*上一行的操作步骤：
 </span><span class="cm"> *1、容器中搜索关键字&#34;Anna&#34;，未找到
@@ -514,7 +514,7 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">multimap</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">authors</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">multimap</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">authors</span><span class="p">;</span>
 <span class="n">authors</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="s">&#34;Barth, John&#34;</span><span class="p">,</span><span class="s">&#34;Sot-Weed Factor&#34;</span><span class="p">});</span>
 <span class="n">authors</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="s">&#34;Barth, John&#34;</span><span class="p">,</span><span class="s">&#34;Lost in the Funhouse&#34;</span><span class="p">});</span>
 <span class="n">string</span> <span class="nf">search_item</span><span class="p">(</span><span class="s">&#34;Alain de Botton&#34;</span><span class="p">);</span>
@@ -596,7 +596,7 @@ okay? thanks! later</li>
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//读取对照表，存为字典
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//读取对照表，存为字典
 </span><span class="c1"></span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">buildMap</span><span class="p">(</span><span class="n">ifstream</span> <span class="o">&amp;</span><span class="n">map_file</span><span class="p">){</span>
     <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">trans_map</span><span class="p">;</span>
     <span class="n">string</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">;</span>
@@ -669,7 +669,7 @@ okay? thanks! later</li>
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//定义哈希函数
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义哈希函数
 </span><span class="c1"></span><span class="n">size_t</span> <span class="nf">hasher</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">sd</span><span class="p">){</span>
     <span class="k">return</span> <span class="n">hash</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()(</span><span class="n">sd</span><span class="p">.</span><span class="n">isbn</span><span class="p">());</span> <span class="c1">//用一个成员的哈希作为该类的哈希
 </span><span class="c1"></span><span class="p">}</span>

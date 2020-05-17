@@ -206,7 +206,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//对于非成员函数算符，下两行等价
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//对于非成员函数算符，下两行等价
 </span><span class="c1"></span><span class="n">data1</span><span class="o">+</span><span class="n">data2</span><span class="p">;</span>
 <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span><span class="n">data2</span><span class="p">);</span>
 <span class="c1">//对于成员函数算符，下两行等价
@@ -249,7 +249,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">s</span><span class="o">=</span><span class="s">&#34;world&#34;</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">s</span><span class="o">=</span><span class="s">&#34;world&#34;</span><span class="p">;</span>
 <span class="n">string</span> <span class="n">t</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="s">&#34;!&#34;</span><span class="p">;</span>     <span class="c1">//对，左侧是string对象
 </span><span class="c1"></span><span class="n">string</span> <span class="n">u</span><span class="o">=</span><span class="s">&#34;hi&#34;</span><span class="o">+</span><span class="n">s</span><span class="p">;</span>    <span class="c1">//若operator+是string的成员函数且未定义非成员版本，则错
 </span></code></pre></td></tr></table>
@@ -281,7 +281,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//第一个参数是非常量ostream对象的引用，第二个参数一般是常量引用，返回值是它的ostream形参的引用
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//第一个参数是非常量ostream对象的引用，第二个参数一般是常量引用，返回值是它的ostream形参的引用
 </span><span class="c1"></span><span class="n">ostream</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="p">,</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">){</span>
     <span class="n">os</span><span class="o">&lt;&lt;</span><span class="n">item</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="n">item</span><span class="p">.</span><span class="n">units_sold</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span>
       <span class="o">&lt;&lt;</span><span class="n">item</span><span class="p">.</span><span class="n">revenue</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="n">item</span><span class="p">.</span><span class="n">avg_price</span><span class="p">();</span>
@@ -323,7 +323,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//第一个参数是要读取的istream的引用，第二个参数是将读入的非常量对象的引用，返回值是它的istream形参的引用
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//第一个参数是要读取的istream的引用，第二个参数是将读入的非常量对象的引用，返回值是它的istream形参的引用
 </span><span class="c1"></span><span class="n">istream</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">,</span><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">){</span>
     <span class="kt">double</span> <span class="n">price</span><span class="p">;</span>
     <span class="n">is</span><span class="o">&gt;&gt;</span><span class="n">item</span><span class="p">.</span><span class="n">bookNo</span><span class="o">&gt;&gt;</span><span class="n">item</span><span class="p">.</span><span class="n">units_sold</span><span class="o">&gt;&gt;</span><span class="n">price</span><span class="p">;</span>
@@ -356,7 +356,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">Sales_data</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Sales_data</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span><span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span>
     <span class="n">Sales_data</span> <span class="n">sum</span><span class="o">=</span><span class="n">lhs</span><span class="p">;</span> <span class="c1">//拷贝初始化
 </span><span class="c1"></span>    <span class="n">sum</span><span class="o">+=</span><span class="n">rhs</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>         <span class="c1">//局部变量传出时拷贝
@@ -394,7 +394,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//参数为常量引用，返回值为bool
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//参数为常量引用，返回值为bool
 </span><span class="c1"></span><span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">){</span>
     <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span><span class="o">==</span><span class="n">rhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
            <span class="n">lhs</span><span class="p">.</span><span class="n">units_sold</span><span class="o">==</span><span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&amp;&amp;</span>
@@ -444,7 +444,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">StrVec</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">);</span>
     <span class="cm">/* 其他成员与13.5一致 */</span>
@@ -493,7 +493,7 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">StrVec</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//非const版本的[]，可赋值
 </span><span class="c1"></span>    <span class="n">string</span> <span class="o">&amp;</span><span class="k">operator</span><span class="p">[](</span><span class="n">size_t</span> <span class="n">n</span><span class="p">){</span><span class="k">return</span> <span class="n">elements</span><span class="p">[</span><span class="n">n</span><span class="p">];}</span>
@@ -561,7 +561,7 @@
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">StrBlobPtr</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">StrBlobPtr</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">StrBlobPtr</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">++</span><span class="p">();</span>
     <span class="n">StrBlobPtr</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">--</span><span class="p">();</span>
@@ -606,7 +606,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">StrBlobPtr</span> <span class="nf">p</span><span class="p">(</span><span class="n">a1</span><span class="p">);</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">StrBlobPtr</span> <span class="nf">p</span><span class="p">(</span><span class="n">a1</span><span class="p">);</span>
 <span class="n">p</span><span class="p">.</span><span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>    <span class="c1">//调用后置版本
 </span><span class="c1"></span><span class="n">p</span><span class="p">.</span><span class="k">operator</span><span class="o">++</span><span class="p">();</span>     <span class="c1">//调用前置版本
 </span></code></pre></td></tr></table>
@@ -649,7 +649,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">StrBlobPtr</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">StrBlobPtr</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//返回string的引用
 </span><span class="c1"></span>    <span class="n">string</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
@@ -699,7 +699,7 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">PrintString</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">PrintString</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//构造函数，指明打印对象和打印分隔符
 </span><span class="c1"></span>    <span class="n">PrintString</span><span class="p">(</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">o</span><span class="o">=</span><span class="n">cout</span><span class="p">,</span><span class="kt">char</span> <span class="n">c</span><span class="o">=</span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="o">:</span>
@@ -739,7 +739,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//法1：用lambda实现谓词
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//法1：用lambda实现谓词
 </span><span class="c1"></span><span class="n">stable_sort</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
             <span class="p">[](</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">();});</span>
 <span class="c1">//法2：用等价的函数对象实现谓词
@@ -780,7 +780,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//值捕获的lambda
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//值捕获的lambda
 </span><span class="c1"></span><span class="k">auto</span> <span class="n">wc</span><span class="o">=</span><span class="n">find_if</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
                 <span class="p">[</span><span class="n">sz</span><span class="p">](</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;=</span><span class="n">sz</span><span class="p">;});</span>
 <span class="k">class</span> <span class="nc">SizeComp</span><span class="p">{</span>
@@ -812,7 +812,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">plus</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">intAdd</span><span class="p">;</span>               <span class="c1">//int的加法
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">plus</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">intAdd</span><span class="p">;</span>               <span class="c1">//int的加法
 </span><span class="c1"></span><span class="n">negate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">intNegate</span><span class="p">;</span>          <span class="c1">//int的取反
 </span><span class="c1"></span><span class="kt">int</span> <span class="n">sum</span><span class="o">=</span><span class="n">intAdd</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">);</span>          <span class="c1">//结果是30
 </span><span class="c1"></span><span class="n">sum</span><span class="o">=</span><span class="n">intNegate</span><span class="p">(</span><span class="n">intAdd</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">));</span>   <span class="c1">//结果是-30
@@ -836,7 +836,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span> <span class="o">*&gt;</span> <span class="n">nameTable</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span> <span class="o">*&gt;</span> <span class="n">nameTable</span><span class="p">;</span>
 <span class="c1">//用内置的&lt;对string指针排序，未定义
 </span><span class="c1"></span><span class="n">sort</span><span class="p">(</span><span class="n">nameTable</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">nameTable</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
      <span class="p">[](</span><span class="n">string</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="n">string</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&lt;</span><span class="n">b</span><span class="p">;});</span>
@@ -863,7 +863,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//以下3个可调用对象的调用形式都是int(int,int)
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//以下3个可调用对象的调用形式都是int(int,int)
 </span><span class="c1">//函数
 </span><span class="c1"></span><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">){</span><span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">;}</span>
 <span class="c1">//lambda
@@ -895,7 +895,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/* 上下文：上一个例子 */</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 上下文：上一个例子 */</span>
 <span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">f1</span><span class="o">=</span><span class="n">add</span><span class="p">;</span>                          <span class="c1">//加法，函数
 </span><span class="c1"></span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">f2</span><span class="o">=</span><span class="n">divide</span><span class="p">();</span>                     <span class="c1">//除法，重载调用算符的类
 </span><span class="c1"></span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">f3</span><span class="o">=</span><span class="p">[](</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">){</span><span class="k">return</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">};</span>  <span class="c1">//乘法，lambda实现
@@ -925,7 +925,7 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//定义函数表，用于查找操作并调用。统一类型为function&lt;int(int,int)&gt;
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义函数表，用于查找操作并调用。统一类型为function&lt;int(int,int)&gt;
 </span><span class="c1"></span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;&gt;</span> <span class="n">binops</span><span class="o">=</span><span class="p">{</span>
     <span class="p">{</span><span class="s">&#34;+&#34;</span><span class="p">,</span><span class="n">add</span><span class="p">},</span>                          <span class="c1">//上文定义的函数
 </span><span class="c1"></span>    <span class="p">{</span><span class="s">&#34;-&#34;</span><span class="p">,</span><span class="n">minus</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()},</span>                 <span class="c1">//标准库的函数对象
@@ -956,7 +956,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">){</span><span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">;}</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">){</span><span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">;}</span>
 <span class="n">Sales_data</span> <span class="nf">add</span><span class="p">(</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="p">,</span><span class="k">const</span> <span class="n">Sales_data</span> <span class="o">&amp;</span><span class="p">);</span>
 <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;&gt;</span> <span class="n">binops</span><span class="p">;</span>
 <span class="n">binops</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="s">&#34;+&#34;</span><span class="p">,</span><span class="n">add</span><span class="p">});</span>                               <span class="c1">//错，function不能识别是哪个重载函数
@@ -1010,7 +1010,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">SmallInt</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">SmallInt</span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">//构造函数实现int向该类的转换
 </span><span class="c1"></span>    <span class="n">SmallInt</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">:</span><span class="n">val</span><span class="p">(</span><span class="n">i</span><span class="p">){</span>
@@ -1047,7 +1047,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/* 假设cin可以隐式转为bool */</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 假设cin可以隐式转为bool */</span>
 <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
 <span class="n">cin</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
 <span class="c1">//cin未定义&lt;&lt;操作，但可转为bool
@@ -1105,7 +1105,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">struct</span> <span class="nc">B</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">B</span><span class="p">;</span>
 <span class="k">struct</span> <span class="nc">A</span><span class="p">{</span>
     <span class="n">A</span><span class="p">()</span><span class="o">=</span><span class="k">default</span><span class="p">;</span>
     <span class="n">A</span><span class="p">(</span><span class="k">const</span> <span class="n">B</span> <span class="o">&amp;</span><span class="p">);</span>       <span class="c1">//B转为A
@@ -1145,7 +1145,7 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">struct</span> <span class="nc">A</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">A</span><span class="p">{</span>
     <span class="n">A</span><span class="p">(</span><span class="kt">int</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>                   <span class="c1">//int转为A
 </span><span class="c1"></span>    <span class="n">A</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>                  <span class="c1">//double转为A
 </span><span class="c1"></span>    <span class="k">operator</span> <span class="nf">int</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>       <span class="c1">//A转为int
@@ -1193,7 +1193,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">struct</span> <span class="nc">C</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">C</span><span class="p">{</span>
     <span class="n">C</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>     <span class="c1">//int转为C
 </span><span class="c1"></span><span class="p">};</span>
 <span class="k">struct</span> <span class="nc">D</span><span class="p">{</span>
@@ -1225,7 +1225,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">struct</span> <span class="nc">C</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">C</span><span class="p">{</span>
     <span class="n">C</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>     <span class="c1">//int转为C
 </span><span class="c1"></span><span class="p">};</span>
 <span class="k">struct</span> <span class="nc">E</span><span class="p">{</span>
@@ -1270,7 +1270,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">SmallInt</span><span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">SmallInt</span><span class="p">{</span>
     <span class="c1">//对SmallInt重载+
 </span><span class="c1"></span>    <span class="k">friend</span> <span class="n">SmallInt</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">SmallInt</span> <span class="o">&amp;</span><span class="p">,</span><span class="k">const</span> <span class="n">SmallInt</span> <span class="o">&amp;</span><span class="p">);</span>
 <span class="k">public</span><span class="o">:</span>

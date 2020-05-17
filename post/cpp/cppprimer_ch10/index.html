@@ -236,7 +236,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v</span><span class="o">=</span><span class="p">{</span><span class="s">&#34;hello&#34;</span><span class="p">,</span><span class="s">&#34;world&#34;</span><span class="p">};</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v</span><span class="o">=</span><span class="p">{</span><span class="s">&#34;hello&#34;</span><span class="p">,</span><span class="s">&#34;world&#34;</span><span class="p">};</span>
 <span class="n">string</span> <span class="n">sum</span><span class="o">=</span><span class="n">accumulate</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="n">v</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span><span class="s">&#34;&#34;</span><span class="p">);</span>          <span class="c1">//错，const char *类型未定义+算符
 </span><span class="c1"></span><span class="n">string</span> <span class="n">sum</span><span class="o">=</span><span class="n">accumulate</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="n">v</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span><span class="n">string</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">));</span>  <span class="c1">//对，string上定义了+算符
 </span></code></pre></td></tr></table>
@@ -286,7 +286,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>                    <span class="c1">//空vector
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>                    <span class="c1">//空vector
 </span><span class="c1"></span><span class="n">fill_n</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>           <span class="c1">//错，算法不可向空vector写值
 </span><span class="c1"></span><span class="n">fill_n</span><span class="p">(</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">vec</span><span class="p">),</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>    <span class="c1">//对，在vec尾部插入10个0
 </span></code></pre></td></tr></table>
@@ -321,7 +321,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ilst</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">};</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ilst</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">};</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ivec</span><span class="p">;</span>
 <span class="n">replace</span><span class="p">(</span><span class="n">ilst</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">ilst</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="mi">0</span><span class="p">,</span><span class="mi">42</span><span class="p">);</span>                              <span class="c1">//原址版本，将ilst中的0都替换为42
 </span><span class="c1"></span><span class="n">replace_copy</span><span class="p">(</span><span class="n">ilst</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="n">ilst</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">ivec</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="mi">42</span><span class="p">);</span>   <span class="c1">//copy版本，将ilst中的0替换为42后插入ivec，ilst不变
@@ -358,7 +358,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//将输入vector中的string元素重排并消除重复
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//将输入vector中的string元素重排并消除重复
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">elimDups</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">words</span><span class="p">){</span>
     <span class="n">sort</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>                    <span class="c1">//将元素排序，使重复项相邻
 </span><span class="c1"></span>    <span class="k">auto</span> <span class="n">end_unique</span><span class="o">=</span><span class="n">unique</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>  <span class="c1">//将不重复元素集中到序列前端，返回不重复元素序列的尾后迭代器
@@ -407,7 +407,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="n">f</span><span class="o">=</span><span class="p">[]{</span><span class="k">return</span> <span class="mi">42</span><span class="p">;};</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">f</span><span class="o">=</span><span class="p">[]{</span><span class="k">return</span> <span class="mi">42</span><span class="p">;};</span>
 <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">f</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//用调用算符使用lambda
 </span></code></pre></td></tr></table>
 </div>
@@ -456,7 +456,7 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//将输入vector中的string元素重排并消除重复
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//将输入vector中的string元素重排并消除重复
 </span><span class="c1"></span><span class="kt">void</span> <span class="nf">elimDups</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">words</span><span class="p">){</span>
     <span class="n">sort</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>                    <span class="c1">//将元素排序，使重复项相邻
 </span><span class="c1"></span>    <span class="k">auto</span> <span class="n">end_unique</span><span class="o">=</span><span class="n">unique</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>  <span class="c1">//将不重复元素集中到序列前端，返回不重复元素序列的尾后迭代器
@@ -510,7 +510,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">fcn1</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">fcn1</span><span class="p">(){</span>
     <span class="n">size_t</span> <span class="n">v</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
     <span class="k">auto</span> <span class="n">f1</span><span class="o">=</span><span class="p">[</span><span class="n">v</span><span class="p">]{</span><span class="k">return</span> <span class="n">v</span><span class="p">;};</span>     <span class="c1">//值捕获，创建lambda（构造lambda对象）
 </span><span class="c1"></span>    <span class="k">auto</span> <span class="n">f2</span><span class="o">=</span><span class="p">[</span><span class="o">&amp;</span><span class="n">v</span><span class="p">]{</span><span class="k">return</span> <span class="n">v</span><span class="p">;};</span>    <span class="c1">//引用捕获，创建lambda（构造lambda对象）
@@ -543,7 +543,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">print_strings</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">strin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">words</span><span class="p">,</span> <span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="o">=</span><span class="n">cout</span><span class="p">,</span> <span class="kt">char</span> <span class="n">c</span><span class="o">=</span><span class="sc">&#39; &#39;</span><span class="p">){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">print_strings</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">strin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">words</span><span class="p">,</span> <span class="n">ostream</span> <span class="o">&amp;</span><span class="n">os</span><span class="o">=</span><span class="n">cout</span><span class="p">,</span> <span class="kt">char</span> <span class="n">c</span><span class="o">=</span><span class="sc">&#39; &#39;</span><span class="p">){</span>
     <span class="c1">//c为显式值捕获，其他变量（os）为隐式引用捕获
 </span><span class="c1"></span>    <span class="n">for_each</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
              <span class="p">[</span><span class="o">&amp;</span><span class="p">,</span><span class="n">c</span><span class="p">](</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">){</span><span class="n">os</span><span class="o">&lt;&lt;</span><span class="n">s</span><span class="o">&lt;&lt;</span><span class="n">c</span><span class="p">;});</span>
@@ -569,7 +569,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">fcn3</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">fcn3</span><span class="p">(){</span>
     <span class="n">size_t</span> <span class="n">v</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>
     <span class="k">auto</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="n">v</span><span class="p">]()</span> <span class="k">mutable</span> <span class="p">{</span><span class="k">return</span> <span class="o">++</span><span class="n">v</span><span class="p">;}</span>  <span class="c1">//mutalbe，允许改变捕获到的copy的值
 </span><span class="c1"></span>    <span class="n">v</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
@@ -602,7 +602,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vi</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">};</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vi</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">};</span>
 <span class="n">transform</span><span class="p">(</span><span class="n">vi</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">vi</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="n">vi</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
           <span class="p">[](</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">int</span><span class="p">{</span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="n">i</span><span class="p">;</span> <span class="k">else</span> <span class="k">return</span> <span class="n">i</span><span class="p">;});</span> <span class="c1">//取绝对值
 </span></code></pre></td></tr></table>
@@ -631,7 +631,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="n">g</span><span class="o">=</span><span class="n">bind</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">_2</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">_1</span><span class="p">);</span> <span class="c1">//对g的定义，abc类似于lambda的捕获列表
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">g</span><span class="o">=</span><span class="n">bind</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">_2</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">_1</span><span class="p">);</span> <span class="c1">//对g的定义，abc类似于lambda的捕获列表
 </span><span class="c1"></span><span class="n">g</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span><span class="n">_2</span><span class="p">);</span>                   <span class="c1">//调用g
 </span><span class="c1"></span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">_2</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">_1</span><span class="p">);</span>             <span class="c1">//等价于调用f
 </span></code></pre></td></tr></table>
@@ -660,7 +660,7 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cm">/* 上下文：os是局部变量，引用输出流；c是局部变量，类型为char */</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/* 上下文：os是局部变量，引用输出流；c是局部变量，类型为char */</span>
 <span class="c1">//lambda实现，引用捕获输出流，值捕获字符
 </span><span class="c1"></span><span class="n">for_each</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
          <span class="p">[</span><span class="o">&amp;</span><span class="n">os</span><span class="p">,</span><span class="n">c</span><span class="p">](</span><span class="n">cons</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">){</span><span class="n">os</span><span class="o">&lt;&lt;</span><span class="n">s</span><span class="o">&lt;&lt;</span><span class="n">c</span><span class="p">;});</span>
@@ -715,7 +715,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">auto</span> <span class="n">it</span><span class="o">=</span><span class="n">inserter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">iter</span><span class="p">);</span>   <span class="c1">//iter是it的初始位置
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">auto</span> <span class="n">it</span><span class="o">=</span><span class="n">inserter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">iter</span><span class="p">);</span>   <span class="c1">//iter是it的初始位置
 </span><span class="c1"></span><span class="o">*</span><span class="n">it</span><span class="o">=</span><span class="n">val</span><span class="p">;</span>
 <span class="c1">//上一行等价于下两行
 </span><span class="c1"></span><span class="n">it</span><span class="o">=</span><span class="n">c</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">it</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>        <span class="c1">//先在it前插入，之后it指向插入元素。
@@ -750,7 +750,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in_iter</span><span class="p">(</span><span class="n">cin</span><span class="p">),</span> <span class="n">eof</span><span class="p">;</span>    <span class="c1">//in_iter绑定到cin，eof作为输入流的尾后迭代器
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in_iter</span><span class="p">(</span><span class="n">cin</span><span class="p">),</span> <span class="n">eof</span><span class="p">;</span>    <span class="c1">//in_iter绑定到cin，eof作为输入流的尾后迭代器
 </span><span class="c1">//法1：先创建vector再依次读取数据、插入
 </span><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
 <span class="k">while</span><span class="p">(</span><span class="n">in_iter</span><span class="o">!=</span><span class="n">eof</span><span class="p">)</span>
@@ -771,7 +771,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">(</span><span class="n">cin</span><span class="p">),</span> <span class="n">eof</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">(</span><span class="n">cin</span><span class="p">),</span> <span class="n">eof</span><span class="p">;</span>
 <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">accumulate</span><span class="p">(</span><span class="n">in</span><span class="p">,</span><span class="n">eof</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>   <span class="c1">//将输入序列读为int并累加输出
 </span></code></pre></td></tr></table>
 </div>
@@ -796,7 +796,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">out_iter</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="s">&#34; &#34;</span><span class="p">);</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">out_iter</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="s">&#34; &#34;</span><span class="p">);</span>
 <span class="c1">//法1：显式写出解引用和递增
 </span><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">e</span><span class="p">:</span><span class="n">vec</span><span class="p">)</span>
     <span class="o">*</span><span class="n">out_iter</span><span class="o">++=</span><span class="n">e</span><span class="p">;</span>
@@ -821,7 +821,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">sort</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>    <span class="c1">//递增序
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">sort</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>    <span class="c1">//递增序
 </span><span class="c1"></span><span class="n">sort</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span><span class="n">vec</span><span class="p">.</span><span class="n">rend</span><span class="p">());</span>  <span class="c1">//递减序
 </span></code></pre></td></tr></table>
 </div>
@@ -844,7 +844,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">string</span> <span class="n">line</span><span class="o">=</span><span class="s">&#34;FIRST,MIDDLE,LAST&#34;</span><span class="p">;</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">string</span> <span class="n">line</span><span class="o">=</span><span class="s">&#34;FIRST,MIDDLE,LAST&#34;</span><span class="p">;</span>
 <span class="c1">//检测第一个&#39;,&#39;并打印
 </span><span class="c1"></span><span class="k">auto</span> <span class="n">comma</span><span class="o">=</span><span class="n">find</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="n">line</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span><span class="sc">&#39;,&#39;</span><span class="p">);</span>     <span class="c1">//检测第一个`,`
 </span><span class="c1"></span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">string</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="n">comma</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>            <span class="c1">//打印&#34;FIRST&#34;
@@ -942,7 +942,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">find</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span><span class="n">end</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>      <span class="c1">//接受元素值，查找第一个等于val的元素
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">find</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span><span class="n">end</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>      <span class="c1">//接受元素值，查找第一个等于val的元素
 </span><span class="c1"></span><span class="n">find_if</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span><span class="n">end</span><span class="p">,</span><span class="n">pred</span><span class="p">);</span>  <span class="c1">//接受谓词，查找第一个使谓词为真的元素
 </span></code></pre></td></tr></table>
 </div>
@@ -956,7 +956,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">reverse</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span><span class="n">end</span><span class="p">);</span>           <span class="c1">//逆序写入原址
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">reverse</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span><span class="n">end</span><span class="p">);</span>           <span class="c1">//逆序写入原址
 </span><span class="c1"></span><span class="n">reverse_copy</span><span class="p">(</span><span class="n">bed</span><span class="p">,</span><span class="n">end</span><span class="p">,</span><span class="n">dest</span><span class="p">);</span> <span class="c1">//逆序拷贝到dest
 </span></code></pre></td></tr></table>
 </div>
@@ -974,7 +974,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//从v1中移除奇数
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//从v1中移除奇数
 </span><span class="c1"></span><span class="n">remove_if</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">v1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
           <span class="p">[](</span><span class="kt">int</span> <span class="n">i</span><span class="p">){</span><span class="k">return</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">;});</span>
 <span class="c1">//将v1中移除奇数后剩下的拷贝到v2，v1不变
