@@ -49,7 +49,7 @@
 <meta itemprop="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet">
 <meta itemprop="datePublished" content="2020-05-11T15:44:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-11T15:44:00&#43;08:00" />
-<meta itemprop="wordCount" content="12147">
+<meta itemprop="wordCount" content="17016">
 
 
 
@@ -130,8 +130,8 @@
             <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
             <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
             </div>
-          <span class="more-meta"> 约 12147 字 </span>
-          <span class="more-meta"> 预计阅读 25 分钟 </span>
+          <span class="more-meta"> 约 17016 字 </span>
+          <span class="more-meta"> 预计阅读 34 分钟 </span>
         
       </div>
     </header>
@@ -1273,15 +1273,488 @@
 <li>分配给union对象的存储空间至少要能容纳它的最大成员</li>
 <li>union不能含有引用类型的成员，除此之外可以是绝大多数类型。C++11中，含构造/析构函数的类也可作为union的成员类型</li>
 <li>union可为其成员指定public/protected/private权限，默认为public</li>
-<li>union可定义成员函数（包括构造/析构函数），但unioin不可作为基类/派生类，故union不可有虚函数</li>
-<li>定义union时，首先是关键字union，随后是可选的名字和花括号后的一组成员声明</li>
-<li>union的名字是一个类型名，默认union是未初始化的，可用一堆花括号内的初始值显式初始化union（类似显式初始化聚合类）</li>
+<li>union可定义成员函数（包括构造/析构函数）</li>
+<li>unioin不可作为基类/派生类，故union不可有虚函数</li>
+<li>定义union时，首先是关键字<code>union</code>，随后是可选的名字和花括号后的一组成员声明，分号结束</li>
+<li>union的名字是一个类型名，默认union是未初始化的，可用一对花括号内的初始值显式初始化union（类似显式初始化聚合类），该初始值被用于初始化第一个成员</li>
+<li>使用通用的成员访问算符来访问union对象的成员</li>
+<li>为union的一个数据成员赋值会让其他数据成员变成未定义，故使用union时必须清楚地知道当前存储的是哪个成员</li>
+<li>例子：使用union</li>
 </ul>
-<h2 id="局部类">局部类</h2>
-<h2 id="固有的不可移植的特性">固有的不可移植的特性</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//用union定义一个类型
+</span><span class="c1"></span><span class="k">union</span> <span class="nc">Token</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">cval</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ival</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">dval</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">Token</span> <span class="n">first_token</span><span class="o">=</span><span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">};</span>    <span class="c1">//用花括号初始化union实际上是在初始化第一个成员
+</span><span class="c1"></span><span class="n">Token</span> <span class="n">last_token</span><span class="p">;</span>           <span class="c1">//声明union不初始化
+</span><span class="c1"></span><span class="n">Token</span> <span class="o">*</span><span class="n">pt</span><span class="o">=</span><span class="k">new</span> <span class="n">Token</span><span class="p">;</span>        <span class="c1">//声明动态的union和指针
+</span><span class="c1"></span><span class="n">last_token</span><span class="p">.</span><span class="n">cval</span><span class="o">=</span><span class="sc">&#39;z&#39;</span><span class="p">;</span>        <span class="c1">//为union的成员赋值
+</span><span class="c1"></span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">ival</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>                <span class="c1">//通过指向union的指针为union成员赋值
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>匿名union</code>是未命名的union，且在花括号和分号间无任何对象的声明</li>
+<li>一旦定义了一个匿名union，编译器自动为该匿名union创建一个未命名的对象</li>
+<li>在匿名union的定义所在作用域内，该匿名union的成员都可直接访问，不需要说明union作用域</li>
+<li>匿名union不可包含protected/private成员，也不可定义成员函数</li>
+<li>例子：使用匿名union</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//定义匿名union，同时隐式定义一个未命名的对象
+</span><span class="c1"></span><span class="k">union</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">cval</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ival</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">dval</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">//在匿名union定义所在的作用域中，可直接访问其成员
+</span><span class="c1"></span><span class="n">cval</span><span class="o">=</span><span class="sc">&#39;c&#39;</span><span class="p">;</span>   <span class="c1">//为隐式定义的对象的成员赋值
+</span><span class="c1"></span><span class="n">ival</span><span class="o">=</span><span class="mi">42</span><span class="p">;</span>    <span class="c1">//为隐式定义的对象的成员赋值
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>旧标准规定union中不可含有定义了构造函数/拷贝控制成员的类类型成员，这一限制在C++11中被取消</li>
+<li>若union的成员类型有自己的构造函数/拷贝控制成员，则该union的用法比只含内置类型成员的union复杂得多：
+<ul>
+<li>若union仅包含内置类型成员，则可用普通的赋值语句改变union保存的值</li>
+<li>若union包含拥有构造函数/拷贝控制成员的对象，则：
+<ul>
+<li>将union值改为类类型成员的值时，必须运行该类型的构造函数</li>
+<li>将union值从类类型成员改为其他值时，必须运行该类型的析构函数</li>
+</ul>
+</li>
+<li>若union仅包含内置类型成员时，编译器按照成员次序为该union合成默认构造函数和拷贝控制成员</li>
+<li>若union包含拥有构造函数/拷贝控制成员的对象，编译器将为该union合成对应的构造函数/拷贝控制成员并将其声明为删除的</li>
+<li>例如，string类型定义了默认构造函数和五个拷贝控制成员，若union含有string类型的成员，且未自定义默认构造函数和拷贝控制成员，则编译器将为该union合成缺少的成员并将其声明为删除的。</li>
+</ul>
+</li>
+<li>对于含有类类型成员的union，构造/析构类类型成员的操作很复杂，通常的管理方式是：
+<ul>
+<li>把含有类类型成员的union定义为匿名union并内嵌在另一个类中，使用外部类管理union的类类型成员有关的状态转换</li>
+<li>在外部类中定义一个独立的枚举类型成员，称为union的<code>判别式</code>，用于追踪union当前存储的是哪个成员</li>
+<li>在union中处理类类型成员：
+<ul>
+<li>构造时不需要重新申请内存，使用<code>定位new</code>构造</li>
+<li>析构时显式调用析构函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>作为union成员的类对象不能被自动销毁，因为union的析构函数不知道union当前是什么类型</li>
+<li>例子：管理含类类型成员的union</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//用类管理以类作为成员的union
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Token</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//默认构造时将union初始化为int成员，值为0
+</span><span class="c1"></span>    <span class="n">Token</span><span class="p">()</span><span class="o">:</span><span class="n">tok</span><span class="p">(</span><span class="n">INT</span><span class="p">),</span><span class="n">ival</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="c1">//拷贝构造时更新union判别式，并调用copyUnion拷贝底层结构体
+</span><span class="c1"></span>    <span class="n">Token</span><span class="p">(</span><span class="k">const</span> <span class="n">Token</span> <span class="o">&amp;</span><span class="n">t</span><span class="p">)</span><span class="o">:</span><span class="n">tok</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">tok</span><span class="p">)</span> <span class="p">{</span><span class="n">copyUnion</span><span class="p">(</span><span class="n">t</span><span class="p">);}</span>
+    <span class="c1">//拷贝赋值
+</span><span class="c1"></span>    <span class="n">Token</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Token</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="c1">//析构时判断union当前是否是string类型，若是则显式调用string的析构函数
+</span><span class="c1"></span>    <span class="o">~</span><span class="n">Token</span><span class="p">()</span> <span class="p">{</span><span class="k">if</span><span class="p">(</span><span class="n">tok</span><span class="o">==</span><span class="n">STR</span><span class="p">)</span> <span class="n">sval</span><span class="p">.</span><span class="o">~</span><span class="n">string</span><span class="p">();}</span>
+    <span class="c1">//以下4个成员分别是用union的4个成员类型来初始化
+</span><span class="c1"></span>    <span class="n">Token</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">Token</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="kt">char</span><span class="p">);</span>
+    <span class="n">Token</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+    <span class="n">Token</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">//union判别式，使用不限定作用域的枚举来表示union当前的成员
+</span><span class="c1"></span>    <span class="k">enum</span> <span class="p">{</span><span class="n">INT</span><span class="p">,</span><span class="n">CHAR</span><span class="p">,</span><span class="n">DBL</span><span class="p">,</span><span class="n">STR</span><span class="p">}</span> <span class="n">tok</span><span class="p">;</span>
+    <span class="c1">//底层存储数据的匿名union，每个时刻只有一个有效的对象，节省空间
+</span><span class="c1"></span>    <span class="k">union</span><span class="p">{</span>
+        <span class="kt">char</span> <span class="n">cval</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">dval</span><span class="p">;</span>
+        <span class="n">string</span> <span class="n">sval</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="c1">//将实参中的Token内容拷贝进this，是拷贝赋值的组成部分
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">copyUnion</span><span class="p">(</span><span class="k">const</span> <span class="n">Token</span> <span class="o">&amp;</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="c1">//将int拷贝给union的成员，char和double同理
+</span><span class="c1"></span><span class="n">Token</span> <span class="o">&amp;</span><span class="n">Token</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tok</span><span class="o">==</span><span class="n">STR</span><span class="p">)</span> <span class="n">sval</span><span class="p">.</span><span class="o">~</span><span class="n">string</span><span class="p">();</span>            <span class="c1">//若当前union是string，则手动销毁string
+</span><span class="c1"></span>    <span class="n">ival</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>                                 <span class="c1">//赋值
+</span><span class="c1"></span>    <span class="n">tok</span><span class="o">=</span><span class="n">INT</span><span class="p">;</span>                                <span class="c1">//更新union判别式
+</span><span class="c1"></span>    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//将string拷贝给union的成员
+</span><span class="c1"></span><span class="n">Token</span> <span class="o">&amp;</span><span class="n">Token</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tok</span><span class="o">==</span><span class="n">STR</span><span class="p">)</span>    <span class="n">sval</span><span class="o">=</span><span class="n">s</span><span class="p">;</span>                 <span class="c1">//若当前union是string，则直接赋值
+</span><span class="c1"></span>    <span class="k">else</span>            <span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sval</span><span class="p">)</span> <span class="n">string</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>   <span class="c1">//若当前union不是string，则在已有内存中用定位new构造
+</span><span class="c1"></span>    <span class="n">tok</span><span class="o">=</span><span class="n">STR</span><span class="p">;</span>                                <span class="c1">//更新new判别式
+</span><span class="c1"></span>    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//将实参中的union的内容拷贝进this的union，是拷贝赋值的组成部分
+</span><span class="c1">//只负责处理this不是string的情形（this是string时交给其他部分处理）
+</span><span class="c1"></span><span class="kt">void</span> <span class="n">Token</span><span class="o">::</span><span class="n">copyUnion</span><span class="p">(</span><span class="k">const</span> <span class="n">Token</span> <span class="o">&amp;</span><span class="n">t</span><span class="p">){</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">tok</span><span class="p">){</span>                              <span class="c1">//对实参中的union成员讨论
+</span><span class="c1"></span>        <span class="k">case</span> <span class="n">Token</span><span class="o">::</span><span class="nl">INT</span><span class="p">:</span>    <span class="n">ival</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">ival</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> <span class="c1">//若实参中union不是string，则直接拷贝
+</span><span class="c1"></span>        <span class="k">case</span> <span class="n">Token</span><span class="o">::</span><span class="nl">CHAR</span><span class="p">:</span>   <span class="n">cval</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">cval</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="n">Token</span><span class="o">::</span><span class="nl">DBL</span><span class="p">:</span>    <span class="n">dval</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">dval</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+        <span class="c1">//若实参中的union是string，则在已有内存中使用定位new构造string
+</span><span class="c1"></span>        <span class="k">case</span> <span class="n">Token</span><span class="o">::</span><span class="nl">STR</span><span class="p">:</span>    <span class="k">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sval</span><span class="p">)</span> <span class="n">string</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">sval</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//拷贝赋值函数
+</span><span class="c1"></span><span class="n">Token</span> <span class="o">&amp;</span><span class="n">Token</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Token</span> <span class="o">&amp;</span><span class="n">t</span><span class="p">){</span>
+    <span class="c1">//当左侧的union是string，右侧的union不是string，则将左侧的string析构
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">tok</span><span class="o">==</span><span class="n">STR</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">.</span><span class="n">tok</span><span class="o">!=</span><span class="n">STR</span><span class="p">)</span>  <span class="n">sval</span><span class="p">.</span><span class="o">~</span><span class="n">string</span><span class="p">();</span>
+    <span class="c1">//当左侧的union是string，右侧的union也是string，则直接拷贝
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">tok</span><span class="o">==</span><span class="n">STR</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">.</span><span class="n">tok</span><span class="o">==</span><span class="n">STR</span><span class="p">)</span>  <span class="n">sval</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">sval</span><span class="p">();</span>
+    <span class="c1">//当左侧的union不是string，则调用copyUnion进行处理（故copyUnion不需要考虑this是string的情形）
+</span><span class="c1"></span>    <span class="k">else</span>                        <span class="nf">copyUnion</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+    <span class="c1">//更新union判别式
+</span><span class="c1"></span>    <span class="n">tok</span><span class="o">=</span><span class="n">t</span><span class="p">.</span><span class="n">tok</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="局部类">局部类</h2>
+<ul>
+<li>类可定义在函数的内部，称这样的类为<code>局部类</code>（和类内部定义的嵌套类区分）</li>
+<li>局部类定义的类型只在定义它的作用域内可见</li>
+<li>局部类的所有成员（包括成员函数）都必须完整定义在局部类内，因此成员函数的复杂性不可太高，一般只有几行</li>
+<li>局部类不允许有static数据成员，因为static成员需要在类外定义</li>
+<li>局部类对其外层作用域中名字的访问受到诸多限制，它只能访问外层作用域中的<code>类型名</code>、<code>静态变量</code>、<code>枚举成员</code>。</li>
+<li>若局部类定义在某函数内部，则该函数的普通局部变量不可被该局部类使用</li>
+<li>例子：定义局部类</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">val</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">si</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="nc">Loc</span><span class="p">{</span><span class="n">a</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span><span class="n">b</span><span class="p">};</span>
+    <span class="c1">//在函数内部定义局部类
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="nc">Bar</span><span class="p">{</span>
+        <span class="n">Loc</span> <span class="n">locVal</span><span class="p">;</span>             <span class="c1">//对，可使用外层函数中的局部类型名
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">barVal</span><span class="p">;</span>
+        <span class="kt">void</span> <span class="n">fooBar</span><span class="p">(</span><span class="n">Loc</span> <span class="n">l</span><span class="o">=</span><span class="n">a</span><span class="p">){</span>   <span class="c1">//局部类的成员函数，默认实参是外层函数中的枚举成员Loc::a
+</span><span class="c1"></span>            <span class="n">barVal</span><span class="o">=</span><span class="n">val</span><span class="p">;</span>         <span class="c1">//错，val是外层函数的局部变量，在局部类中不可见
+</span><span class="c1"></span>            <span class="n">barVal</span><span class="o">=::</span><span class="n">val</span><span class="p">;</span>       <span class="c1">//对，显式使用全局作用域的变量
+</span><span class="c1"></span>            <span class="n">barVal</span><span class="o">=</span><span class="n">si</span><span class="p">;</span>          <span class="c1">//对，使用外层函数的局部静态变量
+</span><span class="c1"></span>            <span class="n">locVal</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>           <span class="c1">//对，使用外层函数的枚举成员
+</span><span class="c1"></span>        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>外层函数对局部类的protected/private成员没有访问特权，但局部类可将外层函数声明为友元</li>
+<li>由于局部类在函数作用域中，故程序中可访问局部类的代码十分有限</li>
+<li>局部类内的名字查找和其他类相似，即二段编译：声明时用到的其他名字必须确保已存在，但定义中用到的名字可出现在类内的任意位置</li>
+<li>若局部类内的某个名字不是局部类的成员，则继续在外层函数作用域中查找，若还未找到则在外层作用域之外查找</li>
+<li>可在局部类的内部再嵌套一个类，此时嵌套类的定义可在局部类之外，但只能在与局部类相同的作用域中，且定义时应指明作用域在局部类中</li>
+<li>局部类内的嵌套类也是局部类，必须遵循局部类的规定，该嵌套类的所有成员都必须定义在嵌套类内部</li>
+<li>例子：局部类中的嵌套类</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">foo</span><span class="p">(){</span>
+    <span class="k">class</span> <span class="nc">Bar</span><span class="p">{</span>          <span class="c1">//定义局部类
+</span><span class="c1"></span>    <span class="k">public</span><span class="o">:</span>
+        <span class="k">class</span> <span class="nc">Nested</span><span class="p">;</span>   <span class="c1">//声明局部类中的嵌套类
+</span><span class="c1"></span>    <span class="p">};</span>
+    <span class="k">class</span> <span class="nc">Bar</span><span class="o">::</span><span class="n">Nested</span><span class="p">{</span><span class="cm">/* 局部类中嵌套类的定义 */</span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="固有的不可移植的特性">固有的不可移植的特性</h2>
+<ul>
+<li>为了支持底层编程，C++定义了一些固有的<code>不可移植</code>的特性，即因机器而异的特性，例如算术类型的大小因机器而异</li>
+<li><code>位域</code>和<code>volatile</code>限定符是从C中继承而来的特性，<code>链接指示</code>是C++新增的特性</li>
+</ul>
 <h3 id="位域">位域</h3>
-<h3 id="volatile限定符">volatile限定符</h3>
-<h3 id="链接指示extern-c">链接指示：extern &ldquo;C&rdquo;</h3>
+<ul>
+<li>类可将其非static数据成员定义为<code>位域</code>，一个位域中含有一定数量的二进制位</li>
+<li>程序若要向硬件设备或其他程序传递二进制数据，通常会用到位域。但位域在内存中的布局是机器相关</li>
+<li>位域的类型必须是整型或枚举类型</li>
+<li>由于signed的位域行为与signed的具体实现相关，故通常使用<code>unsigned</code>类型来存储位域</li>
+<li>位域的声明形式是在成员名字后紧跟冒号<code>:</code>和<code>constexpr</code>，该constexpr用于指定成员所占的二进制位数</li>
+<li>如果可能的话，类内部连续定义的位域会被压缩到同一整型的相邻位，从而提供存储压缩。但这些比特是否能压缩到一个整型以及如何压缩都是机器相关</li>
+<li>取地址算符<code>&amp;</code>不可用于位域，因为寻址的单位是字节。因此任何指针都不可指向类的位域</li>
+<li>对于超过1位的位域，通常使用内置位运算符处理</li>
+<li>若一个类定义了位域成员，通常会定义一组inline成员函数用于检验或设置对应位域</li>
+<li>例子：使用位域</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Bit</span><span class="p">;</span>   <span class="c1">//用unsigned int表示位域
+</span><span class="c1">//用于操作文件的类
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">File</span><span class="p">{</span>
+    <span class="c1">//比特形式存储的文件描述符，用位域作为flag
+</span><span class="c1"></span>    <span class="n">Bit</span> <span class="nl">mode</span><span class="p">:</span><span class="mi">2</span><span class="p">;</span>             <span class="c1">//占2位
+</span><span class="c1"></span>    <span class="n">Bit</span> <span class="nl">modified</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>         <span class="c1">//占1位
+</span><span class="c1"></span>    <span class="n">Bit</span> <span class="nl">prot_owner</span><span class="p">:</span><span class="mi">3</span><span class="p">;</span>       <span class="c1">//占3位
+</span><span class="c1"></span>    <span class="n">Bit</span> <span class="nl">prot_group</span><span class="p">:</span><span class="mi">3</span><span class="p">;</span>       <span class="c1">//占3位
+</span><span class="c1"></span>    <span class="n">Bit</span> <span class="nl">prot_world</span><span class="p">:</span><span class="mi">3</span><span class="p">;</span>       <span class="c1">//占3位
+</span><span class="c1"></span>    <span class="cm">/* 其他数据成员 */</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//以八进制的枚举类型来表示比特常量
+</span><span class="c1"></span>    <span class="k">enum</span> <span class="nc">modes</span><span class="p">{</span><span class="n">READ</span><span class="o">=</span><span class="mo">01</span><span class="p">,</span><span class="n">WRITE</span><span class="o">=</span><span class="mo">02</span><span class="p">,</span><span class="n">EXECUTE</span><span class="o">=</span><span class="mo">03</span><span class="p">};</span>
+    <span class="n">File</span> <span class="o">&amp;</span><span class="n">open</span><span class="p">(</span><span class="n">modes</span><span class="p">);</span>      <span class="c1">//输入一个枚举成员，按该模式打开文件并返回该类的引用
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">close</span><span class="p">();</span>           <span class="c1">//关闭该文件
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">write</span><span class="p">();</span>           <span class="c1">//写入该文件
+</span><span class="c1"></span>    <span class="kt">bool</span> <span class="nf">isRead</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="nf">setWrite</span><span class="p">();</span>
+<span class="p">};</span>
+<span class="kt">void</span> <span class="n">File</span><span class="o">::</span><span class="n">write</span><span class="p">(){</span>
+    <span class="n">modified</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>             <span class="c1">//将位域modified置为1，标记已被修改过
+</span><span class="c1"></span>    <span class="c1">//操作
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kt">void</span> <span class="n">File</span><span class="o">::</span><span class="n">close</span><span class="p">(){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">modified</span><span class="p">)</span>            <span class="c1">//如果位域modified是1，则保存内容
+</span><span class="c1"></span>        <span class="c1">//保存内容
+</span><span class="c1"></span><span class="p">}</span>
+<span class="n">File</span> <span class="o">&amp;</span><span class="n">File</span><span class="o">::</span><span class="n">open</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">modes</span> <span class="n">m</span><span class="p">){</span>
+    <span class="n">mode</span><span class="o">|=</span><span class="n">READ</span><span class="p">;</span>             <span class="c1">//将mode设置为READ
+</span><span class="c1"></span>    <span class="c1">//其他处理
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">&amp;</span><span class="n">WRITE</span><span class="p">)</span>             <span class="c1">//如果同时设置了READ和WRITE  
+</span><span class="c1"></span>        <span class="c1">//按照可读可写模式打开文件
+</span><span class="c1"></span>    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//返回是否为READ模式
+</span><span class="c1"></span><span class="kr">inline</span> <span class="kt">bool</span> <span class="n">File</span><span class="o">::</span><span class="n">isRead</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">mode</span><span class="o">&amp;</span><span class="n">READ</span><span class="p">;}</span>
+<span class="c1">//设置为WRITE模式
+</span><span class="c1"></span><span class="kr">inline</span> <span class="kt">void</span> <span class="n">File</span><span class="o">::</span><span class="n">setWrite</span><span class="p">()</span> <span class="p">{</span><span class="n">mode</span><span class="o">|=</span><span class="n">WRITE</span><span class="p">;}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="volatile限定符">volatile限定符</h3>
+<ul>
+<li>volatile的确切含义与机器相关，只能阅读编译器文档。要想让使用volatile的程序移植到新机器/新编译器仍有效，经常需要修改程序</li>
+<li>直接处理硬件的程序经常包含这样的数据：它们的值由程序之外的过程控制，例如系统时钟等</li>
+<li>当对象的值可能在程序的控制/检测之外被改变，则应将该对象声明为<code>volatile</code>，该关键字告诉编译器，不应该对该对象进行优化</li>
+<li>volatile的用法和const很像，都是对类型额外修饰：
+<ul>
+<li>const和volatile相互不影响，可同时使用</li>
+<li>可将类的成员函数定义为volatile的，且只有volatile的成员函数才能被volatile的对象调用</li>
+<li>可声明volatile指针、指向volatile对象的指针、指向volatile对象的volatile指针</li>
+<li>volatile对象的地址（或指向volatile类型的指针）只能被赋值给指向volatile对象的指针</li>
+<li>volatile对象只能用于初始化volatile引用</li>
+</ul>
+</li>
+<li>例子：使用volatile</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">volatile</span> <span class="kt">int</span> <span class="n">display_register</span><span class="p">;</span>  <span class="c1">//该变量可能在程序控制之外发生改变
+</span><span class="c1"></span><span class="k">volatile</span> <span class="n">Task</span> <span class="o">*</span><span class="n">curr_task</span><span class="p">;</span>       <span class="c1">//指向volatile对象的指针
+</span><span class="c1"></span><span class="k">volatile</span> <span class="kt">int</span> <span class="n">iax</span><span class="p">[</span><span class="n">max_size</span><span class="p">];</span>     <span class="c1">//数组的每个元素都是volatile
+</span><span class="c1"></span><span class="k">volatile</span> <span class="n">Screen</span> <span class="n">bitmapBuf</span><span class="p">;</span>      <span class="c1">//类的每个成员都是volatile
+</span><span class="c1"></span><span class="k">volatile</span> <span class="kt">int</span> <span class="n">v</span><span class="p">;</span>                 <span class="c1">//定义volatile对象
+</span><span class="c1"></span><span class="kt">int</span> <span class="o">*</span><span class="k">volatile</span> <span class="n">vip</span><span class="p">;</span>              <span class="c1">//指针是volatile，指向对象非volatile
+</span><span class="c1"></span><span class="k">volatile</span> <span class="kt">int</span> <span class="o">*</span><span class="n">ivp</span><span class="p">;</span>              <span class="c1">//指针是非volatile，指向对象是volatile
+</span><span class="c1"></span><span class="k">volatile</span> <span class="kt">int</span> <span class="o">*</span><span class="k">volatile</span> <span class="n">vivp</span><span class="p">;</span>    <span class="c1">//指针是volatile，指向对象是volatile
+</span><span class="c1"></span><span class="kt">int</span> <span class="o">*</span><span class="n">ip</span><span class="o">=&amp;</span><span class="n">v</span><span class="p">;</span>                     <span class="c1">//错，对于volatile对象，必须使用指向volatile对象的指针
+</span><span class="c1"></span><span class="n">ivp</span><span class="o">=&amp;</span><span class="n">v</span><span class="p">;</span>                         <span class="c1">//对，可用指向volatile对象的非volatile指针来指向volatile对象
+</span><span class="c1"></span><span class="n">vivp</span><span class="o">=&amp;</span><span class="n">v</span>                         <span class="c1">//对，可用指向volatile对象的volatile指针来指向volatile对象
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>const和volatile的重要区别之一是：不能使用合成的拷贝/移动构造函数/赋值算符来初始化volatile对象，或为volatile对象赋值。因为合成的成员接受的形参类型是非volatile的const引用</li>
+<li>若一个类希望拷贝/移动/赋值它的volatile对象，则必须自定义拷贝/移动操作，例如将形参设置为<code>const volatile &amp;</code></li>
+<li>可为volatile对象定义拷贝/赋值操作，但拷贝/赋值volatile对象不一定有意义，该对象可能与设备相关（例如stream）</li>
+<li>例子：自定义拷贝控制，以支持volatile对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Foo</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Foo</span><span class="p">(</span><span class="k">const</span> <span class="k">volatile</span> <span class="n">Foo</span> <span class="o">&amp;</span><span class="p">);</span>                      <span class="c1">//从volatile对象拷贝
+</span><span class="c1"></span>    <span class="n">Foo</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">volatile</span> <span class="k">const</span> <span class="n">Foo</span> <span class="o">&amp;</span><span class="p">);</span>           <span class="c1">//将volatile对象赋值给非volatile对象
+</span><span class="c1"></span>    <span class="n">Foo</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">volatile</span> <span class="k">const</span> <span class="n">Foo</span> <span class="o">&amp;</span><span class="p">)</span> <span class="k">volatile</span><span class="p">;</span>  <span class="c1">//将volatile对象赋值给volatile对象
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="链接指示extern-c">链接指示：extern &ldquo;C&rdquo;</h3>
 
     </div>
 
