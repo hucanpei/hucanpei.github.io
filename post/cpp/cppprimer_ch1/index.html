@@ -49,7 +49,7 @@
 <meta itemprop="description" content="编写一个简单的程序 函数：包含4部分：返回类型，函数名，形参列表，函数体。其中函数体是一个语句块。 main函数：每个cpp程序都有且仅有一个m">
 <meta itemprop="datePublished" content="2020-01-26T23:54:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-01-26T23:54:00&#43;08:00" />
-<meta itemprop="wordCount" content="2318">
+<meta itemprop="wordCount" content="2372">
 
 
 
@@ -130,7 +130,7 @@
             <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
             <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
             </div>
-          <span class="more-meta"> 约 2318 字 </span>
+          <span class="more-meta"> 约 2372 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -268,8 +268,60 @@
 <li><code>调用运算符()</code>用于调用一个函数</li>
 </ul>
 <h2 id="书店程序">书店程序</h2>
-<p>略</p>
-
+<ul>
+<li>例子：书店程序</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&#34;Sales_item.h&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">Sales_item</span> <span class="n">total</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">total</span><span class="p">){</span>
+        <span class="n">Sales_item</span> <span class="n">trans</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">trans</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">total</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span><span class="o">==</span><span class="n">trans</span><span class="p">.</span><span class="n">isbn</span><span class="p">())</span>
+                <span class="n">total</span><span class="o">+=</span><span class="n">trans</span><span class="p">;</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">total</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                <span class="n">total</span><span class="o">=</span><span class="n">trans</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">total</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&#34;No data!&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

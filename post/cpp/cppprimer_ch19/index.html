@@ -49,7 +49,7 @@
 <meta itemprop="description" content="控制内存分配 某些程序对内存分配有特殊要求，不能直接使用标准内存管理机制 重载new和delete算符可控制内存分配的过程 重载new和delet">
 <meta itemprop="datePublished" content="2020-05-11T15:44:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-11T15:44:00&#43;08:00" />
-<meta itemprop="wordCount" content="17016">
+<meta itemprop="wordCount" content="18725">
 
 
 
@@ -130,8 +130,8 @@
             <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
             <a href="/categories/c&#43;&#43;-primer/"> C&#43;&#43; primer </a>
             </div>
-          <span class="more-meta"> 约 17016 字 </span>
-          <span class="more-meta"> 预计阅读 34 分钟 </span>
+          <span class="more-meta"> 约 18725 字 </span>
+          <span class="more-meta"> 预计阅读 38 分钟 </span>
         
       </div>
     </header>
@@ -1755,7 +1755,138 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="链接指示extern-c">链接指示：extern &ldquo;C&rdquo;</h3>
-
+<ul>
+<li>C++有时需要调用其他语言编写的函数，如C语言</li>
+<li>调用其他语言中的函数时，函数名也必须在C++中声明，且必须指定返回类型和形参列表</li>
+<li>对于其他语言编写的函数，编译器检查其调用的方式与普通C++函数相同，但对该函数生成的代码有所不同</li>
+<li>C++使用<code>链接指示</code>指出任意非C++函数使用的语言</li>
+<li>若要将C++的代码与其他语言的代码放在一起使用，必须有权访问该语言的编译器，且该语言编译器与当前C++编译器兼容</li>
+<li>链接指示可以有两种形式：
+<ul>
+<li><code>单个的</code>链接指示：以关键字extern开头，后接表示另一种语言的字符串字面值常量，最后是普通的函数声明，该函数是另一种语言的函数</li>
+<li><code>复合的</code>链接指示：以关键字extern开头，后接表示另一种语言的字符串字面值常量，最后是一个花括号的语句块，块中声明若干个函数，它们都被标记为另一种语言的函数。花括号内声明的函数名字对外可见，就像是在花括号外声明的一样</li>
+</ul>
+</li>
+<li>链接指示不能出现在类定义或函数定义内部</li>
+<li>同一个函数的链接指示必须在它的每个声明中都出现</li>
+<li>复合的链接指示可应用于整个头文件，当<code>#include</code>指示被放在复合链接指示的花括号中时，头文件中的所有普通函数声明都被认为是链接指示的语言编写的。</li>
+<li>链接指示可嵌套，即，若链接指示中包含的头文件内也有链接指示的函数，则函数的链接不受影响，仍是头文件中的版本</li>
+<li>C++从C中继承的标准库函数可定义为C函数，但并非必须。这取决于具体实现。</li>
+<li>例子：链接指示</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//单个的链接指示，将该函数标记为C语言的函数
+</span><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="n">size_t</span> <span class="n">strlen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+<span class="c1">//复合的链接指示，将这些函数都标记为C语言的函数
+</span><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="nf">strcmp</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">,</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="nf">strcat</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">,</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//复合的链接指示应用于整个头文件
+</span><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
+    <span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>编写函数使用的语言是函数类型的一部分。故对于使用链接指示的函数，其每个声明都必须有相同的链接指示，且函数指针必须与所指函数使用相同的链接指示</li>
+<li>指向C函数的指针与指向C++函数的指针是不同类型。指向C函数的指针不能被C++的函数初始化或赋值，反之亦然。也不能在两个链接指示不同的函数指针之间互相赋值。</li>
+<li>有的C++编译器可使链接指示不同的函数指针之间互相赋值，这被视作对语言的扩展。严格来说这是非法的</li>
+<li>例子：链接指示是函数类型的一部分</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>     <span class="c1">//链接指示是函数类型的一部分
+</span><span class="c1"></span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf1</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>               <span class="c1">//pf1与pf类型不同
+</span><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">pf2</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>    <span class="c1">//pf2与pf类型相同
+</span><span class="c1"></span><span class="n">pf1</span><span class="o">=</span><span class="n">pf2</span><span class="p">;</span>                        <span class="c1">//错，两指针指向函数的链接指示不一样，类型不同
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用链接指示时，它不仅对函数声明有效，且对函数声明中的返回类型和形参列表中的函数指针也有效。即，链接指示同时对声明语句中的所有函数有效</li>
+<li>若希望对C++函数传入一个指向C函数的指针，需使用类型别名</li>
+<li>例子：链接指示同时对声明语句中的所有函数有效</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">void</span> <span class="n">f1</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">int</span><span class="p">));</span>  <span class="c1">//f1是C函数，其形参也是指向C函数的指针
+</span><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="k">typedef</span> <span class="kt">void</span> <span class="n">FC</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>    <span class="c1">//使用类型别名定义C函数类型
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">f2</span><span class="p">(</span><span class="n">FC</span> <span class="o">*</span><span class="p">);</span>                      <span class="c1">//将C函数的指针传给C++函数
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>通过使用链接指示对函数进行定义，可令C++函数在其他语言编写的程序中可用。例如，标记为<code>extern &quot;C&quot;</code>的函数可被C程序调用</li>
+<li>可被多种语言共享的函数，其返回类型和形参类型受到诸多限制。例如，不可能把C++的类对象传递给C程序，它无法理解类特有的操作</li>
+<li>有时需要在C和C++中编译同一个源文件，利用预处理器定义的<code>__cplusplus</code>宏变量，可实现仅在编译C++时才包含一些代码</li>
+<li>例子：使用__cplusplus条件编译C++代码</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#ifdef __cplusplus
+</span><span class="cp"></span><span class="cm">/* 这里是仅对C++可见的代码 */</span>
+<span class="cp">#endif
+</span><span class="cp"></span><span class="cm">/* 其他地方都对C和C++同样可见 */</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>链接指示与重载函数的相互作用依赖于目标语言：若目标语言支持函数重载，则为该语言实现链接指示的编译器很可能也支持重载这些C++函数</li>
+<li>C语言不支持函数重载，故C的链接指示只能用于说明一组重载函数中的一个，否则报错</li>
+<li>若在一组重载函数中有一个是C函数，则其他的必定都是C++函数</li>
+<li>使用了类类型形参/返回类型的C++函数都只能在C++程序中调用</li>
+<li>例子：C语言不支持函数重载</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">void</span> <span class="n">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">);</span>    <span class="c1">//声明为C函数
+</span><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">void</span> <span class="n">print</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>             <span class="c1">//错，C函数不支持重载，和上面一句冲突
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">SmallInt</span><span class="p">{</span><span class="cm">/* 定义类 */</span><span class="p">};</span>
+<span class="k">class</span> <span class="nc">BigNum</span><span class="p">{</span><span class="cm">/* 定义类 */</span><span class="p">};</span>
+<span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">double</span> <span class="n">calc</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>         <span class="c1">//该重载版本可被C使用
+</span><span class="c1"></span><span class="k">extern</span> <span class="n">SmallInt</span> <span class="nf">calc</span><span class="p">(</span><span class="k">const</span> <span class="n">SmallInt</span> <span class="o">&amp;</span><span class="p">);</span> <span class="c1">//该重载版本不可被C使用
+</span><span class="c1"></span><span class="k">extern</span> <span class="n">BigNum</span> <span class="nf">calc</span><span class="p">(</span><span class="k">const</span> <span class="n">BigNum</span> <span class="o">&amp;</span><span class="p">);</span>     <span class="c1">//该重载版本不可被C使用
+</span></code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
