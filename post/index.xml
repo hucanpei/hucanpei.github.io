@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 18 May 2020 17:34:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2020 11:59:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,15 @@
       
       <guid>http://localhost:1313/post/ml/ml_top/</guid>
       <description>做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG</description>
+    </item>
+    
+    <item>
+      <title>（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族</title>
+      <link>http://localhost:1313/post/network/hplsp_ch1/</link>
+      <pubDate>Tue, 19 May 2020 11:59:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/network/hplsp_ch1/</guid>
+      <description>现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque</description>
     </item>
     
     <item>
@@ -75,7 +84,7 @@
     </item>
     
     <item>
-      <title>趣谈Linux操作系统10-14：进程、线程、进程数据结构</title>
+      <title>（未完成）趣谈Linux操作系统10-14：进程、线程、进程数据结构</title>
       <link>http://localhost:1313/post/os/linux_interest_10-14/</link>
       <pubDate>Fri, 27 Mar 2020 00:11:00 +0800</pubDate>
       

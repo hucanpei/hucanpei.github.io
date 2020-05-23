@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/network/hplsp_ch1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族" />
+<meta property="og:description" content="现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/network/hplsp_ch1/" />
+<meta property="article:published_time" content="2020-05-19T11:59:00+08:00" />
+<meta property="article:modified_time" content="2020-05-19T11:59:00+08:00" />
+<meta itemprop="name" content="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族">
+<meta itemprop="description" content="现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque">
+<meta itemprop="datePublished" content="2020-05-19T11:59:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-19T11:59:00&#43;08:00" />
+<meta itemprop="wordCount" content="6151">
+
+
+
+<meta itemprop="keywords" content="Linux,网络,C&#43;&#43;,Linux高性能服务器编程,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族"/>
+<meta name="twitter:description" content="现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-19 </span>
+        
+          <span class="more-meta"> 约 6151 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tcpip协议族体系结构以及主要协议">TCP/IP协议族体系结构以及主要协议</a>
+      <ul>
+        <li><a href="#数据链路层">数据链路层</a></li>
+        <li><a href="#网络层">网络层</a></li>
+        <li><a href="#传输层">传输层</a></li>
+        <li><a href="#应用层">应用层</a></li>
+      </ul>
+    </li>
+    <li><a href="#封装">封装</a></li>
+    <li><a href="#分用">分用</a></li>
+    <li><a href="#测试网络">测试网络</a></li>
+    <li><a href="#arp协议工作原理">ARP协议工作原理</a>
+      <ul>
+        <li><a href="#以太网arp请求应答报文详解">以太网ARP请求/应答报文详解</a></li>
+        <li><a href="#arp高速缓存的查看和修改">ARP高速缓存的查看和修改</a></li>
+        <li><a href="#使用tcpdump观察arp通信过程">使用tcpdump观察ARP通信过程</a></li>
+      </ul>
+    </li>
+    <li><a href="#dns工作原理">DNS工作原理</a>
+      <ul>
+        <li><a href="#dns查询和应答报文详解">DNS查询和应答报文详解</a></li>
+        <li><a href="#linux下访问dns服务">Linux下访问DNS服务</a></li>
+        <li><a href="#使用tcpdump观察dns通信过程">使用tcpdump观察DNS通信过程</a></li>
+      </ul>
+    </li>
+    <li><a href="#socket和tcpip协议族的关系">socket和TCP/IP协议族的关系</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>现在Internet使用的主流协议族是<code>TCP/IP</code>，它是分层、多协议的通信体系</li>
+<li>TCP/IP协议族包含众多协议，系统学习需查<code>RFC</code>(Request For Comments)文档</li>
+</ul>
+<h2 id="tcpip协议族体系结构以及主要协议">TCP/IP协议族体系结构以及主要协议</h2>
+<ul>
+<li>TCP/IP协议族是<code>四层</code>协议系统，自底向上是<code>数据链路层</code>、<code>网络层</code>、<code>传输层</code>、<code>应用层</code>，上层协议使用下层协议提供的服务，如图1.1
+<img src="../network_figs/HPLSP_ch1-fig_1_1.png" alt="fig_1_1"></li>
+</ul>
+<h3 id="数据链路层">数据链路层</h3>
+<ul>
+<li>数据链路层实现网卡接口和网络驱动，以处理数据在物理媒介（以太网、令牌环等）上的传输</li>
+<li>网络驱动隐藏了不同物理网络的电气特性等细节，对上层协议提供统一的接口</li>
+<li>数据链路层常用的两个协议：<code>ARP</code>(Address Resolve Protocol，地址解析)和<code>RARP</code>(Reverse ARP，逆地址解析)，它们实现<code>IP地址</code>和<code>物理地址</code>（通常是<code>MAC地址</code>，以太网、令牌环、802.11无线都使用MAC地址）之间的转换
+<ul>
+<li><code>ARP</code>协议：网络层使用IP地址寻址一台机器，数据链路层使用物理地址寻址一台机器，因此网络层必须先用ARP协议将目标机器的IP地址转换为物理地址</li>
+<li><code>RARP</code>协议：仅用于网络上的某些无盘工作站，它们缺乏存储设备，无法记住自己的IP地址。运行RARP的网管通常存有该网络上所有机器的物理地址到IP地址的映射</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络层">网络层</h3>
+<ul>
+<li>网络层实现数据包的选路和转发。<code>WAN</code>(Wide Area Network，广域网)通常使用众多分级的路由来连接分散的主机或<code>LAN</code>(Local Area Network，局域网)</li>
+<li>通信的主机之间一般不直接连接，而是通过多个中间节点（路由）连接的，网络层的任务是选择这些节点，确定两台主机间的通信路径</li>
+<li>网络层对上层协议隐藏了网络拓扑连接的细节。在上层协议看来，通信的两台主机是直接连接的</li>
+<li>网络层最核心的协议是<code>IP</code>(Internet Protocol，因特网协议)协议，它根据数据包的目的IP地址来决定如何投递：若数据包不能直接发送给目标主机，就为它寻找合适的<code>下一跳</code>路由，并将数据包交给该路由转发。多次重复该过程直到最终到达目的主机，或因发送失败被丢弃。</li>
+<li>IP协议使用<code>逐跳</code>(hop by hop)的方式确定通信路径</li>
+<li>网络层另一个重要的协议是<code>ICMP</code>(Internet Control Message Protocol，因特网控制报文协议)协议，它是IP协议的补充，主要用于检测网络连接。</li>
+<li>ICMP协议使用的报文格式如图1.2
+<img src="../network_figs/HPLSP_ch1-fig_1_2.png" alt="fig_1_2"></li>
+<li>上图中各字段的用途：
+<ul>
+<li><code>8位类型字段</code>用于区分报文类型，它将ICMP报文分为两大类：
+<ul>
+<li><code>差错报文</code>：主要用于回应网络错误，例如目标不可达（类型值为3）和重定向（类型值为5）</li>
+<li><code>查询报文</code>：用于查询网络信息，例如ping程序使用ICMP报文查看目标是否可到达（类型值为8）</li>
+</ul>
+</li>
+<li>有的ICMP还使用<code>8位代码字段</code>来进一步细分不同的条件，例如重定向报文使用代码值0表示对网络重定向，代码值1表示对主机重定向</li>
+<li><code>16位校验和字段</code>对整个报文（包括头部和内容）进行<code>CRC</code>(Cyclic Redundancy Check，循环冗余校验)来检验报文在传输过程中是否被损坏</li>
+</ul>
+</li>
+<li>不同的ICMP报文类型具有不同的正文内容，具体参考RFC792</li>
+<li>ICMP协议并非严格意义上的网络层协议，因为它使用同一层的IP协议提供的服务（算是IP的上层协议）</li>
+</ul>
+<h3 id="传输层">传输层</h3>
+<ul>
+<li>传输层为两台主机上的程序提供<code>端到端</code>(end to end)的通信，只关心起始端和目的端，不关心中转过程（和网络层的逐跳方式相反）</li>
+<li>传输层和网络层的区别见图1.3
+<img src="../network_figs/HPLSP_ch1-fig_1_3.png" alt="fig_1_3"></li>
+<li>上图中垂直实线是TCP/IP各层协议之间的实体通信，水平虚线是逻辑通路
+<ul>
+<li>数据链路层封装了物理网络的电气细节</li>
+<li>网络层封装了网络连接的细节</li>
+<li>传输层封装了一条端到端的逻辑通信链路，它负责数据的收发、链路的超时重连等</li>
+</ul>
+</li>
+<li>传输层的主要协议有：<code>TCP</code>、<code>UDP</code>、<code>SCTP</code>
+<ul>
+<li><code>TCP</code>(Transmission Control Protocol，传输控制协议)：为应用层提供可靠的、面向连接的、基于流的服务：
+<ul>
+<li><code>可靠</code>：TCP使用超时重传、数据确认等方式确保数据包正确地发送到目的端</li>
+<li><code>面向连接</code>：使用TCP通信的双方必须先建立连接并在内核中为连接维护一些数据结构，如连接状态、读写缓冲区、定时器等。通信结束时，双方必须关闭连接以释放这些数据</li>
+<li><code>基于流</code>：TCP的数据没有长度限制，发送端可逐个字节地写入，接收端可逐个字节地读取</li>
+</ul>
+</li>
+<li><code>UDP</code>(User Datagram Protocol，用户数据报协议)：为应用层提供不可靠、无连接、基于数据报的服务：
+<ul>
+<li><code>不可靠</code>：无法保证数据从发送端正确传送到目的端，丢失或错误时UDP仅告知程序发送失败，使用UDP的程序需自己处理数据确认、超时重传等</li>
+<li><code>无连接</code>：通信双方不必保持长久的联系，每次发送都需明确指定接收端地址</li>
+<li><code>基于数据报</code>：每个UDP数据报都有长度，接收端必须以该长度为最小单位将数据报的内容一次性读出，否则数据被截断</li>
+</ul>
+</li>
+<li><code>SCTP</code>(Stream Control Transmission Protocol，流控制传输协议)：为在因特网上传输电话信号而设计，可参考RFC2960</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用层">应用层</h3>
+<ul>
+<li>应用层协议工作在用户态：
+<ul>
+<li>数据链路层、网络层、传输层处理网络通信细节，在<code>内核空间</code>中实现</li>
+<li>应用层处理众多逻辑，如文件传输、名称查询、网络管理等，通常在<code>用户空间</code>中实现（也有少数服务器程序在内核中实现，为减少数据复制和状态切换的开销，但这样不够灵活且不便移植）</li>
+</ul>
+</li>
+<li>应用层协议举例（见图1.1）：
+<ul>
+<li><code>ping</code>是应用程序而非协议，利用ICMP报文检测网络连接</li>
+<li><code>telnet</code>协议是远程登陆协议，可在本地完成远程任务</li>
+<li><code>OSPF</code>(Open Shortest Path First，开放最短路径优先)协议是动态路由更新协议，用于路由器之间通信</li>
+<li><code>DNS</code>(Domain Name Service，域名服务)协议提供机器域名到IP地址的转换</li>
+</ul>
+</li>
+<li>应用层协议/程序可跳过传输层直接使用网络层的服务（如ping和OSPF），既可使用TCP又可使用UDP（如DNS）</li>
+<li>可通过<code>/etc/services</code>文件查看所有知名的应用层协议，以及它们使用哪些传输层服务</li>
+</ul>
+<h2 id="封装">封装</h2>
+<ul>
+<li>上层协议通过<code>封装</code>使用下层协议的服务：程序数据在发送之前沿着协议栈从上往下传递，每层协议都在上层数据的基础上添加自己的头部（有时还有尾部），如图1.4
+<img src="../network_figs/HPLSP_ch1-fig_1_4.png" alt="fig_1_4"></li>
+<li>经过TCP封装后的数据称为<code>TCP报文段</code>，由<code>TCP头部信息</code>和<code>TCP内核缓冲区</code>的数据构成，如图1.5，发送端程序使用<code>send/write</code>函数向一个已建立的TCP连接写入数据时，内核的TCP模块首先把数据复制到该连接对应的TCP内核发送缓冲区中，然后TCP模块调用IP模块提供的服务，向IP模块传递的参数包括TCP头部信息和TCP发送缓冲区的数据，即TCP报文段
+<img src="../network_figs/HPLSP_ch1-fig_1_5.png" alt="fig_1_5"></li>
+<li>经过UDP封装的数据称为<code>UDP数据报</code>，UDP不需要为应用层数据保持副本，因为不可靠。一个UDP数据报被发送后，UDP内核缓冲区的该数据报就被丢弃。若需要重发则需重新从用户空间中拷贝</li>
+<li>经过IP封装后的数据称为<code>IP数据报</code>，它也包括头部信息和数据部分，其中数据部分是一个TCP报文段/UDP数据报/ICMP报文</li>
+<li>经过数据链路层封装的数据称为<code>帧</code>，帧是最终在物理网络上传送的字节序列，其类型取决于传输媒介。以太网帧的封装格式如图1.6
+<ul>
+<li>6字节的<code>目的物理地址</code>和6字节的<code>源物理地址</code>来表示通信双方</li>
+<li>2字节<code>类型字段</code>表示上一层协议类型</li>
+<li>4字节<code>CRC字段</code>对帧的其他部分提供差错检验</li>
+<li>帧的<code>MTU</code>(Max Transmit Unit，最大传输单元)通常受网络类型限制，以太网帧的MTU是1500字节，过长的IP数据报会被<code>分片</code>(fragment)传输
+<img src="../network_figs/HPLSP_ch1-fig_1_6.png" alt="fig_1_6"></li>
+</ul>
+</li>
+</ul>
+<h2 id="分用">分用</h2>
+<ul>
+<li><code>分用</code>：帧到达目的主机时将沿协议栈自底向上传递，各层协议依次处理本层负责的头部数据，最终将处理后的帧交给目标程序。</li>
+<li>分用是依靠头部信息中的<code>类型字段</code>实现的，RFC1700定义了所有标识上层协议的类型字段和各上层协议对应的值。</li>
+<li>以太网帧的分用过程如图1.7
+<img src="../network_figs/HPLSP_ch1-fig_1_7.png" alt="fig_1_7"></li>
+<li>IP、ARP、RARP都使用帧传输数据，故帧的头部需要提供字段区分它们。以太网帧使用2字节<code>类型字段</code>标识上层协议：
+<ul>
+<li>类型字段0x800表示IP数据报</li>
+<li>类型字段0x806表示ARP请求/应答报文</li>
+<li>类型字段0x835表示RARP请求/应答报文</li>
+</ul>
+</li>
+<li>TCP、UDP、ICMP都使用IP协议，故IP数据报头部使用16位<code>协议字段</code>区分它们</li>
+<li>TCP报文段和UDP数据报通过头部中的16位<code>端口号字段</code>区分上层应用程序，例如DNS使用53端口，HTTP协议使用80端口。所有知名应用层协议使用的端口号都可在<code>/etc/services</code>中查询</li>
+<li>帧通过分用步骤将封装前的原始数据送至目标服务，在顶层应用看来，封装和分用似乎没有发生过</li>
+</ul>
+<h2 id="测试网络">测试网络</h2>
+<ul>
+<li>本书若未特别声明，所有测试硬件都是如图1.8的网络：两台主机通过路由器接入网络
+<img src="../network_figs/HPLSP_ch1-fig_1_8.png" alt="fig_1_8"></li>
+<li>我自己的测试平台如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">A机</th>
+<th align="center">B机</th>
+<th align="center">路由器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">机器名</td>
+<td align="center">ernest-laptop</td>
+<td align="center">Kongming20</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">IP地址</td>
+<td align="center">192.168.1.108</td>
+<td align="center">192.168.1.109</td>
+<td align="center">192.168.1.1</td>
+</tr>
+<tr>
+<td align="center">MAC地址</td>
+<td align="center">00:16:d3:5c:b9:c3</td>
+<td align="center">08:00:27:53:10:67</td>
+<td align="center">14:e6:e4:93:5b:78</td>
+</tr>
+<tr>
+<td align="center">系统</td>
+<td align="center">ubuntu 18（实体机）</td>
+<td align="center">ubuntu 18（虚拟机）</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">网卡</td>
+<td align="center">eth0</td>
+<td align="center">ens33</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="arp协议工作原理">ARP协议工作原理</h2>
+<ul>
+<li>ARP协议可实现任意网络层地址到任意物理地址的转换</li>
+<li>ARP协议实现IP地址向物理地址转换的<code>原理</code>是：主机向所在的网络广播一个ARP请求，请求目标机器的网络地址。该网络上所有主机都收到该请求，但只有被请求的目标机器会回应，回应内容包含自己的物理地址</li>
+</ul>
+<h3 id="以太网arp请求应答报文详解">以太网ARP请求/应答报文详解</h3>
+<ul>
+<li>以太网ARP请求/应答报文的格式如图1.9：
+<img src="../network_figs/HPLSP_ch1-fig_1_9.png" alt="fig_1_9"></li>
+<li>上图中各字段：
+<ul>
+<li><code>硬件类型字段</code>定义物理地址的类型，为1表示MAC地址</li>
+<li><code>协议类型字段</code>表示要映射的协议地址类型，为0x800表示IP地址</li>
+<li><code>硬件地址长度字段</code>和<code>协议地址长度字段</code>，单位是字节，MAC地址的长度为6，IPv4地址的长度为4</li>
+<li><code>操作字段</code>指出4种操作类型：为1表示ARP请求，为2表示ARP应答，为3表示RARP请求，为4表示RARP应答</li>
+<li>最后4个字段指定通信双方的以太网地址和IP地址：
+<ul>
+<li><code>发送端</code>填充除目的端以太网地址外的其他3个字段，构建ARP请求并发送</li>
+<li><code>接收端</code>发现该请求的目的端IP地址是自己，就将自己的以太网地址填入目的端以太网地址，并交换两个发送端地址和目的端地址，构建ARP应答并返回</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ARP请求/应答的报文长度为28字节，若加上以太网帧头部尾部的18字节，则携带ARP请求/应答报文的以太网帧长度为46字节</li>
+<li>有的链路层实现要求以太网帧数据部分长度至少为46字节，此时将对ARP请求/应答报文填充，此时携带ARP请求/应答报文的以太网帧长度为64字节</li>
+</ul>
+<h3 id="arp高速缓存的查看和修改">ARP高速缓存的查看和修改</h3>
+<ul>
+<li>通常ARP维护一个<code>高速缓存</code>，其中包含经常访问（例如网关）或最近访问的机器的IP地址到物理地址的映射。这样可尽量避免重复的ARP请求</li>
+<li>linux下可用<code>arp</code>命令查看和修改ARP高速缓存：
+<ul>
+<li><code>arp -a</code>显示当前缓存中的内容</li>
+<li><code>arp -d address</code>删除缓存中的一项</li>
+<li><code>arp -s address hw_addr</code>向缓存中添加一项</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用tcpdump观察arp通信过程">使用tcpdump观察ARP通信过程</h3>
+<ul>
+<li>步骤：
+<ul>
+<li>将两台机器分别从对方的ARP缓存中删除</li>
+<li>在A机使用tcpdump抓取两台机器之间的以太网帧</li>
+<li>从A机telnet登录到B机执行echo</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 在A机上执行：</span>
+<span class="c1"># ARP缓存中删除B机</span>
+$ sudo arp -d 192.168.1.109
+<span class="c1"># 从A机网卡eth0上抓取两台机器间的以太网帧</span>
+$ sudo tcpdump -i eth0 -ent <span class="s1">&#39;(dst 192.168.1.109 and src 192.168.1.108)&#39;</span>
+<span class="c1"># 在A机的另一个终端上telnel登陆到B机</span>
+$ telnet 192.168.1.109 <span class="nb">echo</span>
+<span class="c1"># tcpdump的输出：</span>
+<span class="c1"># 00:16:d3:5c:b9:e3 &gt; ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Request who-has 192.168.1.109 tell 192.168.1.108, length 28</span>
+<span class="c1"># 24:ee:9a:14:58:3e &gt; 00:16:d3:5c:b9:e3, ethertype ARP (0x0806), length 60: Reply 192.168.1.109 is-at 24:ee:9a:14:58:3e, length 46</span>
+<span class="c1"># 00:16:d3:5c:b9:e3 &gt; 24:ee:9a:14:58:3e, ethertype IPv4 (0x0800), length 74: 192.168.1.108.47404 &gt; 192.168.1.109.7: Flags [S], seq 3299827161, win 64240, options [mss 1460,sackOK,TS val 4128028256 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># 24:ee:9a:14:58:3e &gt; 00:16:d3:5c:b9:e3, ethertype IPv4 (0x0800), length 60: 192.168.1.109.7 &gt; 192.168.1.108.47404: Flags [R.], seq 0, ack 3299827162, win 0, length 0</span>
+<span class="c1"># 24:ee:9a:14:58:3e &gt; 00:16:d3:5c:b9:e3, ethertype ARP (0x0806), length 60: Request who-has 192.168.1.108 tell 192.168.1.109, length 46</span>
+<span class="c1"># 00:16:d3:5c:b9:e3 &gt; 24:ee:9a:14:58:3e, ethertype ARP (0x0806), length 42: Reply 192.168.1.108 is-at 00:16:d3:5c:b9:e3, length 28</span>
+<span class="c1"># 注：B机的MAC地址在这里是24:ee:9a:14:58:3e，因为B机是虚拟机，这是B机运行的物理机的MAC地址</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>若执行tcpdump和telnet之前未清除ARP缓存，则不会发出ARP请求，故抓不到帧</li>
+<li>用<code>tcpdump</code>抓取的数据包是以太网帧，可选项：
+<ul>
+<li><code>-i</code>指定网卡</li>
+<li><code>-e</code>开启以太网帧头部显示</li>
+<li><code>-n</code>不将地址转换为主机名</li>
+<li><code>-t</code>不打印时间戳</li>
+<li>使用<code>dst</code>和<code>src</code>指定通信的目的IP和源端IP</li>
+</ul>
+</li>
+<li>输出信息：
+<ul>
+<li>前两行是A机向B机发出ARP请求和B机应答（此处只看前两行）</li>
+<li>中间两行是telnet相关的通信</li>
+<li>最后两行是B机向A机发出ARP请求和A机应答</li>
+</ul>
+</li>
+<li>第一行输出解读：
+<ul>
+<li>00:16:d3:5c:b9:e3是源端的物理地址，ff:ff:ff:ff:ff:ff是目的端的物理地址（这是以太网的<code>广播地址</code>，用来表示整个LAN，即该LAN上的所有机器都会收到该帧）</li>
+<li>0x0806是以太网帧头部的类型字段，表示上层协议是ARP</li>
+<li>length 42是该以太网帧的长度（字节数），实际上应该是46字节，尾部4个字节的CRC字段被tcpdump忽略</li>
+<li>length 28是以太网帧中的数据部分长度</li>
+<li>数据部分中的Request表示是一个请求</li>
+<li>who-has 192.168.1.109 tell 192.168.1.108表示查询的目标和查询的发起者</li>
+</ul>
+</li>
+<li>第二行输出数据部分解读：
+<ul>
+<li>Reply表示是一个应答</li>
+<li>192.168.1.109 is-at 24:ee:9a:14:58:3e表示对自己MAC地址的应答</li>
+<li>数据部分长度是46，使用了填充字节来满足最小帧长度</li>
+</ul>
+</li>
+<li>该过程可用图1.10解释：
+<img src="../network_figs/HPLSP_ch1-fig_1_10.png" alt="fig_1_10"></li>
+<li>上图说明：
+<ul>
+<li>以太网帧参照图1.6</li>
+<li>ARP请求/应答是从以太网驱动中发出的，并不是独立于驱动程序之外</li>
+<li>路由器也将收到ARP请求的以太网帧，只是它不会应答，也不会被tcpdump捕获（此处tcpdump指定了捕获的通信双方的ip）</li>
+</ul>
+</li>
+</ul>
+<h2 id="dns工作原理">DNS工作原理</h2>
+<ul>
+<li>通常使用机器的域名而非IP地址来访问，将域名转换为IP地址的方法称为<code>域名查询服务</code>，包括：<code>NIS</code>(Network Information Service，网络信息服务)、<code>DNS</code>、<code>本地静态文件</code>等</li>
+</ul>
+<h3 id="dns查询和应答报文详解">DNS查询和应答报文详解</h3>
+<ul>
+<li>DNS是一套分布式的域名服务系统，每个DNS服务器上都存放机器名到IP地址的映射并动态更新</li>
+<li>使用DNS协议向DNS服务器查询，DNS查询/应答的报文格式如图1.11
+<img src="../network_figs/HPLSP_ch1-fig_1_11.png" alt="fig_1_11"></li>
+<li>DNS报文格式：
+<ul>
+<li>16位<code>标识(Identification)</code>字段用于标记一对DNS查询/应答，以此区分某个应答是哪个查询的回应</li>
+<li>16位<code>标志(Flags)</code>字段用于协商具体的通信方式和反馈通信状态，如图1.12：
+<img src="../network_figs/HPLSP_ch1-fig_1_12.png" alt="fig_1_12">
+<ul>
+<li>QR是查询/应答标志：0是查询，1是应答</li>
+<li>opcode定义查询/应答的类型：0是标准查询，1是反向查询（由IP地址得到域名），2是请求服务器状态</li>
+<li>AA是授权应答标志，仅由应答报文使用：1表示域名服务器是授权服务器</li>
+<li>TC是截断标志，仅当DNS报文使用UDP服务时使用（因为UDP数据报长度有限制）：1表示DNS报文超过512字节被截断</li>
+<li>RD是递归查询标志，当目标DNS服务器无法解析域名时：
+<ul>
+<li>0是迭代查询，即将它知道的其他DNS服务器的IP地址返回</li>
+<li>1是递归查询，即它将向其他DNS服务器继续查询，直到获得结果并返回</li>
+</ul>
+</li>
+<li>RA是允许递归标志，仅由应答报文使用：1表示DNS服务器支持递归查询</li>
+<li>zero这3位未使用，必须都设为0</li>
+<li>rcode是4位返回码，表示应答状态：0表示无错误，3表示域名不存在</li>
+</ul>
+</li>
+<li>接下来4个16位字段：查询问题个数、应答资源记录个数、授权资源记录数目、额外资源记录数目，对应报文的最后4个字段。通常：
+<ul>
+<li>查询报文一般有1个查询问题，而应答资源记录、授权资源记录、额外资源记录数目都是0</li>
+<li>应答报文至少有1个应答资源记录，而授权资源记录、额外资源记录数目可为0或非0</li>
+</ul>
+</li>
+<li>可变长的查询问题的格式如图1.13：
+<img src="../network_figs/HPLSP_ch1-fig_1_13.png" alt="fig_1_13">
+<ul>
+<li>查询名以一定格式封装了要查询的主机域名</li>
+<li>16位查询类型表示如何查询：
+<ul>
+<li>类型A值为1，表示获得目标主机的IP地址</li>
+<li>类型CNAME值为5，表示获得目标主机的别名</li>
+<li>类型PTR值为12，表示反向查询</li>
+</ul>
+</li>
+<li>16位查询类通常为1，表示获得因特网地址（IP地址）</li>
+</ul>
+</li>
+<li>可变长的应答字段、授权字段、额外信息字段都适用RR(Resource Record，资源记录)格式，如图1.14：
+<img src="../network_figs/HPLSP_ch1-fig_1_14.png" alt="fig_1_14"></li>
+</ul>
+</li>
+</ul>
+<h3 id="linux下访问dns服务">Linux下访问DNS服务</h3>
+<h3 id="使用tcpdump观察dns通信过程">使用tcpdump观察DNS通信过程</h3>
+<h2 id="socket和tcpip协议族的关系">socket和TCP/IP协议族的关系</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-05-19
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">Linux高性能服务器编程</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/ml/ml_top/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/cppprimer_ch19/">
+            <span class="next-text nav-default">C&#43;&#43; primer 第19章 特殊工具与技术</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/network/hplsp_ch1/" class="leancloud_visitors" data-flag-title="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
