@@ -17,7 +17,7 @@
       <pubDate>Mon, 25 May 2020 00:00:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/network/hplsp_ch2/</guid>
-      <description></description>
+      <description>IP头部信息出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为 IP数据报的路由和转发发生在</description>
     </item>
     
     <item>

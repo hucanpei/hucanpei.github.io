@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="IP头部信息出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为 IP数据报的路由和转发发生在" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="（未完成）Linux高性能服务器编程 第2章 IP协议详解" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="IP头部信息出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为 IP数据报的路由和转发发生在" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/network/hplsp_ch2/" />
 <meta property="article:published_time" content="2020-05-25T00:00:00+08:00" />
 <meta property="article:modified_time" content="2020-05-25T00:00:00+08:00" />
 <meta itemprop="name" content="（未完成）Linux高性能服务器编程 第2章 IP协议详解">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="IP头部信息出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为 IP数据报的路由和转发发生在">
 <meta itemprop="datePublished" content="2020-05-25T00:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-25T00:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="1247">
 
 
 
 <meta itemprop="keywords" content="Linux,网络,C&#43;&#43;,Linux高性能服务器编程,读书," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="（未完成）Linux高性能服务器编程 第2章 IP协议详解"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="IP头部信息出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为 IP数据报的路由和转发发生在"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-05-25 </span>
         
-          <span class="more-meta"> 约 0 字 </span>
-          <span class="more-meta"> 预计阅读 0 分钟 </span>
+          <span class="more-meta"> 约 1247 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
     </header>
@@ -132,11 +132,117 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ip服务的特点">IP服务的特点</a></li>
+    <li><a href="#ipv4头部结构">IPv4头部结构</a>
+      <ul>
+        <li><a href="#ipv4头部结构-1">IPv4头部结构</a></li>
+        <li><a href="#使用tcpdump观察ipv4头部结构">使用tcpdump观察IPv4头部结构</a></li>
+      </ul>
+    </li>
+    <li><a href="#ip分片">IP分片</a></li>
+    <li><a href="#ip路由">IP路由</a>
+      <ul>
+        <li><a href="#ip模块工作流程">IP模块工作流程</a></li>
+        <li><a href="#路由机制">路由机制</a></li>
+        <li><a href="#路由表更新">路由表更新</a></li>
+      </ul>
+    </li>
+    <li><a href="#ip转发">IP转发</a></li>
+    <li><a href="#重定向">重定向</a>
+      <ul>
+        <li><a href="#icmp重定向报文">ICMP重定向报文</a></li>
+        <li><a href="#主机重定向实例">主机重定向实例</a></li>
+      </ul>
+    </li>
+    <li><a href="#ipv6头部结构">IPv6头部结构</a>
+      <ul>
+        <li><a href="#ipv6固定头部结构">IPv6固定头部结构</a></li>
+        <li><a href="#ipv6扩展头部">IPv6扩展头部</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      
+      <ul>
+<li><code>IP头部信息</code>出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为</li>
+<li><code>IP数据报的路由和转发</code>发生在除目标机器之外的所有主机和路由器上，它们决定数据报如何转发</li>
+<li>32位的IPv4地址已经耗尽，可使用128位IPv6地址</li>
+</ul>
+<h2 id="ip服务的特点">IP服务的特点</h2>
+<ul>
+<li>IP协议为上层协议提供无状态、无连接、不可靠的服务</li>
+<li><code>无状态</code>(stateless)：IP通信双方不同步传输数据的状态，即所有IP数据报都是相互独立、无上下文关系
+<ul>
+<li>缺点：无法处理乱序和重复的IP数据报，因为IP协议无法检测乱序和重复。（IP数据报头部也有提供标识字段来唯一标识一个IP数据报，但它仅用于处理IP数据报的分片和重组，不用于指定接收顺序）</li>
+<li>优点：简单高效，不需为保持通信状态而分配资源，也不需每次传输都携带状态信息。（UDP和HTTP也是无状态，HTTP浏览器连续两次网页请求之间无关联）</li>
+</ul>
+</li>
+<li><code>无连接</code>(connectionless)：IP通信双方都不维持对方的任何信息，即上层协议每次发送数据都必须指定对方的IP地址</li>
+<li><code>不可靠</code>：IP协议不能保证IP数据报准确地到达接收端，它只承诺尽最大努力。上层协议需实现数据确认、超时重传等机制以实现可靠传输
+<ul>
+<li>IP数据报发送失败的例子：
+<ul>
+<li>中转路由器根据IP数据报头部TTL字段发现它在网络上存活太久，会将其丢弃，并返回ICMP错误消息（超时错误）给发送端</li>
+<li>接收端通过校验发现IP数据报不正确，会将其丢弃，并返回ICMP错误消息（IP头部参数错误）给发送端</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ipv4头部结构">IPv4头部结构</h2>
+<ul>
+<li>IPv4的头部通常为20字节，除非含有可变长的选项。结构如图2.1
+<img src="../network_figs/HPLSP_ch2-fig_2_1.png" alt="fig_2_1"></li>
+<li>IPv4的头部：
+<ul>
+<li>4位<code>版本号</code>指定IP协议版本：IPv4的版本号是4，其他IPv4的扩展（如SIP和PIP）有不同的版本号，头部结构也不同</li>
+<li>4位<code>头部长度</code>是该头部的长度，单位是32bit（4字节），IP头部的最大长度是15*4=60字节</li>
+<li>8位<code>服务类型</code>(Type Of Service，TOS)包括：
+<ul>
+<li>3位优先权字段，现已被忽略</li>
+<li>4位TOS字段，分别为：最小延时、最大吞吐量、最高可靠性，最小费用。根据实际需要，至多能将其中一个置为1，如ssh和telnet需要最小延时，ftp需要最大吞吐量</li>
+<li>1位保留字段，必须置0</li>
+</ul>
+</li>
+<li>16位<code>总长度</code>是整个IP数据报的长度，单位是字节，IP数据报的最大长度为65535字节，但长度超过MTU的会被分片传输</li>
+<li>16位<code>标识</code>唯一地标识主机发送的每一个数据报，其初始值随机，每发送一个数据报就+1，分片时每一个分片的标识都相同</li>
+<li>3位<code>标志</code>字段：
+<ul>
+<li>第一位保留</li>
+<li>第二位DF(Don&rsquo;t Fragment)表示禁止分片，此时若IP数据报长度超过MTU将被丢弃并返回ICMP差错报文</li>
+<li>第三位MF(More Fragment)表示更多分片，除数据报的最后一个分片外，其他分片都要将其置1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ipv4头部结构-1">IPv4头部结构</h3>
+<h3 id="使用tcpdump观察ipv4头部结构">使用tcpdump观察IPv4头部结构</h3>
+<h2 id="ip分片">IP分片</h2>
+<h2 id="ip路由">IP路由</h2>
+<h3 id="ip模块工作流程">IP模块工作流程</h3>
+<h3 id="路由机制">路由机制</h3>
+<h3 id="路由表更新">路由表更新</h3>
+<h2 id="ip转发">IP转发</h2>
+<h2 id="重定向">重定向</h2>
+<h3 id="icmp重定向报文">ICMP重定向报文</h3>
+<h3 id="主机重定向实例">主机重定向实例</h3>
+<h2 id="ipv6头部结构">IPv6头部结构</h2>
+<h3 id="ipv6固定头部结构">IPv6固定头部结构</h3>
+<h3 id="ipv6扩展头部">IPv6扩展头部</h3>
+<p><img src="../network_figs/HPLSP_ch2-fig_2_2.png" alt="fig_2_2">
+<img src="../network_figs/HPLSP_ch2-fig_2_3.png" alt="fig_2_3">
+<img src="../network_figs/HPLSP_ch2-fig_2_4.png" alt="fig_2_4">
+<img src="../network_figs/HPLSP_ch2-fig_2_5.png" alt="fig_2_5">
+<img src="../network_figs/HPLSP_ch2-fig_2_6.png" alt="fig_2_6">
+<img src="../network_figs/HPLSP_ch2-tab_2_1.png" alt="tab_2_1">
+<img src="../network_figs/HPLSP_ch2-tab_2_2.png" alt="tab_2_2">
+<img src="../network_figs/HPLSP_ch2-tab_2_3.png" alt="tab_2_3"></p>
+
     </div>
 
     <div class="post-copyright">
