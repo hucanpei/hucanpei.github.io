@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族 - pi</title>
+  <title>Linux高性能服务器编程 第1章 TCP/IP协议族 - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -39,22 +39,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族" />
+<meta property="og:title" content="Linux高性能服务器编程 第1章 TCP/IP协议族" />
 <meta property="og:description" content="现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/network/hplsp_ch1/" />
 <meta property="article:published_time" content="2020-05-19T11:59:00+08:00" />
 <meta property="article:modified_time" content="2020-05-19T11:59:00+08:00" />
-<meta itemprop="name" content="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族">
+<meta itemprop="name" content="Linux高性能服务器编程 第1章 TCP/IP协议族">
 <meta itemprop="description" content="现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque">
 <meta itemprop="datePublished" content="2020-05-19T11:59:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-19T11:59:00&#43;08:00" />
-<meta itemprop="wordCount" content="6151">
+<meta itemprop="wordCount" content="7435">
 
 
 
 <meta itemprop="keywords" content="Linux,网络,C&#43;&#43;,Linux高性能服务器编程,读书," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族"/>
+<meta name="twitter:title" content="Linux高性能服务器编程 第1章 TCP/IP协议族"/>
 <meta name="twitter:description" content="现在Internet使用的主流协议族是TCP/IP，它是分层、多协议的通信体系 TCP/IP协议族包含众多协议，系统学习需查RFC(Reque"/>
 
 <!--[if lte IE 9]>
@@ -118,13 +118,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族</h1>
+      <h1 class="post-title">Linux高性能服务器编程 第1章 TCP/IP协议族</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-05-19 </span>
         
-          <span class="more-meta"> 约 6151 字 </span>
-          <span class="more-meta"> 预计阅读 13 分钟 </span>
+          <span class="more-meta"> 约 7435 字 </span>
+          <span class="more-meta"> 预计阅读 15 分钟 </span>
         
       </div>
     </header>
@@ -502,13 +502,13 @@ $ telnet 192.168.1.109 <span class="nb">echo</span>
 <li>rcode是4位返回码，表示应答状态：0表示无错误，3表示域名不存在</li>
 </ul>
 </li>
-<li>接下来4个16位字段：查询问题个数、应答资源记录个数、授权资源记录数目、额外资源记录数目，对应报文的最后4个字段。通常：
+<li>接下来4个16位字段：<code>查询问题个数</code>、<code>应答资源记录个数</code>、<code>授权资源记录数目</code>、<code>额外资源记录数目</code>，对应报文的最后4个字段。通常：
 <ul>
 <li>查询报文一般有1个查询问题，而应答资源记录、授权资源记录、额外资源记录数目都是0</li>
 <li>应答报文至少有1个应答资源记录，而授权资源记录、额外资源记录数目可为0或非0</li>
 </ul>
 </li>
-<li>可变长的查询问题的格式如图1.13：
+<li>可变长的<code>查询问题</code>的格式如图1.13：
 <img src="../network_figs/HPLSP_ch1-fig_1_13.png" alt="fig_1_13">
 <ul>
 <li>查询名以一定格式封装了要查询的主机域名</li>
@@ -522,14 +522,123 @@ $ telnet 192.168.1.109 <span class="nb">echo</span>
 <li>16位查询类通常为1，表示获得因特网地址（IP地址）</li>
 </ul>
 </li>
-<li>可变长的应答字段、授权字段、额外信息字段都适用RR(Resource Record，资源记录)格式，如图1.14：
-<img src="../network_figs/HPLSP_ch1-fig_1_14.png" alt="fig_1_14"></li>
+<li>可变长的<code>应答</code>字段、<code>授权</code>字段、<code>额外信息</code>字段都适用RR(Resource Record，资源记录)格式，如图1.14：
+<img src="../network_figs/HPLSP_ch1-fig_1_14.png" alt="fig_1_14">
+<ul>
+<li>32位域名是该记录中资源对应的名字，其格式与查询问题中的查询名相同</li>
+<li>16位类型和16位类的含义与查询问题中的查询类型和查询类相同</li>
+<li>32位生存时间表示该查询记录的结果可被本地客户端缓存多久（秒）</li>
+<li>16位资源数据长度和资源数据的内容取决于16位类型字段，对类型A而言，资源长度位4字节，资源数据是32位IPv4地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DNS协议的细节参考RFC（有诸多文档）：
+<ul>
+<li>RFC1035介绍域名的实现和规范</li>
+<li>RFC1886描述DNS协议对IPv6的扩展支持</li>
 </ul>
 </li>
 </ul>
 <h3 id="linux下访问dns服务">Linux下访问DNS服务</h3>
+<ul>
+<li>要访问DNS服务，必须知道DNS服务器的IP地址</li>
+<li>linux在<code>/etc/resolv.conf</code>文件中存放DNS服务器的IP地址</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-plain" data-lang="plain"># This file is managed by man:systemd-resolved(8). Do not edit.
+nameserver 219.239.26.42
+options edns0
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>文件/etc/resolv.conf是系统自动生成的，编辑后重启会被覆盖</li>
+<li>nameserver用于指定DNS服务器的IP地址，可以有多个nameserver，查询优先级从上往下</li>
+<li>options edns0是配置选项，开启RFC2671描述的DNS扩展</li>
+<li>常用于访问DNS客户端的程序是<code>host</code>，使用如下</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ host -t A www.baidu.com
+<span class="c1"># 输出：</span>
+<span class="c1"># www.baidu.com is an alias for www.a.shifen.com.</span>
+<span class="c1"># www.a.shifen.com has address 182.61.200.6</span>
+<span class="c1"># www.a.shifen.com has address 182.61.200.7</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>host命令使用DNS协议和DNS服务器通信：-t选项告诉DNS协议使用的查询类型，此处使用A类型，即通过域名查询IP地址</li>
+<li>上面输出表明：主机名www.baidu.com是www.a.shifen.com的别名，其IP地址是182.61.200.6和182.61.200.7</li>
+</ul>
 <h3 id="使用tcpdump观察dns通信过程">使用tcpdump观察DNS通信过程</h3>
+<ul>
+<li>使用host命令查询百度的IP地址，并用tcpdump抓取以太网帧：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo tcpdump -i eth0 -nt -s <span class="m">500</span> port domain
+$ host -t A www.baidu.com
+<span class="c1"># 输出：</span>
+<span class="c1"># IP 192.168.1.108.59301 &gt; 219.239.26.42.53: 63637+ A? www.baidu.com. (31)</span>
+<span class="c1"># IP 219.239.26.42.53 &gt; 192.168.1.108.59301: 63637 3/5/5 CNAME www.a.shifen.com., A 182.61.200.6, A 182.61.200.7 (260)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用<code>IP地址:端口号</code>来描述通信的某一端，使用<code>&gt;</code>表示数据传输的方向</li>
+<li>第一行输出是A机192.168.1.108向首选DNS服务器219.239.26.42（见上面/etc/resolv.conf）发送的查询报文
+<ul>
+<li>目标端口53是DNS服务器使用的端口</li>
+<li>63637是本次DNS查询报文的标识值，用于标记一对DNS查询/应答</li>
+<li>+表示启用递归查询标志</li>
+<li>A?表示使用A类型查询方式，即查询IP地址</li>
+<li><a href="http://www.baidu.com">www.baidu.com</a>是查询名</li>
+</ul>
+</li>
+<li>第二行输出是DNS服务器向A机发送的DNS应答：
+<ul>
+<li>3/5/5表示该报文中有3个应答资源、5个授权资源、5个额外信息</li>
+<li>其中，3个应答资源的内容为：
+<ul>
+<li>CNAME <a href="http://www.a.shifen.com">www.a.shifen.com</a>表示机器的别名</li>
+<li>A 182.61.200.6表示机器的IP地址</li>
+<li>A 182.61.200.7表示机器的IP地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="socket和tcpip协议族的关系">socket和TCP/IP协议族的关系</h2>
+<ul>
+<li>数据链路层、网络层、传输层都在内核中实现</li>
+<li>实现TCP/IP协议栈的系统调用主要有两套：socket和XTI，后者基本不再使用</li>
+<li><code>socket</code>的API的主要功能：
+<ul>
+<li>从用户缓冲区复制数据到TCP/UDP内核发送缓冲区，交给内核发送数据，或是从内核TCP/UDP内核接收缓冲区复制数据到用户缓冲区，从内核读取数据</li>
+<li>应用程序可通过API来修改内核中各层协议的某些头部信息或其他数据结构，从而控制底层通信的行为</li>
+</ul>
+</li>
+<li>socket是一套通用网络编程接口，不仅可访问TCP/IP协议栈，还可访问其他协议栈（如X.25协议栈、UNIX本地域协议栈）</li>
+</ul>
 
     </div>
 
@@ -574,9 +683,9 @@ $ telnet 192.168.1.109 <span class="nb">echo</span>
           <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/network/hplsp_ch2/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">（未完成）Linux高性能服务器编程 第2章 IP协议详解</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/cpp/cppprimer_ch19/">
@@ -590,7 +699,7 @@ $ telnet 192.168.1.109 <span class="nb">echo</span>
         </div>
         
 
-  <span id="/post/network/hplsp_ch1/" class="leancloud_visitors" data-flag-title="（未完成）Linux高性能服务器编程 第1章 TCP/IP协议族">
+  <span id="/post/network/hplsp_ch1/" class="leancloud_visitors" data-flag-title="Linux高性能服务器编程 第1章 TCP/IP协议族">
 		<span class="post-meta-item-text">文章阅读量 </span>
 		<span class="leancloud-visitors-count">0</span>
 		<p></p>
