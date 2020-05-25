@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>LeetCode307 - (medium) Range Sum Query - Mutable - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/range-sum-query-mutable/ 花花酱视频链接：youtu" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/oj/leetcode307/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="LeetCode307 - (medium) Range Sum Query - Mutable" />
+<meta property="og:description" content="链接：https://leetcode.com/problems/range-sum-query-mutable/ 花花酱视频链接：youtu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/oj/leetcode307/" />
+<meta property="article:published_time" content="2020-05-26T00:40:00+08:00" />
+<meta property="article:modified_time" content="2020-05-26T00:40:00+08:00" />
+<meta itemprop="name" content="LeetCode307 - (medium) Range Sum Query - Mutable">
+<meta itemprop="description" content="链接：https://leetcode.com/problems/range-sum-query-mutable/ 花花酱视频链接：youtu">
+<meta itemprop="datePublished" content="2020-05-26T00:40:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-26T00:40:00&#43;08:00" />
+<meta itemprop="wordCount" content="1540">
+
+
+
+<meta itemprop="keywords" content="online judge,leetcode,BIT," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LeetCode307 - (medium) Range Sum Query - Mutable"/>
+<meta name="twitter:description" content="链接：https://leetcode.com/problems/range-sum-query-mutable/ 花花酱视频链接：youtu"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">LeetCode307 - (medium) Range Sum Query - Mutable</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-26 </span>
+        
+          <span class="more-meta"> 约 1540 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#task">Task</a></li>
+    <li><a href="#example">Example</a></li>
+    <li><a href="#bit">BIT</a>
+      <ul>
+        <li><a href="#motivation">motivation</a></li>
+        <li><a href="#树状结构">树状结构</a></li>
+        <li><a href="#实现">实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#solution">Solution</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>链接：<a href="https://leetcode.com/problems/range-sum-query-mutable/">https://leetcode.com/problems/range-sum-query-mutable/</a></li>
+<li>花花酱视频链接：<a href="https://www.youtube.com/watch?v=WbafSgetDDk">youtube</a></li>
+</ul>
+<h2 id="task">Task</h2>
+<p>Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.</p>
+<p>The update(i, val) function modifies nums by updating the element at index i to val.</p>
+<h2 id="example">Example</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Given nums = [1, 3, 5]
+
+sumRange(0, 2) -&gt; 9
+update(1, 2)
+sumRange(0, 2) -&gt; 8
+</code></pre></td></tr></table>
+</div>
+</div><p>Note:
+The array is only modifiable by the update function.
+You may assume the number of calls to update and sumRange function is distributed evenly.</p>
+<h2 id="bit">BIT</h2>
+<ul>
+<li>对于prefix sum问题，使用<code>BIT</code>(Binary Indexed Tree，又叫<code>Fenwick Tree</code>，又叫<code>树状数组</code>)可实现O(log(n))时间内求解数组的prefix sum，并在数组中一个值发生变化时以O(log(n))的时间更新节点值</li>
+</ul>
+<h3 id="motivation">motivation</h3>
+<ul>
+<li>假设要求数组x=[2,5,-1,3,6]的第i项到第j项和，可求数组的累计和得到s=[2,7,6,9,15]，用s[j]-s[i-1]即可</li>
+<li>但当数组中某个值发生变化时，必须重新求累计和，时间是O(n)</li>
+<li>BIT的设计初衷是维护一个数据结构，使得：
+<ul>
+<li>数组中某个数值发生变化时，可在O(log(n))时间内更新该数据结构</li>
+<li>需要数组前k项和时，可在该数据结构上以O(log(n))的时间求出结果</li>
+</ul>
+</li>
+<li>维护一个树状结构，深度是O(log(n))：
+<ul>
+<li>数值发生变化（<code>update</code>）时，从该位置对应节点向根部遍历，时间是<code>O(log(n))</code></li>
+<li>求前k项和（<code>query</code>）时，从该位置对应节点向根部遍历，时间是<code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="树状结构">树状结构</h3>
+<ul>
+<li>举个例子：对于数组[1,2,3,4,5,6,7,8]</li>
+<li>update和query对应的数据结构不一样，如下图：
+<img src="../oj_figs/LeetCode307.png" alt="leetcode307"></li>
+<li>维护<code>update tree</code>：
+<ul>
+<li>对于数组中的位置<code>x</code>（红色数字，索引从1开始），每个位置的父节点是位置为<code>x+lowbit(x)</code>的节点。根节点必是数组中最后一个位置</li>
+<li>lowbit(x)是将x转换为二进制后，最低位的1及其后面的部分，快速计算方法：<code>lowbit(x)=x&amp;(-x)</code>，其中负数使用补码，即<code>-x=~x+1</code></li>
+<li>数组某个位置的值增加k时，将该位置对应节点向上直到根节点这条路径上的所有节点值都增加k（初始化时要做n次这样的操作）</li>
+</ul>
+</li>
+<li>维护<code>query tree</code>：
+<ul>
+<li>对于数组中的位置<code>x</code>（红色数字，索引从1开始），每个位置的父节点是位置为<code>x-lowbit(x)</code>的节点。根节点必是2的幂（因为减到最后，二进制形式中只剩下一个1）</li>
+<li>需要求前k项和时，将k对应节点向上直到根节点这条路径上的所有节点相加即是所求值</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现">实现</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">FenwickTree</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//对于长为n的数组，使用长为n+1的数组来存储BIT，因为BIT的索引从1开始。全初始化为0
+</span><span class="c1"></span>    <span class="c1">//使用update和query时不会访问索引为0的节点
+</span><span class="c1"></span>    <span class="n">FenwickTree</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span><span class="o">:</span> <span class="n">sums_</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="c1">//更新位置i处的值（下标从1开始），对其增加delta
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">delta</span><span class="p">){</span>
+        <span class="c1">//向上追溯到根节点，根节点必是数组的最后一个
+</span><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">sums_</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
+            <span class="n">sums_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">delta</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">+=</span><span class="n">lowbit</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">//求位置i处的前i项和（下标从1开始）
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="c1">//向上追溯到根节点，根节点必是减去lowbit后不为0的最后一个节点
+</span><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">sum</span><span class="o">+=</span><span class="n">sums_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">i</span><span class="o">-=</span><span class="n">lowbit</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">//lowbit函数的内联实现
+</span><span class="c1"></span>    <span class="k">static</span> <span class="kr">inline</span> <span class="kt">int</span> <span class="n">lowbit</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">x</span><span class="o">&amp;</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">);}</span>
+    <span class="c1">//vector存储底层数据
+</span><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sums_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="solution">Solution</h2>
+<ul>
+<li>直接使用上面的FenwickTree类</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 56 ms, faster than 67.51% of C++ online submissions for Range Sum Query - Mutable.
+</span><span class="c1">// Memory Usage: 19.2 MB, less than 25.00% of C++ online submissions for Range Sum Query - Mutable.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">NumArray</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//初始化两个底层数据，nums_用move是考虑性能，初始化tree_时用到nums_故声明顺序应是nums_在前
+</span><span class="c1"></span>    <span class="n">NumArray</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span><span class="o">:</span> <span class="n">nums_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">nums</span><span class="p">)),</span><span class="n">tree_</span><span class="p">(</span><span class="n">nums_</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">nums_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="c1">//对每个位置都更新BIT
+</span><span class="c1"></span>            <span class="n">tree_</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nums_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//由于BIT的索引从1开始，故要+1
+</span><span class="c1"></span>        <span class="n">tree_</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">val</span><span class="o">-</span><span class="n">nums_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">nums_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">val</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">sumRange</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//BIT的索引从1开始，故要+1
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">tree_</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">tree_</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">//这两者声明顺序不可反，因为构造函数初值列表中初始化tree_时要用到nums_
+</span><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums_</span><span class="p">;</span>
+    <span class="n">FenwickTree</span> <span class="n">tree_</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="cm">/**
+</span><span class="cm"> * Your NumArray object will be instantiated and called as such:
+</span><span class="cm"> * NumArray* obj = new NumArray(nums);
+</span><span class="cm"> * obj-&gt;update(i,val);
+</span><span class="cm"> * int param_2 = obj-&gt;sumRange(i,j);
+</span><span class="cm"> */</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-05-26
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/online-judge/">online judge</a>
+          <a href="/tags/leetcode/">leetcode</a>
+          <a href="/tags/bit/">BIT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/oj/leetcode315/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">（未完成）LeetCode315 - (hard) Count of Smaller Numbers After Self</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/oj/leetcode169/">
+            <span class="next-text nav-default">LeetCode169 - (easy) Majority Element</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/oj/leetcode307/" class="leancloud_visitors" data-flag-title="LeetCode307 - (medium) Range Sum Query - Mutable">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

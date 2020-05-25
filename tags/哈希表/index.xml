@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>哈希表 on pi</title>
+    <link>http://localhost:1313/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/</link>
+    <description>Recent content in 哈希表 on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 25 May 2020 17:30:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LeetCode169 - (easy) Majority Element</title>
+      <link>http://localhost:1313/post/oj/leetcode169/</link>
+      <pubDate>Mon, 25 May 2020 17:30:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode169/</guid>
+      <description>链接：https://leetcode.com/problems/majority-element/ 花花酱视频链接：youtube Task Given an array of</description>
+    </item>
+    
+  </channel>
+</rss>

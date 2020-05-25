@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2020 01:42:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,33 @@
       
       <guid>http://localhost:1313/post/ml/ml_top/</guid>
       <description>做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG</description>
+    </item>
+    
+    <item>
+      <title>（未完成）LeetCode315 - (hard) Count of Smaller Numbers After Self</title>
+      <link>http://localhost:1313/post/oj/leetcode315/</link>
+      <pubDate>Tue, 26 May 2020 01:42:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode315/</guid>
+      <description>链接：https://leetcode.com/problems/count-of-smaller-numbers-after-self/ 花</description>
+    </item>
+    
+    <item>
+      <title>LeetCode307 - (medium) Range Sum Query - Mutable</title>
+      <link>http://localhost:1313/post/oj/leetcode307/</link>
+      <pubDate>Tue, 26 May 2020 00:40:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode307/</guid>
+      <description>链接：https://leetcode.com/problems/range-sum-query-mutable/ 花花酱视频链接：youtu</description>
+    </item>
+    
+    <item>
+      <title>LeetCode169 - (easy) Majority Element</title>
+      <link>http://localhost:1313/post/oj/leetcode169/</link>
+      <pubDate>Mon, 25 May 2020 17:30:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode169/</guid>
+      <description>链接：https://leetcode.com/problems/majority-element/ 花花酱视频链接：youtube Task Given an array of</description>
     </item>
     
     <item>

@@ -49,7 +49,7 @@
 <meta itemprop="description" content="IP头部信息出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为 IP数据报的路由和转发发生在">
 <meta itemprop="datePublished" content="2020-05-25T00:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-25T00:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1247">
+<meta itemprop="wordCount" content="2254">
 
 
 
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-05-25 </span>
         
-          <span class="more-meta"> 约 1247 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 2254 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
     </header>
@@ -194,6 +194,7 @@
 </li>
 </ul>
 <h2 id="ipv4头部结构">IPv4头部结构</h2>
+<h3 id="ipv4头部结构-1">IPv4头部结构</h3>
 <ul>
 <li>IPv4的头部通常为20字节，除非含有可变长的选项。结构如图2.1
 <img src="../network_figs/HPLSP_ch2-fig_2_1.png" alt="fig_2_1"></li>
@@ -204,7 +205,7 @@
 <li>8位<code>服务类型</code>(Type Of Service，TOS)包括：
 <ul>
 <li>3位优先权字段，现已被忽略</li>
-<li>4位TOS字段，分别为：最小延时、最大吞吐量、最高可靠性，最小费用。根据实际需要，至多能将其中一个置为1，如ssh和telnet需要最小延时，ftp需要最大吞吐量</li>
+<li>4位TOS字段，分别为：<code>最小延时</code>、<code>最大吞吐量</code>、<code>最高可靠性</code>，<code>最小费用</code>。根据实际需要，至多能将其中一个置为1，如ssh和telnet需要最小延时，ftp需要最大吞吐量</li>
 <li>1位保留字段，必须置0</li>
 </ul>
 </li>
@@ -213,16 +214,63 @@
 <li>3位<code>标志</code>字段：
 <ul>
 <li>第一位保留</li>
-<li>第二位DF(Don&rsquo;t Fragment)表示禁止分片，此时若IP数据报长度超过MTU将被丢弃并返回ICMP差错报文</li>
-<li>第三位MF(More Fragment)表示更多分片，除数据报的最后一个分片外，其他分片都要将其置1</li>
+<li>第二位DF(Don&rsquo;t Fragment)表示<code>禁止分片</code>，此时若IP数据报长度超过MTU将被丢弃并返回ICMP差错报文</li>
+<li>第三位MF(More Fragment)表示<code>更多分片</code>，除数据报的最后一个分片外，其他分片都要将其置1</li>
+</ul>
+</li>
+<li>13位分片偏移是当前分片相对原始IP数据报开始处的偏移，实际偏移是该值*8（左移3位）得到的。因此除最后一个分片外，其他所有分片的数据部分长度必须是8的整数倍</li>
+<li>8位<code>生存时间</code>(Time To Live，TTL)是数据报到达目的地之前允许经过的路由器跳数，每经过一个路由器该值就-1，减为0时路由器丢弃该数据报并向源端发送ICMP差错报文。TTL可防止数据报陷入路由循环</li>
+<li>8位<code>协议</code>字段用于区分上层协议，在<code>/etc/protocols</code>文件中定义所有上层协议的该字段值，该文件是RFC1700的子集。例如：ICMP是1，TCP是6，UDP是17</li>
+<li>16位<code>头部校验和</code>由发送端填充，接收端对其使用CRC来校验IP数据报的头部</li>
+<li>32位<code>源端IP地址</code>和<code>目的端IP地址</code>用于标识发送端和接收端，在整个传递过程中一般不变</li>
+<li>可变长的<code>选项</code>字段最多包含40字节（因为IP数据报头部最长是60字节，固定部分占用20字节），该字段使用不多，详细信息见RFC791：
+<ul>
+<li><code>记录路由</code>用于告诉传播途经的所有路由器，将其IP地址填入IP头部的选项部分，这样可追踪数据报的传递路径</li>
+<li><code>时间戳</code>告诉每个路由器都将数据报被转发的时间填入IP头部的选项部分，这样可测量途径路由间传递的时间</li>
+<li><code>松散源路由选择</code>指定一个路由器IP列表，使得IP数据报传递过程必须经过这些路由器</li>
+<li><code>严格源路由选择</code>指定一个路由器IP列表，使得IP数据报传递过程只能经过这些路由器</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="ipv4头部结构-1">IPv4头部结构</h3>
 <h3 id="使用tcpdump观察ipv4头部结构">使用tcpdump观察IPv4头部结构</h3>
+<ul>
+<li>在A机上使用telnet登陆到本机，并用tcpdump抓取第一个包</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo tcpdump -ntx -i lo
+$ telnet 127.0.0.1
+<span class="c1"># 输出：</span>
+<span class="c1"># IP 127.0.0.1.45422 &gt; 127.0.0.1.23: Flags [S], seq 4231039042, win 65495, options [mss 65495,sackOK,TS val 3775535807 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1">#         0x0000:  4510 003c 3038 4000 4006 0c72 7f00 0001</span>
+<span class="c1">#         0x0010:  7f00 0001 b16e 0017 fc30 8842 0000 0000</span>
+<span class="c1">#         0x0020:  a002 ffd7 fe30 0000 0204 ffd7 0402 080a</span>
+<span class="c1">#         0x0030:  e10a 1abf 0000 0000 0103 0307</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>tcpdump使用<code>-x</code>输出数据包的二进制码，该输出有60字节：前20字节是IP头部，后40字节是TCP头部，此处没有应用程序数据</li>
+<li>该输出描述一个IP数据报，源端和目的端IP都是127.0.0.1，telnet服务器的端口号是23，Flag、seq、win、options都是TCP头部信息，length指出IP数据报携带的应用程序数据长度为0</li>
+<li>前20字节的IP头部含义见表2.1，对照图2.1看。其中数据报标识和头部校验和这两项与我的输出不同
+<img src="../network_figs/HPLSP_ch2-tab_2_1.png" alt="tab_2_1"></li>
+<li>看出telnet选择使用最小延时服务，传输层默认用TCP协议</li>
+</ul>
 <h2 id="ip分片">IP分片</h2>
+<ul>
+<li>IP数据报长度超过帧的MTU时会被分片，它可能发生在发送端或中转路由，可能在传输中被多次分片，只有在目标机上才会完成分片的重组</li>
+</ul>
 <h2 id="ip路由">IP路由</h2>
 <h3 id="ip模块工作流程">IP模块工作流程</h3>
 <h3 id="路由机制">路由机制</h3>
@@ -238,9 +286,8 @@
 <img src="../network_figs/HPLSP_ch2-fig_2_3.png" alt="fig_2_3">
 <img src="../network_figs/HPLSP_ch2-fig_2_4.png" alt="fig_2_4">
 <img src="../network_figs/HPLSP_ch2-fig_2_5.png" alt="fig_2_5">
-<img src="../network_figs/HPLSP_ch2-fig_2_6.png" alt="fig_2_6">
-<img src="../network_figs/HPLSP_ch2-tab_2_1.png" alt="tab_2_1">
-<img src="../network_figs/HPLSP_ch2-tab_2_2.png" alt="tab_2_2">
+<img src="../network_figs/HPLSP_ch2-fig_2_6.png" alt="fig_2_6"></p>
+<p><img src="../network_figs/HPLSP_ch2-tab_2_2.png" alt="tab_2_2">
 <img src="../network_figs/HPLSP_ch2-tab_2_3.png" alt="tab_2_3"></p>
 
     </div>
@@ -286,9 +333,9 @@
           <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/oj/leetcode169/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">LeetCode169 - (easy) Majority Element</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/network/hplsp_ch1/">
