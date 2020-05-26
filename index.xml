@@ -39,12 +39,39 @@
     </item>
     
     <item>
-      <title>（未完成）LeetCode726 - (hard) Number of Atoms</title>
+      <title>LeetCode11 - (medium) Container With Most Water</title>
+      <link>http://localhost:1313/post/oj/leetcode11/</link>
+      <pubDate>Wed, 27 May 2020 02:48:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode11/</guid>
+      <description>链接：https://leetcode.com/problems/container-with-most-water/ 花花酱视频链接：you</description>
+    </item>
+    
+    <item>
+      <title>LeetCode167 - (easy) Two Sum II - Input array is sorted</title>
+      <link>http://localhost:1313/post/oj/leetcode167/</link>
+      <pubDate>Wed, 27 May 2020 01:18:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode167/</guid>
+      <description>链接：https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/ Task Given an array</description>
+    </item>
+    
+    <item>
+      <title>LeetCode977 - (easy) Squares of a Sorted Array</title>
+      <link>http://localhost:1313/post/oj/leetcode977/</link>
+      <pubDate>Wed, 27 May 2020 00:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode977/</guid>
+      <description>链接：https://leetcode.com/problems/squares-of-a-sorted-array/ Task Given an array of integers A sorted in non-decreasing order,</description>
+    </item>
+    
+    <item>
+      <title>LeetCode726 - (hard) Number of Atoms</title>
       <link>http://localhost:1313/post/oj/leetcode726/</link>
       <pubDate>Tue, 26 May 2020 19:37:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/oj/leetcode726/</guid>
-      <description>链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：https://www.y</description>
+      <description>链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：youtube Task Given a chemical formula (given</description>
     </item>
     
     <item>
@@ -53,7 +80,7 @@
       <pubDate>Tue, 26 May 2020 16:53:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/oj/leetcode856/</guid>
-      <description>链接：https://leetcode.com/problems/score-of-parentheses/ 花花酱视频链接：https://</description>
+      <description>链接：https://leetcode.com/problems/score-of-parentheses/ 花花酱视频链接：youtube Task</description>
     </item>
     
     <item>

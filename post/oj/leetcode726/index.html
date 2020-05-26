@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>（未完成）LeetCode726 - (hard) Number of Atoms - pi</title>
+  <title>LeetCode726 - (hard) Number of Atoms - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：https://www.y" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：youtube Task Given a chemical formula (given" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,23 +39,23 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="（未完成）LeetCode726 - (hard) Number of Atoms" />
-<meta property="og:description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：https://www.y" />
+<meta property="og:title" content="LeetCode726 - (hard) Number of Atoms" />
+<meta property="og:description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：youtube Task Given a chemical formula (given" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/oj/leetcode726/" />
 <meta property="article:published_time" content="2020-05-26T19:37:00+08:00" />
 <meta property="article:modified_time" content="2020-05-26T19:37:00+08:00" />
-<meta itemprop="name" content="（未完成）LeetCode726 - (hard) Number of Atoms">
-<meta itemprop="description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：https://www.y">
+<meta itemprop="name" content="LeetCode726 - (hard) Number of Atoms">
+<meta itemprop="description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：youtube Task Given a chemical formula (given">
 <meta itemprop="datePublished" content="2020-05-26T19:37:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-26T19:37:00&#43;08:00" />
-<meta itemprop="wordCount" content="386">
+<meta itemprop="wordCount" content="1252">
 
 
 
 <meta itemprop="keywords" content="online judge,leetcode,字符串,递归," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="（未完成）LeetCode726 - (hard) Number of Atoms"/>
-<meta name="twitter:description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：https://www.y"/>
+<meta name="twitter:title" content="LeetCode726 - (hard) Number of Atoms"/>
+<meta name="twitter:description" content="链接：https://leetcode.com/problems/number-of-atoms/ 花花酱视频链接：youtube Task Given a chemical formula (given"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -118,13 +118,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">（未完成）LeetCode726 - (hard) Number of Atoms</h1>
+      <h1 class="post-title">LeetCode726 - (hard) Number of Atoms</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-05-26 </span>
         
-          <span class="more-meta"> 约 386 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 1252 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
     </header>
@@ -144,7 +144,7 @@
     <div class="post-content">
       <ul>
 <li>链接：<a href="https://leetcode.com/problems/number-of-atoms/">https://leetcode.com/problems/number-of-atoms/</a></li>
-<li>花花酱视频链接：<a href="https://www.youtube.com/watch?v=6nQ2jfs7a7I">https://www.youtube.com/watch?v=6nQ2jfs7a7I</a></li>
+<li>花花酱视频链接：<a href="https://www.youtube.com/watch?v=6nQ2jfs7a7I">youtube</a></li>
 </ul>
 <h2 id="task">Task</h2>
 <p>Given a chemical <code>formula</code> (given as a string), return the count of each atom.</p>
@@ -218,7 +218,154 @@ The count of elements are {&#39;K&#39;: 4, &#39;N&#39;: 2, &#39;O&#39;: 14, &#39
 <li><code>formula</code> will only consist of letters, digits, and round parentheses, and is a valid formula as defined in the problem.</li>
 </ul>
 <h2 id="solution">Solution</h2>
-
+<ul>
+<li>由于中间可以有括号，故可递归解决
+<img src="../oj_figs/LeetCode726.png" alt="leetcode726"></li>
+<li>定义两个工具函数：
+<ul>
+<li>getName()用于在字符串的某个位置取元素名，返回string</li>
+<li>getCount()用于在字符串的某个位置取数字，返回int</li>
+</ul>
+</li>
+<li>递归过程：
+<ul>
+<li>使用字典维护元素名到原子数的映射，并自动维护元素名的顺序</li>
+<li>读到<code>(</code>时触发递归，调用自身处理<code>()</code>内的部分，在内层函数读到<code>)</code>时向上一层返回结果</li>
+<li>一层递归结束后，外层函数读取<code>()</code>后的数字，将该数字乘上内层函数的原子数，加到外层维护的字典中</li>
+</ul>
+</li>
+<li>在整个递归过程中，以及使用getName/getCount时，传入的index都是引用，将当前处理位置向前推进的任务在这些函数内部完成</li>
+<li><code>时间复杂度</code>：只需扫描一遍字符串，时间复杂度是O(n)</li>
+<li><code>空间复杂度</code>：建立的字典规模取决于字符串中unique的元素数量，空间复杂度是O(n)</li>
+<li>实现：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 4 ms, faster than 78.66% of C++ online submissions for Number of Atoms.
+</span><span class="c1">// Memory Usage: 7 MB, less than 100.00% of C++ online submissions for Number of Atoms.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">countOfAtoms</span><span class="p">(</span><span class="n">string</span> <span class="n">formula</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>        <span class="c1">//存储当前位置，该值在整个过程中以引用方式传递
+</span><span class="c1"></span>        <span class="n">string</span> <span class="n">ans</span><span class="p">;</span>     <span class="c1">//存储结果
+</span><span class="c1"></span>        <span class="c1">//递归求得字典
+</span><span class="c1"></span>        <span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="n">counts</span><span class="o">=</span><span class="n">countOfAtoms</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+        <span class="c1">//从字典中生成输出字符串
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">kv</span><span class="p">:</span><span class="n">counts</span><span class="p">){</span>
+            <span class="n">ans</span><span class="o">+=</span><span class="n">kv</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+            <span class="c1">//当元素数目是1时不添加内容，否则将元素数目转为字符串添加在后
+</span><span class="c1"></span>            <span class="n">ans</span><span class="o">+=</span><span class="p">(</span><span class="n">kv</span><span class="p">.</span><span class="n">second</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="s">&#34;&#34;</span><span class="o">:</span><span class="n">to_string</span><span class="p">(</span><span class="n">kv</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">countOfAtoms</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">formula</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">){</span>
+        <span class="c1">//每层递归都维护自己的字典
+</span><span class="c1"></span>        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">counts</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">!=</span><span class="n">formula</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
+            <span class="c1">//遇到(时进入内层递归
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;(&#39;</span><span class="p">){</span>
+                <span class="c1">//取内层递归的结果，执行前用++i跳过(进入内部，执行完这一句后i指向对应的)
+</span><span class="c1"></span>                <span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="n">tmp_counts</span><span class="o">=</span><span class="n">countOfAtoms</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span><span class="o">++</span><span class="n">i</span><span class="p">);</span>
+                <span class="c1">//用++i跳过)，取)后面的数字，代表()中整个部分出现的次数
+</span><span class="c1"></span>                <span class="k">const</span> <span class="kt">int</span> <span class="n">tmp_count</span><span class="o">=</span><span class="n">getCount</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span><span class="o">++</span><span class="n">i</span><span class="p">);</span>
+                <span class="c1">//将内层递归的结果合并入本层递归
+</span><span class="c1"></span>                <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">kv</span><span class="p">:</span><span class="n">tmp_counts</span><span class="p">)</span>
+                    <span class="n">counts</span><span class="p">[</span><span class="n">kv</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">+=</span><span class="n">kv</span><span class="p">.</span><span class="n">second</span><span class="o">*</span><span class="n">tmp_count</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">//遇到)时什么都不做，跳出这一层递归，将这一层求得的结果返回给上一层
+</span><span class="c1"></span>            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="err">&#39;</span><span class="p">)</span><span class="err">&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">counts</span><span class="p">;</span>
+            <span class="c1">//既不是(又不是)时正常读取元素名和原子数，存入字典
+</span><span class="c1"></span>            <span class="k">else</span><span class="p">{</span>
+                <span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">name</span><span class="o">=</span><span class="n">getName</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+                <span class="n">counts</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">+=</span><span class="n">getCount</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">counts</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//读取i位置处的元素名，并将i向前推进
+</span><span class="c1"></span>    <span class="n">string</span> <span class="nf">getName</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">formula</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">){</span>
+        <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+        <span class="c1">//i位置是字母，第一个字母可以是大写，后面的字母必须是小写，否则认为是下一个元素，终止循环
+</span><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="n">isalpha</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">islower</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+            <span class="n">name</span><span class="o">+=</span><span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+        <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//读取i位置处的原子个数，并将i向前推进
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">getCount</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">formula</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">){</span>
+        <span class="n">string</span> <span class="n">count</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">count</span><span class="o">+=</span><span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+        <span class="c1">//若读到的数字是空，则是被省略的1，否则将数字的字符串转为整型
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">count</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="n">stoi</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -261,9 +408,9 @@ The count of elements are {&#39;K&#39;: 4, &#39;N&#39;: 2, &#39;O&#39;: 14, &#39
           <a href="/tags/%E9%80%92%E5%BD%92/">递归</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/oj/leetcode977/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">LeetCode977 - (easy) Squares of a Sorted Array</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/oj/leetcode856/">
@@ -276,6 +423,29 @@ The count of elements are {&#39;K&#39;: 4, &#39;N&#39;: 2, &#39;O&#39;: 14, &#39
   </article>
         </div>
         
+
+  <span id="/post/oj/leetcode726/" class="leancloud_visitors" data-flag-title="LeetCode726 - (hard) Number of Atoms">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
 
       </div>
     </main>
