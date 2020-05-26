@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>LeetCode856 - (medium) Score of Parentheses - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/score-of-parentheses/ 花花酱视频链接：https://" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/oj/leetcode856/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="LeetCode856 - (medium) Score of Parentheses" />
+<meta property="og:description" content="链接：https://leetcode.com/problems/score-of-parentheses/ 花花酱视频链接：https://" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/oj/leetcode856/" />
+<meta property="article:published_time" content="2020-05-26T16:53:00+08:00" />
+<meta property="article:modified_time" content="2020-05-26T16:53:00+08:00" />
+<meta itemprop="name" content="LeetCode856 - (medium) Score of Parentheses">
+<meta itemprop="description" content="链接：https://leetcode.com/problems/score-of-parentheses/ 花花酱视频链接：https://">
+<meta itemprop="datePublished" content="2020-05-26T16:53:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-26T16:53:00&#43;08:00" />
+<meta itemprop="wordCount" content="1089">
+
+
+
+<meta itemprop="keywords" content="online judge,leetcode,一题多解,字符串,递归," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LeetCode856 - (medium) Score of Parentheses"/>
+<meta name="twitter:description" content="链接：https://leetcode.com/problems/score-of-parentheses/ 花花酱视频链接：https://"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">LeetCode856 - (medium) Score of Parentheses</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-26 </span>
+        
+          <span class="more-meta"> 约 1089 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#task">Task</a></li>
+    <li><a href="#example">Example</a></li>
+    <li><a href="#solution">Solution</a>
+      <ul>
+        <li><a href="#直接递归">直接递归</a></li>
+        <li><a href="#将原字符串变形">将原字符串变形</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>链接：<a href="https://leetcode.com/problems/score-of-parentheses/">https://leetcode.com/problems/score-of-parentheses/</a></li>
+<li>花花酱视频链接：<a href="https://www.youtube.com/watch?v=tiAaVfMcL9w">https://www.youtube.com/watch?v=tiAaVfMcL9w</a></li>
+</ul>
+<h2 id="task">Task</h2>
+<p>Given a balanced parentheses string <code>S</code>, compute the score of the string based on the following rule:</p>
+<ul>
+<li><code>()</code> has score <code>1</code></li>
+<li><code>AB</code> has score <code>A + B</code>, where A and B are balanced parentheses strings.</li>
+<li><code>(A)</code> has score <code>2 * A</code>, where A is a balanced parentheses string.</li>
+</ul>
+<h2 id="example">Example</h2>
+<ul>
+<li>Example 1:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: &#34;()&#34;
+Output: 1
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Example 2:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: &#34;(())&#34;
+Output: 2
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Example 3:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: &#34;()()&#34;
+Output: 2
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Example 4:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: &#34;(()(()))&#34;
+Output: 6
+</code></pre></td></tr></table>
+</div>
+</div><p>Note:</p>
+<ol>
+<li><code>S</code> is a balanced parentheses string, containing only <code>(</code> and <code>)</code>.</li>
+<li><code>2 &lt;= S.length &lt;= 50</code></li>
+</ol>
+<h2 id="solution">Solution</h2>
+<h3 id="直接递归">直接递归</h3>
+<ul>
+<li>如下图：
+<img src="../oj_figs/LeetCode856_1.png" alt="leetcode856_1"></li>
+<li>将问题分解为三种情形：
+<ul>
+<li><code>()</code>是递归终止条件</li>
+<li><code>(A)</code>需脱去两侧括号，对<code>A</code>再次递归</li>
+<li><code>(A)(B)</code>需分解为<code>(A)</code>和<code>(B)</code>，分别递归</li>
+</ul>
+</li>
+<li>可使用一个计数来检测后两种情形：遍历字符串，遇到<code>(</code>计数递增，遇到<code>)</code>计数递减
+<ul>
+<li>若走到倒数第二个元素计数还未变为0，则是第二种情形</li>
+<li>还未走完全程计数就变为0，则是第三种情形</li>
+</ul>
+</li>
+<li><code>时间复杂度</code>：
+<ul>
+<li>最好情形是()()&hellip;()()，只需遍历一次即可，时间复杂度O(n)</li>
+<li>最坏情形是((((&hellip;))))，需遍历多次，每次走完全程，时间复杂度O(n^2)</li>
+</ul>
+</li>
+<li><code>空间复杂度</code>：不需要为每个元素分配对应空间，空间复杂度O(1)</li>
+<li>实现：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 0 ms, faster than 100.00% of C++ online submissions for Score of Parentheses.
+</span><span class="c1">// Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Score of Parentheses.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">scoreOfParentheses</span><span class="p">(</span><span class="n">string</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">score</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">S</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">score</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">S</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
+        <span class="c1">//若r和l相邻，则必是()，终止递归
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="c1">//从子串第一个字符遍历到倒数第二个字符
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">r</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;(&#39;</span><span class="p">)</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;)&#39;</span><span class="p">)</span> <span class="o">--</span><span class="n">cnt</span><span class="p">;</span>
+            <span class="c1">//若途中计数归零，说明遇到了一对互补的括号，即(A)(B)，进入两个递归
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">score</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="n">score</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//若在遍历子串的过程中未return，则说明没有遇到互补的括号，即(A)，脱去外层括号
+</span><span class="c1"></span>        <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">score</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="将原字符串变形">将原字符串变形</h3>
+<ul>
+<li>将字符串分解为(A)(B)的形式，其中A和B都是(((&hellip;)))的形式</li>
+<li>例如，(()(()()))的结果是2*(1+2*(1+1))，将2全部乘进括号，变为2+4+4，分解为2的幂。即变形后的字符串是(())+((()))+((()))，只需数括号</li>
+<li>这种分解的项数是由最小单元<code>()</code>决定的，每个<code>()</code>都是一项，对应的幂为左侧未被<code>)</code>抵消掉的<code>(</code>的数量。
+<img src="../oj_figs/LeetCode856_2.png" alt="leetcode856_2"></li>
+<li>因此任务变为：
+<ul>
+<li>维护<code>(</code>的计数，遇到<code>(</code>时递增，遇到<code>)</code>时递减</li>
+<li>当遇到<code>()</code>时求幂并加到结果上</li>
+</ul>
+</li>
+<li><code>时间复杂度</code>：只需遍历一次字符串，故是O(n)</li>
+<li><code>空间复杂度</code>：除储存结果、计数、循环变量外，未申请额外内存，故是O(1)</li>
+<li>实现：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 0 ms, faster than 100.00% of C++ online submissions for Score of Parentheses.
+</span><span class="c1">// Memory Usage: 6 MB, less than 100.00% of C++ online submissions for Score of Parentheses.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">scoreOfParentheses</span><span class="p">(</span><span class="n">string</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">S</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="c1">//维护左侧单独的(个数
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;(&#39;</span><span class="p">)</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+            <span class="k">else</span>          <span class="o">--</span><span class="n">cnt</span><span class="p">;</span>
+            <span class="c1">//遇到()时计算一项2的幂
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;(&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;)&#39;</span><span class="p">)</span>
+                <span class="c1">//使用位移快速计算2的幂
+</span><span class="c1"></span>                <span class="n">ans</span><span class="o">+=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">cnt</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-05-26
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/online-judge/">online judge</a>
+          <a href="/tags/leetcode/">leetcode</a>
+          <a href="/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/">一题多解</a>
+          <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+          <a href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/oj/leetcode726/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">（未完成）LeetCode726 - (hard) Number of Atoms</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/oj/leetcode315/">
+            <span class="next-text nav-default">LeetCode315 - (hard) Count of Smaller Numbers After Self</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <span id="/post/oj/leetcode856/" class="leancloud_visitors" data-flag-title="LeetCode856 - (medium) Score of Parentheses">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

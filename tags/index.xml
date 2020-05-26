@@ -6,10 +6,55 @@
     <description>Recent content in Tags on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 26 May 2020 01:42:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2020 19:37:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>leetcode</title>
+      <link>http://localhost:1313/tags/leetcode/</link>
+      <pubDate>Tue, 26 May 2020 19:37:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/leetcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>online judge</title>
+      <link>http://localhost:1313/tags/online-judge/</link>
+      <pubDate>Tue, 26 May 2020 19:37:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/online-judge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>字符串</title>
+      <link>http://localhost:1313/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Tue, 26 May 2020 19:37:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>递归</title>
+      <link>http://localhost:1313/tags/%E9%80%92%E5%BD%92/</link>
+      <pubDate>Tue, 26 May 2020 19:37:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E9%80%92%E5%BD%92/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>一题多解</title>
+      <link>http://localhost:1313/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/</link>
+      <pubDate>Tue, 26 May 2020 16:53:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>BIT</title>
@@ -26,33 +71,6 @@
       <pubDate>Tue, 26 May 2020 01:42:00 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/bst/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>leetcode</title>
-      <link>http://localhost:1313/tags/leetcode/</link>
-      <pubDate>Tue, 26 May 2020 01:42:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/leetcode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>online judge</title>
-      <link>http://localhost:1313/tags/online-judge/</link>
-      <pubDate>Tue, 26 May 2020 01:42:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/online-judge/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>一题多解</title>
-      <link>http://localhost:1313/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/</link>
-      <pubDate>Tue, 26 May 2020 01:42:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/</guid>
       <description></description>
     </item>
     
@@ -75,11 +93,11 @@
     </item>
     
     <item>
-      <title>分治法</title>
-      <link>http://localhost:1313/tags/%E5%88%86%E6%B2%BB%E6%B3%95/</link>
+      <title>分治</title>
+      <link>http://localhost:1313/tags/%E5%88%86%E6%B2%BB/</link>
       <pubDate>Mon, 25 May 2020 17:30:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/tags/%E5%88%86%E6%B2%BB%E6%B3%95/</guid>
+      <guid>http://localhost:1313/tags/%E5%88%86%E6%B2%BB/</guid>
       <description></description>
     </item>
     
