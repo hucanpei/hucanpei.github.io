@@ -49,7 +49,7 @@
 <meta itemprop="description" content="链接：https://leetcode.com/problems/range-sum-query-mutable/ 花花酱视频链接：youtu">
 <meta itemprop="datePublished" content="2020-05-26T00:40:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-26T00:40:00&#43;08:00" />
-<meta itemprop="wordCount" content="1733">
+<meta itemprop="wordCount" content="1748">
 
 
 
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-05-26 </span>
         
-          <span class="more-meta"> 约 1733 字 </span>
+          <span class="more-meta"> 约 1748 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
@@ -288,8 +288,9 @@ sumRange(0, 2) -&gt; 8
 </div><h2 id="solution">Solution</h2>
 <ul>
 <li>直接使用上面的FenwickTree类</li>
-<li>初始化时要对n个数值都update BIT，故时间复杂度是O(nlog(n))</li>
-<li>每次修改一个值只需update一次，时间复杂度是O(log(n))</li>
+<li><code>时间复杂度</code>：初始化时要对n个数值都update BIT，故时间复杂度是O(nlog(n))</li>
+<li><code>空间复杂度</code>：每次修改一个值只需update一次，时间复杂度是O(log(n))</li>
+<li>实现：</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

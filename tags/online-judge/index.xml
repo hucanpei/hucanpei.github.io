@@ -6,10 +6,64 @@
     <description>Recent content in online judge on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 27 May 2020 02:48:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2020 00:58:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/online-judge/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode141 - (easy) Linked List Cycle</title>
+      <link>http://localhost:1313/post/oj/leetcode141/</link>
+      <pubDate>Thu, 28 May 2020 00:58:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode141/</guid>
+      <description>链接：https://leetcode.com/problems/linked-list-cycle/ 花花酱视频链接：youtube Task Given a linked</description>
+    </item>
+    
+    <item>
+      <title>LeetCode206 - (easy) Reverse Linked List</title>
+      <link>http://localhost:1313/post/oj/leetcode206/</link>
+      <pubDate>Thu, 28 May 2020 00:05:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode206/</guid>
+      <description>链接：https://leetcode.com/problems/reverse-linked-list/ Task Reverse a singly linked list. Example 1 2 Input: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL Output: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL Follow up: A linked</description>
+    </item>
+    
+    <item>
+      <title>LeetCode23 - (hard) Merge k Sorted Lists</title>
+      <link>http://localhost:1313/post/oj/leetcode23/</link>
+      <pubDate>Thu, 28 May 2020 00:02:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode23/</guid>
+      <description>链接：https://leetcode.com/problems/merge-k-sorted-lists/ 花花酱视频链接：youtube Task</description>
+    </item>
+    
+    <item>
+      <title>LeetCode21 - (easy) Merge Two Sorted Lists</title>
+      <link>http://localhost:1313/post/oj/leetcode21/</link>
+      <pubDate>Thu, 28 May 2020 00:02:27 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode21/</guid>
+      <description>链接：https://leetcode.com/problems/merge-two-sorted-lists/ 花花酱视频链接：youtub</description>
+    </item>
+    
+    <item>
+      <title>LeetCode24 - (medium) Swap Nodes in Pairs</title>
+      <link>http://localhost:1313/post/oj/leetcode24/</link>
+      <pubDate>Wed, 27 May 2020 22:57:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode24/</guid>
+      <description>链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not</description>
+    </item>
+    
+    <item>
+      <title>LeetCode2 - (medium) Add Two Numbers</title>
+      <link>http://localhost:1313/post/oj/leetcode2/</link>
+      <pubDate>Wed, 27 May 2020 22:08:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode2/</guid>
+      <description>链接：https://leetcode.com/problems/add-two-numbers/ 花花酱视频链接：youtube Task You are given two non-empty</description>
+    </item>
     
     <item>
       <title>LeetCode11 - (medium) Container With Most Water</title>
