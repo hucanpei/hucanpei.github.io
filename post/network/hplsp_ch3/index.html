@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>（未完成）Linux高性能服务器编程 第3章 TCP协议详解 - pi</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="canpi" /><meta name="description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/network/hplsp_ch3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="（未完成）Linux高性能服务器编程 第3章 TCP协议详解" />
+<meta property="og:description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/network/hplsp_ch3/" />
+<meta property="article:published_time" content="2020-05-28T14:21:00+08:00" />
+<meta property="article:modified_time" content="2020-05-28T14:21:00+08:00" />
+<meta itemprop="name" content="（未完成）Linux高性能服务器编程 第3章 TCP协议详解">
+<meta itemprop="description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每">
+<meta itemprop="datePublished" content="2020-05-28T14:21:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-28T14:21:00&#43;08:00" />
+<meta itemprop="wordCount" content="5119">
+
+
+
+<meta itemprop="keywords" content="Linux,网络,C&#43;&#43;,Linux高性能服务器编程,读书," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="（未完成）Linux高性能服务器编程 第3章 TCP协议详解"/>
+<meta name="twitter:description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">canpi</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">canpi</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">（未完成）Linux高性能服务器编程 第3章 TCP协议详解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-28 </span>
+        
+          <span class="more-meta"> 约 5119 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tcp服务的特点">TCP服务的特点</a></li>
+    <li><a href="#tcp头部结构">TCP头部结构</a>
+      <ul>
+        <li><a href="#tcp固定头部结构">TCP固定头部结构</a></li>
+        <li><a href="#tcp头部选项">TCP头部选项</a></li>
+        <li><a href="#使用tcpdump观察tcp头部信息">使用tcpdump观察TCP头部信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#tcp连接的建立和关闭">TCP连接的建立和关闭</a>
+      <ul>
+        <li><a href="#使用tcpdump观察tcp连接的建立和关闭">使用tcpdump观察TCP连接的建立和关闭</a></li>
+        <li><a href="#半关闭状态">半关闭状态</a></li>
+        <li><a href="#连接超时">连接超时</a></li>
+      </ul>
+    </li>
+    <li><a href="#tcp状态转移">TCP状态转移</a>
+      <ul>
+        <li><a href="#tcp状态转移总图">TCP状态转移总图</a></li>
+        <li><a href="#time_wait状态">TIME_WAIT状态</a></li>
+      </ul>
+    </li>
+    <li><a href="#复位报文段">复位报文段</a>
+      <ul>
+        <li><a href="#访问不存在的端口">访问不存在的端口</a></li>
+        <li><a href="#异常终止连接">异常终止连接</a></li>
+        <li><a href="#处理半打开连接">处理半打开连接</a></li>
+      </ul>
+    </li>
+    <li><a href="#tcp交互数据流">TCP交互数据流</a></li>
+    <li><a href="#tcp成块数据流">TCP成块数据流</a></li>
+    <li><a href="#带外数据">带外数据</a></li>
+    <li><a href="#tcp超时重传">TCP超时重传</a></li>
+    <li><a href="#拥塞控制">拥塞控制</a>
+      <ul>
+        <li><a href="#拥塞控制概述">拥塞控制概述</a></li>
+        <li><a href="#慢启动和拥塞避免">慢启动和拥塞避免</a></li>
+        <li><a href="#快速重传和快速恢复">快速重传和快速恢复</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <ul>
+<li>TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关</li>
+<li>TCP主要包含以下几方面：
+<ul>
+<li><code>头部信息</code>：出现在每个TCP报文段中，用于指定通信的源/目的端口号，管理TCP连接，控制两个方向的数据流</li>
+<li><code>状态转移过程</code>：TCP连接的任意一端都是状态机，在TCP连接从建立到断开的过程中，两端状态机的状态发生变化</li>
+<li><code>数据流</code>：通过分析数据流可从应用程序外部了解应用层协议和通信双方交换的应用数据。例如交互数据流、成块数据流</li>
+<li><code>数据流的控制</code>：为保证可靠传输和提高通信质量，内核需控制TCP数据流，主要包括超时重传和拥塞控制</li>
+</ul>
+</li>
+</ul>
+<h2 id="tcp服务的特点">TCP服务的特点</h2>
+<ul>
+<li>传输层的协议主要有TCP和UDP，TCP相对于UDP的特点是：面向连接、字节流、可靠传输</li>
+<li><code>面向连接</code>：
+<ul>
+<li>TCP通信双方必须先<code>建立连接</code>，并为该连接分配内核资源以管理连接状态和传输数据</li>
+<li>TCP连接是<code>全双工</code>的，双方的数据读写可通过一个连接进行</li>
+<li>完成数据交换后，通信双方都必须<code>断开连接</code>并释放内核资源</li>
+<li>TCP的连接是<code>一对一</code>的，故基于广播/多播的程序不可使用TCP服务，它们应使用无连接的UDP</li>
+</ul>
+</li>
+<li><code>字节流服务</code>：
+<ul>
+<li>发送端应用使用TCP连续多次写操作时，TCP模块将这些数据写入<code>TCP发送缓冲区</code>，真正发送时将缓冲区中的数据封装为一个或多个TCP报文。即，TCP模块发送的报文数量与应用执行写操作的次数无关</li>
+<li>接收端收到一个或多个TCP报文后，TCP模块将这些报文中的数据按序号写入<code>TCP接收缓冲区</code>，并通知应用一次性读出或分批读出。即，TCP模块接收的报文数量与应*用执行读操作的次数无关</li>
+<li>使用字节流服务的应用，其对数据的发送和接收没有边界限制</li>
+</ul>
+</li>
+<li>数据报服务（UDP）：
+<ul>
+<li>发送端程序每写一次，UDP模块将其封装为一个UDP数据报</li>
+<li>接收端每收到一个UDP数据报，接收端应用都必须读一次（否则丢包）</li>
+<li>若用户未指定足够的应用程序缓冲区来读取UDP数据，则数据被截断</li>
+</ul>
+</li>
+<li><code>可靠传输</code>：
+<ul>
+<li>TCP使用<code>发送应答</code>机制，发送端的每个TCP报文都必须得到接收方的应答才算传输成功</li>
+<li>TCP使用<code>超时重传</code>机制，若发送一个TCP报文后规定时间内未收到应答则重新发送</li>
+<li>接收端会对TCP报文进行<code>重排整理</code>再交给应用层（因为IP协议没有顺序）</li>
+</ul>
+</li>
+<li>UDP提供不可靠服务（类似IP），需要上层协议处理数据确认和超时重传</li>
+<li>图3.1和3.2是TCP的字节流服务和UDP的数据报服务的区别：
+<img src="../network_figs/HPLSP_ch3-fig_3_1.png" alt="fig_3_1">
+<img src="../network_figs/HPLSP_ch3-fig_3_2.png" alt="fig_3_2"></li>
+</ul>
+<h2 id="tcp头部结构">TCP头部结构</h2>
+<ul>
+<li>TCP头部出现在每个TCP报文中，用于指定源端/目的端端口，管理TCP连接等</li>
+<li>TCP头部包括<code>固定头部结构</code>和<code>头部选项</code></li>
+</ul>
+<h3 id="tcp固定头部结构">TCP固定头部结构</h3>
+<ul>
+<li>固定头部结构如图3.3
+<img src="../network_figs/HPLSP_ch3-fig_3_3.png" alt="fig_3_3"></li>
+<li>16位<code>端口号</code>：源端口号和目的端口号
+<ul>
+<li>客户端通常使用系统自动选择的临时端口号</li>
+<li>服务器使用知名服务端口号，在文件<code>/etc/services</code>中指定</li>
+</ul>
+</li>
+<li>32位<code>序号</code>(seq)：一次TCP通信过程中某传输方向上字节流的编号，其值为流中第一个字节的初始序号加上该报文携带数据在整个数据流中的偏移。例如，A机给B机发送TCP报文，第一个报文的序号被初始化为随机ISN(Initial Sequence Number)，某次A机发给B的报文携带的数据是字节流中的第1025-2048字节，则该报文的序号是ISN+1025</li>
+<li>32位<code>确认号</code>(ack)：对另一方发来的TCP报文的响应，其值是收到的TCP报文的序号值+1。两机通信时发送的报文中同时携带自己的序号和对对方报文的确认号</li>
+<li>4位<code>头部长度</code>：标识该TCP头部有多少个32bit（4字节），因此TCP头部最长是60字节</li>
+<li>6位<code>标志位</code>：
+<ul>
+<li>URG：<code>紧急指针</code>是否有效</li>
+<li>ACK：确认号是否有效。携带ACK标志的称为<code>确认报文</code></li>
+<li>PSH：接收端应立即从TCP接收缓冲区取走数据，为后面的数据预留空间</li>
+<li>RST：要求对方重新建立连接。携带RST标志的称为<code>复位报文</code></li>
+<li>SYN：请求建立连接。携带SYN标志的称为<code>同步报文</code></li>
+<li>FIN：通知对方本端要关闭连接。携带FIN标志的称为<code>结束报文</code></li>
+</ul>
+</li>
+<li>16位<code>窗口大小</code>：TCP流量控制的手段。该窗口指<code>接收通告窗口</code>(Receiver Window，<code>RWND</code>)，它告诉对方：本端TCP接收缓冲区还能容纳多少字节的数据。用于对方控制发送数据的速度</li>
+<li>16位<code>校验和</code>：包括TCP头部和数据部分的校验</li>
+<li>16位<code>紧急指针</code>：紧急指针字段和序号字段相加，结果是最后一个紧急数据的下一字节序号。TCP的紧急指针是发送端向接收端发送紧急数据的方法。</li>
+</ul>
+<h3 id="tcp头部选项">TCP头部选项</h3>
+<ul>
+<li>选项字段是变长的可选信息，该部分最多包括40字节（因为头部最长60字节，固定部分20字节）
+<img src="../network_figs/HPLSP_ch3-fig_3_4.png" alt="fig_3_4"></li>
+<li>选项字段：
+<ul>
+<li>1字节<code>kind</code>字段说明选项类型</li>
+<li>1字节<code>length</code>字段指定该选项字段总长度（包括kind和length）</li>
+<li>可变长的<code>info</code>字段是选项的具体信息</li>
+</ul>
+</li>
+<li>常见的TCP选项有7种，见图3.5
+<img src="../network_figs/HPLSP_ch3-fig_3_5.png" alt="fig_3_5"></li>
+<li>kind=0代表选项表结束</li>
+<li>kind=1是空选项，一般用于将选项总长度填充为32bit的整数倍</li>
+<li>kind=2是<code>最大报文长度</code>(Max Segment Size，<code>MSS</code>)选项
+<ul>
+<li>TCP连接初始化时，双方通过该选项来协商最大报文长度</li>
+<li>TCP通常将MSS设置为MTU减40字节（20字节是TCP头部，20字节是IP头部），尽量避免发出的IP数据报被分片。故以太网传输的MSS值通常是1460</li>
+<li>该选项只能出现在同步报文中，否则被忽略</li>
+</ul>
+</li>
+<li>kind=3是<code>窗口扩大因子</code>选项
+<ul>
+<li>TCP头部的窗口大小字段只有16位，即最大为65535字节。但TCP允许的RWND大小远不止如此（为提高TCP的吞吐量）</li>
+<li>窗口扩大因子代表向左的位移：假设头部的RWND大小是N，窗口扩大因子是M，则实际的RWND大小是N*(2^M)，即将N左移M位。</li>
+<li>窗口扩大因子的取值范围是0-14，可通过修改内核变量<code>/proc/sys/net/ipv4/tcp_window_scaling</code>来启用/关闭该选项</li>
+<li>该选项只能出现在同步报文中，否则被忽略。但同步报文发送时该选项并未生效。该选项细节见RFC1323</li>
+</ul>
+</li>
+<li>kind=4是<code>选择性确认</code>(Selective Acknowledgement，<code>SACK</code>)选项
+<ul>
+<li>若某个报文丢失，TCP默认重传最后被确认的报文后续的所有未确认报文，可能导致重复发送，降低性能</li>
+<li>SACK可使TCP模块仅重传丢失的报文，不用发送所有未被确认的报文</li>
+<li>该选项在连接初始化时被确定是否支持</li>
+<li>可通过内核变量<code>/proc/sys/net/ipv4/tcp_sack</code>来启用/关闭该选项</li>
+</ul>
+</li>
+<li>kind=5是SACK实际工作的选项
+<ul>
+<li>该选项告知发送方：本端已接收并缓存的不连续的数据块。可让发送端据此选择性重传丢失数据块。</li>
+<li>每个块边沿参数包含4字节序号：
+<ul>
+<li>块左边沿表示不连续块的第一个数据的序号</li>
+<li>块右边沿表示不连续块的最后一个数据的序号的下一个序号</li>
+</ul>
+</li>
+<li>一对左边沿和右边沿之间的数据是未收到的</li>
+<li>一对块边沿占用8字节，故TCP头部选项中最多可包含4个这样的不连续数据块</li>
+</ul>
+</li>
+<li>kind=8是<code>时间戳</code>选项
+<ul>
+<li>该选项提供较精确的计算通信双方之间<code>回路时间</code>(Round Trip Time，<code>RTT</code>)的方法，为流量控制提供信息</li>
+<li>可修改内核变量<code>/proc/sys/net/ipv4/tcp_timestamps</code>来启用/关闭该选项</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用tcpdump观察tcp头部信息">使用tcpdump观察TCP头部信息</h3>
+<ul>
+<li>在A机上使用telnet登陆到本机，并用tcpdump抓取第一个包</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo tcpdump -ntx -i lo
+$ telnet 127.0.0.1
+<span class="c1"># IP 127.0.0.1.40394 &gt; 127.0.0.1.23: Flags [S], seq 398128570, win 65495, options [mss 65495,sackOK,TS val 3942817918 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1">#         0x0000:  4510 003c 3ca7 4000 4006 0003 7f00 0001</span>
+<span class="c1">#         0x0010:  7f00 0001 9dca 0017 17ba f5ba 0000 0000</span>
+<span class="c1">#         0x0020:  a002 ffd7 fe30 0000 0204 ffd7 0402 080a</span>
+<span class="c1">#         0x0030:  eb02 a07e 0000 0000 0103 0307</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>tcpdump使用<code>-x</code>输出数据包的二进制码，该输出有60字节：前20字节是IP头部，后40字节是TCP头部，此处没有应用程序数据</li>
+<li>输出含义：
+<ul>
+<li>Flag是[S]，表示该TCP报文含有SYN标志，即是同步报文。（若有其他标志，也会将首字母显示在Flag后的方括号）</li>
+<li>seq是序号值。这是A机发送的第一个报文，故该值即是本次连接中该方向上的ISN值。</li>
+<li>该报文是发送的第一个报文，不用作确认，故ack为空</li>
+<li>win是RWND的大小，同步报文的win值反映实际的RWND大小（窗口扩大因子还未生效）</li>
+<li>options是TCP选项，具体内容在方括号中：
+<ul>
+<li>mss是发送端通知的最大报文长度，ifconfig得知回环的MTU是65536，此处减了41字节防止被分片</li>
+<li>sackOK表示发送端支持并同意使用SACK选项</li>
+<li>TS val是发送端的时间戳</li>
+<li>ecr是时间戳回显应答，这是第一个报文，故针对对方时间戳的应答为0</li>
+<li>nop是空操作，用于填充对齐</li>
+<li>wscale指出发送端使用的窗口扩大因子，此处是7表明报文头部的RWND值左移7位是实际的RWND值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>输出字节码中TCP头部信息见表3.1：
+<img src="../network_figs/HPLSP_ch3-tab_3_1.png" alt="tab_3_1"></li>
+<li>实验输出的源端口、序号、RWND大小、最大报文长度、时间戳、窗口扩大因子和表中不一致</li>
+<li>TCP报文段头部的二进制码和tcpdump输出的TCP报文描述信息完全对应</li>
+</ul>
+<h2 id="tcp连接的建立和关闭">TCP连接的建立和关闭</h2>
+<h3 id="使用tcpdump观察tcp连接的建立和关闭">使用tcpdump观察TCP连接的建立和关闭</h3>
+<ul>
+<li>在A机上telnet登陆到B机的80端口，并用tcpdump抓包</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo tcpdump -i eth0 -nt <span class="s1">&#39;(src 192.168.1.109 and dst 192.168.1.108) or (src 192.168.1.108 and dst 192.168.1.109)&#39;</span>
+$ telnet 192.168.1.109 <span class="m">80</span>
+<span class="c1"># 按ctrl+]并输入quit关闭telnet</span>
+<span class="c1"># 输出：</span>
+<span class="c1"># IP 192.168.1.108.54718 &gt; 192.168.1.109.80: Flags [S], seq 1008659349, win 64240, options [mss 1460,sackOK,TS val 3754123477 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># IP 192.168.1.109.80 &gt; 192.168.1.108.54718: Flags [S.], seq 1115022643, ack 1008659350, win 65160, options [mss 1460,sackOK,TS val 1813658852 ecr 3754123477,nop,wscale 7], length 0</span>
+<span class="c1"># IP 192.168.1.108.54718 &gt; 192.168.1.109.80: Flags [.], ack 1, win 502, options [nop,nop,TS val 3754123478 ecr 1813658852], length 0</span>
+<span class="c1"># IP 192.168.1.108.54718 &gt; 192.168.1.109.80: Flags [F.], seq 1, ack 1, win 502, options [nop,nop,TS val 3754127533 ecr 1813658852], length 0</span>
+<span class="c1"># IP 192.168.1.109.80 &gt; 192.168.1.108.54718: Flags [F.], seq 1, ack 2, win 510, options [nop,nop,TS val 1813662908 ecr 3754127533], length 0</span>
+<span class="c1"># IP 192.168.1.108.54718 &gt; 192.168.1.109.80: Flags [.], ack 2, win 502, options [nop,nop,TS val 3754127534 ecr 1813662908], length 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>输出6个报文，前3个用于建立连接，后3个用于关闭连接（关闭连接应有4个，其中一个被省略）</li>
+<li>TCP建立和关闭连接的时序如图3.6：
+<img src="../network_figs/HPLSP_ch3-fig_3_6.png" alt="fig_3_6"></li>
+<li>建立连接（<code>三次握手</code>）：
+<ul>
+<li>第1个报文包含SYN，是<code>同步报文</code>，由A机向B机发起连接请求。同步报文虽然未携带数据但要占用一个序号值（故下一个发送的seq要+1）</li>
+<li>第2个报文包含SYN，是<code>同步报文</code>，表示B机同意与A机建立连接，并将A机的seq值+1作为ack返回</li>
+<li>第3个报文是对第2个同步报文的<code>确认</code></li>
+</ul>
+</li>
+<li>从建立连接开始，tcpdump输出的seq和ack就都是相对ISN的偏移，也可用<code>-S</code>选项来打印绝对值</li>
+<li>关闭连接（<code>四次挥手</code>）：
+<ul>
+<li>第4个报文包含FIN，是<code>结束报文</code>，由A机向B机发起结束请求。结束报文虽然未携带数据但要占用一个序号值</li>
+<li>第5个报文（我的实验中被省略）用于<code>确认</code>第4个报文的结束请求。该报文是否被省略，取决于TCP的<code>延迟确认</code>特性</li>
+<li>第6个报文包含FIN，是<code>结束报文</code>，由B机向A机发起结束请求（当第5个报文被省略时，该报文同时用于确认第4个报文的结束请求）</li>
+<li>第7个报文是对第6个结束报文的<code>确认</code></li>
+</ul>
+</li>
+<li>TCP连接一般由客户端发起，而可能由客户端关闭，也可能由服务器关闭。特殊情况是可能由两端同时发起或同时关闭</li>
+</ul>
+<h3 id="半关闭状态">半关闭状态</h3>
+<ul>
+<li>TCP是全双工连接，允许两个方向的数据传输被独立地关闭</li>
+<li><code>半关闭</code>状态：通信的一方可发送结束报文给对方，告诉它本端已完成了数据的发送。同时还允许接收对方的数据（并向对方发送确认报文），直到对方也发送结束报文关闭连接。如图3.7
+<img src="../network_figs/HPLSP_ch3-fig_3_7.png" alt="fig_3_7"></li>
+<li>上图中，客户端和服务器判断对方是否已关闭连接的方法是：<code>read</code>系统调用返回0（收到结束报文）。linux还有其他的检测手段</li>
+<li>socket通过<code>shutdown</code>函数提供了对半关闭的支持，虽然使用半关闭的程序很少见</li>
+</ul>
+<h3 id="连接超时">连接超时</h3>
+<ul>
+<li>若服务器对客户端发送的TCP同步报文没有应答，则客户端会多次重连，若仍然无应答，会通知应用程序：连接超时</li>
+<li>在A机上使用<code>iptables</code>命令过滤所有连接请求（丢弃所有同步报文），然后在B机上用telnet登陆A机并抓包</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># A机执行：</span>
+$ sudo iptables -F
+$ sudo iptables -I INPUT -p tcp --syn -i eth0 -j DROP
+<span class="c1"># B机执行：</span>
+$ sudo tcpdump -n -i ens33 port <span class="m">23</span>
+$ date<span class="p">;</span>telnet 192.168.1.108<span class="p">;</span>date
+<span class="c1"># 输出：</span>
+<span class="c1"># 12:08:38.340276 IP 192.168.1.109.58258 &gt; 192.168.1.108.23: Flags [S], seq 3296644761, win 64240, options [mss 1460,sackOK,TS val 1817484846 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># 12:08:39.353278 IP 192.168.1.109.58258 &gt; 192.168.1.108.23: Flags [S], seq 3296644761, win 64240, options [mss 1460,sackOK,TS val 1817485859 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># 12:08:41.367765 IP 192.168.1.109.58258 &gt; 192.168.1.108.23: Flags [S], seq 3296644761, win 64240, options [mss 1460,sackOK,TS val 1817487873 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># 12:08:45.494805 IP 192.168.1.109.58258 &gt; 192.168.1.108.23: Flags [S], seq 3296644761, win 64240, options [mss 1460,sackOK,TS val 1817492000 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># 12:08:53.686589 IP 192.168.1.109.58258 &gt; 192.168.1.108.23: Flags [S], seq 3296644761, win 64240, options [mss 1460,sackOK,TS val 1817500192 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># 12:09:09.819888 IP 192.168.1.109.58258 &gt; 192.168.1.108.23: Flags [S], seq 3296644761, win 64240, options [mss 1460,sackOK,TS val 1817516325 ecr 0,nop,wscale 7], length 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>tcpdump不使用<code>-t</code>即可保留时间戳</li>
+<li>抓取的6个报文序号相同，说明后面5个都是超时重传</li>
+<li>每个超时重传的时间是上一次的两倍，间隔时间分别是：1,2,4,8,16,&hellip;</li>
+<li>超过<code>最多重连次数</code>时放弃连接并通知应用程序。最多重连次数在内核变量<code>/proc/sys/net/ipv4/tcp_syn_retries</code>中定义</li>
+</ul>
+<h2 id="tcp状态转移">TCP状态转移</h2>
+<ul>
+<li>TCP连接的双方是两个状态机，每台机器的当前状态可由netstat命令查看</li>
+<li>从建立到关闭的过程中两端状态转移见图3.8
+<img src="../network_figs/HPLSP_ch3-fig_3_8.png" alt="fig_3_8"></li>
+<li>上图中虚线是典型的服务器端状态转移，实线是典型的客户端状态转移，CLOSED是假想起点（虚拟状态）</li>
+</ul>
+<h3 id="tcp状态转移总图">TCP状态转移总图</h3>
+<h3 id="time_wait状态">TIME_WAIT状态</h3>
+<h2 id="复位报文段">复位报文段</h2>
+<h3 id="访问不存在的端口">访问不存在的端口</h3>
+<h3 id="异常终止连接">异常终止连接</h3>
+<h3 id="处理半打开连接">处理半打开连接</h3>
+<h2 id="tcp交互数据流">TCP交互数据流</h2>
+<h2 id="tcp成块数据流">TCP成块数据流</h2>
+<h2 id="带外数据">带外数据</h2>
+<h2 id="tcp超时重传">TCP超时重传</h2>
+<h2 id="拥塞控制">拥塞控制</h2>
+<h3 id="拥塞控制概述">拥塞控制概述</h3>
+<h3 id="慢启动和拥塞避免">慢启动和拥塞避免</h3>
+<h3 id="快速重传和快速恢复">快速重传和快速恢复</h3>
+<p><img src="../network_figs/HPLSP_ch3-fig_3_9.png" alt="fig_3_9">
+<img src="../network_figs/HPLSP_ch3-fig_3_10.png" alt="fig_3_10">
+<img src="../network_figs/HPLSP_ch3-fig_3_11.png" alt="fig_3_11">
+<img src="../network_figs/HPLSP_ch3-fig_3_12.png" alt="fig_3_12"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">canpi</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-05-28
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/reward_alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">Linux高性能服务器编程</a>
+          <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/ml/ml_top/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/oj/leetcode23/">
+            <span class="next-text nav-default">LeetCode23 - (hard) Merge k Sorted Lists</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:hucanpei@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hucanpei" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/canpi" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">canpi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

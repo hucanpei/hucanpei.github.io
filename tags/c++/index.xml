@@ -6,7 +6,7 @@
     <description>Recent content in C&#43;&#43; on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2020 14:21:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>http://localhost:1313/post/cpp/top_cpp/</guid>
       <description>C++ primer 读书笔记 C++ primer 第1章 开始 C++ primer 第2章 变量和基本类型 C++ primer 第3章 字符串、向量和数组 C++ primer 第4章 表达式 C++ primer 第5章 语句 C++ primer 第6章 函数 C++ primer 第7章 类 C++ primer 第</description>
+    </item>
+    
+    <item>
+      <title>（未完成）Linux高性能服务器编程 第3章 TCP协议详解</title>
+      <link>http://localhost:1313/post/network/hplsp_ch3/</link>
+      <pubDate>Thu, 28 May 2020 14:21:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/network/hplsp_ch3/</guid>
+      <description>TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每</description>
     </item>
     
     <item>

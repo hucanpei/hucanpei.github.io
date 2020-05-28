@@ -49,7 +49,7 @@
 <meta itemprop="description" content="IP头部信息出现在每个IP数据报中，用于指定IP通信的源端和目的端IP地址，指导IP分片和重组，指定部分通信行为 IP数据报的路由和转发发生在">
 <meta itemprop="datePublished" content="2020-05-25T00:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-25T00:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="5300">
+<meta itemprop="wordCount" content="5287">
 
 
 
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-05-25 </span>
         
-          <span class="more-meta"> 约 5300 字 </span>
+          <span class="more-meta"> 约 5287 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
@@ -198,8 +198,6 @@
 <ul>
 <li>IPv4的头部通常为20字节，除非含有可变长的选项。结构如图2.1
 <img src="../network_figs/HPLSP_ch2-fig_2_1.png" alt="fig_2_1"></li>
-<li>IPv4的头部：
-<ul>
 <li>4位<code>版本号</code>指定IP协议版本：IPv4的版本号是4，其他IPv4的扩展（如SIP和PIP）有不同的版本号，头部结构也不同</li>
 <li>4位<code>头部长度</code>是该头部的长度，单位是32bit（4字节），IP头部的最大长度是15*4=60字节</li>
 <li>8位<code>服务类型</code>(Type Of Service，TOS)包括：
@@ -229,8 +227,6 @@
 <li><code>时间戳</code>告诉每个路由器都将数据报被转发的时间填入IP头部的选项部分，这样可测量途径路由间传递的时间</li>
 <li><code>松散源路由选择</code>指定一个路由器IP列表，使得IP数据报传递过程必须经过这些路由器</li>
 <li><code>严格源路由选择</code>指定一个路由器IP列表，使得IP数据报传递过程只能经过这些路由器</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -515,8 +511,6 @@ $ route
 <ul>
 <li>IPv6头部由40字节的<code>固定头部</code>和可变长的<code>扩展头部</code>组成，如图2.6是固定头部
 <img src="../network_figs/HPLSP_ch2-fig_2_6.png" alt="fig_2_6"></li>
-<li>头部含义：
-<ul>
 <li>4位<code>版本号</code>指定IP协议的版本，IPv6的版本号是6</li>
 <li>8位<code>通信类型</code>指定数据流的通信类型或优先级，类似IPv4的TOS</li>
 <li>20位<code>流标签</code>是IPv6新增字段，用于某些对连接的服务质量有特殊要求的通信，例如音视频实时传输</li>
@@ -527,8 +521,6 @@ $ route
 <ul>
 <li>IPv4的地址是32位，用点分十进制分割为4组。而IPv6的地址用十六进制和<code>:</code>分割为8组，每组2字节</li>
 <li>通常使用零压缩法简写IPv6地址，即省略连续的全0组。不过对一个IPv6地址只能省略一个全0组</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
