@@ -49,7 +49,7 @@
 <meta itemprop="description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每">
 <meta itemprop="datePublished" content="2020-05-28T14:21:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-28T14:21:00&#43;08:00" />
-<meta itemprop="wordCount" content="5119">
+<meta itemprop="wordCount" content="10420">
 
 
 
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-05-28 </span>
         
-          <span class="more-meta"> 约 5119 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+          <span class="more-meta"> 约 10420 字 </span>
+          <span class="more-meta"> 预计阅读 21 分钟 </span>
         
       </div>
     </header>
@@ -471,27 +471,389 @@ $ date<span class="p">;</span>telnet 192.168.1.108<span class="p">;</span>date
 </ul>
 <h2 id="tcp状态转移">TCP状态转移</h2>
 <ul>
-<li>TCP连接的双方是两个状态机，每台机器的当前状态可由netstat命令查看</li>
+<li>TCP连接的双方是两个状态机，每台机器的当前状态可由<code>netstat</code>命令查看</li>
 <li>从建立到关闭的过程中两端状态转移见图3.8
 <img src="../network_figs/HPLSP_ch3-fig_3_8.png" alt="fig_3_8"></li>
-<li>上图中虚线是典型的服务器端状态转移，实线是典型的客户端状态转移，CLOSED是假想起点（虚拟状态）</li>
+<li>上图中虚线是典型的服务器端状态转移，实线是典型的客户端状态转移，<code>CLOSED</code>是假想起点（虚拟状态）</li>
 </ul>
 <h3 id="tcp状态转移总图">TCP状态转移总图</h3>
+<ul>
+<li>典型的服务器状态转移：
+<ol>
+<li>通过listen系统调用进入<code>LISTEN</code>状态，等待客户端连接（执行被动打开）</li>
+<li>一旦收到客户端的连接请求（同步报文）则将该连接放入内核等待队列，并向客户端发送确认报文。此时处于<code>SYN_RCVD</code>状态</li>
+<li>若服务器成功收到客户端发回的确认报文，则进入<code>ESTABLISHED</code>状态，此时三次握手已建立</li>
+<li>客户端主动关闭连接时（即通过close/shutdown系统调用向服务器发送结束报文），服务器发送确认报文并进入<code>CLOSE_WAIT</code>状态，等待服务器应用程序关闭连接</li>
+<li>通常服务器检测到客户端的结束报文后，也会给客户端发送结束报文以关闭连接，状态变为<code>LAST_ACK</code>，等待客户端对结束报文的最后一次确认</li>
+<li>服务器收到客户端最后一次的确认结束报文后，连接关闭，服务器处于<code>CLOSED</code>状态</li>
+</ol>
+</li>
+<li>典型的客户端状态转移：
+<ol>
+<li>客户端通过connect系统调用主动与服务器建立连接，connect首先给服务器发送同步报文，客户端进入<code>SYN_SENT</code>状态
+<ul>
+<li>connect调用可能因为两个原因失败：
+<ul>
+<li>若connect的目标端口不存在（未被进程监听）或该端口被处于TIME_WAIT状态的连接占用，则服务器给客户端发送复位报文，connect调用失败</li>
+<li>若connect的目标端口存在，但在超时时间内未收到服务器的确认报文，则connect调用失败</li>
+</ul>
+</li>
+<li>connect调用失败会使客户端立即返回<code>CLOSED</code>状态</li>
+</ul>
+</li>
+<li>若客户端成功收到服务器的同步和确认报文，则connect调用成功，客户端发送确认报文并进入<code>ESTABLISHED</code>状态</li>
+<li>客户端主动关闭时，向服务器发送结束报文，此时客户端进入<code>FIN_WAIT_1</code>状态
+<ul>
+<li>若延迟确认未被开启，即图3.6的第5个报文未被省略，
+<ol>
+<li>客户端收到服务器专门用于确认客户端结束报文的确认报文后，客户端进入<code>FIN_WAIT_2</code>状态，此时服务器处于CLOSE_WAIT状态，有可能发生半关闭</li>
+<li>此时若服务器也向客户端发送结束报文关闭连接，则客户端给予确认并进入<code>TIME_WAIT</code>状态</li>
+</ol>
+</li>
+<li>若延迟确认被开启，即图3.6的第5个报文被省略，则在收到服务器的“确认并结束”报文后，客户端发送确认报文，并直接进入<code>TIME_WAIT</code>状态</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>上述状态转移（图3.6的连接对应的状态转移）过程见图3.9：
+<img src="../network_figs/HPLSP_ch3-fig_3_9.png" alt="fig_3_9"></li>
+<li>客户端处于FIN_WAIT_2状态时，需等待服务器发送结束报文，客户端才会进入TIME_WAIT，否则它一直停留在FIN_WAIT_2
+<ul>
+<li>有一种可能是：需要在半关闭状态下继续接收服务器的报文</li>
+<li>另一种可能是：客户端半关闭后，未等到服务器关闭连接就强行退出了。此时客户端连接由内核接管，称为<code>孤儿连接</code>（类似孤儿进程）</li>
+<li>Linux为防止孤儿连接长期存在于内核中，定义了两个内核变量：
+<ul>
+<li><code>/proc/sys/net/ipv4/tcp_max_orphans</code>指定内核能托管的孤儿连接数量</li>
+<li><code>/proc/sys/net/ipv4/tcp_fin_timeout</code>指定孤儿连接在内核中的生存时间</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="time_wait状态">TIME_WAIT状态</h3>
+<ul>
+<li>在四次挥手中，客户端收到服务器的结束报文后，不会直接进入CLOSED，而是进入TIME_WAIT状态</li>
+<li>客户端在TIME_WAIT状态时，要等待一段长为2<code>MSL</code>(Maximum Segment Life，报文最大生存时间)的时间才能关闭，其中MSL是TCP报文在网络中的最大生存时间，RFC1122建议MSL的时间是2min</li>
+<li>TIME_WAIT存在的原因：
+<ul>
+<li>可靠地终止TCP连接。若四次挥手中最后一个报文（客户端对服务器结束报文的确认）丢失，则服务器会重发结束报文。此时客户端需停留在某状态以处理重复的结束报文。</li>
+<li>一个TCP端口不能被多个连接同时打开，一个连接处于TIME_WAIT时无法使用该连接占用的端口建立新连接。若不存在TIME_WAIT则可以立刻建立刚才关闭的连接的<code>化身</code>(incarnation，与原连接使用相同IP和端口号的新连接)，该化身可能收到属于原来连接的报文。</li>
+<li>TCP报文的最大生存时间是MSL，坚持2MSL的TIME_WAIT状态可确保网络中两方向上的报文都被接收（或因迟到被丢弃），因此新的化身可安全建立。</li>
+</ul>
+</li>
+<li>有时希望避免TIME_WAIT状态，例如需要立即重启程序时：
+<ul>
+<li>客户端一般不需要担心端口被占用，因为每次启动时都使用系统随机分配的端口，不会用到被占用的端口（除非手动指定）</li>
+<li>服务器在主动关闭连接后异常终止，则进入TIME_WAIT将导致无法立即重启，因为服务器使用的端口是固定的知名端口</li>
+<li>可通过socket选项<code>SO_REUSEADDR</code>来强制进程立即使用处于TIME_WAIT状态的连接占用的端口</li>
+</ul>
+</li>
+</ul>
 <h2 id="复位报文段">复位报文段</h2>
+<ul>
+<li>某些时候TCP连接的一段会向另一端发送携带RST标志的报文，即复位报文，通知对方关闭连接或重新建立连接</li>
+<li>产生复位报文的3种情况：访问不存在的端口、异常终止连接、处理半打开连接</li>
+</ul>
 <h3 id="访问不存在的端口">访问不存在的端口</h3>
+<ul>
+<li>客户端访问不存在的服务器端口时，服务器将给客户端发送复位报文</li>
+<li>从B机执行telnet登陆到A机的不存在的54321端口，并用tcpdump抓包</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo tcpdump -nt -i ens33 port <span class="m">54321</span>
+$ telnet 192.168.1.108 <span class="m">54321</span>
+<span class="c1"># 输出：</span>
+<span class="c1"># IP 192.168.1.109.35526 &gt; 192.168.1.108.54321: Flags [S], seq 435839609, win 64240, options [mss 1460,sackOK,TS val 3588785144 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># IP 192.168.1.108.54321 &gt; 192.168.1.109.35526: Flags [R.], seq 0, ack 435839610, win 0, length 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>输出显示telnet连接被拒绝，抓包可见服务器返回的报文Flags为R，即复位报文</li>
+<li>复位报文的RWND大小为0，故收到复位报文的一端应关闭连接或重连，不应回复该报文</li>
+<li>客户端向服务器的某端口发起连接而该端口处于TIME_WAIT时，客户端也将收到复位报文</li>
+</ul>
 <h3 id="异常终止连接">异常终止连接</h3>
+<ul>
+<li>异常地终止一个TCP连接的方法：给对方发送复位报文。一旦发送了复位报文，发送端所有排队等待发送的数据都被丢弃</li>
+<li>应用程序可使用socket选项SO_LINGER来发送复位报文，来异常终止一个连接</li>
+</ul>
 <h3 id="处理半打开连接">处理半打开连接</h3>
+<ul>
+<li>当一方（B）关闭或异常终止连接，而另一方（A）未收到结束报文（例如断网了），此时A还维持原来的连接，而B即使重启也没有保持原连接的任何信息。此时是半打开状态，这种状态的连接叫<code>半打开连接</code>。若A向半打开的连接写入数据，则B将回复复位报文以关闭连接</li>
+<li>操作：
+<ol>
+<li>在B机上监听12345端口并用telnet抓包，在A机上用telnet登陆到B机的12345端口</li>
+<li>拔掉A机网线，重启B机的服务器程序，插上A机网线</li>
+<li>A机的telnet并未退出，处于半打开状态，向其中输入一个任意字符，会导致A机的telnet被服务器关闭</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># B机执行：</span>
+$ nc -l <span class="m">12345</span>
+$ sudo tcpdump -nt -i ens33 port <span class="m">12345</span>
+<span class="c1"># A机执行：</span>
+$ telnet 192.168.1.109 <span class="m">12345</span>
+<span class="c1"># 拔掉A机网线，重启B机的nc程序，插上A机网线</span>
+<span class="c1"># 此时A机的telnet并未退出，处于半打开状态，向其中输入一个字符a并回车，会导致A机的telnet被服务器关闭</span>
+<span class="c1"># telnet输出：</span>
+<span class="c1"># IP 192.168.1.108.35428 &gt; 192.168.1.109.12345: Flags [S], seq 119895406, win 64240, options [mss 1460,sackOK,TS val 2812493670 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># IP 192.168.1.109.12345 &gt; 192.168.1.108.35428: Flags [S.], seq 2780126804, ack 119895407, win 65160, options [mss 1460,sackOK,TS val 3593745641 ecr 2812493670,nop,wscale 7], length 0</span>
+<span class="c1"># IP 192.168.1.108.35428 &gt; 192.168.1.109.12345: Flags [.], ack 1, win 502, options [nop,nop,TS val 2812493715 ecr 3593745641], length 0</span>
+<span class="c1"># IP 192.168.1.108.35428 &gt; 192.168.1.109.12345: Flags [P.], seq 1:4, ack 1, win 502, options [nop,nop,TS val 2812512194 ecr 3593745641], length 3</span>
+<span class="c1"># IP 192.168.1.109.12345 &gt; 192.168.1.108.35428: Flags [R], seq 2780126805, win 0, length 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>上面的输出：
+<ul>
+<li>前3个报文是建立TCP时的三次握手</li>
+<li>第4个报文由客户端发给服务器，携带了3字节的应用程序数据，是用户输入的字符&rsquo;a&rsquo;、回车&rsquo;\r&rsquo;、换行&rsquo;\n&rsquo;</li>
+<li>第5个报文是服务器发给客户端的复位报文，使客户端关闭连接</li>
+</ul>
+</li>
+</ul>
 <h2 id="tcp交互数据流">TCP交互数据流</h2>
+<ul>
+<li>TCP报文携带的应用程序数据按长度分为两种：
+<ul>
+<li><code>交互数据</code>很短，使用交互数据的程序对<code>实时性</code>要求高，如telnet、ssh等</li>
+<li><code>成块数据</code>长度通常为TCP报文允许的最大数据长度，使用成块数据的程序对<code>传输效率</code>要求高，如ftp等</li>
+</ul>
+</li>
+<li>在A机上telnet登陆到本机并执行ls命令，用tcpdump抓包：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo tcpdump -nt -i lo port <span class="m">23</span>
+$ telnet 127.0.0.1
+<span class="c1"># 输入用户名和密码，登陆后输入ls并回车</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>整个登陆过程中产生大量报文，这里只选择登陆成功之后的报文：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [P.], seq 146:147, ack 718, win 512, options [nop,nop,TS val 3641403459 ecr 3641395591], length 1</span>
+<span class="c1"># IP 127.0.0.1.23 &gt; 127.0.0.1.49214: Flags [.], ack 147, win 512, options [nop,nop,TS val 3641403460 ecr 3641403459], length 0</span>
+<span class="c1"># IP 127.0.0.1.23 &gt; 127.0.0.1.49214: Flags [P.], seq 718:719, ack 147, win 512, options [nop,nop,TS val 3641403460 ecr 3641403459], length 1</span>
+<span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [.], ack 719, win 512, options [nop,nop,TS val 3641403460 ecr 3641403460], length 0</span>
+<span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [P.], seq 147:148, ack 719, win 512, options [nop,nop,TS val 3641404533 ecr 3641403460], length 1</span>
+<span class="c1"># IP 127.0.0.1.23 &gt; 127.0.0.1.49214: Flags [.], ack 148, win 512, options [nop,nop,TS val 3641404533 ecr 3641404533], length 0</span>
+<span class="c1"># IP 127.0.0.1.23 &gt; 127.0.0.1.49214: Flags [P.], seq 719:720, ack 148, win 512, options [nop,nop,TS val 3641404533 ecr 3641404533], length 1</span>
+<span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [.], ack 720, win 512, options [nop,nop,TS val 3641404533 ecr 3641404533], length 0</span>
+<span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [P.], seq 148:150, ack 720, win 512, options [nop,nop,TS val 3641405532 ecr 3641404533], length 2</span>
+<span class="c1"># IP 127.0.0.1.23 &gt; 127.0.0.1.49214: Flags [P.], seq 720:722, ack 150, win 512, options [nop,nop,TS val 3641405534 ecr 3641405532], length 2</span>
+<span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [.], ack 722, win 512, options [nop,nop,TS val 3641405534 ecr 3641405534], length 0</span>
+<span class="c1"># IP 127.0.0.1.23 &gt; 127.0.0.1.49214: Flags [P.], seq 722:897, ack 150, win 512, options [nop,nop,TS val 3641405536 ecr 3641405534], length 175</span>
+<span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [.], ack 897, win 511, options [nop,nop,TS val 3641405537 ecr 3641405536], length 0</span>
+<span class="c1"># IP 127.0.0.1.23 &gt; 127.0.0.1.49214: Flags [P.], seq 897:918, ack 150, win 512, options [nop,nop,TS val 3641405537 ecr 3641405537], length 21</span>
+<span class="c1"># IP 127.0.0.1.49214 &gt; 127.0.0.1.23: Flags [.], ack 918, win 511, options [nop,nop,TS val 3641405537 ecr 3641405537], length 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>输出：
+<ul>
+<li>第1-4行是输入字符&rsquo;l'的过程：
+<ul>
+<li>第1行是客户端发送给服务器，数据长度为1，携带字符&rsquo;l'的应用程序数据</li>
+<li>第2行是服务器对第1行报文的确认，数据长度为0</li>
+<li>第3行是服务器发送给客户端，数据长度为1，携带字符&rsquo;l'的应用程序数据，用于回显字符&rsquo;l&rsquo;</li>
+<li>第4行是客户端对第3行报文的确认，数据长度为0</li>
+</ul>
+</li>
+<li>第5-8行是输入字符&rsquo;s'的过程</li>
+<li>第9-11行是输入回车符&rsquo;\n'和流结束符EOF的过程：
+<ul>
+<li>第9行是客户端发送给服务器，数据长度为2，携带回车符&rsquo;\n'和流结束符EOF</li>
+<li>第10行是服务器对第9行报文的确认，并携带2个字节的数据，传回回车符和换行符</li>
+<li>第11行是客户端对第10行报文的确认</li>
+</ul>
+</li>
+<li>第12-13行是服务器对ls命令的回显：
+<ul>
+<li>第12行是服务器发送给客户端，携带175个字节表示ls命令的输出</li>
+<li>第13行是客户端对第12行的确认</li>
+</ul>
+</li>
+<li>第14行是服务器发送给客户端，携带21个字节，包括：一个回车符、一个换行符、客户端登陆用户的PS1环境变量</li>
+</ul>
+</li>
+<li>关于报文携带的数据，可在tcpdump中开启<code>-x</code>来显示报文的16进制，然后将数据部分转为字符串：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 以下是第1行的1个字节：l
+6c
+# 以下是第3行的1个字节：l
+6c
+# 以下是第5行的1个字节：s
+73
+# 以下是第7行的1个字节：s
+73
+# 以下是第9行的2个字节：回车和空字符
+0d00
+# 以下是第10行的2个字节：回车和换行
+0d0a
+# 以下是第12行的175个字节
+1b5b 306d 1b5b 3031 3b33 346d 4465 736b 746f 701b 5b30 6d20 201b 5b30 313b 3334 6d44 6f63 756d 656e 7473 1b5b 306d 2020 1b5b 3031 3b33 346d 446f 776e 6c6f 6164 731b 5b30 6d20 201b 5b30 313b 3334 6d4d 7573 6963 1b5b 306d 2020 1b5b 3031 3b33 346d 5069 6374 7572 6573 1b5b 306d 2020 1b5b 3031 3b33 346d 5075 626c 6963 1b5b 306d 2020 1b5b 3031 3b33 346d 5465 6d70 6c61 7465 731b 5b30 6d20 201b 5b30 313b 3334 6d56 6964 656f 731b 5b30 6d0d 0a
+# 以下是14行的21个字节
+1b5b 313b 3332 6d63 616e 7069 407e 241b 5b30 306d 20
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>延迟确认</code>：对于收到的报文并不立即确认，而是查看本端是否由数据需要发送给对方，若有则和确认信息一起发出（例如图3.6中被省略的报文5，是TCP建立/断开连接时发生的延迟确认）</li>
+<li>使用延时确认可减少TCP报文的数量</li>
+<li>对于交互数据流，如telnet程序：
+<ul>
+<li>在本机和局域网上，由于用户的输入速度显著慢于程序的处理速度，故客户端的确认报文总是可以不携带任何应用数据</li>
+<li>在广域网上，交互数据流可能有很大的延时，且携带交互数据的微小报文一般很多（按一个键就有几个报文），可能导致拥塞发生</li>
+<li>解决广域网交互数据流报文太多导致拥塞的方法之一是<code>Nagle算法</code>：
+<ul>
+<li>一个TCP连接的双方在任意时刻都最多只能发送一个未被确认的报文，在该报文被确认前不能发送下一个报文</li>
+<li>发送方在等待确认的同时收集本端需发送的微小数据，在确认到来时以一个报文将这些小数据一次发出</li>
+<li>该算法可极大的减少网络中微小TCP报文的数量，且是自适应的：确认到达越快，数据发送得越快</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="tcp成块数据流">TCP成块数据流</h2>
+<ul>
+<li>在B机启动vsftpd服务器，在A机执行ftp登陆并使用get下载一个大文件，tcpdump抓包：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo tcpdump -nt -i eth0 port <span class="m">20</span>
+$ ftp 192.168.1.109
+<span class="c1"># 输入用户名和密码登陆，并用get下载一个大文件</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>只选最后几个输出：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># IP 192.168.1.109.20 &gt; 192.168.1.108.33827: Flags [.], seq 27280321:27281769, ack 1, win 502, options [nop,nop,TS val 3602956274 ecr 2821704407], length 1448</span>
+<span class="c1"># IP 192.168.1.109.20 &gt; 192.168.1.108.33827: Flags [.], seq 27281769:27283217, ack 1, win 502, options [nop,nop,TS val 3602956274 ecr 2821704407], length 1448</span>
+<span class="c1"># IP 192.168.1.108.33827 &gt; 192.168.1.109.20: Flags [.], ack 27283217, win 23620, options [nop,nop,TS val 2821704509 ecr 3602956274], length 0</span>
+<span class="c1"># IP 192.168.1.109.20 &gt; 192.168.1.108.33827: Flags [.], seq 27283217:27284665, ack 1, win 502, options [nop,nop,TS val 3602956274 ecr 2821704407], length 1448</span>
+<span class="c1"># IP 192.168.1.109.20 &gt; 192.168.1.108.33827: Flags [.], seq 27284665:27286113, ack 1, win 502, options [nop,nop,TS val 3602956274 ecr 2821704407], length 1448</span>
+<span class="c1"># IP 192.168.1.109.20 &gt; 192.168.1.108.33827: Flags [.], seq 27286113:27287561, ack 1, win 502, options [nop,nop,TS val 3602956274 ecr 2821704407], length 1448</span>
+<span class="c1"># IP 192.168.1.109.20 &gt; 192.168.1.108.33827: Flags [FP.], seq 27287561:27287681, ack 1, win 502, options [nop,nop,TS val 3602956274 ecr 2821704407], length 120</span>
+<span class="c1"># IP 192.168.1.108.33827 &gt; 192.168.1.109.20: Flags [.], ack 27287682, win 23588, options [nop,nop,TS val 2821704509 ecr 3602956274], length 0</span>
+<span class="c1"># IP 192.168.1.108.33827 &gt; 192.168.1.109.20: Flags [F.], seq 1, ack 27287682, win 23629, options [nop,nop,TS val 2821704698 ecr 3602956274], length 0</span>
+<span class="c1"># IP 192.168.1.109.20 &gt; 192.168.1.108.33827: Flags [.], ack 2, win 502, options [nop,nop,TS val 3602956557 ecr 2821704698], length 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>输出中：
+<ul>
+<li>服务器连续发送1-2行报文，得到客户端的第3行确认报文（ack），该确认报文同时说明客户端还可接收23620*(2^7)字节</li>
+<li>服务器连续发送4-7行报文，得到客户端的第8行确认报文（ack），该确认报文同时说明客户端还可接收23588*(2^7)字节</li>
+<li>7-10行是标准的四次挥手：
+<ul>
+<li>第7行服务器主动要求关闭连接（F），并通知客户端尽快取走数据（P）</li>
+<li>第8行客户端对第7行报文确认</li>
+<li>第9行客户端要求关闭连接（F）</li>
+<li>第10行服务器对第9行报文确认</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>传输大量数据时，发送方会连续发送多个TCP报文，接收方可<code>一次确认</code>所有这些报文</li>
+<li>在发送方收到一次接收方的确认后，还能连续发送多少个报文，是由接收方的RWND和CWND大小决定。接收方RWND越大，发送方可连续发送的报文内容越多（但实际上发送方也不会一次发送那么多）</li>
+<li>有时服务器会每隔几个报文就发送一个PSH标志（Flags为P）通知客户端尽快读取数据。但这并非必须，因为它可从客户端确认报文中得知客户端还能接收多少数据（RWND不为0）</li>
+</ul>
 <h2 id="带外数据">带外数据</h2>
 <h2 id="tcp超时重传">TCP超时重传</h2>
 <h2 id="拥塞控制">拥塞控制</h2>
 <h3 id="拥塞控制概述">拥塞控制概述</h3>
 <h3 id="慢启动和拥塞避免">慢启动和拥塞避免</h3>
 <h3 id="快速重传和快速恢复">快速重传和快速恢复</h3>
-<p><img src="../network_figs/HPLSP_ch3-fig_3_9.png" alt="fig_3_9">
-<img src="../network_figs/HPLSP_ch3-fig_3_10.png" alt="fig_3_10">
+<p><img src="../network_figs/HPLSP_ch3-fig_3_10.png" alt="fig_3_10">
 <img src="../network_figs/HPLSP_ch3-fig_3_11.png" alt="fig_3_11">
 <img src="../network_figs/HPLSP_ch3-fig_3_12.png" alt="fig_3_12"></p>
 
