@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>（未完成）Linux高性能服务器编程 第3章 TCP协议详解 - pi</title>
+  <title>Linux高性能服务器编程 第3章 TCP协议详解 - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -39,22 +39,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="（未完成）Linux高性能服务器编程 第3章 TCP协议详解" />
+<meta property="og:title" content="Linux高性能服务器编程 第3章 TCP协议详解" />
 <meta property="og:description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/network/hplsp_ch3/" />
 <meta property="article:published_time" content="2020-05-28T14:21:00+08:00" />
 <meta property="article:modified_time" content="2020-05-28T14:21:00+08:00" />
-<meta itemprop="name" content="（未完成）Linux高性能服务器编程 第3章 TCP协议详解">
+<meta itemprop="name" content="Linux高性能服务器编程 第3章 TCP协议详解">
 <meta itemprop="description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每">
 <meta itemprop="datePublished" content="2020-05-28T14:21:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-28T14:21:00&#43;08:00" />
-<meta itemprop="wordCount" content="10420">
+<meta itemprop="wordCount" content="13583">
 
 
 
 <meta itemprop="keywords" content="Linux,网络,C&#43;&#43;,Linux高性能服务器编程,读书," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="（未完成）Linux高性能服务器编程 第3章 TCP协议详解"/>
+<meta name="twitter:title" content="Linux高性能服务器编程 第3章 TCP协议详解"/>
 <meta name="twitter:description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每"/>
 
 <!--[if lte IE 9]>
@@ -118,13 +118,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">（未完成）Linux高性能服务器编程 第3章 TCP协议详解</h1>
+      <h1 class="post-title">Linux高性能服务器编程 第3章 TCP协议详解</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-05-28 </span>
         
-          <span class="more-meta"> 约 10420 字 </span>
-          <span class="more-meta"> 预计阅读 21 分钟 </span>
+          <span class="more-meta"> 约 13583 字 </span>
+          <span class="more-meta"> 预计阅读 28 分钟 </span>
         
       </div>
     </header>
@@ -848,14 +848,182 @@ $ ftp 192.168.1.109
 <li>有时服务器会每隔几个报文就发送一个PSH标志（Flags为P）通知客户端尽快读取数据。但这并非必须，因为它可从客户端确认报文中得知客户端还能接收多少数据（RWND不为0）</li>
 </ul>
 <h2 id="带外数据">带外数据</h2>
+<ul>
+<li>带外数据：
+<ul>
+<li>某些传输层协议有<code>带外</code>(Out Of Bound，OOB)数据，用于迅速通知对方本端发生的重要事件</li>
+<li>带外数据比普通数据（也称带内数据）优先级更高，应该总是被立即发送，无论发送缓冲区中是否有数据在排队</li>
+<li>带外数据的传输可用一条独立的传输层连接，也可在普通数据的连接中传输</li>
+<li>带外数据的使用很少，仅有telnet、ftp等远程非活跃程序</li>
+</ul>
+</li>
+<li>UDP没有带外数据，TCP也没有真正的带外数据</li>
+<li>TCP使用头部的紧急指针标志和紧急指针两个字段给程序提法了紧急方式，它利用传输普通数据的连接来传输紧急数据（带外数据）</li>
+<li>TCP发送带外数据：
+<ul>
+<li>如图3.10，发送缓冲区中已有N字节数据，又向其中写入3字节带外数据&quot;abc&rdquo;
+<img src="../network_figs/HPLSP_ch3-fig_3_10.png" alt="fig_3_10"></li>
+<li>紧急指针指向最后一个带外数据的下一字节，即&rsquo;c'之后的位置</li>
+<li>多字节带外数据中，只有最后一字节被当作带外数据，其他被当作普通数据</li>
+<li>发送缓冲区产生的每个报文都被设置URG标志，且紧急指针指向同一位置，但只有一个报文真正携带带外数据</li>
+</ul>
+</li>
+<li>TCP接收带外数据：
+<ul>
+<li>接收端只在看到紧急指针标志时才检查紧急指针，根据其所指位置确定带外数据的位置</li>
+<li>将带外数据读入特殊的<code>带外缓存</code>中，该缓存只有1字节</li>
+<li>若应用程序未及时从带外缓存中取走带外数据，后续带外数据会覆盖带外缓存</li>
+<li>若给TCP连接设置了SO_OOBINLINE选项，则带外数据和普通数据一样被存放在TCP接收缓冲区中，应用程序根据紧急指针所指位置得到带外数据的位置</li>
+</ul>
+</li>
+</ul>
 <h2 id="tcp超时重传">TCP超时重传</h2>
+<ul>
+<li>TCP模块为每个报文都维护一个<code>重传定时器</code>，该定时器在该报文第一次发送时启动，若超时时间内未收到对方应答，则重传该报文并重置定时器</li>
+<li>下次重传的超时时间如何选择、最多执行多少次重传，取决于重传策略</li>
+<li>在A机上启动iperf服务器，在B机上telnet登陆到A机的该服务器并用tcpdump抓包，从telnet客户端发送一些数据，拔掉服务器网线再从客户端发送数据</li>
+<li><code>iperf</code>是测量网络状况的工具，<code>-s</code>是作为服务器运行，iperf默认监听5001端口并丢弃接收到的所有数据</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 在A机上执行：</span>
+$ iperf -s
+<span class="c1"># 在B机上执行：</span>
+$ sudo tcpdump -n -i ens33 port <span class="m">5001</span>
+$ telnet 192.168.1.108 <span class="m">5001</span>
+<span class="c1"># 连接之后输入1234并发送，断开A机网线，再输入12并发送</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>抓包输出：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 02:08:42.781751 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [S], seq 3300258650, win 64240, options [mss 1460,sackOK,TS val 2406822083 ecr 0,nop,wscale 7], length 0</span>
+<span class="c1"># 02:08:42.880150 IP 192.168.1.108.5001 &gt; 192.168.1.109.47432: Flags [S.], seq 3116723956, ack 3300258651, win 65160, options [mss 1460,sackOK,TS val 2917638388 ecr 2406822083,nop,wscale 7], length 0</span>
+<span class="c1"># 02:08:42.880229 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [.], ack 1, win 502, options [nop,nop,TS val 2406822181 ecr 2917638388], length 0</span>
+<span class="c1"># 02:08:45.332545 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 1:7, ack 1, win 502, options [nop,nop,TS val 2406824633 ecr 2917638388], length 6</span>
+<span class="c1"># 02:08:45.372670 IP 192.168.1.108.5001 &gt; 192.168.1.109.47432: Flags [.], ack 7, win 510, options [nop,nop,TS val 2917640871 ecr 2406824633], length 0</span>
+<span class="c1"># 02:08:50.764861 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 7:11, ack 1, win 502, options [nop,nop,TS val 2406830066 ecr 2917640871], length 4</span>
+<span class="c1"># 02:08:51.072529 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 7:11, ack 1, win 502, options [nop,nop,TS val 2406830373 ecr 2917640871], length 4</span>
+<span class="c1"># 02:08:51.391487 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 7:11, ack 1, win 502, options [nop,nop,TS val 2406830692 ecr 2917640871], length 4</span>
+<span class="c1"># 02:08:52.001323 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 7:11, ack 1, win 502, options [nop,nop,TS val 2406831302 ecr 2917640871], length 4</span>
+<span class="c1"># 02:08:53.185087 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 7:11, ack 1, win 502, options [nop,nop,TS val 2406832486 ecr 2917640871], length 4</span>
+<span class="c1"># 02:08:55.549867 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 7:11, ack 1, win 502, options [nop,nop,TS val 2406834851 ecr 2917640871], length 4</span>
+<span class="c1"># 02:09:00.424332 IP 192.168.1.109.47432 &gt; 192.168.1.108.5001: Flags [P.], seq 7:11, ack 1, win 502, options [nop,nop,TS val 2406839725 ecr 2917640871], length 4</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>输出：
+<ul>
+<li>1-3行是三次握手</li>
+<li>4-5行是客户端发送&quot;1234&quot;并得到服务器确认</li>
+<li>6行是客户端尝试发送&quot;12&rdquo;</li>
+<li>7-12行是客户端重传第6行报文</li>
+</ul>
+</li>
+<li>每次<code>超时重传</code>的间隔时间都是上次重传间隔时间的2倍，类似<code>超时重连</code></li>
+<li>若超时重传次数超过最大允许次数，可能会使底层IP和ARP接管，查询对方的MAC地址，直到客户端放弃连接</li>
+<li>与TCP超时重传相关的内核参数：
+<ul>
+<li><code>/proc/sys/net/ipv4/tcp_retries1</code>指定在底层IP接管前TCP最少重传的次数，默认为3</li>
+<li><code>/proc/sys/net/ipv4/tcp_retries2</code>指定放弃连接前TCP最多重传的次数，默认为15（一般是13-30min）</li>
+</ul>
+</li>
+<li>虽然超时会导致TCP报文重传，但报文重传可发生在超时之前，即<code>快速重传</code></li>
+</ul>
 <h2 id="拥塞控制">拥塞控制</h2>
 <h3 id="拥塞控制概述">拥塞控制概述</h3>
+<ul>
+<li>拥塞控制目的：提高网络利用率、降低丢包率、保证网络资源对每条数据流的公平</li>
+<li>TCP拥塞控制的标准文档是RFC5681，包括4部分：<code>慢启动</code>、<code>拥塞避免</code>、<code>快速重传</code>、<code>快速恢复</code></li>
+<li>拥塞控制算法在Linux下有多种实现：<code>reno算法</code>、<code>vegas算法</code>、<code>cubic算法</code>等，它们部分或全部地实现了RFC5681的4隔部分。在<code>/proc/sys/net/ipv4/tcp_congestion_control</code>中指明当前使用的算法</li>
+<li>拥塞控制的最终受控变量是SWND：
+<ul>
+<li><code>SWND</code>(Send Window，发送窗口)是发送端向网络一次连续写入（在收到第一个数据的确认之前）的数据量</li>
+<li>发送端最终以TCP报文来发送数据，故SWND也限制了发送端能连续发送的报文数</li>
+<li>一次连续发送的TCP报文中，每个报文的数据部分的最大长度称为<code>SMSS</code>(Sender Maximum Segment Size，发送者最大段大小)，其值一般等于MSS</li>
+</ul>
+</li>
+<li>合理选择SWND的大小：
+<ul>
+<li>SWND太小会引起明显的网络延迟，SWND太大易造成网络拥塞</li>
+<li>接收方可通过其RWND来控制发送端的SWND，但这不够</li>
+<li>发送端引入状态变量<code>CWND</code>(Congestion Window，拥塞窗口)，实际的<code>SWND=min{RWND,CWND}</code></li>
+</ul>
+</li>
+<li>拥塞控制的输入输出见图3.11，它是一个闭环反馈控制
+<img src="../network_figs/HPLSP_ch3-fig_3_11.png" alt="fig_3_11"></li>
+</ul>
 <h3 id="慢启动和拥塞避免">慢启动和拥塞避免</h3>
+<ul>
+<li><code>慢启动</code>：
+<ul>
+<li>连接建立时，CWND设置为初始值<code>IW</code>(Initial Window)，其值为2-4个SMSS，该值在新的Linux内核中被提高，以减小传输滞后</li>
+<li>连接建立后，发送端每收到接收端的一个确认，其CWND就增加，规律是<code>CWND+=min{N,SMSS}</code>，其中N是此次确认中包含的之前未被确认的字节数</li>
+<li>上述步骤使得CWND在连接建立之初按照指数增长</li>
+<li>慢启动的理由是，TCP模块刚开始发送数据时并不知道网络的状况，需用试探方式平滑增加CWND大小</li>
+<li>慢启动实际不慢，若不施加其他限制，慢启动会使CWND很快膨胀</li>
+<li>为限制慢启动中CWND的增加速度，定义状态变量<code>ssthresh</code>(slow start threshold size，慢启动门限)，当CWND大小超过该值时，进入拥塞避免</li>
+</ul>
+</li>
+<li><code>拥塞避免</code>：
+<ul>
+<li>拥塞避免算法使得CWND依线性增长，减缓其扩大</li>
+<li>RFC5681提到两种拥塞避免的实现：
+<ul>
+<li>每个RTT时间内按照<code>CWND+=min{N,SMSS}</code>计算新的CWND，无论该RTT时间内发送端收到多少确认</li>
+<li>每收到一个新数据的确认，就按照<code>CWND+=SMSS*SMSS/CWND</code>来更新CWND</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图3.12描述了慢启动和拥塞避免发生的时机和区别（以SMSS为单位来显示CWND，以次数为单位显示RTT）：
+<img src="../network_figs/HPLSP_ch3-fig_3_12.png" alt="fig_3_12"></li>
+<li>发送端未检测到拥塞时使用慢启动和拥塞避免来避免拥塞，检测到拥塞时使用快速重传和快速恢复</li>
+<li>发送端判断拥塞发生的依据有2个：
+<ul>
+<li><code>传输超时</code>（重传定时器溢出），处理方式：仍使用慢启动和拥塞避免，只是调整为<code>ssthresh=max{FlightSize/2,2*SMSS}</code>,<code>CWND&lt;=SMSS</code>，其中FlightSize是已发送但未收到确认的字节数。这样调整后CWND将会小于SMSS，故也小于ssthresh，故再次进入慢启动阶段</li>
+<li><code>收到重复的确认报文</code>，处理方式：使用快速重传和快速恢复</li>
+<li>若在传输超时后又收到重复的确认，则也被当成传输超时处理</li>
+</ul>
+</li>
+</ul>
 <h3 id="快速重传和快速恢复">快速重传和快速恢复</h3>
-<p><img src="../network_figs/HPLSP_ch3-fig_3_10.png" alt="fig_3_10">
-<img src="../network_figs/HPLSP_ch3-fig_3_11.png" alt="fig_3_11">
-<img src="../network_figs/HPLSP_ch3-fig_3_12.png" alt="fig_3_12"></p>
+<ul>
+<li>很多时候发送端都可能收到重复的确认报文，例如：报文丢失、接收端收到乱序的报文并重排等</li>
+<li>拥塞控制算法需判断收到重复的确认报文时，网络是否真的发生了拥塞（报文是否真的丢失）。方法：若发送端<code>连续收到3个重复的确认报文</code>，则认为拥塞真的发生，将启用快速重传和快速恢复</li>
+<li><code>快速重传和快速恢复</code>：
+<ol>
+<li>收到第3个重复确认报文时，按照<code>ssthresh=max{FlightSize/2,2*SMSS}</code>计算ssthresh，并立即重传丢失报文，按照<code>CWND=ssthresh+3*SMSS</code>设置CWND</li>
+<li>每次收到一个重复确认时，设置<code>CWND+=SMSS</code>，此时发送端可发送新的报文</li>
+<li>收到新数据的确认时，设置<code>CWND=ssthresh</code>，其中ssthresh是新的慢启动门限，在第1步中计算</li>
+</ol>
+</li>
+<li>快速重传和快速恢复后，拥塞控制将恢复到拥塞避免阶段</li>
+</ul>
 
     </div>
 
@@ -900,9 +1068,9 @@ $ ftp 192.168.1.109
           <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/network/hplsp_ch4/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">（未完成）Linux高性能服务器编程 第4章 TCP/IP通信案例：访问Internet上的Web服务器</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/oj/leetcode23/">
@@ -915,6 +1083,29 @@ $ ftp 192.168.1.109
   </article>
         </div>
         
+
+  <span id="/post/network/hplsp_ch3/" class="leancloud_visitors" data-flag-title="Linux高性能服务器编程 第3章 TCP协议详解">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
 
       </div>
     </main>
