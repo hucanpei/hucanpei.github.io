@@ -114,6 +114,13 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/network/hplsp_ch4/</loc>
+    <lastmod>2020-05-30T19:08:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/tags/%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2020-05-30T19:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -122,13 +129,6 @@
   
   <url>
     <loc>http://localhost:1313/tags/%E8%AF%BB%E4%B9%A6/</loc>
-    <lastmod>2020-05-30T19:08:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/network/hplsp_ch4/</loc>
     <lastmod>2020-05-30T19:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
