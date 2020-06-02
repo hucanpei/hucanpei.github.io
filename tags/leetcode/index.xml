@@ -6,10 +6,37 @@
     <description>Recent content in leetcode on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 31 May 2020 02:13:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2020 20:50:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode230 - (medium) Kth Smallest Element in a BST</title>
+      <link>http://localhost:1313/post/oj/leetcode230/</link>
+      <pubDate>Tue, 02 Jun 2020 20:50:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode230/</guid>
+      <description>链接：https://leetcode.com/problems/kth-smallest-element-in-a-bst/ Task Given a binary search tree, write</description>
+    </item>
+    
+    <item>
+      <title>LeetCode700 - (easy) Search in a Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode700/</link>
+      <pubDate>Tue, 02 Jun 2020 20:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode700/</guid>
+      <description>链接：https://leetcode.com/problems/search-in-a-binary-search-tree/ Task Given the root node of</description>
+    </item>
+    
+    <item>
+      <title>LeetCode98 - (medium) Validate Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode98/</link>
+      <pubDate>Tue, 02 Jun 2020 17:46:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode98/</guid>
+      <description>链接：https://leetcode.com/problems/validate-binary-search-tree/ 花花酱视频链接：y</description>
+    </item>
     
     <item>
       <title>LeetCode707 - (medium) Design Linked List</title>

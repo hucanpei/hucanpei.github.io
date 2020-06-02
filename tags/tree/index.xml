@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>BST on pi</title>
-    <link>http://localhost:1313/tags/bst/</link>
-    <description>Recent content in BST on pi</description>
+    <title>Tree on pi</title>
+    <link>http://localhost:1313/tags/tree/</link>
+    <description>Recent content in Tree on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 02 Jun 2020 20:50:00 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/bst/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/tags/tree/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -36,15 +36,6 @@
       
       <guid>http://localhost:1313/post/oj/leetcode98/</guid>
       <description>链接：https://leetcode.com/problems/validate-binary-search-tree/ 花花酱视频链接：y</description>
-    </item>
-    
-    <item>
-      <title>LeetCode315 - (hard) Count of Smaller Numbers After Self</title>
-      <link>http://localhost:1313/post/oj/leetcode315/</link>
-      <pubDate>Tue, 26 May 2020 01:42:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/oj/leetcode315/</guid>
-      <description>链接：https://leetcode.com/problems/count-of-smaller-numbers-after-self/ 花</description>
     </item>
     
   </channel>
