@@ -17,7 +17,7 @@
       <pubDate>Sat, 30 May 2020 19:08:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/network/hplsp_ch4/</guid>
-      <description>实例总图 部署代理服务器 HTTP代理服务器的工作原理 部署squid代理服务器 使用tcpdump抓取传输数据包 访问DNS服务器 本地名称查询 HTT</description>
+      <description>web客户端和服务器之间使用HTTP协议通信，HTTP协议内容相当广泛，涵盖应用层协议需考虑的诸多方面 实例总图 A机运行squid代理服务器，</description>
     </item>
     
     <item>
