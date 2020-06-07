@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 02 Jun 2020 20:50:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2020 00:22:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,42 @@
       
       <guid>http://localhost:1313/post/ml/ml_top/</guid>
       <description>做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG</description>
+    </item>
+    
+    <item>
+      <title>LeetCode450 - (medium) Delete Node in a BST</title>
+      <link>http://localhost:1313/post/oj/leetcode450/</link>
+      <pubDate>Mon, 08 Jun 2020 00:22:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode450/</guid>
+      <description>链接：https://leetcode.com/problems/delete-node-in-a-bst/ 花花酱视频链接：youtube Task</description>
+    </item>
+    
+    <item>
+      <title>LeetCode501 - (easy) Find Mode in Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode501/</link>
+      <pubDate>Sun, 07 Jun 2020 15:02:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode501/</guid>
+      <description>链接：https://leetcode.com/problems/find-mode-in-binary-search-tree/ Task Given a binary search</description>
+    </item>
+    
+    <item>
+      <title>LeetCode108 - (easy) Convert Sorted Array to Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode108/</link>
+      <pubDate>Thu, 04 Jun 2020 10:58:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode108/</guid>
+      <description>链接：https://leetcode.com/problems/convert-sorted-array-to-binary-search</description>
+    </item>
+    
+    <item>
+      <title>LeetCode99 - (hard) Recover Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode99/</link>
+      <pubDate>Thu, 04 Jun 2020 10:09:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode99/</guid>
+      <description>链接：https://leetcode.com/problems/recover-binary-search-tree/ Task Two elements of a binary search tree (BST) are</description>
     </item>
     
     <item>

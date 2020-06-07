@@ -6,10 +6,46 @@
     <description>Recent content in leetcode on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 02 Jun 2020 20:50:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2020 00:22:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode450 - (medium) Delete Node in a BST</title>
+      <link>http://localhost:1313/post/oj/leetcode450/</link>
+      <pubDate>Mon, 08 Jun 2020 00:22:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode450/</guid>
+      <description>链接：https://leetcode.com/problems/delete-node-in-a-bst/ 花花酱视频链接：youtube Task</description>
+    </item>
+    
+    <item>
+      <title>LeetCode501 - (easy) Find Mode in Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode501/</link>
+      <pubDate>Sun, 07 Jun 2020 15:02:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode501/</guid>
+      <description>链接：https://leetcode.com/problems/find-mode-in-binary-search-tree/ Task Given a binary search</description>
+    </item>
+    
+    <item>
+      <title>LeetCode108 - (easy) Convert Sorted Array to Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode108/</link>
+      <pubDate>Thu, 04 Jun 2020 10:58:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode108/</guid>
+      <description>链接：https://leetcode.com/problems/convert-sorted-array-to-binary-search</description>
+    </item>
+    
+    <item>
+      <title>LeetCode99 - (hard) Recover Binary Search Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode99/</link>
+      <pubDate>Thu, 04 Jun 2020 10:09:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode99/</guid>
+      <description>链接：https://leetcode.com/problems/recover-binary-search-tree/ Task Two elements of a binary search tree (BST) are</description>
+    </item>
     
     <item>
       <title>LeetCode230 - (medium) Kth Smallest Element in a BST</title>

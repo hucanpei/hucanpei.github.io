@@ -49,11 +49,11 @@
 <meta itemprop="description" content="链接：https://leetcode.com/problems/kth-smallest-element-in-a-bst/ Task Given a binary search tree, write">
 <meta itemprop="datePublished" content="2020-06-02T20:50:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-02T20:50:00&#43;08:00" />
-<meta itemprop="wordCount" content="673">
+<meta itemprop="wordCount" content="1288">
 
 
 
-<meta itemprop="keywords" content="online judge,leetcode,BST,Tree,DFS," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="online judge,leetcode,一题多解,BST,Tree,DFS," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="LeetCode230 - (medium) Kth Smallest Element in a BST"/>
 <meta name="twitter:description" content="链接：https://leetcode.com/problems/kth-smallest-element-in-a-bst/ Task Given a binary search tree, write"/>
 
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-02 </span>
         
-          <span class="more-meta"> 约 673 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 1288 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
     </header>
@@ -136,7 +136,12 @@
   <ul>
     <li><a href="#task">Task</a></li>
     <li><a href="#example">Example</a></li>
-    <li><a href="#solution">Solution</a></li>
+    <li><a href="#solution">Solution</a>
+      <ul>
+        <li><a href="#用队列存储遍历结果">用队列存储遍历结果</a></li>
+        <li><a href="#用计数取遍历结果">用计数取遍历结果</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -208,14 +213,101 @@ What if the BST is modified (insert/delete operations) often and you need to fin
 <h2 id="solution">Solution</h2>
 <ul>
 <li>BST的性质是左子树的所有节点一定小于根节点，右子树的所有节点一定大于根节点。要按大小顺序遍历则选择<code>中序遍历</code>，即先看左子树再看根节点再看右子树。本质上是在BST上做DFS</li>
-<li>用递归实现中序遍历求第k大的节点：
+</ul>
+<h3 id="用队列存储遍历结果">用队列存储遍历结果</h3>
+<ul>
+<li>中序遍历时每经过一个节点就将其放进队列中，遍历完成后整个队列是升序存储，pop掉前k-1个就得到第k大的</li>
+<li>也可用vector存储队列</li>
+<li><code>时间复杂度</code>：由于要遍历一次，故O(n)</li>
+<li><code>空间复杂度</code>：用额外队列存储所有元素，故O(n)</li>
+<li>实现：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 32 ms, faster than 50.85% of C++ online submissions for Kth Smallest Element in a BST.
+</span><span class="c1">// Memory Usage: 24.2 MB, less than 6.67% of C++ online submissions for Kth Smallest Element in a BST.
+</span><span class="c1"></span><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">kthSmallest</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+        <span class="c1">//dfs遍历，得到升序队列
+</span><span class="c1"></span>        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">q</span><span class="p">);</span>
+        <span class="c1">//去除前k-1个元素
+</span><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">dfs</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span><span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">q</span><span class="p">){</span>
+        <span class="c1">//dfs的递归终点是空节点
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">q</span><span class="p">);</span>
+        <span class="c1">//每次看到一个节点就存进队列中
+</span><span class="c1"></span>        <span class="c1">//由于是中序遍历，故这一操作在遍历左子树之后，遍历右子树之前
+</span><span class="c1"></span>        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">q</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="用计数取遍历结果">用计数取遍历结果</h3>
+<ul>
+<li>用纯递归实现中序遍历求第k大的节点：
 <ul>
 <li>首先走到最左边的节点，即最小节点</li>
 <li>维护一个计数，其初始值为k，每看一个节点就计数递减，减到0时返回该节点值</li>
 </ul>
 </li>
-<li>时间复杂度：由于要遍历一次，故O(n)</li>
-<li>空间复杂度：取决于递归深度，最好是完全二叉树O(logn)，最差是链表O(n)</li>
+<li><code>时间复杂度</code>：由于要遍历一次，而计数减为0时结束，故O(k)</li>
+<li><code>空间复杂度</code>：取决于递归深度，最好是完全二叉树O(logn)，最差是链表O(n)</li>
 <li>实现：</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -290,6 +382,87 @@ What if the BST is modified (insert/delete operations) often and you need to fin
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
+</div><ul>
+<li>另一种实现（更易理解）：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 24 ms, faster than 86.06% of C++ online submissions for Kth Smallest Element in a BST.
+</span><span class="c1">// Memory Usage: 24 MB, less than 6.67% of C++ online submissions for Kth Smallest Element in a BST.
+</span><span class="c1"></span><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">kthSmallest</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//初始化计数成员变量
+</span><span class="c1"></span>        <span class="n">cnt</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+        <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">//中序遍历时维护计数成员变量和结果成员变量的值
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="n">inorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="c1">//计数减为0时当前节点的值即为所求
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="o">--</span><span class="n">cnt</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">res</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//两个成员变量维护计数和结果
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">res</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -329,14 +502,15 @@ What if the BST is modified (insert/delete operations) often and you need to fin
       <div class="post-tags">
           <a href="/tags/online-judge/">online judge</a>
           <a href="/tags/leetcode/">leetcode</a>
+          <a href="/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/">一题多解</a>
           <a href="/tags/bst/">BST</a>
           <a href="/tags/tree/">Tree</a>
           <a href="/tags/dfs/">DFS</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/oj/leetcode99/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">LeetCode99 - (hard) Recover Binary Search Tree</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/oj/leetcode700/">
