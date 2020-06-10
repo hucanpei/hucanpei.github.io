@@ -49,7 +49,7 @@
 <meta itemprop="description" content="链接：https://leetcode.com/problems/delete-node-in-a-bst/ 花花酱视频链接：youtube Task">
 <meta itemprop="datePublished" content="2020-06-08T00:22:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-08T00:22:00&#43;08:00" />
-<meta itemprop="wordCount" content="227">
+<meta itemprop="wordCount" content="1540">
 
 
 
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-08 </span>
         
-          <span class="more-meta"> 约 227 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 1540 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
     </header>
@@ -214,10 +214,252 @@ Another valid answer is [5,2,6,null,4,null,7].
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="solution">Solution</h2>
-<p><img src="../oj_figs/LeetCode450_1.png" alt="leetcode450_1">
-<img src="../oj_figs/LeetCode450_2.png" alt="leetcode450_2">
-<img src="../oj_figs/LeetCode450_3.png" alt="leetcode450_3"></p>
-
+<ul>
+<li>删除值为key的节点，首先要找到这个节点，从根节点开始搜索。未找到等于key的节点时，如下图：
+<ul>
+<li>若当前节点a小于key，则进入右子树搜索</li>
+<li>若当前节点a大于key，则进入左子树搜索</li>
+<li>若当前节点a等于key，后面分析
+<img src="../oj_figs/LeetCode450_1.png" alt="leetcode450_1"></li>
+</ul>
+</li>
+<li>若找到了等于key的节点，即当前节点a等于key，如下图：
+<ul>
+<li>若当前节点a没有子树，则直接删除节点a，并将指向它的指针置为空</li>
+<li>若当前节点a只有左子树，则让节点a的父节点接管其左子树，删除节点a</li>
+<li>若当前节点a只有右子树，则让节点a的父节点接管其右子树，删除节点a</li>
+<li>若当前节点a同时有左子树和右子树，后面分析
+<img src="../oj_figs/LeetCode450_2.png" alt="leetcode450_2"></li>
+</ul>
+</li>
+<li>若当前节点a等于key，且当前节点a同时有左子树和右子树，如下图：</li>
+<li>可在左子树中找最大的节点替换当前节点，也可在右子树中找最小的节点替换当前节点。不失一般性，选后者</li>
+<li>在当前节点a的右子树中找最小节点m，即是找a的右子树中最左边的节点m，它一定只有右子树或者没有子树</li>
+<li>两种实现：
+<ul>
+<li>将节点a的值替换为m的值，此时树中有两个值为m的节点，再在a的右子树中递归地删除值为m的节点即可。由于m只有右子树，可直接跳到递归终点。（这种方法的缺点是：若之前有一个指针指向m，则删除m后该指针悬空）</li>
+<li>使用指针操作将节点m移动到节点a的位置上，再删除节点a。（若之前有一个指针指向m，操作后该指针仍有效）
+<img src="../oj_figs/LeetCode450_3.png" alt="leetcode450_3"></li>
+</ul>
+</li>
+<li><code>时间复杂度</code>：找到值为key的节点后或者直接让父节点接管子树，或者继续查找右子树的最小节点，故时间复杂度O(h)</li>
+<li><code>空间复杂度</code>：取决于递归深度，O(h)</li>
+<li>第一种实现：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 40 ms, faster than 37.88% of C++ online submissions for Delete Node in a BST.
+</span><span class="c1">// Memory Usage: 15.2 MB, less than 75.68% of C++ online submissions for Delete Node in a BST.
+</span><span class="c1"></span><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//递归终点
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="c1">//向下搜索值为key的节点
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">&lt;</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">key</span><span class="p">);</span>
+        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">&gt;</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">key</span><span class="p">);</span>
+        <span class="c1">//找到值为key的节点
+</span><span class="c1"></span>        <span class="k">else</span><span class="p">{</span>
+            <span class="c1">//当值为key的节点同时有左右子树
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
+                <span class="c1">//搜索右子树的最左边节点，即最小节点
+</span><span class="c1"></span>                <span class="n">TreeNode</span> <span class="o">*</span><span class="n">min</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">min</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span>
+                    <span class="n">min</span><span class="o">=</span><span class="n">min</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+                <span class="c1">//为值为key的节点重新赋值
+</span><span class="c1"></span>                <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">=</span><span class="n">min</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+                <span class="c1">//删掉右子树的最小节点（重复）
+</span><span class="c1"></span>                <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">min</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="c1">//当值为key的节点或者只有左子树、或者只有右子树、或者二者皆无
+</span><span class="c1"></span>            <span class="k">else</span><span class="p">{</span>
+                <span class="c1">//三种情况都可用newroot表示其子树
+</span><span class="c1"></span>                <span class="n">TreeNode</span> <span class="o">*</span><span class="n">newroot</span><span class="o">=</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+                <span class="c1">//删除该节点并返回其子树（由于是被父节点递归调用，故效果是让其父节点接管其子树）
+</span><span class="c1"></span>                <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="k">nullptr</span><span class="p">;</span>
+                <span class="k">delete</span> <span class="n">root</span><span class="p">;</span>
+                <span class="k">return</span> <span class="n">newroot</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>第二种实现：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 36 ms, faster than 65.89% of C++ online submissions for Delete Node in a BST.
+</span><span class="c1">// Memory Usage: 15.3 MB, less than 64.99% of C++ online submissions for Delete Node in a BST.
+</span><span class="c1"></span><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">&lt;</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">key</span><span class="p">);</span>
+        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">&gt;</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">key</span><span class="p">);</span>
+        <span class="c1">//找到值为key的节点
+</span><span class="c1"></span>        <span class="k">else</span><span class="p">{</span>
+            <span class="n">TreeNode</span> <span class="o">*</span><span class="n">newroot</span><span class="p">;</span>
+            <span class="c1">//当值为key的节点同时有左右子树
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
+                <span class="c1">//寻找右子树的最左节点newroot及其父节点parent
+</span><span class="c1"></span>                <span class="n">TreeNode</span> <span class="o">*</span><span class="n">parent</span><span class="o">=</span><span class="n">root</span><span class="p">;</span>
+                <span class="n">newroot</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">newroot</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">){</span>
+                    <span class="n">parent</span><span class="o">=</span><span class="n">newroot</span><span class="p">;</span>
+                    <span class="n">newroot</span><span class="o">=</span><span class="n">newroot</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="c1">//当右子树的最左节点不是右子树的根节点时（即右子树不是只有一个节点）
+</span><span class="c1"></span>                <span class="c1">//交换指针
+</span><span class="c1"></span>                <span class="k">if</span><span class="p">(</span><span class="n">parent</span><span class="o">!=</span><span class="n">root</span><span class="p">){</span>
+                    <span class="n">parent</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="n">newroot</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+                    <span class="n">newroot</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">newroot</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">//当值为key的节点或者只有左子树、或者只有右子树、或者二者皆无
+</span><span class="c1"></span>            <span class="k">else</span>
+                <span class="n">newroot</span><span class="o">=</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+            <span class="k">delete</span> <span class="n">root</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">newroot</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -275,6 +517,29 @@ Another valid answer is [5,2,6,null,4,null,7].
   </article>
         </div>
         
+
+  <span id="/post/oj/leetcode450/" class="leancloud_visitors" data-flag-title="LeetCode450 - (medium) Delete Node in a BST">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
 
       </div>
     </main>
