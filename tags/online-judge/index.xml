@@ -6,10 +6,37 @@
     <description>Recent content in online judge on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 08 Jun 2020 00:22:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 10:27:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/online-judge/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode69 - (easy) Sqrt(x)</title>
+      <link>http://localhost:1313/post/oj/leetcode69/</link>
+      <pubDate>Thu, 11 Jun 2020 10:27:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode69/</guid>
+      <description>链接：https://leetcode.com/problems/sqrtx/ 花花酱视频链接：youtube Task Implement int sqrt(int x). Compute and return the square root of x, where x is</description>
+    </item>
+    
+    <item>
+      <title>LeetCode33 - (medium) Search in Rotated Sorted Array</title>
+      <link>http://localhost:1313/post/oj/leetcode33/</link>
+      <pubDate>Thu, 11 Jun 2020 09:15:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode33/</guid>
+      <description>链接：https://leetcode.com/problems/search-in-rotated-sorted-array/ Task Suppose an array sorted in</description>
+    </item>
+    
+    <item>
+      <title>LeetCode35 - (easy) Search Insert Position</title>
+      <link>http://localhost:1313/post/oj/leetcode35/</link>
+      <pubDate>Thu, 11 Jun 2020 08:55:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode35/</guid>
+      <description>链接：https://leetcode.com/problems/search-insert-position/ Task Given a sorted array and a target value, return the index if the</description>
+    </item>
     
     <item>
       <title>LeetCode450 - (medium) Delete Node in a BST</title>
