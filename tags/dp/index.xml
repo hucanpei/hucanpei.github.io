@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DP on pi</title>
+    <link>http://localhost:1313/tags/dp/</link>
+    <description>Recent content in DP on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 19 Jun 2020 02:15:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/dp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LeetCode719 - (hard) Find K-th Smallest Pair Distance</title>
+      <link>http://localhost:1313/post/oj/leetcode719/</link>
+      <pubDate>Fri, 19 Jun 2020 02:15:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode719/</guid>
+      <description>链接：https://leetcode.com/problems/find-k-th-smallest-pair-distance/ 花花酱视</description>
+    </item>
+    
+  </channel>
+</rss>

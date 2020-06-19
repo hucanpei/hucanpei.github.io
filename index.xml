@@ -39,6 +39,24 @@
     </item>
     
     <item>
+      <title>LeetCode719 - (hard) Find K-th Smallest Pair Distance</title>
+      <link>http://localhost:1313/post/oj/leetcode719/</link>
+      <pubDate>Fri, 19 Jun 2020 02:15:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode719/</guid>
+      <description>链接：https://leetcode.com/problems/find-k-th-smallest-pair-distance/ 花花酱视</description>
+    </item>
+    
+    <item>
+      <title>LeetCode378 - (medium) Kth Smallest Element in a Sorted Matrix</title>
+      <link>http://localhost:1313/post/oj/leetcode378/</link>
+      <pubDate>Thu, 18 Jun 2020 17:04:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode378/</guid>
+      <description>链接：https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matr</description>
+    </item>
+    
+    <item>
       <title>LeetCode4 - (hard) Median of Two Sorted Arrays</title>
       <link>http://localhost:1313/post/oj/leetcode4/</link>
       <pubDate>Sun, 14 Jun 2020 18:39:00 +0800</pubDate>
@@ -395,7 +413,7 @@
       <pubDate>Fri, 27 Mar 2020 00:11:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/os/linux_interest_10-14/</guid>
-      <description>10-进程：公司接这么多项目，如何管？ 11-线程：如何让复杂的项目并行执行？ 12-进程数据结构（上）：项目多了就需要项目管理系统 13-进程数</description>
+      <description>10-进程：公司接这么多项目，如何管？7 11-线程：如何让复杂的项目并行执行？ 12-进程数据结构（上）：项目多了就需要项目管理系统 13-进程</description>
     </item>
     
     <item>

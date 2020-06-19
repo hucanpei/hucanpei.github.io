@@ -49,7 +49,7 @@
 <meta itemprop="description" content="链接：https://leetcode.com/problems/median-of-two-sorted-arrays/ 花花酱视频链接：y">
 <meta itemprop="datePublished" content="2020-06-14T18:39:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-14T18:39:00&#43;08:00" />
-<meta itemprop="wordCount" content="678">
+<meta itemprop="wordCount" content="684">
 
 
 
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-14 </span>
         
-          <span class="more-meta"> 约 678 字 </span>
+          <span class="more-meta"> 约 684 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -257,10 +257,10 @@ The median is (2 + 3)/2 = 2.5
         <span class="p">}</span>
         <span class="c1">//第一个数组前m1个元素和第二个数组前m2个元素组成合并后数组的前k个元素
 </span><span class="c1"></span>        <span class="kt">int</span> <span class="n">m1</span><span class="o">=</span><span class="n">l</span><span class="p">,</span><span class="n">m2</span><span class="o">=</span><span class="n">k</span><span class="o">-</span><span class="n">m1</span><span class="p">;</span>
-        <span class="c1">//考虑边界情形：可能合并后数组的前k个元素中不含有某个数组的元素
+        <span class="c1">//考虑边界情形：可能合并后数组的前k个元素中不含有合并前某个数组的元素
 </span><span class="c1"></span>        <span class="kt">double</span> <span class="n">c1</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">m1</span><span class="o">&lt;=</span><span class="mi">0</span><span class="o">?</span><span class="nl">INT_MIN</span><span class="p">:</span><span class="n">nums1</span><span class="p">[</span><span class="n">m1</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
                       <span class="n">m2</span><span class="o">&lt;=</span><span class="mi">0</span><span class="o">?</span><span class="nl">INT_MIN</span><span class="p">:</span><span class="n">nums2</span><span class="p">[</span><span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
-        <span class="c1">//考虑边界情形：某个数组可能全部在合并后数组的前k个元素中
+        <span class="c1">//考虑边界情形：合并前某个数组可能全部在合并后数组的前k个元素中
 </span><span class="c1"></span>        <span class="kt">double</span> <span class="n">c2</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">m1</span><span class="o">&gt;=</span><span class="n">n1</span><span class="o">?</span><span class="nl">INT_MAX</span><span class="p">:</span><span class="n">nums1</span><span class="p">[</span><span class="n">m1</span><span class="p">],</span>
                       <span class="n">m2</span><span class="o">&gt;=</span><span class="n">n2</span><span class="o">?</span><span class="nl">INT_MAX</span><span class="p">:</span><span class="n">nums2</span><span class="p">[</span><span class="n">m2</span><span class="p">]);</span>
         <span class="c1">//奇偶分开求中位数
@@ -314,9 +314,9 @@ The median is (2 + 3)/2 = 2.5
           <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/oj/leetcode378/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">LeetCode378 - (medium) Kth Smallest Element in a Sorted Matrix</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/oj/leetcode875/">
