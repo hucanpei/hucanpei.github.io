@@ -6,10 +6,37 @@
     <description>Recent content in 操作系统 on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 27 Mar 2020 00:11:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2020 23:49:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OSTEP第4章 抽象：进程</title>
+      <link>http://localhost:1313/post/os/ostep_ch4/</link>
+      <pubDate>Fri, 26 Jun 2020 23:49:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch4/</guid>
+      <description>进程就是运行中的程序 时分共享(time sharing)：让一个进程只运行一个时间片，然后切换到其他进程，操作系统提供了存在多个虚拟cpu的假</description>
+    </item>
+    
+    <item>
+      <title>OSTEP第2章 操作系统介绍</title>
+      <link>http://localhost:1313/post/os/ostep_ch2/</link>
+      <pubDate>Fri, 26 Jun 2020 21:45:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch2/</guid>
+      <description>冯诺依曼计算模型：处理器从内存中读取指令，对其解码、执行。完成一条指令后继续执行下一条，直到程序最终完成 操作系统要确保系统易于使用又高效运行</description>
+    </item>
+    
+    <item>
+      <title>OSTEP读书笔记合集</title>
+      <link>http://localhost:1313/post/os/ostep/</link>
+      <pubDate>Fri, 26 Jun 2020 02:35:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep/</guid>
+      <description>Operating Systems: Three Easy Pieces 资源 本书主页：http://pages.cs.wisc.edu/~remzi/OSTEP/ 中文版（分章pdf）：https://g</description>
+    </item>
     
     <item>
       <title>（未完成）趣谈Linux操作系统10-14：进程、线程、进程数据结构</title>

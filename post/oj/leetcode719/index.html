@@ -49,7 +49,7 @@
 <meta itemprop="description" content="链接：https://leetcode.com/problems/find-k-th-smallest-pair-distance/ 花花酱视">
 <meta itemprop="datePublished" content="2020-06-19T02:15:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-19T02:15:00&#43;08:00" />
-<meta itemprop="wordCount" content="185">
+<meta itemprop="wordCount" content="1217">
 
 
 
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-19 </span>
         
-          <span class="more-meta"> 约 185 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 1217 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
     </header>
@@ -183,7 +183,93 @@ Then the 1st smallest distance pair is (1,1), and its distance is 0.
 <li><code>1 &lt;= k &lt;= len(nums) * (len(nums) - 1) / 2</code>.</li>
 </ol>
 <h2 id="solution">Solution</h2>
-
+<ul>
+<li>要找的是第k小的距离，对于标量可使用二分查找：在最小距离和最大距离之间搜索</li>
+<li>最小距离可认为是0（尽管不一定真的是0，但0确实是一个可用于二分搜索的下界），最大距离是数组中的最大值减去最小值</li>
+<li>首先将数组排好序，这样可方便的计算距离，且可确保两个元素之间的任意元素到这两个元素之间的距离一定小于这两元素本身的距离，即约束“到某元素的距离小于m的元素一定组成该元素的邻域”</li>
+<li>二分搜索每次查找一个距离m时，都计算整个数组中有多少对距离小于m
+<ul>
+<li>若距离小于m的pair数量大于k，则m偏大，修改二分查找的右边界</li>
+<li>若距离小于m的pair数量小于k，则m偏小，修改二分查找的左边界</li>
+</ul>
+</li>
+<li>对查找的每个距离m，使用DP来计算距离小于m的pair的数量：
+<ul>
+<li>建立与原数组等长的一维DP数组dp[i]，每个dp[i]的值是以下两项的和：
+<ul>
+<li>i左侧（含）的距离&lt;=m的pair总数（这些pair的两个点都在i左侧）</li>
+<li>i右侧（不含）减去i左侧（含）的&lt;=m的pair数量（这些pair的一个点在i左侧而另一个点在i右侧）</li>
+</ul>
+</li>
+<li>dp数组的递推规律是dp[i]=dp[i-1]+(j-i-1)，其中j是使nums[j]-nums[i]&gt;m的最小j。这样计算递推的原因是：考虑dp[i-1]时i在右侧，而考虑dp[i]时i在左侧，两者相差的那些pair是一个点在i右侧而另一个点就是i的pair，这些pair的数量是j-i-1个，因为数组已排好序</li>
+<li>dp[n-2]即是整个数组中距离小于m的pair的数量</li>
+<li>由于dp递归时只需递增，故可用一个accumulated sum代替dp数组，将一维dp压缩到0维
+<img src="../oj_figs/LeetCode719.png" alt="leetcode719"></li>
+</ul>
+</li>
+<li><code>时间复杂度</code>：排序是O(nlogn)，二分查找的复杂度是O(log(max-min))，其中每次二分都要搜索一次数组来做dp是O(n)，故整个二分查找的复杂度是O(nlog(max-min))，同时考虑排序和二分查找的总复杂度是O(nlog(max{n,max-min})</li>
+<li><code>空间复杂度</code>：将一维dp压缩到0维后没有额外开销，O(1)</li>
+<li>实现：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 20 ms, faster than 97.60% of C++ online submissions for Find K-th Smallest Pair Distance.
+</span><span class="c1">// Memory Usage: 10.1 MB, less than 72.69% of C++ online submissions for Find K-th Smallest Pair Distance.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">smallestDistancePair</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//预先排序
+</span><span class="c1"></span>        <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="c1">//左闭右开的二分查找区间
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">l</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pairs</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+                <span class="c1">//j是使nums[j]-nums[i]&gt;m的最小j
+</span><span class="c1"></span>                <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">)</span>
+                    <span class="o">++</span><span class="n">j</span><span class="p">;</span>
+                <span class="c1">//将一维dp压缩到0维dp，计算的结果是整个数组中距离小于m的pair的数量
+</span><span class="c1"></span>                <span class="n">pairs</span><span class="o">+=</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">//改变二分查找区间
+</span><span class="c1"></span>            <span class="p">(</span><span class="n">pairs</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">m</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -226,9 +312,9 @@ Then the 1st smallest distance pair is (1,1), and its distance is 0.
           <a href="/tags/dp/">DP</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/os/ostep/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">OSTEP读书笔记合集</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/oj/leetcode378/">
@@ -241,6 +327,29 @@ Then the 1st smallest distance pair is (1,1), and its distance is 0.
   </article>
         </div>
         
+
+  <span id="/post/oj/leetcode719/" class="leancloud_visitors" data-flag-title="LeetCode719 - (hard) Find K-th Smallest Pair Distance">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
 
       </div>
     </main>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>[置顶]机器学习文章集合 - pi</title>
+  <title>OSTEP第2章 操作系统介绍 - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="冯诺依曼计算模型：处理器从内存中读取指令，对其解码、执行。完成一条指令后继续执行下一条，直到程序最终完成 操作系统要确保系统易于使用又高效运行" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.67.0 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/ml/ml_top/" />
+<link rel="canonical" href="http://localhost:1313/post/os/ostep_ch2/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,23 +39,23 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="[置顶]机器学习文章集合" />
-<meta property="og:description" content="做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG" />
+<meta property="og:title" content="OSTEP第2章 操作系统介绍" />
+<meta property="og:description" content="冯诺依曼计算模型：处理器从内存中读取指令，对其解码、执行。完成一条指令后继续执行下一条，直到程序最终完成 操作系统要确保系统易于使用又高效运行" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/ml/ml_top/" />
-<meta property="article:published_time" content="2020-05-18T17:34:00+08:00" />
-<meta property="article:modified_time" content="2020-05-18T17:34:00+08:00" />
-<meta itemprop="name" content="[置顶]机器学习文章集合">
-<meta itemprop="description" content="做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG">
-<meta itemprop="datePublished" content="2020-05-18T17:34:00&#43;08:00" />
-<meta itemprop="dateModified" content="2020-05-18T17:34:00&#43;08:00" />
-<meta itemprop="wordCount" content="42">
+<meta property="og:url" content="http://localhost:1313/post/os/ostep_ch2/" />
+<meta property="article:published_time" content="2020-06-26T21:45:00+08:00" />
+<meta property="article:modified_time" content="2020-06-26T21:45:00+08:00" />
+<meta itemprop="name" content="OSTEP第2章 操作系统介绍">
+<meta itemprop="description" content="冯诺依曼计算模型：处理器从内存中读取指令，对其解码、执行。完成一条指令后继续执行下一条，直到程序最终完成 操作系统要确保系统易于使用又高效运行">
+<meta itemprop="datePublished" content="2020-06-26T21:45:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-26T21:45:00&#43;08:00" />
+<meta itemprop="wordCount" content="906">
 
 
 
-<meta itemprop="keywords" content="机器学习," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[置顶]机器学习文章集合"/>
-<meta name="twitter:description" content="做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG"/>
+<meta itemprop="keywords" content="操作系统,OSTEP," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OSTEP第2章 操作系统介绍"/>
+<meta name="twitter:description" content="冯诺依曼计算模型：处理器从内存中读取指令，对其解码、执行。完成一条指令后继续执行下一条，直到程序最终完成 操作系统要确保系统易于使用又高效运行"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -118,13 +118,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">[置顶]机器学习文章集合</h1>
+      <h1 class="post-title">OSTEP第2章 操作系统介绍</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-05-18 </span>
+        <span class="post-time"> 2020-06-26 </span>
         
-          <span class="more-meta"> 约 42 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 906 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
     </header>
@@ -134,25 +134,62 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#做一些seminar用的ppt">做一些seminar用的ppt</a></li>
+    <li><a href="#虚拟化cpu">虚拟化cpu</a></li>
+    <li><a href="#虚拟化内存">虚拟化内存</a></li>
+    <li><a href="#并发">并发</a></li>
+    <li><a href="#持久性">持久性</a></li>
+    <li><a href="#设计目标">设计目标</a></li>
+    <li><a href="#简单历史">简单历史</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="做一些seminar用的ppt">做一些seminar用的ppt</h2>
+      <ul>
+<li><code>冯诺依曼计算模型</code>：处理器从内存中<code>读取</code>指令，对其<code>解码</code>、<code>执行</code>。完成一条指令后继续执行下一条，直到程序最终完成</li>
+<li>操作系统要确保系统易于使用又高效运行，需要<code>虚拟化</code>，将物理资源转换为通用易用的虚拟形式，故操作系统有时称为<code>虚拟机</code></li>
+<li>操作系统提供<code>接口</code>供用户运行程序、访问设备等，它为应用程序提供了<code>标准库</code></li>
+</ul>
+<h2 id="虚拟化cpu">虚拟化cpu</h2>
 <ul>
-<li>
-<p>Searching for MobileNetV3:<br>
-<a href="https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9-">https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9-</a></p>
+<li><code>虚拟化cpu</code>：将单个cpu或其中一部分转换为看似无限数量的cpu，从而让很多程序看似同时运行</li>
+</ul>
+<h2 id="虚拟化内存">虚拟化内存</h2>
+<ul>
+<li>现代机器提供的物理内存模型是一个字节数组，要读写内存必须指定地址</li>
+<li>程序运行时，指令都在内存中，故每次读取指令都会访问内存</li>
+<li><code>虚拟化内存</code>：每个进程访问自己的私有虚拟地址空间，操作系统将各进程的虚拟地址空间映射到机器的物理内存上。一个进程使用的内存不影响其他进程的内存</li>
+</ul>
+<h2 id="并发">并发</h2>
+<ul>
+<li>并发问题出现在操作系统本身中，也出现在多线程程序中</li>
+<li>多个进程同时操作一个变量时，该操作可能不止一条指令，即非<code>原子操作</code>。一个进程的操作可能被另一个进程打断。</li>
+</ul>
+<h2 id="持久性">持久性</h2>
+<ul>
+<li>内存是易失设备，持久存储数据需要硬盘</li>
+<li><code>文件系统</code>：操作系统中管理磁盘的软件</li>
+<li>操作系统不会为每个应用程序创建专用的虚拟磁盘，相反，它假设所有程序共享磁盘中的信息</li>
+<li>操作系统底层和磁盘的交互很复杂，而它对应用程序提供更简单的系统调用来操作硬件，故操作系统有时候被视为标准库</li>
+</ul>
+<h2 id="设计目标">设计目标</h2>
+<ul>
+<li>操作系统做的事：获取物理资源并虚拟化、处理并发、持久性地存储文件</li>
+<li>操作系统的目标：抽象、高性能、隔离、可靠性</li>
+</ul>
+<h2 id="简单历史">简单历史</h2>
+<ul>
+<li><code>批处理</code>：由操作员来分批运行程序，一次只运行一个。此时操作系统只是库</li>
+<li><code>系统调用</code>：不是将操作系统作为库，而是添加特殊的硬件指令和硬件状态，使得用户程序到操作系统的过渡更加正式、可控
+<ul>
+<li>系统调用和过程调用的关键区别：系统调用将控制转移给OS时，提高了硬件的特权级别</li>
+<li>应用程序以<code>用户模式</code>运行，限制硬件的功能。发起系统调用时陷入陷阱，硬件将控制转移给陷阱处理程序并将特权级别提升到<code>内核模式</code>，可完全访问硬件。完成系统调用后从陷阱中返回，将控制权交还给用户并将特权级别降低到<code>用户模式</code></li>
+</ul>
 </li>
-<li>
-<p>Cognitive Graph for Multi-Hop Reading Comprehension at Scale:<br>
-<a href="https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8">https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8</a></p>
-</li>
-<li>
-<p>CTA脑血管分割方法调研:<br>
-<a href="https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG">https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG</a></p>
+<li><code>多道程序</code>：OS一次不止运行一项作业，而是将大量作业加载进内存并在它们之间快速切换，提高cpu利用率，因为等待IO很慢
+<ul>
+<li>处理多道程序时，产生内存保护、并发等问题</li>
+</ul>
 </li>
 </ul>
 
@@ -166,7 +203,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2020-05-18
+        2020-06-26
         
     </span>
   </p>
@@ -192,16 +229,17 @@
   </div>
 </div><footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+          <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+          <a href="/tags/ostep/">OSTEP</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/cpp/top_cpp/">
+        <a class="prev" href="/post/os/ostep_ch4/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章集合</span>
+            <span class="prev-text nav-default">OSTEP第4章 抽象：进程</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/os/ostep_ch4/">
-            <span class="next-text nav-default">OSTEP第4章 抽象：进程</span>
+        <a class="next" href="/post/os/ostep/">
+            <span class="next-text nav-default">OSTEP读书笔记合集</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -211,7 +249,7 @@
         </div>
         
 
-  <span id="/post/ml/ml_top/" class="leancloud_visitors" data-flag-title="[置顶]机器学习文章集合">
+  <span id="/post/os/ostep_ch2/" class="leancloud_visitors" data-flag-title="OSTEP第2章 操作系统介绍">
 		<span class="post-meta-item-text">文章阅读量 </span>
 		<span class="leancloud-visitors-count">0</span>
 		<p></p>

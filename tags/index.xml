@@ -6,10 +6,28 @@
     <description>Recent content in Tags on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 19 Jun 2020 02:15:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2020 23:49:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OSTEP</title>
+      <link>http://localhost:1313/tags/ostep/</link>
+      <pubDate>Fri, 26 Jun 2020 23:49:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/ostep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>操作系统</title>
+      <link>http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Fri, 26 Jun 2020 23:49:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>DP</title>
@@ -269,15 +287,6 @@
       <pubDate>Mon, 11 May 2020 15:44:00 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/c&#43;&#43;-primer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>操作系统</title>
-      <link>http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Fri, 27 Mar 2020 00:11:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
       <description></description>
     </item>
     
