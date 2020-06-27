@@ -39,6 +39,24 @@
     </item>
     
     <item>
+      <title>OSTEP第6章 机制：受限直接执行</title>
+      <link>http://localhost:1313/post/os/ostep_ch6/</link>
+      <pubDate>Sun, 28 Jun 2020 00:43:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OSTEP第5章 插叙：进程API</title>
+      <link>http://localhost:1313/post/os/ostep_ch5/</link>
+      <pubDate>Sat, 27 Jun 2020 13:44:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch5/</guid>
+      <description>unix系统创建新进程的方式是一对系统调用fork()和exec()，系统调用wait()用于等待创建的子进程执行完 fork()系统调用 例子</description>
+    </item>
+    
+    <item>
       <title>OSTEP第4章 抽象：进程</title>
       <link>http://localhost:1313/post/os/ostep_ch4/</link>
       <pubDate>Fri, 26 Jun 2020 23:49:00 +0800</pubDate>
