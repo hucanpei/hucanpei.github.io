@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="时分共享cpu：运行一个进程一段时间，然后运行另一个进程，如此轮换，实现虚拟化 时分共享要解决的问题：性能和OS控制权 如何不增加系统运行时开销" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="OSTEP第6章 机制：受限直接执行" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="时分共享cpu：运行一个进程一段时间，然后运行另一个进程，如此轮换，实现虚拟化 时分共享要解决的问题：性能和OS控制权 如何不增加系统运行时开销" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/os/ostep_ch6/" />
 <meta property="article:published_time" content="2020-06-28T00:43:00+08:00" />
 <meta property="article:modified_time" content="2020-06-28T00:43:00+08:00" />
 <meta itemprop="name" content="OSTEP第6章 机制：受限直接执行">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="时分共享cpu：运行一个进程一段时间，然后运行另一个进程，如此轮换，实现虚拟化 时分共享要解决的问题：性能和OS控制权 如何不增加系统运行时开销">
 <meta itemprop="datePublished" content="2020-06-28T00:43:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-28T00:43:00&#43;08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="2319">
 
 
 
 <meta itemprop="keywords" content="操作系统,OSTEP," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="OSTEP第6章 机制：受限直接执行"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="时分共享cpu：运行一个进程一段时间，然后运行另一个进程，如此轮换，实现虚拟化 时分共享要解决的问题：性能和OS控制权 如何不增加系统运行时开销"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-28 </span>
         
-          <span class="more-meta"> 约 0 字 </span>
-          <span class="more-meta"> 预计阅读 0 分钟 </span>
+          <span class="more-meta"> 约 2319 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
     </header>
@@ -132,11 +132,187 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本技巧受限直接执行">基本技巧：受限直接执行</a></li>
+    <li><a href="#问题1受限制的操作">问题1：受限制的操作</a></li>
+    <li><a href="#问题2在进程之间切换">问题2：在进程之间切换</a></li>
+    <li><a href="#担心并发吗">担心并发吗</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      
+      <ul>
+<li>时分共享cpu：运行一个进程一段时间，然后运行另一个进程，如此轮换，实现虚拟化</li>
+<li>时分共享要解决的问题：性能和OS控制权
+<ul>
+<li>如何不增加系统运行时开销</li>
+<li>如何让系统在用户程序运行时可重新获取控制权</li>
+<li>OS通常会利用硬件支持来解决这两个问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本技巧受限直接执行">基本技巧：受限直接执行</h2>
+<ul>
+<li>解决时分共享问题的方法：<code>受限直接执行</code>(limited direct execution, LDE)</li>
+<li><code>直接执行</code>：OS在进程列表中创建一个item，为其分配内存并将代码加载到内存，跳转到main开始执行用户代码。如表6.1
+<img src="../os_figs/OSTEP_ch6-tab_6_1.png" alt="tab_6_1"></li>
+<li>如果对程序直接执行而不加限制，OS无法控制任何事情，会成为“仅仅是一个库”</li>
+</ul>
+<h2 id="问题1受限制的操作">问题1：受限制的操作</h2>
+<ul>
+<li>直接执行的优点是直接在硬件上运行，快速</li>
+<li>进程必须能执行IO等受限制的操作，但不能完全控制系统</li>
+<li>用户模式和内核模式：
+<ul>
+<li><code>用户模式</code>：在用户模式下运行的代码会受到限制，无法访问某些硬件或进行特权操作</li>
+<li><code>内核模式</code>：OS以这种模式运行，该模式下的代码可做任意事，包括特权操作，以及访问机器的所有资源</li>
+</ul>
+</li>
+<li>用户希望执行特权操作时可使用OS提供的<code>系统调用</code>，它允许内核向用户程序暴露某些关键功能，如访问文件系统、创建/销毁进程、与进程通信、分配更多内存等，大多数系统提供几百个系统调用（见POSIX标准）</li>
+<li>用户希望执行特权操作：陷入内核
+<ul>
+<li><code>陷入(trap)</code>：发起系统调用时程序执行trap指令，进入内核，并将特权级别提升到内核模式</li>
+<li><code>从陷阱返回(return-from-trap)</code>：系统调用结束后程序执行return-from-trap指令，返回到发起系统调用的用户程序，并将特权级别降低到用户模式</li>
+</ul>
+</li>
+<li>执行trap时必须确保存储足够的调用者寄存器，以便在return-from-trap时能正确返回到用户程序的状态</li>
+<li>x86上保存寄存器：执行trap时cpu会将一些寄存器的内容push到进程的<code>内核栈</code>(kernel stack)上，执行return-from-trap时从内核栈中pop出这些值</li>
+<li><code>系统调用</code>与<code>过程调用</code>的区别：系统调用是一种过程调用，但内部有trap指令</li>
+<li>C库中进行系统调用的部分是用汇编写的</li>
+<li><code>陷阱表(trap table)</code>：
+<ul>
+<li>发起系统调用的进程不可trap到内核的任意地址，否则很不安全</li>
+<li>OS启动时处于内核模式，它设置<code>陷阱表</code>来告诉硬件：在发生哪些异常事件（trap）时要运行哪些代码（即对应trap处理程序的位置）</li>
+<li>每次启动机器，陷阱表更新</li>
+</ul>
+</li>
+<li>LDE机制的过程见表6.2：
+<img src="../os_figs/OSTEP_ch6-tab_6_2.png" alt="tab_6_2"></li>
+<li>如上表，<code>LDE机制</code>有两个阶段：
+<ul>
+<li>第一阶段在系统引导时：处于内核模式，内核初始化陷阱表，cpu记住其位置</li>
+<li>第二阶段在运行进程时：
+<ul>
+<li>启动进程前处于内核模式，做完准备工作后使用return-from-trap进入main开始执行程序并进入用户模式</li>
+<li>进程发起系统调用时trap进内核，结束系统调用时return-from-trap</li>
+<li>进程完成工作后从main返回，trap进内核进行清理工作并正确退出程序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题2在进程之间切换">问题2：在进程之间切换</h2>
+<ul>
+<li>上一节操作的一个问题是：如何实现进程间切换，即程序运行起来后OS如何重新获取控制权实现调度。解决该问题的思路有两种：协作方式和非协作方式</li>
+<li><code>协作方式</code>：OS等待应用程序执行系统调用
+<ul>
+<li>OS假定运行时间长的进程会定期将控制权交给OS（通过系统调用）</li>
+<li>若应用程序执行了非法操作，也会将控制权交给OS</li>
+<li>若应用程序既不进行系统调用又无非法操作，则OS永远得不到控制权，只有重启才能解决问题</li>
+</ul>
+</li>
+<li><code>非协作方式</code>：OS通过硬件定时器获取控制权
+<ul>
+<li>时钟设备（硬件）维护一个<code>定时器中断</code>，每次该定时器中断发生时，停止当前运行的进程，运行OS的中断处理程序，OS重新获得控制权</li>
+<li>OS启动时必须启动时钟，并通知它在发生定时器中断时应该运行哪些代码</li>
+<li>定时器中断发生时进入内核，相当于发生了系统调用，必须为当前进程保护现场，以便return-from-trap时可正确恢复</li>
+</ul>
+</li>
+<li><code>调度程序</code>：当OS获取控制权时，需要决定是继续运行当前进程还是切换到另一个进程</li>
+<li><code>上下文切换</code>：
+<ul>
+<li>当调度程序决定切换到另一个进程时，OS将为当前进程保存寄存器值（到它的内核栈），并恢复即将执行的进程的寄存器值（从它的内核栈）。这样可确保return-from-trap时返回到即将执行的进程</li>
+<li>通过switch()切换栈，内核在进入switch()调用时是一个进程（被中断的进程）的上下文，从switch()返回时是另一个进程（即将执行的进程）的上下文。OS最终return-from-trap时，即将执行的进程变成了当前运行的进程，上下文切换完成</li>
+</ul>
+</li>
+<li>进程间切换的过程见表6.3：
+<img src="../os_figs/OSTEP_ch6-tab_6_3.png" alt="tab_6_3"></li>
+<li>上表中：
+<ul>
+<li>进程A正在运行，被定时器中断，硬件保存寄存器到其内核栈，进入内核将控制权交给OS</li>
+<li>OS在处理定时器中断的程序中进行调度，决定从进程A切换到进程B，调用switch()处理两个进程的寄存器保存/恢复，切换上下文（即改变栈指针来使用B的内核栈）</li>
+<li>return-from-trap，恢复B的寄存器并运行</li>
+</ul>
+</li>
+<li>上表中有两种类型的寄存器保存/恢复：
+<ul>
+<li>发生定时器中断时：正在运行的进程，其<code>用户寄存器</code>由硬件隐式保存到该进程的内核栈</li>
+<li>OS决定由A切换到B时：内核寄存器，其<code>内核寄存器</code>被OS明确保存到该进程的进程结构中</li>
+</ul>
+</li>
+<li>例子：xv6的上下文切换代码</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-S" data-lang="S"><span class="c1"># void swtch(struct context **old, struct context *new); </span>
+<span class="c1">#</span>
+<span class="c1"># Save current register context in old</span>
+<span class="c1"># and then load register context from new. </span>
+<span class="n">.globl</span> <span class="n">swtch</span>
+<span class="n">swtch</span><span class="o">:</span> 
+    <span class="c1"># Save old registers</span>
+    <span class="n">movl</span> <span class="m">4</span><span class="p">(</span><span class="o">%esp), %</span><span class="n">eax</span>  <span class="c1"># put old ptr into eax </span>
+    <span class="n">popl</span> <span class="m">0</span><span class="p">(</span><span class="o">%eax)        # save the old IP
+</span><span class="o">    movl %</span><span class="n">esp</span><span class="p">,</span> <span class="m">4</span><span class="p">(</span><span class="o">%eax)  # and stack
+</span><span class="o">    movl %</span><span class="n">ebx</span><span class="p">,</span> <span class="m">8</span><span class="p">(</span><span class="o">%eax)  # and other registers 
+</span><span class="o">    movl %</span><span class="n">ecx</span><span class="p">,</span> <span class="m">12</span><span class="p">(</span><span class="o">%eax) 
+</span><span class="o">    movl %</span><span class="n">edx</span><span class="p">,</span> <span class="m">16</span><span class="p">(</span><span class="o">%eax) 
+</span><span class="o">    movl %</span><span class="n">esi</span><span class="p">,</span> <span class="m">20</span><span class="p">(</span><span class="o">%eax) 
+</span><span class="o">    movl %</span><span class="n">edi</span><span class="p">,</span> <span class="m">24</span><span class="p">(</span><span class="o">%eax) 
+</span><span class="o">    movl %</span><span class="n">ebp</span><span class="p">,</span> <span class="m">28</span><span class="p">(</span><span class="o">%eax)
+</span><span class="o">
+</span><span class="o">    # Load new registers
+</span><span class="o">    movl 4(%</span><span class="n">esp</span><span class="p">),</span> <span class="o">%eax  # put new ptr into eax 
+</span><span class="o">    movl 28(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%ebp # restore other registers 
+</span><span class="o">    movl 24(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%edi 
+</span><span class="o">    movl 20(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%esi 
+</span><span class="o">    movl 16(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%edx 
+</span><span class="o">    movl 12(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%ecx 
+</span><span class="o">    movl 8(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%ebx 
+</span><span class="o">    movl 4(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%esp  # stack is switched here
+</span><span class="o">    pushl 0(%</span><span class="n">eax</span><span class="p">)</span>       <span class="c1"># return addr put in place</span>
+    <span class="n">ret</span>                 <span class="c1"># finally return into new ctxt</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="担心并发吗">担心并发吗</h2>
+<ul>
+<li>若在中断或trap处理过程中发生另一个中断，OS需要考虑这种情况</li>
+<li>使用lmbench工具可测量上下文切换/系统调用的时间</li>
+<li>现代OS的上下文切换在2G-3GHz处理器上能达到亚微秒级</li>
+</ul>
+
     </div>
 
     <div class="post-copyright">
@@ -177,9 +353,9 @@
           <a href="/tags/ostep/">OSTEP</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ml/ml_top/">
+        <a class="prev" href="/post/cpp/top_cpp/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]机器学习文章集合</span>
+            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章集合</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/os/ostep_ch5/">

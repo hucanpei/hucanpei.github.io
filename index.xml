@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>[置顶]机器学习文章集合</title>
-      <link>http://localhost:1313/post/ml/ml_top/</link>
-      <pubDate>Mon, 18 May 2020 17:34:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/ml/ml_top/</guid>
-      <description>做一些seminar用的ppt Searching for MobileNetV3: https://drive.google.com/open?id=14wzzKkalz0oo8CuogE8SsQaWx-wf2x9- Cognitive Graph for Multi-Hop Reading Comprehension at Scale: https://drive.google.com/open?id=1dhXeJBoReWrFZ7TYoXuX66xlhluJ1hT8 CTA脑血管分割方法调研: https://drive.google.com/open?id=1UjXBR3mqSgDWk58I2FkwWwa957aO4kMG</description>
-    </item>
-    
-    <item>
       <title>关于我</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
@@ -44,7 +35,7 @@
       <pubDate>Sun, 28 Jun 2020 00:43:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/os/ostep_ch6/</guid>
-      <description></description>
+      <description>时分共享cpu：运行一个进程一段时间，然后运行另一个进程，如此轮换，实现虚拟化 时分共享要解决的问题：性能和OS控制权 如何不增加系统运行时开销</description>
     </item>
     
     <item>
