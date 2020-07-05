@@ -49,7 +49,7 @@
 <meta itemprop="description" content="时分共享cpu：运行一个进程一段时间，然后运行另一个进程，如此轮换，实现虚拟化 时分共享要解决的问题：性能和OS控制权 如何不增加系统运行时开销">
 <meta itemprop="datePublished" content="2020-06-28T00:43:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-28T00:43:00&#43;08:00" />
-<meta itemprop="wordCount" content="2319">
+<meta itemprop="wordCount" content="2736">
 
 
 
@@ -123,8 +123,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-28 </span>
         
-          <span class="more-meta"> 约 2319 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+          <span class="more-meta"> 约 2736 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         
       </div>
     </header>
@@ -136,8 +136,16 @@
   <ul>
     <li><a href="#基本技巧受限直接执行">基本技巧：受限直接执行</a></li>
     <li><a href="#问题1受限制的操作">问题1：受限制的操作</a></li>
-    <li><a href="#问题2在进程之间切换">问题2：在进程之间切换</a></li>
+    <li><a href="#问题2在进程之间切换">问题2：在进程之间切换</a>
+      <ul>
+        <li><a href="#协作方式等待系统调用">协作方式：等待系统调用</a></li>
+        <li><a href="#非协作方式操作系统进行控制">非协作方式：操作系统进行控制</a></li>
+        <li><a href="#保存和恢复上下文">保存和恢复上下文</a></li>
+      </ul>
+    </li>
     <li><a href="#担心并发吗">担心并发吗</a></li>
+    <li><a href="#小结">小结</a></li>
+    <li><a href="#作业测量">作业（测量）</a></li>
   </ul>
 </nav>
   </div>
@@ -205,7 +213,10 @@
 </ul>
 <h2 id="问题2在进程之间切换">问题2：在进程之间切换</h2>
 <ul>
-<li>上一节操作的一个问题是：如何实现进程间切换，即程序运行起来后OS如何重新获取控制权实现调度。解决该问题的思路有两种：协作方式和非协作方式</li>
+<li>上一节操作的一个问题是：如何实现进程间切换，即程序运行起来后OS如何重新获取控制权实现调度</li>
+</ul>
+<h3 id="协作方式等待系统调用">协作方式：等待系统调用</h3>
+<ul>
 <li><code>协作方式</code>：OS等待应用程序执行系统调用
 <ul>
 <li>OS假定运行时间长的进程会定期将控制权交给OS（通过系统调用）</li>
@@ -213,6 +224,9 @@
 <li>若应用程序既不进行系统调用又无非法操作，则OS永远得不到控制权，只有重启才能解决问题</li>
 </ul>
 </li>
+</ul>
+<h3 id="非协作方式操作系统进行控制">非协作方式：操作系统进行控制</h3>
+<ul>
 <li><code>非协作方式</code>：OS通过硬件定时器获取控制权
 <ul>
 <li>时钟设备（硬件）维护一个<code>定时器中断</code>，每次该定时器中断发生时，停止当前运行的进程，运行OS的中断处理程序，OS重新获得控制权</li>
@@ -220,6 +234,9 @@
 <li>定时器中断发生时进入内核，相当于发生了系统调用，必须为当前进程保护现场，以便return-from-trap时可正确恢复</li>
 </ul>
 </li>
+</ul>
+<h3 id="保存和恢复上下文">保存和恢复上下文</h3>
+<ul>
 <li><code>调度程序</code>：当OS获取控制权时，需要决定是继续运行当前进程还是切换到另一个进程</li>
 <li><code>上下文切换</code>：
 <ul>
@@ -276,41 +293,103 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-S" data-lang="S"><span class="c1"># void swtch(struct context **old, struct context *new); </span>
-<span class="c1">#</span>
-<span class="c1"># Save current register context in old</span>
-<span class="c1"># and then load register context from new. </span>
-<span class="n">.globl</span> <span class="n">swtch</span>
-<span class="n">swtch</span><span class="o">:</span> 
-    <span class="c1"># Save old registers</span>
-    <span class="n">movl</span> <span class="m">4</span><span class="p">(</span><span class="o">%esp), %</span><span class="n">eax</span>  <span class="c1"># put old ptr into eax </span>
-    <span class="n">popl</span> <span class="m">0</span><span class="p">(</span><span class="o">%eax)        # save the old IP
-</span><span class="o">    movl %</span><span class="n">esp</span><span class="p">,</span> <span class="m">4</span><span class="p">(</span><span class="o">%eax)  # and stack
-</span><span class="o">    movl %</span><span class="n">ebx</span><span class="p">,</span> <span class="m">8</span><span class="p">(</span><span class="o">%eax)  # and other registers 
-</span><span class="o">    movl %</span><span class="n">ecx</span><span class="p">,</span> <span class="m">12</span><span class="p">(</span><span class="o">%eax) 
-</span><span class="o">    movl %</span><span class="n">edx</span><span class="p">,</span> <span class="m">16</span><span class="p">(</span><span class="o">%eax) 
-</span><span class="o">    movl %</span><span class="n">esi</span><span class="p">,</span> <span class="m">20</span><span class="p">(</span><span class="o">%eax) 
-</span><span class="o">    movl %</span><span class="n">edi</span><span class="p">,</span> <span class="m">24</span><span class="p">(</span><span class="o">%eax) 
-</span><span class="o">    movl %</span><span class="n">ebp</span><span class="p">,</span> <span class="m">28</span><span class="p">(</span><span class="o">%eax)
-</span><span class="o">
-</span><span class="o">    # Load new registers
-</span><span class="o">    movl 4(%</span><span class="n">esp</span><span class="p">),</span> <span class="o">%eax  # put new ptr into eax 
-</span><span class="o">    movl 28(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%ebp # restore other registers 
-</span><span class="o">    movl 24(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%edi 
-</span><span class="o">    movl 20(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%esi 
-</span><span class="o">    movl 16(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%edx 
-</span><span class="o">    movl 12(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%ecx 
-</span><span class="o">    movl 8(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%ebx 
-</span><span class="o">    movl 4(%</span><span class="n">eax</span><span class="p">),</span> <span class="o">%esp  # stack is switched here
-</span><span class="o">    pushl 0(%</span><span class="n">eax</span><span class="p">)</span>       <span class="c1"># return addr put in place</span>
-    <span class="n">ret</span>                 <span class="c1"># finally return into new ctxt</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-asm" data-lang="asm"><span class="c"># void swtch(struct context **old, struct context *new); 
+</span><span class="c">#
+</span><span class="c"># Save current register context in old
+</span><span class="c"># and then load register context from new. 
+</span><span class="c"></span><span class="na">.globl</span> <span class="no">swtch</span>
+<span class="nl">swtch:</span> 
+    <span class="c"># Save old registers
+</span><span class="c"></span>    <span class="nf">movl</span> <span class="mi">4</span><span class="p">(</span><span class="nv">%esp</span><span class="p">),</span> <span class="nv">%eax</span>  <span class="c"># put old ptr into eax 
+</span><span class="c"></span>    <span class="no">popl</span> <span class="mi">0</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span>        <span class="c"># save the old IP
+</span><span class="c"></span>    <span class="no">movl</span> <span class="nv">%esp</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span>  <span class="c"># and stack
+</span><span class="c"></span>    <span class="no">movl</span> <span class="nv">%ebx</span><span class="p">,</span> <span class="mi">8</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span>  <span class="c"># and other registers 
+</span><span class="c"></span>    <span class="no">movl</span> <span class="nv">%ecx</span><span class="p">,</span> <span class="mi">12</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span> 
+    <span class="no">movl</span> <span class="nv">%edx</span><span class="p">,</span> <span class="mi">16</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span> 
+    <span class="no">movl</span> <span class="nv">%esi</span><span class="p">,</span> <span class="mi">20</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span> 
+    <span class="no">movl</span> <span class="nv">%edi</span><span class="p">,</span> <span class="mi">24</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span> 
+    <span class="no">movl</span> <span class="nv">%ebp</span><span class="p">,</span> <span class="mi">28</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span>
+
+    <span class="c"># Load new registers
+</span><span class="c"></span>    <span class="nf">movl</span> <span class="mi">4</span><span class="p">(</span><span class="nv">%esp</span><span class="p">),</span> <span class="nv">%eax</span>  <span class="c"># put new ptr into eax 
+</span><span class="c"></span>    <span class="no">movl</span> <span class="mi">28</span><span class="p">(</span><span class="nv">%eax</span><span class="p">),</span> <span class="nv">%ebp</span> <span class="c"># restore other registers 
+</span><span class="c"></span>    <span class="no">movl</span> <span class="mi">24</span><span class="p">(</span><span class="nv">%eax</span><span class="p">),</span> <span class="nv">%edi</span> 
+    <span class="no">movl</span> <span class="mi">20</span><span class="p">(</span><span class="nv">%eax</span><span class="p">),</span> <span class="nv">%esi</span> 
+    <span class="no">movl</span> <span class="mi">16</span><span class="p">(</span><span class="nv">%eax</span><span class="p">),</span> <span class="nv">%edx</span> 
+    <span class="no">movl</span> <span class="mi">12</span><span class="p">(</span><span class="nv">%eax</span><span class="p">),</span> <span class="nv">%ecx</span> 
+    <span class="no">movl</span> <span class="mi">8</span><span class="p">(</span><span class="nv">%eax</span><span class="p">),</span> <span class="nv">%ebx</span> 
+    <span class="no">movl</span> <span class="mi">4</span><span class="p">(</span><span class="nv">%eax</span><span class="p">),</span> <span class="nv">%esp</span>  <span class="c"># stack is switched here
+</span><span class="c"></span>    <span class="no">pushl</span> <span class="mi">0</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span>       <span class="c"># return addr put in place
+</span><span class="c"></span>    <span class="no">ret</span>                 <span class="c"># finally return into new ctxt
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="担心并发吗">担心并发吗</h2>
 <ul>
 <li>若在中断或trap处理过程中发生另一个中断，OS需要考虑这种情况</li>
 <li>使用lmbench工具可测量上下文切换/系统调用的时间</li>
 <li>现代OS的上下文切换在2G-3GHz处理器上能达到亚微秒级</li>
+</ul>
+<h2 id="小结">小结</h2>
+<ul>
+<li><code>受限直接执行</code>(limited direct execution, LDE)：让应用程序直接在cpu上运行，但首先确保设置好硬件，以便在无OS帮助的情况下限制进程可执行的操作</li>
+<li>重启是有用的，它可让软件回到已知的状态，还可回收泄露的资源。在大规模集群服务器中，系统管理软件定期重启一些机器</li>
+<li>OS启动时设置trap处理程序并启动定时器中断，然后仅在受限模式下运行进程。这样可确保进程高效运行，只在进程执行特权操作或独占cpu时间过长时才需OS干预</li>
+</ul>
+<h2 id="作业测量">作业（测量）</h2>
+<ul>
+<li>测量系统调用的时间可用0字节读取</li>
+<li>测量时间可用系统调用<code>gettimeofday()</code>，它返回自1970年以来的时间（微秒）</li>
+<li>更精确的时间测量方法是x86的<code>rdtsc</code>/<code>rdtscp</code>指令</li>
+<li>测量系统调用时间：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#define uint32_t unsigned int
+</span><span class="cp">#define uint64_t unsigned long int
+</span><span class="cp">#define BUF_LEN 8
+</span><span class="cp"></span><span class="n">uint64_t</span> <span class="nf">perf_counter</span><span class="p">();</span>
+<span class="kr">inline</span> <span class="n">uint64_t</span> <span class="nf">perf_counter</span><span class="p">(){</span>
+  <span class="n">uint32_t</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">;</span>
+  <span class="k">asm</span> <span class="k">volatile</span> <span class="p">(</span><span class="s">&#34;rdtscp&#34;</span><span class="o">:</span><span class="s">&#34;=a&#34;</span><span class="p">(</span><span class="n">lo</span><span class="p">),</span><span class="s">&#34;=d&#34;</span><span class="p">(</span><span class="n">hi</span><span class="p">));</span>
+  <span class="k">return</span> <span class="p">((</span><span class="n">uint64_t</span><span class="p">)</span><span class="n">lo</span><span class="p">)</span> <span class="o">|</span> <span class="p">(((</span><span class="n">uint64_t</span><span class="p">)</span><span class="n">hi</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUF_LEN</span><span class="p">];</span>
+    <span class="n">uint64_t</span> <span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">;</span>
+    <span class="n">t1</span><span class="o">=</span><span class="n">perf_counter</span><span class="p">();</span>
+    <span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">buffer</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">t2</span><span class="o">=</span><span class="n">perf_counter</span><span class="p">();</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">%ld</span><span class="se">\n</span><span class="s">%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,(</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="p">));</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>由于现代处理器的流水线能力，故重复进行多次系统调用取平均时间测得的结果会偏小</li>
 </ul>
 
     </div>
@@ -353,9 +432,9 @@
           <a href="/tags/ostep/">OSTEP</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/cpp/top_cpp/">
+        <a class="prev" href="/post/os/ostep_ch7/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章集合</span>
+            <span class="prev-text nav-default">OSTEP第7章 进程调度：介绍</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/os/ostep_ch5/">
@@ -368,6 +447,29 @@
   </article>
         </div>
         
+
+  <span id="/post/os/ostep_ch6/" class="leancloud_visitors" data-flag-title="OSTEP第6章 机制：受限直接执行">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
 
       </div>
     </main>

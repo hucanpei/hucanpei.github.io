@@ -49,7 +49,7 @@
 <meta itemprop="description" content="进程就是运行中的程序 时分共享(time sharing)：让一个进程只运行一个时间片，然后切换到其他进程，操作系统提供了存在多个虚拟cpu的假">
 <meta itemprop="datePublished" content="2020-06-26T23:49:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-26T23:49:00&#43;08:00" />
-<meta itemprop="wordCount" content="1332">
+<meta itemprop="wordCount" content="1350">
 
 
 
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-26 </span>
         
-          <span class="more-meta"> 约 1332 字 </span>
+          <span class="more-meta"> 约 1350 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -139,6 +139,7 @@
     <li><a href="#进程创建更多细节">进程创建：更多细节</a></li>
     <li><a href="#进程状态">进程状态</a></li>
     <li><a href="#数据结构">数据结构</a></li>
+    <li><a href="#小结">小结</a></li>
   </ul>
 </nav>
   </div>
@@ -232,6 +233,7 @@
 <h2 id="数据结构">数据结构</h2>
 <ul>
 <li>OS使用数据结构跟踪各种相关信息，如进程列表等</li>
+<li><code>上下文切换</code>：进程停止时，它的寄存器被保存到内存中，通过恢复这些寄存器（从内存中放回寄存器）OS可恢复运行该进程</li>
 <li>例子：xv6的proc结构</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -308,7 +310,6 @@
 </div>
 </div><ul>
 <li>如上，操作系统追踪进程的一些关键信息。</li>
-<li>进程停止时，<code>寄存器上下文</code>保存寄存器的内容，进程恢复时OS将这些内容重新放入寄存器</li>
 <li>除运行、就绪、阻塞外，还有其他状态：
 <ul>
 <li><code>初始</code>(initial)状态：进程正在创建时的状态</li>
@@ -317,6 +318,8 @@
 </li>
 <li>存储关于进程信息的结构又叫<code>进程控制块</code>(Process Control Block,PCB)</li>
 </ul>
+<h2 id="小结">小结</h2>
+<p>略</p>
 
     </div>
 

@@ -30,6 +30,33 @@
     </item>
     
     <item>
+      <title>OSTEP第9章 调度：比例份额</title>
+      <link>http://localhost:1313/post/os/ostep_ch9/</link>
+      <pubDate>Sun, 05 Jul 2020 21:05:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch9/</guid>
+      <description>比例份额(proportional-share)又称公平份额(fair-share)，基于简单的想法：调度的最终目标是确保每个工作获得一定比</description>
+    </item>
+    
+    <item>
+      <title>OSTEP第8章 调度：多级反馈队列</title>
+      <link>http://localhost:1313/post/os/ostep_ch8/</link>
+      <pubDate>Sun, 05 Jul 2020 15:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch8/</guid>
+      <description>多级反馈队列(Multi-level Feedback Queue, MLFQ) 优化周转时间：先执行短工作，但通常不知道工作要运行多久 优化响应时间：使用轮转，但轮转的周转时间很差</description>
+    </item>
+    
+    <item>
+      <title>OSTEP第7章 进程调度：介绍</title>
+      <link>http://localhost:1313/post/os/ostep_ch7/</link>
+      <pubDate>Tue, 30 Jun 2020 17:44:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch7/</guid>
+      <description>工作负载假设 确定工作负载是构建调度策略的关键部分。对工作负载了解得越多，调度策略就越优 对进程（工作任务）进行如下假设，这些假设并不现实，随着</description>
+    </item>
+    
+    <item>
       <title>OSTEP第6章 机制：受限直接执行</title>
       <link>http://localhost:1313/post/os/ostep_ch6/</link>
       <pubDate>Sun, 28 Jun 2020 00:43:00 +0800</pubDate>

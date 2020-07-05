@@ -17,34 +17,55 @@
   
   <url>
     <loc>http://localhost:1313/tags/ostep/</loc>
-    <lastmod>2020-06-28T00:43:00+08:00</lastmod>
+    <lastmod>2020-07-05T21:05:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/os/ostep_ch6/</loc>
-    <lastmod>2020-06-28T00:43:00+08:00</lastmod>
+    <loc>http://localhost:1313/post/os/ostep_ch9/</loc>
+    <lastmod>2020-07-05T21:05:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-06-28T00:43:00+08:00</lastmod>
+    <lastmod>2020-07-05T21:05:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2020-06-28T00:43:00+08:00</lastmod>
+    <lastmod>2020-07-05T21:05:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2020-07-05T21:05:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/os/ostep_ch8/</loc>
+    <lastmod>2020-07-05T15:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/os/ostep_ch7/</loc>
+    <lastmod>2020-06-30T17:44:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/os/ostep_ch6/</loc>
     <lastmod>2020-06-28T00:43:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

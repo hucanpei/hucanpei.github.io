@@ -49,7 +49,7 @@
 <meta itemprop="description" content="冯诺依曼计算模型：处理器从内存中读取指令，对其解码、执行。完成一条指令后继续执行下一条，直到程序最终完成 操作系统要确保系统易于使用又高效运行">
 <meta itemprop="datePublished" content="2020-06-26T21:45:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-26T21:45:00&#43;08:00" />
-<meta itemprop="wordCount" content="906">
+<meta itemprop="wordCount" content="947">
 
 
 
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-06-26 </span>
         
-          <span class="more-meta"> 约 906 字 </span>
+          <span class="more-meta"> 约 947 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -139,7 +139,15 @@
     <li><a href="#并发">并发</a></li>
     <li><a href="#持久性">持久性</a></li>
     <li><a href="#设计目标">设计目标</a></li>
-    <li><a href="#简单历史">简单历史</a></li>
+    <li><a href="#简单历史">简单历史</a>
+      <ul>
+        <li><a href="#早期操作系统只是一些库">早期操作系统：只是一些库</a></li>
+        <li><a href="#超越库保护">超越库：保护</a></li>
+        <li><a href="#多道程序时代">多道程序时代</a></li>
+        <li><a href="#摩登时代">摩登时代</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a></li>
   </ul>
 </nav>
   </div>
@@ -178,20 +186,33 @@
 <li>操作系统的目标：抽象、高性能、隔离、可靠性</li>
 </ul>
 <h2 id="简单历史">简单历史</h2>
+<h3 id="早期操作系统只是一些库">早期操作系统：只是一些库</h3>
 <ul>
 <li><code>批处理</code>：由操作员来分批运行程序，一次只运行一个。此时操作系统只是库</li>
+</ul>
+<h3 id="超越库保护">超越库：保护</h3>
+<ul>
 <li><code>系统调用</code>：不是将操作系统作为库，而是添加特殊的硬件指令和硬件状态，使得用户程序到操作系统的过渡更加正式、可控
 <ul>
 <li>系统调用和过程调用的关键区别：系统调用将控制转移给OS时，提高了硬件的特权级别</li>
 <li>应用程序以<code>用户模式</code>运行，限制硬件的功能。发起系统调用时陷入陷阱，硬件将控制转移给陷阱处理程序并将特权级别提升到<code>内核模式</code>，可完全访问硬件。完成系统调用后从陷阱中返回，将控制权交还给用户并将特权级别降低到<code>用户模式</code></li>
 </ul>
 </li>
+</ul>
+<h3 id="多道程序时代">多道程序时代</h3>
+<ul>
 <li><code>多道程序</code>：OS一次不止运行一项作业，而是将大量作业加载进内存并在它们之间快速切换，提高cpu利用率，因为等待IO很慢
 <ul>
 <li>处理多道程序时，产生内存保护、并发等问题</li>
 </ul>
 </li>
 </ul>
+<h3 id="摩登时代">摩登时代</h3>
+<ul>
+<li>unix和linux</li>
+</ul>
+<h2 id="小结">小结</h2>
+<p>略</p>
 
     </div>
 
