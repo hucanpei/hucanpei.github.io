@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 05 Jul 2020 21:05:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2020 22:13:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,42 @@
       
       <guid>http://localhost:1313/post/cpp/top_cpp/</guid>
       <description>C++ primer 读书笔记 C++ primer 第1章 开始 C++ primer 第2章 变量和基本类型 C++ primer 第3章 字符串、向量和数组 C++ primer 第4章 表达式 C++ primer 第5章 语句 C++ primer 第6章 函数 C++ primer 第7章 类 C++ primer 第</description>
+    </item>
+    
+    <item>
+      <title>LeetCode102 - (medium) Binary Tree Level Order Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode102/</link>
+      <pubDate>Thu, 23 Jul 2020 22:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode102/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-level-order-traversal/ 花花酱</description>
+    </item>
+    
+    <item>
+      <title>LeetCode100 - (easy) Binary Tree Inorder Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode100/</link>
+      <pubDate>Thu, 23 Jul 2020 22:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode100/</guid>
+      <description>链接：https://leetcode.com/problems/same-tree/ 花花酱视频链接：youtube Task Given two binary trees, write a function to check if they</description>
+    </item>
+    
+    <item>
+      <title>LeetCode94 - (medium) Binary Tree Inorder Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode94/</link>
+      <pubDate>Thu, 23 Jul 2020 16:30:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode94/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-inorder-traversal/ Task Given a binary tree, return the</description>
+    </item>
+    
+    <item>
+      <title>OSTEP第10章 多处理器调度（高级）</title>
+      <link>http://localhost:1313/post/os/ostep_ch10/</link>
+      <pubDate>Tue, 21 Jul 2020 15:38:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch10/</guid>
+      <description>多核时代的困难： 应用程序需要重写以使用多线程并行执行 操作系统需要实现多处理器调度 背景：多处理器架构 别忘了同步 最后一个问题：缓存亲和度 单队列调</description>
     </item>
     
     <item>

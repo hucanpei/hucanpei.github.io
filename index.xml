@@ -30,6 +30,42 @@
     </item>
     
     <item>
+      <title>LeetCode102 - (medium) Binary Tree Level Order Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode102/</link>
+      <pubDate>Thu, 23 Jul 2020 22:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode102/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-level-order-traversal/ 花花酱</description>
+    </item>
+    
+    <item>
+      <title>LeetCode100 - (easy) Binary Tree Inorder Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode100/</link>
+      <pubDate>Thu, 23 Jul 2020 22:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode100/</guid>
+      <description>链接：https://leetcode.com/problems/same-tree/ 花花酱视频链接：youtube Task Given two binary trees, write a function to check if they</description>
+    </item>
+    
+    <item>
+      <title>LeetCode94 - (medium) Binary Tree Inorder Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode94/</link>
+      <pubDate>Thu, 23 Jul 2020 16:30:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode94/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-inorder-traversal/ Task Given a binary tree, return the</description>
+    </item>
+    
+    <item>
+      <title>OSTEP第10章 多处理器调度（高级）</title>
+      <link>http://localhost:1313/post/os/ostep_ch10/</link>
+      <pubDate>Tue, 21 Jul 2020 15:38:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/os/ostep_ch10/</guid>
+      <description>多核时代的困难： 应用程序需要重写以使用多线程并行执行 操作系统需要实现多处理器调度 背景：多处理器架构 别忘了同步 最后一个问题：缓存亲和度 单队列调</description>
+    </item>
+    
+    <item>
       <title>OSTEP第9章 调度：比例份额</title>
       <link>http://localhost:1313/post/os/ostep_ch9/</link>
       <pubDate>Sun, 05 Jul 2020 21:05:00 +0800</pubDate>

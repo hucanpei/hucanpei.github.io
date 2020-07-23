@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tree on pi</title>
+    <title>tree on pi</title>
     <link>http://localhost:1313/tags/tree/</link>
-    <description>Recent content in Tree on pi</description>
+    <description>Recent content in tree on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 08 Jun 2020 00:22:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2020 22:13:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/tree/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode102 - (medium) Binary Tree Level Order Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode102/</link>
+      <pubDate>Thu, 23 Jul 2020 22:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode102/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-level-order-traversal/ 花花酱</description>
+    </item>
+    
+    <item>
+      <title>LeetCode100 - (easy) Binary Tree Inorder Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode100/</link>
+      <pubDate>Thu, 23 Jul 2020 22:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode100/</guid>
+      <description>链接：https://leetcode.com/problems/same-tree/ 花花酱视频链接：youtube Task Given two binary trees, write a function to check if they</description>
+    </item>
+    
+    <item>
+      <title>LeetCode94 - (medium) Binary Tree Inorder Traversal</title>
+      <link>http://localhost:1313/post/oj/leetcode94/</link>
+      <pubDate>Thu, 23 Jul 2020 16:30:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode94/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-inorder-traversal/ Task Given a binary tree, return the</description>
+    </item>
     
     <item>
       <title>LeetCode450 - (medium) Delete Node in a BST</title>
