@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 23 Jul 2020 22:13:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2020 18:13:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,33 @@
       
       <guid>http://localhost:1313/post/cpp/top_cpp/</guid>
       <description>C++ primer 读书笔记 C++ primer 第1章 开始 C++ primer 第2章 变量和基本类型 C++ primer 第3章 字符串、向量和数组 C++ primer 第4章 表达式 C++ primer 第5章 语句 C++ primer 第6章 函数 C++ primer 第7章 类 C++ primer 第</description>
+    </item>
+    
+    <item>
+      <title>LeetCode129 - (medium) Sum Root to Leaf Numbers</title>
+      <link>http://localhost:1313/post/oj/leetcode129/</link>
+      <pubDate>Sat, 25 Jul 2020 18:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode129/</guid>
+      <description>链接：https://leetcode.com/problems/sum-root-to-leaf-numbers/ Task Given a binary tree containing digits from 0-9 only, each root-to-leaf</description>
+    </item>
+    
+    <item>
+      <title>LeetCode112 - (easy) Path Sum</title>
+      <link>http://localhost:1313/post/oj/leetcode112/</link>
+      <pubDate>Sat, 25 Jul 2020 17:44:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode112/</guid>
+      <description>链接：https://leetcode.com/problems/path-sum/ 花花酱视频链接：youtube Task Given a binary tree and a sum, determine if the tree has</description>
+    </item>
+    
+    <item>
+      <title>LeetCode814 - (medium) Binary Tree Pruning</title>
+      <link>http://localhost:1313/post/oj/leetcode814/</link>
+      <pubDate>Fri, 24 Jul 2020 16:47:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode814/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-pruning/ Task We are given the head node root of a binary tree, where additionally every node&amp;rsquo;s value</description>
     </item>
     
     <item>

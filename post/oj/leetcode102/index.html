@@ -49,7 +49,7 @@
 <meta itemprop="description" content="链接：https://leetcode.com/problems/binary-tree-level-order-traversal/ 花花酱">
 <meta itemprop="datePublished" content="2020-07-23T22:13:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-23T22:13:00&#43;08:00" />
-<meta itemprop="wordCount" content="912">
+<meta itemprop="wordCount" content="982">
 
 
 
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-07-23 </span>
         
-          <span class="more-meta"> 约 912 字 </span>
+          <span class="more-meta"> 约 982 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -335,6 +335,10 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 </span><span class="lnt">29
 </span><span class="lnt">30
 </span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 8 ms, faster than 55.58% of C++ online submissions for Binary Tree Level Order Traversal.
@@ -360,11 +364,15 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
     <span class="p">}</span>
 <span class="k">private</span><span class="o">:</span>
     <span class="kt">void</span> <span class="n">DFS</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span><span class="kt">int</span> <span class="n">depth</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">ans</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&lt;=</span><span class="n">depth</span><span class="p">)</span>
+        <span class="c1">//递归终止条件
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="c1">//当ans中的数组数少于当前深度时，向其中添加空数组
+</span><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&lt;=</span><span class="n">depth</span><span class="p">)</span>
             <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">({});</span>
-        <span class="n">ans</span><span class="p">[</span><span class="n">depth</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
-        <span class="n">DFS</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+        <span class="c1">//节点在第几层，就向ans的第几个数组中添加节点的值
+</span><span class="c1"></span>        <span class="n">ans</span><span class="p">[</span><span class="n">depth</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="c1">//遍历
+</span><span class="c1"></span>        <span class="n">DFS</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
         <span class="n">DFS</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
@@ -413,9 +421,9 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
           <a href="/tags/%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/">一题多解</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/cpp/top_cpp/">
+        <a class="prev" href="/post/oj/leetcode814/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章集合</span>
+            <span class="prev-text nav-default">LeetCode814 - (medium) Binary Tree Pruning</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/oj/leetcode100/">
@@ -428,6 +436,29 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
   </article>
         </div>
         
+
+  <span id="/post/oj/leetcode102/" class="leancloud_visitors" data-flag-title="LeetCode102 - (medium) Binary Tree Level Order Traversal">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
 
       </div>
     </main>

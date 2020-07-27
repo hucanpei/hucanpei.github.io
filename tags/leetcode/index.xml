@@ -6,10 +6,37 @@
     <description>Recent content in leetcode on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 23 Jul 2020 22:13:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2020 18:13:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode129 - (medium) Sum Root to Leaf Numbers</title>
+      <link>http://localhost:1313/post/oj/leetcode129/</link>
+      <pubDate>Sat, 25 Jul 2020 18:13:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode129/</guid>
+      <description>链接：https://leetcode.com/problems/sum-root-to-leaf-numbers/ Task Given a binary tree containing digits from 0-9 only, each root-to-leaf</description>
+    </item>
+    
+    <item>
+      <title>LeetCode112 - (easy) Path Sum</title>
+      <link>http://localhost:1313/post/oj/leetcode112/</link>
+      <pubDate>Sat, 25 Jul 2020 17:44:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode112/</guid>
+      <description>链接：https://leetcode.com/problems/path-sum/ 花花酱视频链接：youtube Task Given a binary tree and a sum, determine if the tree has</description>
+    </item>
+    
+    <item>
+      <title>LeetCode814 - (medium) Binary Tree Pruning</title>
+      <link>http://localhost:1313/post/oj/leetcode814/</link>
+      <pubDate>Fri, 24 Jul 2020 16:47:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode814/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-pruning/ Task We are given the head node root of a binary tree, where additionally every node&amp;rsquo;s value</description>
+    </item>
     
     <item>
       <title>LeetCode102 - (medium) Binary Tree Level Order Traversal</title>
