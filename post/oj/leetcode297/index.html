@@ -49,7 +49,7 @@
 <meta itemprop="description" content="链接：https://leetcode.com/problems/serialize-and-deserialize-binary-tree">
 <meta itemprop="datePublished" content="2020-07-27T16:57:00+08:00" />
 <meta itemprop="dateModified" content="2020-07-27T16:57:00+08:00" />
-<meta itemprop="wordCount" content="1106">
+<meta itemprop="wordCount" content="1350">
 
 
 
@@ -124,7 +124,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-07-27 </span>
         
-          <span class="more-meta"> 约 1106 字 </span>
+          <span class="more-meta"> 约 1350 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -345,14 +345,136 @@ as &#34;[1,2,3,null,null,4,5]&#34;
 <li>节省空间，即同一棵树使用二进制序列化后比字符串序列化占的空间更小</li>
 </ul>
 </li>
-<li>例子： test test test
+<li>例子：
 <ul>
 <li>字符串：-2^31=-2147483648，加上空格，一个节点占用12个byte</li>
-<li>二进制：-2^31=0xFFFFFFFF，加上flag位，一个节点占用5个byte</li>
+<li>二进制：-2^31=0xFFFFFFFF，加上一些标志位status表示节点的拓扑形态，一个节点占用5个byte</li>
 </ul>
 </li>
 </ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 52 ms, faster than 97.25% of C++ online submissions for Serialize and Deserialize Binary Tree.
+</span><span class="c1">// Memory Usage: 31.8 MB, less than 68.81% of C++ online submissions for Serialize and Deserialize Binary Tree.
+</span><span class="c1"></span><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">Codec</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
 
+    <span class="c1">// Encodes a tree to a single string.
+</span><span class="c1"></span>    <span class="n">string</span> <span class="n">serialize</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ostringstream</span> <span class="n">out</span><span class="p">;</span>
+        <span class="n">encode</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">out</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">out</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Decodes your encoded data to tree.
+</span><span class="c1"></span>    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">deserialize</span><span class="p">(</span><span class="n">string</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">istringstream</span> <span class="n">in</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">decode</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">enum</span> <span class="nc">STATUS</span><span class="p">{</span>
+        <span class="n">NOT_NULL</span><span class="o">=</span><span class="mh">0x1</span><span class="p">,</span>
+        <span class="n">HAS_LEFT</span><span class="o">=</span><span class="mh">0x2</span><span class="p">,</span>
+        <span class="n">HAS_RIGHT</span><span class="o">=</span><span class="mh">0x4</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="kt">void</span> <span class="nf">encode</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span><span class="n">ostringstream</span> <span class="o">&amp;</span><span class="n">out</span><span class="p">){</span>
+        <span class="kt">char</span> <span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="n">status</span><span class="o">|=</span><span class="n">NOT_NULL</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">status</span><span class="o">|=</span><span class="n">HAS_LEFT</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">status</span><span class="o">|=</span><span class="n">HAS_RIGHT</span><span class="p">;</span>
+        <span class="n">out</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="n">out</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)),</span><span class="k">sizeof</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">encode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">out</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">encode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">out</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">TreeNode</span> <span class="o">*</span><span class="nf">decode</span><span class="p">(</span><span class="n">istringstream</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">){</span>
+        <span class="kt">char</span> <span class="n">status</span><span class="p">;</span>
+        <span class="n">in</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">status</span><span class="o">&amp;</span><span class="n">NOT_NULL</span><span class="p">))</span> <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="o">=</span><span class="k">new</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">in</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)),</span><span class="k">sizeof</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">));</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="p">(</span><span class="n">status</span><span class="o">&amp;</span><span class="n">HAS_LEFT</span><span class="p">)</span><span class="o">?</span><span class="n">decode</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="o">:</span><span class="k">nullptr</span><span class="p">;</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="p">(</span><span class="n">status</span><span class="o">&amp;</span><span class="n">HAS_RIGHT</span><span class="p">)</span><span class="o">?</span><span class="n">decode</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="o">:</span><span class="k">nullptr</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Your Codec object will be instantiated and called as such:
+</span><span class="c1">// Codec codec;
+</span><span class="c1">// codec.deserialize(codec.serialize(root));
+</span></code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
