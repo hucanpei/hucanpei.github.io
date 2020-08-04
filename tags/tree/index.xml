@@ -6,10 +6,28 @@
     <description>Recent content in tree on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 25 Jul 2020 18:13:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2020 16:57:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/tree/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode297 - (hard) Serialize and Deserialize Binary Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode297/</link>
+      <pubDate>Mon, 27 Jul 2020 16:57:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode297/</guid>
+      <description>链接：https://leetcode.com/problems/serialize-and-deserialize-binary-tree</description>
+    </item>
+    
+    <item>
+      <title>LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode236/</link>
+      <pubDate>Mon, 27 Jul 2020 15:34:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode236/</guid>
+      <description>链接：https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tr</description>
+    </item>
     
     <item>
       <title>LeetCode129 - (medium) Sum Root to Leaf Numbers</title>

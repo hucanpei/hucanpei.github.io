@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.67.0 with theme even" />
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/network/hplsp_ch3/" />
@@ -47,13 +47,14 @@
 <meta property="article:modified_time" content="2020-05-28T14:21:00+08:00" />
 <meta itemprop="name" content="Linux高性能服务器编程 第3章 TCP协议详解">
 <meta itemprop="description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每">
-<meta itemprop="datePublished" content="2020-05-28T14:21:00&#43;08:00" />
-<meta itemprop="dateModified" content="2020-05-28T14:21:00&#43;08:00" />
-<meta itemprop="wordCount" content="13583">
+<meta itemprop="datePublished" content="2020-05-28T14:21:00+08:00" />
+<meta itemprop="dateModified" content="2020-05-28T14:21:00+08:00" />
+<meta itemprop="wordCount" content="13625">
 
 
 
-<meta itemprop="keywords" content="Linux,网络,C&#43;&#43;,Linux高性能服务器编程,读书," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Linux,网络,C&#43;&#43;,Linux高性能服务器编程,读书," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux高性能服务器编程 第3章 TCP协议详解"/>
 <meta name="twitter:description" content="TCP协议更靠近应用层，故在应用程序中有更强的可操作性，一些重要的socket选项都和TCP有关 TCP主要包含以下几方面： 头部信息：出现在每"/>
 
@@ -123,7 +124,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-05-28 </span>
         
-          <span class="more-meta"> 约 13583 字 </span>
+          <span class="more-meta"> 约 13625 字 </span>
           <span class="more-meta"> 预计阅读 28 分钟 </span>
         
       </div>
@@ -701,18 +702,18 @@ $ telnet 127.0.0.1
 </div><ul>
 <li>输出：
 <ul>
-<li>第1-4行是输入字符&rsquo;l'的过程：
+<li>第1-4行是输入字符&rsquo;l&rsquo;的过程：
 <ul>
-<li>第1行是客户端发送给服务器，数据长度为1，携带字符&rsquo;l'的应用程序数据</li>
+<li>第1行是客户端发送给服务器，数据长度为1，携带字符&rsquo;l&rsquo;的应用程序数据</li>
 <li>第2行是服务器对第1行报文的确认，数据长度为0</li>
-<li>第3行是服务器发送给客户端，数据长度为1，携带字符&rsquo;l'的应用程序数据，用于回显字符&rsquo;l&rsquo;</li>
+<li>第3行是服务器发送给客户端，数据长度为1，携带字符&rsquo;l&rsquo;的应用程序数据，用于回显字符&rsquo;l&rsquo;</li>
 <li>第4行是客户端对第3行报文的确认，数据长度为0</li>
 </ul>
 </li>
-<li>第5-8行是输入字符&rsquo;s'的过程</li>
-<li>第9-11行是输入回车符&rsquo;\n'和流结束符EOF的过程：
+<li>第5-8行是输入字符&rsquo;s&rsquo;的过程</li>
+<li>第9-11行是输入回车符&rsquo;\n&rsquo;和流结束符EOF的过程：
 <ul>
-<li>第9行是客户端发送给服务器，数据长度为2，携带回车符&rsquo;\n'和流结束符EOF</li>
+<li>第9行是客户端发送给服务器，数据长度为2，携带回车符&rsquo;\n&rsquo;和流结束符EOF</li>
 <li>第10行是服务器对第9行报文的确认，并携带2个字节的数据，传回回车符和换行符</li>
 <li>第11行是客户端对第10行报文的确认</li>
 </ul>
@@ -863,7 +864,7 @@ $ ftp 192.168.1.109
 <ul>
 <li>如图3.10，发送缓冲区中已有N字节数据，又向其中写入3字节带外数据&quot;abc&rdquo;
 <img src="../network_figs/HPLSP_ch3-fig_3_10.png" alt="fig_3_10"></li>
-<li>紧急指针指向最后一个带外数据的下一字节，即&rsquo;c'之后的位置</li>
+<li>紧急指针指向最后一个带外数据的下一字节，即&rsquo;c&rsquo;之后的位置</li>
 <li>多字节带外数据中，只有最后一字节被当作带外数据，其他被当作普通数据</li>
 <li>发送缓冲区产生的每个报文都被设置URG标志，且紧急指针指向同一位置，但只有一个报文真正携带带外数据</li>
 </ul>

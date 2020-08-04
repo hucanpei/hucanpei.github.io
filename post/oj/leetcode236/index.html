@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>LeetCode24 - (medium) Swap Nodes in Pairs - pi</title>
+  <title>LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tr" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/oj/leetcode24/" />
+<link rel="canonical" href="http://localhost:1313/post/oj/leetcode236/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,24 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="LeetCode24 - (medium) Swap Nodes in Pairs" />
-<meta property="og:description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not" />
+<meta property="og:title" content="LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree" />
+<meta property="og:description" content="链接：https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tr" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/oj/leetcode24/" />
-<meta property="article:published_time" content="2020-05-27T22:57:00+08:00" />
-<meta property="article:modified_time" content="2020-05-27T22:57:00+08:00" />
-<meta itemprop="name" content="LeetCode24 - (medium) Swap Nodes in Pairs">
-<meta itemprop="description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not">
-<meta itemprop="datePublished" content="2020-05-27T22:57:00+08:00" />
-<meta itemprop="dateModified" content="2020-05-27T22:57:00+08:00" />
-<meta itemprop="wordCount" content="456">
+<meta property="og:url" content="http://localhost:1313/post/oj/leetcode236/" />
+<meta property="article:published_time" content="2020-07-27T15:34:00+08:00" />
+<meta property="article:modified_time" content="2020-07-27T15:34:00+08:00" />
+<meta itemprop="name" content="LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree">
+<meta itemprop="description" content="链接：https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tr">
+<meta itemprop="datePublished" content="2020-07-27T15:34:00+08:00" />
+<meta itemprop="dateModified" content="2020-07-27T15:34:00+08:00" />
+<meta itemprop="wordCount" content="690">
 
 
 
-<meta itemprop="keywords" content="online judge,leetcode,链表," />
+<meta itemprop="keywords" content="online judge,leetcode,tree," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="LeetCode24 - (medium) Swap Nodes in Pairs"/>
-<meta name="twitter:description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not"/>
+<meta name="twitter:title" content="LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree"/>
+<meta name="twitter:description" content="链接：https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tr"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -119,13 +119,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">LeetCode24 - (medium) Swap Nodes in Pairs</h1>
+      <h1 class="post-title">LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-05-27 </span>
+        <span class="post-time"> 2020-07-27 </span>
         
-          <span class="more-meta"> 约 456 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 690 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
     </header>
@@ -144,38 +144,57 @@
 </div>
     <div class="post-content">
       <ul>
-<li>链接：<a href="https://leetcode.com/problems/swap-nodes-in-pairs/">https://leetcode.com/problems/swap-nodes-in-pairs/</a></li>
+<li>链接：<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/</a></li>
 </ul>
 <h2 id="task">Task</h2>
-<p>Given a linked list, swap every two adjacent nodes and return its head.</p>
-<p>You may not modify the values in the list&rsquo;s nodes, only nodes itself may be changed.</p>
+<p>Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.</p>
+<p>According to the <a href="https://en.wikipedia.org/wiki/Lowest_common_ancestor">definition of LCA on Wikipedia</a>: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”</p>
+<p>Given the following binary tree:  root = [3,5,1,6,2,0,8,null,null,7,4]</p>
+<p><img src="../oj_figs/LeetCode236.png" alt="leetcode236"></p>
 <h2 id="example">Example</h2>
+<p>Example 1:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+Output: 3
+Explanation: The LCA of nodes 5 and 1 is 3.
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="solution">Solution</h2>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+Output: 5
+Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+</code></pre></td></tr></table>
+</div>
+</div><p>Note:</p>
 <ul>
-<li>使用dummy head在第一次交换时即得到“当前交换的两个节点”左右两侧都有节点的状态</li>
-<li>每次交换之初，确保两点：
+<li>All of the nodes&rsquo; values will be unique.</li>
+<li>p and q are different and both values will exist in the binary tree.</li>
+</ul>
+<h2 id="solution">Solution</h2>
 <ul>
-<li>一个prev指针指向“当前交换的两个节点”左侧的节点</li>
-<li>一个head指针指向第一个要被交换的节点</li>
+<li>使用递归从根节点开始遍历，递归终点是节点p或q</li>
+<li>对于一个节点：
+<ul>
+<li>若它的左子树和右子树中都能找到p或q，说明该节点即为所求</li>
+<li>若只有左子树或右子树中能找到p或q，就返回能找到p或q的那个子节点</li>
+<li>若左子树和右子树中都不能找到p或q，则返回空</li>
 </ul>
 </li>
-<li>操作的时候：
-<ul>
-<li>先交换节点之间的指针</li>
-<li>再更新prev和head的指向</li>
-</ul>
-</li>
-<li><code>时间复杂度</code>：只遍历一次，O(n)</li>
-<li><code>空间复杂度</code>：只新建了一个dummy节点和2个指针，O(1)</li>
-<li>实现：</li>
+<li>时间复杂度：每个节点看一次，O(n)</li>
+<li>空间复杂度：取决于树的高度，O(h)</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -211,34 +230,34 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 4 ms, faster than 48.23% of C++ online submissions for Swap Nodes in Pairs.
-</span><span class="c1">// Memory Usage: 7.5 MB, less than 100.00% of C++ online submissions for Swap Nodes in Pairs.
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 20 ms, faster than 89.51% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
+</span><span class="c1">// Memory Usage: 14.5 MB, less than 37.39% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
 </span><span class="c1"></span><span class="cm">/**
-</span><span class="cm"> * Definition for singly-linked list.
-</span><span class="cm"> * struct ListNode {
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
 </span><span class="cm"> *     int val;
-</span><span class="cm"> *     ListNode *next;
-</span><span class="cm"> *     ListNode() : val(0), next(nullptr) {}
-</span><span class="cm"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span><span class="cm"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 </span><span class="cm"> * };
 </span><span class="cm"> */</span>
 <span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="n">ListNode</span><span class="o">*</span> <span class="n">swapPairs</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//新建dummy节点，使其next指向输入链表
-</span><span class="c1"></span>        <span class="n">ListNode</span> <span class="o">*</span><span class="n">dummy</span><span class="o">=</span><span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">head</span><span class="p">);</span>
-        <span class="n">ListNode</span> <span class="o">*</span><span class="n">prev</span><span class="o">=</span><span class="n">dummy</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">head</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)){</span>
-            <span class="c1">//交换节点之间的指针
-</span><span class="c1"></span>            <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-            <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-            <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
-            <span class="c1">//更新prev和head的指向
-</span><span class="c1"></span>            <span class="n">prev</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
-            <span class="n">head</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">dummy</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//递归终止条件：p/q/空节点
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span> <span class="o">||</span> <span class="n">root</span><span class="o">==</span><span class="n">p</span> <span class="o">||</span> <span class="n">root</span><span class="o">==</span><span class="n">q</span><span class="p">)</span> <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="c1">//遍历左右子树，找左右子树中的LCA
+</span><span class="c1"></span>        <span class="c1">//实际返回时，若一棵子树中含有p或q，就返回该子树的根节点（根据递归终止条件）
+</span><span class="c1"></span>        <span class="n">TreeNode</span> <span class="o">*</span><span class="n">l</span><span class="o">=</span><span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">);</span>
+        <span class="n">TreeNode</span> <span class="o">*</span><span class="n">r</span><span class="o">=</span><span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">);</span>
+        <span class="c1">//若左右子树都返回了有效节点，说明左右子树中都找到了p或q，该节点为所求
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">l</span> <span class="o">&amp;&amp;</span> <span class="n">r</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="c1">//若左右子树中只有一个能找到p或q，就返回那棵子树
+</span><span class="c1"></span>        <span class="c1">//若左右子树都找不到p或q，就返回空节点
+</span><span class="c1"></span>        <span class="k">else</span>
+            <span class="k">return</span> <span class="n">l</span><span class="o">?</span><span class="nl">l</span><span class="p">:</span><span class="n">r</span><span class="p">;</span>
+        
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
@@ -254,7 +273,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2020-05-27
+        2020-07-27
         
     </span>
   </p>
@@ -282,16 +301,16 @@
       <div class="post-tags">
           <a href="/tags/online-judge/">online judge</a>
           <a href="/tags/leetcode/">leetcode</a>
-          <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+          <a href="/tags/tree/">tree</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/oj/leetcode206/">
+        <a class="prev" href="/post/oj/leetcode297/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">LeetCode206 - (easy) Reverse Linked List</span>
+            <span class="prev-text nav-default">LeetCode297 - (hard) Serialize and Deserialize Binary Tree</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/oj/leetcode2/">
-            <span class="next-text nav-default">LeetCode2 - (medium) Add Two Numbers</span>
+        <a class="next" href="/post/oj/leetcode129/">
+            <span class="next-text nav-default">LeetCode129 - (medium) Sum Root to Leaf Numbers</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -301,7 +320,7 @@
         </div>
         
 
-  <span id="/post/oj/leetcode24/" class="leancloud_visitors" data-flag-title="LeetCode24 - (medium) Swap Nodes in Pairs">
+  <span id="/post/oj/leetcode236/" class="leancloud_visitors" data-flag-title="LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree">
 		<span class="post-meta-item-text">文章阅读量 </span>
 		<span class="leancloud-visitors-count">0</span>
 		<p></p>

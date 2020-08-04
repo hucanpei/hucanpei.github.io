@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.67.0 with theme even" />
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/cpp/cppprimer_ch17/" />
@@ -47,13 +47,14 @@
 <meta property="article:modified_time" content="2020-04-23T01:21:00+08:00" />
 <meta itemprop="name" content="C&#43;&#43; primer 第17章 标准库特殊设施">
 <meta itemprop="description" content="C&#43;&#43;11极大扩充了标准库的规模和范围，标准库占据了C&#43;&#43;11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t">
-<meta itemprop="datePublished" content="2020-04-23T01:21:00&#43;08:00" />
-<meta itemprop="dateModified" content="2020-04-23T01:21:00&#43;08:00" />
+<meta itemprop="datePublished" content="2020-04-23T01:21:00+08:00" />
+<meta itemprop="dateModified" content="2020-04-23T01:21:00+08:00" />
 <meta itemprop="wordCount" content="17498">
 
 
 
-<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="C&#43;&#43;,C&#43;&#43; primer,读书," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C&#43;&#43; primer 第17章 标准库特殊设施"/>
 <meta name="twitter:description" content="C&#43;&#43;11极大扩充了标准库的规模和范围，标准库占据了C&#43;&#43;11标准接近2/3的篇幅 tuple类型 tuple是类似pair的模板： pair和t"/>
 
@@ -472,7 +473,7 @@
 </ul>
 </li>
 <li>to_ulong和to_ullong都返回一个对应类型的值，只有bitset比该类型更小（即能完整放入）时才能转换，否则抛出<code>overflow_error</code>异常</li>
-<li>输入算符从一个流读取字符，存入临时string对象，直到字符数达到bitset的大小，或是遇到错误（例如遇到非&rsquo;0&rsquo;/&lsquo;1'的字符、文件尾、输入错误），则停止读取。随后用临时string对象来初始化bitset</li>
+<li>输入算符从一个流读取字符，存入临时string对象，直到字符数达到bitset的大小，或是遇到错误（例如遇到非'0&rsquo;/&lsquo;1&rsquo;的字符、文件尾、输入错误），则停止读取。随后用临时string对象来初始化bitset</li>
 <li>例子：bitset操作</li>
 </ul>
 <div class="highlight"><div class="chroma">

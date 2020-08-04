@@ -6,7 +6,7 @@
     <description>Recent content on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 20 Aug 2017 21:38:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2020 16:57:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,24 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>21年硕士毕业，非CS专业，C++和操作系统初学。本科做硬件，读研做计算机视觉，工作打算找后台开发。 因为没有CS背景和开发经验，非常担心失业</description>
+    </item>
+    
+    <item>
+      <title>LeetCode297 - (hard) Serialize and Deserialize Binary Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode297/</link>
+      <pubDate>Mon, 27 Jul 2020 16:57:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode297/</guid>
+      <description>链接：https://leetcode.com/problems/serialize-and-deserialize-binary-tree</description>
+    </item>
+    
+    <item>
+      <title>LeetCode236 - (medium) Lowest Common Ancestor of a Binary Tree</title>
+      <link>http://localhost:1313/post/oj/leetcode236/</link>
+      <pubDate>Mon, 27 Jul 2020 15:34:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode236/</guid>
+      <description>链接：https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tr</description>
     </item>
     
     <item>
