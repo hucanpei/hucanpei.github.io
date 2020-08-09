@@ -6,10 +6,28 @@
     <description>Recent content in online judge on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 27 Jul 2020 16:57:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2020 15:14:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/online-judge/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode124 - (hard) Binary Tree Maximum Path Sum</title>
+      <link>http://localhost:1313/post/oj/leetcode124/</link>
+      <pubDate>Sun, 09 Aug 2020 15:14:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode124/</guid>
+      <description>链接：https://leetcode.com/problems/binary-tree-maximum-path-sum/ 花花酱视频链接：</description>
+    </item>
+    
+    <item>
+      <title>LeetCode508 - (medium) Most Frequent Subtree Sum</title>
+      <link>http://localhost:1313/post/oj/leetcode508/</link>
+      <pubDate>Wed, 05 Aug 2020 10:36:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode508/</guid>
+      <description>链接：https://leetcode.com/problems/most-frequent-subtree-sum/ Task Given the root of a tree, you are asked to</description>
+    </item>
     
     <item>
       <title>LeetCode297 - (hard) Serialize and Deserialize Binary Tree</title>

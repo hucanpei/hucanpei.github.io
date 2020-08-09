@@ -49,7 +49,7 @@
 <meta itemprop="description" content="函数是一个命名了的代码块，通过调用函数来执行相应代码。 函数可有0个或多个参数，可能产生0个或1个结果。 函数可以重载，即一个名字对应多个不同函">
 <meta itemprop="datePublished" content="2020-02-11T16:38:00+08:00" />
 <meta itemprop="dateModified" content="2020-02-11T16:38:00+08:00" />
-<meta itemprop="wordCount" content="9490">
+<meta itemprop="wordCount" content="9566">
 
 
 
@@ -124,8 +124,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-02-11 </span>
         
-          <span class="more-meta"> 约 9490 字 </span>
-          <span class="more-meta"> 预计阅读 19 分钟 </span>
+          <span class="more-meta"> 约 9566 字 </span>
+          <span class="more-meta"> 预计阅读 20 分钟 </span>
         
       </div>
     </header>
@@ -782,7 +782,8 @@ $ CC factMain.o fact.o -o main  <span class="c1">#将两个对象文件链接为
 </span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>普通函数只可多次声明不可多次定义，但内联函数和constexpr函数可多次定义，只需保证多个定义相同。因为调用这些函数只是内联展开</li>
+<li>普通函数只可多次声明不可多次定义（不要把普通函数的定义放在头文件中），但内联函数和constexpr函数可多次定义，只需保证多个定义相同。因为调用这些函数只是内联展开</li>
+<li>内联函数和constexpr函数应定义于头文件中，因为内联函数在编译时（链接前）就要展开，故它的定义必须对编译器可见</li>
 </ul>
 <h3 id="调试帮助">调试帮助</h3>
 <ul>
