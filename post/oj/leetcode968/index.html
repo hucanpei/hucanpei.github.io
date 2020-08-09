@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>LeetCode124 - (hard) Binary Tree Maximum Path Sum - pi</title>
+  <title>LeetCode968 - (hard) Binary Tree Cameras - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/binary-tree-maximum-path-sum/ 花花酱视频链接：" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="链接： Task Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent, itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of the tree. Examples Example 1: 1 2 3 Input: [0,0,null,0,0] Output: 1 Explanation: One camera is enough to monitor all nodes if placed as shown. Example 2:" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/oj/leetcode124/" />
+<link rel="canonical" href="http://localhost:1313/post/oj/leetcode968/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,24 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="LeetCode124 - (hard) Binary Tree Maximum Path Sum" />
-<meta property="og:description" content="链接：https://leetcode.com/problems/binary-tree-maximum-path-sum/ 花花酱视频链接：" />
+<meta property="og:title" content="LeetCode968 - (hard) Binary Tree Cameras" />
+<meta property="og:description" content="链接： Task Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent, itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of the tree. Examples Example 1: 1 2 3 Input: [0,0,null,0,0] Output: 1 Explanation: One camera is enough to monitor all nodes if placed as shown. Example 2:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/oj/leetcode124/" />
-<meta property="article:published_time" content="2020-08-09T15:14:00+08:00" />
-<meta property="article:modified_time" content="2020-08-09T15:14:00+08:00" />
-<meta itemprop="name" content="LeetCode124 - (hard) Binary Tree Maximum Path Sum">
-<meta itemprop="description" content="链接：https://leetcode.com/problems/binary-tree-maximum-path-sum/ 花花酱视频链接：">
-<meta itemprop="datePublished" content="2020-08-09T15:14:00+08:00" />
-<meta itemprop="dateModified" content="2020-08-09T15:14:00+08:00" />
-<meta itemprop="wordCount" content="983">
+<meta property="og:url" content="http://localhost:1313/post/oj/leetcode968/" />
+<meta property="article:published_time" content="2020-08-09T17:42:00+08:00" />
+<meta property="article:modified_time" content="2020-08-09T17:42:00+08:00" />
+<meta itemprop="name" content="LeetCode968 - (hard) Binary Tree Cameras">
+<meta itemprop="description" content="链接： Task Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent, itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of the tree. Examples Example 1: 1 2 3 Input: [0,0,null,0,0] Output: 1 Explanation: One camera is enough to monitor all nodes if placed as shown. Example 2:">
+<meta itemprop="datePublished" content="2020-08-09T17:42:00+08:00" />
+<meta itemprop="dateModified" content="2020-08-09T17:42:00+08:00" />
+<meta itemprop="wordCount" content="897">
 
 
 
 <meta itemprop="keywords" content="online judge,leetcode,tree," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="LeetCode124 - (hard) Binary Tree Maximum Path Sum"/>
-<meta name="twitter:description" content="链接：https://leetcode.com/problems/binary-tree-maximum-path-sum/ 花花酱视频链接："/>
+<meta name="twitter:title" content="LeetCode968 - (hard) Binary Tree Cameras"/>
+<meta name="twitter:description" content="链接： Task Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent, itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of the tree. Examples Example 1: 1 2 3 Input: [0,0,null,0,0] Output: 1 Explanation: One camera is enough to monitor all nodes if placed as shown. Example 2:"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -119,12 +119,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">LeetCode124 - (hard) Binary Tree Maximum Path Sum</h1>
+      <h1 class="post-title">LeetCode968 - (hard) Binary Tree Cameras</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-08-09 </span>
         
-          <span class="more-meta"> 约 983 字 </span>
+          <span class="more-meta"> 约 897 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -136,7 +136,7 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#task">Task</a></li>
-    <li><a href="#example">Example</a></li>
+    <li><a href="#examples">Examples</a></li>
     <li><a href="#solution">Solution</a></li>
   </ul>
 </nav>
@@ -144,74 +144,63 @@
 </div>
     <div class="post-content">
       <ul>
-<li>链接：<a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">https://leetcode.com/problems/binary-tree-maximum-path-sum/</a></li>
-<li>花花酱视频链接：<a href="https://www.youtube.com/watch?v=9ZNky1wqNUw">youtube</a></li>
+<li>链接：<a href=""></a></li>
 </ul>
 <h2 id="task">Task</h2>
-<p>Given a non-empty binary tree, find the maximum path sum.</p>
-<p>For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.</p>
-<h2 id="example">Example</h2>
-<p>Example 1:</p>
+<p>Given a binary tree, we install cameras on the nodes of the tree.</p>
+<p>Each camera at a node can monitor its parent, itself, and its immediate children.</p>
+<p>Calculate the minimum number of cameras needed to monitor all nodes of the tree.</p>
+<h2 id="examples">Examples</h2>
+<p>Example 1:
+<img src="../oj_figs/LeetCode968_1.png" alt="leetcode968_1"></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [1,2,3]
-
-       1
-      / \
-     2   3
-
-Output: 6
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [0,0,null,0,0]
+Output: 1
+Explanation: One camera is enough to monitor all nodes if placed as shown.
 </code></pre></td></tr></table>
 </div>
-</div><p>Example 2:</p>
+</div><p>Example 2:
+<img src="../oj_figs/LeetCode968_2.png" alt="leetcode968_2"></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [-10,9,20,null,null,15,7]
-
-   -10
-   / \
-  9  20
-    /  \
-   15   7
-
-Output: 42
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [0,0,null,0,null,0,null,null,0]
+Output: 2
+Explanation: At least two cameras are needed to monitor all nodes of the tree. The above image shows one of the valid configurations of camera placement.
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="solution">Solution</h2>
+</div><p>Note:</p>
+<p>The number of nodes in the given tree will be in the range [1, 1000].
+Every node has value 0.</p>
+<h2 id="solution">Solution</h2>
 <ul>
-<li>使用递归遍历树，叶子节点是终止条件，从叶子往根走。</li>
-<li>遍历到一个节点root时，对于经过root这棵子树的path，分3种情况，如下图：
+<li>为每个节点设置3种state：
 <ul>
-<li>path不经过root节点，而是在root的子节点中。这种情况在遍历到root之前就已被处理，不予考虑</li>
-<li>path经过root节点，且整个path在root这棵子树中。这种情况下需计算root左子树（或0）和右子树（或0）的sum，并加上root节点的值作为sum。更新max_sum时比较这个sum与max_sum，因为只有这个sum是由一条完整path得到的</li>
-<li>path经过root节点，且将延伸至root的父节点。这种情况下只需计算root的一棵子树（左子树或右子树，选大者）的sum（或0），并加上root节点的值，作为递归函数的返回值传递给父节点
-<img src="../oj_figs/LeetCode124_2.png" alt="leetcode124_2"></li>
+<li>NONE表示该节点未被覆盖到</li>
+<li>COVERED表示该节点已经被其他节点上的相机覆盖到</li>
+<li>CAMERA表示该节点上有相机</li>
 </ul>
 </li>
-<li>维护一个全局的max_sum，当算出某个sum的数值比max_sum大时更新max_sum</li>
-<li>花花酱的讲义如下图
-<img src="../oj_figs/LeetCode124_1.png" alt="leetcode124_1"></li>
-<li>时间复杂度：只需遍历每个节点，每个节点需要从左右子节点中得到的信息是包含该子节点且向上延伸的path的最大sum，该值可作为返回值，不需要额外计算，故时间复杂度O(n)</li>
+<li>DFS后序遍历树，从叶子节点向上递归：
+<ul>
+<li>叶子节点之下的空节点（递归终点）默认已被覆盖到</li>
+<li>若该节点的某个子节点未被覆盖，则在该节点上放置相机（因为不再访问子节点，只有在这里放相机才能覆盖到它）</li>
+<li>若该节点的某个子节点上有相机，则该节点标记为COVERED（注意：必须考虑完上一种情形才能考虑这一种情形，因为若一个节点的左子节点未被覆盖而右子节点上有相机，若顺序互换后该节点是COVERED而不是CAMERA，左子节点永远不会被覆盖到）</li>
+<li>若该节点既没有相机子节点，又没有未被覆盖的子节点，则该节点将会被其父节点覆盖，只需将该节点标记为NONE</li>
+</ul>
+</li>
+<li><code>时间复杂度</code>：每个节点只看一次，O(n)</li>
+<li><code>空间复杂度</code>：取决于树的高度，O(h)</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -252,10 +241,17 @@ Output: 42
 </span><span class="lnt">35
 </span><span class="lnt">36
 </span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 40 ms, faster than 78.03% of C++ online submissions for Binary Tree Maximum Path Sum.
-</span><span class="c1">// Memory Usage: 28.7 MB, less than 28.54% of C++ online submissions for Binary Tree Maximum Path Sum.
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 8 ms, faster than 98.49% of C++ online submissions for Binary Tree Cameras.
+</span><span class="c1">// Memory Usage: 21.2 MB, less than 77.71% of C++ online submissions for Binary Tree Cameras.
 </span><span class="c1"></span><span class="cm">/**
 </span><span class="cm"> * Definition for a binary tree node.
 </span><span class="cm"> * struct TreeNode {
@@ -269,27 +265,34 @@ Output: 42
 </span><span class="cm"> */</span>
 <span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="kt">int</span> <span class="n">maxPathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">max_sum</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">minCameraCover</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//若最后根节点未被覆盖，则在根节点上放相机
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">==</span><span class="n">NONE</span><span class="p">)</span> <span class="o">++</span><span class="n">num</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="k">private</span><span class="o">:</span>
-    <span class="kt">int</span> <span class="n">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="c1">//将左右子树的返回值和0比较，若小于0则不取
-</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">));</span>
-        <span class="kt">int</span> <span class="n">r</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">));</span>
-        <span class="c1">//上述第二种情况，是一条完整的path
-</span><span class="c1"></span>        <span class="c1">//只有这种情况得到的是完整的path，故将其求和并与max_sum比较
-</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">sum</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">+</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">;</span>
-        <span class="n">max_sum</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span><span class="n">max_sum</span><span class="p">);</span>
-        <span class="c1">//上述第三种情况，是向上延伸的path的一半
-</span><span class="c1"></span>        <span class="c1">//只有向父节点延伸的path才需要作为返回值提供给父节点
-</span><span class="c1"></span>        <span class="c1">//此时只求path一端的和，即root的左子树或右子树或0
-</span><span class="c1"></span>        <span class="k">return</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">+</span><span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+    <span class="c1">//每个节点的状态
+</span><span class="c1"></span>    <span class="k">enum</span> <span class="nc">state</span><span class="p">{</span><span class="n">NONE</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">COVERED</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">CAMERA</span><span class="o">=</span><span class="mi">2</span><span class="p">};</span>
+    <span class="n">state</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">){</span>
+        <span class="c1">//空节点默认被cover到，终止递归
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="n">COVERED</span><span class="p">;</span>
+        <span class="c1">//后序遍历，由左右子节点的状态得到当前节点应该具有的状态
+</span><span class="c1"></span>        <span class="n">state</span> <span class="n">l</span><span class="o">=</span><span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="n">state</span> <span class="n">r</span><span class="o">=</span><span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="c1">//只要有一个子节点为空，就在当前节点上放相机
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">NONE</span> <span class="o">||</span> <span class="n">r</span><span class="o">==</span><span class="n">NONE</span><span class="p">){</span>
+            <span class="o">++</span><span class="n">num</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">CAMERA</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//只要有一个子节点上有相机，当前节点就被cover
+</span><span class="c1"></span>        <span class="c1">//两个if不能互换，因为要处理“一个子节点为NONE另一个子节点为CAMERA”的情形
+</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">CAMERA</span> <span class="o">||</span> <span class="n">r</span><span class="o">==</span><span class="n">CAMERA</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">COVERED</span><span class="p">;</span>
+        <span class="c1">//若子节点都是被cover但无相机的情形，则该节点标记为NONE，将在其父节点上放相机
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">NONE</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="c1">//记录全局的最大path sum
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">max_sum</span><span class="o">=</span><span class="n">INT_MIN</span><span class="p">;</span>
+    <span class="c1">//维护计数，是最终返回的结果
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">num</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
@@ -335,13 +338,13 @@ Output: 42
           <a href="/tags/tree/">tree</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/oj/leetcode968/">
+        <a class="prev" href="/post/cpp/top_cpp/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">LeetCode968 - (hard) Binary Tree Cameras</span>
+            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章集合</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/oj/leetcode508/">
-            <span class="next-text nav-default">LeetCode508 - (medium) Most Frequent Subtree Sum</span>
+        <a class="next" href="/post/oj/leetcode124/">
+            <span class="next-text nav-default">LeetCode124 - (hard) Binary Tree Maximum Path Sum</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -351,7 +354,7 @@ Output: 42
         </div>
         
 
-  <span id="/post/oj/leetcode124/" class="leancloud_visitors" data-flag-title="LeetCode124 - (hard) Binary Tree Maximum Path Sum">
+  <span id="/post/oj/leetcode968/" class="leancloud_visitors" data-flag-title="LeetCode968 - (hard) Binary Tree Cameras">
 		<span class="post-meta-item-text">文章阅读量 </span>
 		<span class="leancloud-visitors-count">0</span>
 		<p></p>

@@ -6,10 +6,19 @@
     <description>Recent content in tree on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 09 Aug 2020 15:14:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2020 17:42:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/tree/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LeetCode968 - (hard) Binary Tree Cameras</title>
+      <link>http://localhost:1313/post/oj/leetcode968/</link>
+      <pubDate>Sun, 09 Aug 2020 17:42:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode968/</guid>
+      <description>链接： Task Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent, itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of the tree. Examples Example 1: 1 2 3 Input: [0,0,null,0,0] Output: 1 Explanation: One camera is enough to monitor all nodes if placed as shown. Example 2:</description>
+    </item>
     
     <item>
       <title>LeetCode124 - (hard) Binary Tree Maximum Path Sum</title>
