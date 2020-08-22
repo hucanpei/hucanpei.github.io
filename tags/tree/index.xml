@@ -17,7 +17,7 @@
       <pubDate>Sun, 09 Aug 2020 17:42:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/oj/leetcode968/</guid>
-      <description>链接： Task Given a binary tree, we install cameras on the nodes of the tree. Each camera at a node can monitor its parent, itself, and its immediate children. Calculate the minimum number of cameras needed to monitor all nodes of the tree. Examples Example 1: 1 2 3 Input: [0,0,null,0,0] Output: 1 Explanation: One camera is enough to monitor all nodes if placed as shown. Example 2:</description>
+      <description>链接：https://leetcode.com/problems/binary-tree-cameras/ Task Given a binary tree, we install cameras on the nodes of the tree. Each camera at</description>
     </item>
     
     <item>
@@ -93,7 +93,7 @@
     </item>
     
     <item>
-      <title>LeetCode100 - (easy) Binary Tree Inorder Traversal</title>
+      <title>LeetCode100 - (easy) Same Tree</title>
       <link>http://localhost:1313/post/oj/leetcode100/</link>
       <pubDate>Thu, 23 Jul 2020 22:00:00 +0800</pubDate>
       
