@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>LeetCode24 - (medium) Swap Nodes in Pairs - pi</title>
+  <title>LeetCode汇总21-40 - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/oj/leetcode24/" />
+<link rel="canonical" href="http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB21-40/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,24 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="LeetCode24 - (medium) Swap Nodes in Pairs" />
-<meta property="og:description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not" />
+<meta property="og:title" content="LeetCode汇总21-40" />
+<meta property="og:description" content="21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/oj/leetcode24/" />
-<meta property="article:published_time" content="2020-05-27T22:57:00+08:00" />
-<meta property="article:modified_time" content="2020-05-27T22:57:00+08:00" />
-<meta itemprop="name" content="LeetCode24 - (medium) Swap Nodes in Pairs">
-<meta itemprop="description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not">
-<meta itemprop="datePublished" content="2020-05-27T22:57:00+08:00" />
-<meta itemprop="dateModified" content="2020-05-27T22:57:00+08:00" />
-<meta itemprop="wordCount" content="456">
+<meta property="og:url" content="http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB21-40/" />
+<meta property="article:published_time" content="2020-08-28T20:36:00+08:00" />
+<meta property="article:modified_time" content="2020-08-28T20:36:00+08:00" />
+<meta itemprop="name" content="LeetCode汇总21-40">
+<meta itemprop="description" content="21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return">
+<meta itemprop="datePublished" content="2020-08-28T20:36:00+08:00" />
+<meta itemprop="dateModified" content="2020-08-28T20:36:00+08:00" />
+<meta itemprop="wordCount" content="393">
 
 
 
-<meta itemprop="keywords" content="online judge,leetcode,链表," />
+<meta itemprop="keywords" content="online judge,leetcode," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="LeetCode24 - (medium) Swap Nodes in Pairs"/>
-<meta name="twitter:description" content="链接：https://leetcode.com/problems/swap-nodes-in-pairs/ Task Given a linked list, swap every two adjacent nodes and return its head. You may not"/>
+<meta name="twitter:title" content="LeetCode汇总21-40"/>
+<meta name="twitter:description" content="21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -119,12 +119,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">LeetCode24 - (medium) Swap Nodes in Pairs</h1>
+      <h1 class="post-title">LeetCode汇总21-40</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-05-27 </span>
+        <span class="post-time"> 2020-08-28 </span>
         
-          <span class="more-meta"> 约 456 字 </span>
+          <span class="more-meta"> 约 393 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         
       </div>
@@ -132,50 +132,45 @@
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
+  <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#task">Task</a></li>
-    <li><a href="#example">Example</a></li>
-    <li><a href="#solution">Solution</a></li>
+    <li><a href="#21-merge-two-sorted-lists">21. Merge Two Sorted Lists</a>
+      <ul>
+        <li><a href="#描述">描述</a></li>
+        <li><a href="#题解">题解</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <ul>
-<li>链接：<a href="https://leetcode.com/problems/swap-nodes-in-pairs/">https://leetcode.com/problems/swap-nodes-in-pairs/</a></li>
+      <h2 id="21-merge-two-sorted-lists">21. Merge Two Sorted Lists</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/merge-two-sorted-lists/">https://leetcode.com/problems/merge-two-sorted-lists/</a></li>
 </ul>
-<h2 id="task">Task</h2>
-<p>Given a linked list, swap every two adjacent nodes and return its head.</p>
-<p>You may not modify the values in the list&rsquo;s nodes, only nodes itself may be changed.</p>
-<h2 id="example">Example</h2>
+<h3 id="描述">描述</h3>
+<p>Merge two sorted linked lists and return it as a new sorted list. The new list should be made by splicing together the nodes of the first two lists.</p>
+<p>Example:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="solution">Solution</h2>
+</div><h3 id="题解">题解</h3>
 <ul>
-<li>使用dummy head在第一次交换时即得到“当前交换的两个节点”左右两侧都有节点的状态</li>
-<li>每次交换之初，确保两点：
-<ul>
-<li>一个prev指针指向“当前交换的两个节点”左侧的节点</li>
-<li>一个head指针指向第一个要被交换的节点</li>
-</ul>
-</li>
-<li>操作的时候：
-<ul>
-<li>先交换节点之间的指针</li>
-<li>再更新prev和head的指向</li>
-</ul>
-</li>
-<li><code>时间复杂度</code>：只遍历一次，O(n)</li>
-<li><code>空间复杂度</code>：只新建了一个dummy节点和2个指针，O(1)</li>
-<li>实现：</li>
+<li>遍历两个链表时将它们合并（根据两个链表节点的最小值来决定谁是当前节点的next）</li>
+<li>使用dummy节点避免特殊处理头节点，使用curr指针指代当前节点</li>
+<li>使用两个指针分别遍历两个小链表，都没遍历完时比较两个节点的大小，将较小者指定为curr的next，并向前推进</li>
+<li>遍历完一个链表时，若另一个链表还没走完， 直接放在末尾</li>
+<li>时间复杂度：每个链表遍历一次，O(n)</li>
+<li>空间复杂度：原位构建，仅移动了指针，O(1)</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -202,42 +197,28 @@
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 4 ms, faster than 48.23% of C++ online submissions for Swap Nodes in Pairs.
-</span><span class="c1">// Memory Usage: 7.5 MB, less than 100.00% of C++ online submissions for Swap Nodes in Pairs.
-</span><span class="c1"></span><span class="cm">/**
-</span><span class="cm"> * Definition for singly-linked list.
-</span><span class="cm"> * struct ListNode {
-</span><span class="cm"> *     int val;
-</span><span class="cm"> *     ListNode *next;
-</span><span class="cm"> *     ListNode() : val(0), next(nullptr) {}
-</span><span class="cm"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span><span class="cm"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-</span><span class="cm"> * };
-</span><span class="cm"> */</span>
-<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 8 ms, faster than 78.28% of C++ online submissions for Merge Two Sorted Lists.
+</span><span class="c1">// Memory Usage: 14.4 MB, less than 73.15% of C++ online submissions for Merge Two Sorted Lists.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="n">ListNode</span><span class="o">*</span> <span class="n">swapPairs</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//新建dummy节点，使其next指向输入链表
-</span><span class="c1"></span>        <span class="n">ListNode</span> <span class="o">*</span><span class="n">dummy</span><span class="o">=</span><span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">head</span><span class="p">);</span>
-        <span class="n">ListNode</span> <span class="o">*</span><span class="n">prev</span><span class="o">=</span><span class="n">dummy</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">head</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)){</span>
-            <span class="c1">//交换节点之间的指针
-</span><span class="c1"></span>            <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-            <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-            <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
-            <span class="c1">//更新prev和head的指向
-</span><span class="c1"></span>            <span class="n">prev</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
-            <span class="n">head</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">ListNode</span><span class="o">*</span> <span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">l1</span><span class="p">,</span> <span class="n">ListNode</span><span class="o">*</span> <span class="n">l2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">l1</span> <span class="o">||</span> <span class="o">!</span><span class="n">l2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="o">!</span><span class="n">l1</span><span class="p">)</span><span class="o">?</span><span class="nl">l2</span><span class="p">:</span><span class="n">l1</span><span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">dummy</span><span class="o">=</span><span class="k">new</span> <span class="n">ListNode</span><span class="p">,</span><span class="o">*</span><span class="n">cur</span><span class="o">=</span><span class="n">dummy</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l1</span> <span class="o">&amp;&amp;</span> <span class="n">l2</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">){</span>
+                <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">l1</span><span class="p">;</span>
+                <span class="n">l1</span><span class="o">=</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+                <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">l2</span><span class="p">;</span>
+                <span class="n">l2</span><span class="o">=</span><span class="n">l2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">cur</span><span class="o">=</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
         <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">l1</span> <span class="o">||</span> <span class="n">l2</span><span class="p">)</span>
+            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">l1</span><span class="o">?</span><span class="nl">l1</span><span class="p">:</span><span class="n">l2</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">dummy</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
@@ -254,7 +235,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2020-05-27
+        2020-08-28
         
     </span>
   </p>
@@ -282,16 +263,15 @@
       <div class="post-tags">
           <a href="/tags/online-judge/">online judge</a>
           <a href="/tags/leetcode/">leetcode</a>
-          <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/oj/leetcode206/">
+        <a class="prev" href="/post/cpp/top_cpp/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">LeetCode206 - (easy) Reverse Linked List</span>
+            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章集合</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/oj/leetcode2/">
-            <span class="next-text nav-default">LeetCode2 - (medium) Add Two Numbers</span>
+        <a class="next" href="/post/oj/leetcode%E6%B1%87%E6%80%BB1-20/">
+            <span class="next-text nav-default">LeetCode汇总1-20</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -300,29 +280,6 @@
   </article>
         </div>
         
-
-  <span id="/post/oj/leetcode24/" class="leancloud_visitors" data-flag-title="LeetCode24 - (medium) Swap Nodes in Pairs">
-		<span class="post-meta-item-text">文章阅读量 </span>
-		<span class="leancloud-visitors-count">0</span>
-		<p></p>
-	  </span>
-  <div id="vcomments"></div>
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-  <script type="text/javascript">
-    new Valine({
-        el: '#vcomments' ,
-        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
-        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
-        notify:  false ,
-        verify:  false ,
-        avatar:'retro',
-        placeholder: '说点什么吧...',
-        visitor:  true 
-    });
-  </script>
-
-  
 
       </div>
     </main>

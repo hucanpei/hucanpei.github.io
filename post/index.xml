@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 16 Aug 2020 11:31:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 28 Aug 2020 20:36:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -21,11 +21,20 @@
     </item>
     
     <item>
+      <title>LeetCode汇总21-40</title>
+      <link>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB21-40/</link>
+      <pubDate>Fri, 28 Aug 2020 20:36:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB21-40/</guid>
+      <description>21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return</description>
+    </item>
+    
+    <item>
       <title>LeetCode汇总1-20</title>
-      <link>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB1-50/</link>
+      <link>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB1-20/</link>
       <pubDate>Sun, 16 Aug 2020 11:31:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB1-50/</guid>
+      <guid>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB1-20/</guid>
       <description>1.Two Sum 链接：https://leetcode.com/problems/two-sum/ 描述 Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each</description>
     </item>
     
