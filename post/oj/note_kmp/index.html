@@ -49,7 +49,7 @@
 <meta itemprop="description" content="关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配">
 <meta itemprop="datePublished" content="2020-08-31T17:28:00+08:00" />
 <meta itemprop="dateModified" content="2020-08-31T17:28:00+08:00" />
-<meta itemprop="wordCount" content="1025">
+<meta itemprop="wordCount" content="1027">
 
 
 
@@ -124,7 +124,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-08-31 </span>
         
-          <span class="more-meta"> 约 1025 字 </span>
+          <span class="more-meta"> 约 1027 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -145,11 +145,11 @@
       <ul>
 <li>关于KMP中<code>部分匹配表</code>的含义及使用方法，参见<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">阮一峰的文章</a>，那边简明扼要，这边不再赘述</li>
 <li><code>next数组</code>和部分匹配表的关系：next数组是将部分匹配表向右移动一格的结果。使用next数组而不是部分匹配表，是为了在KMP中表述更加方便，不用手动-1</li>
-<li>可直接看图，文字只做辅助描述，不包含必要信息。关键话语会高亮。</li>
+<li>本文可直接看图，文字只做辅助描述，不包含必要信息。关键话语会高亮。</li>
 </ul>
 <h2 id="求解方式递推">求解方式：递推</h2>
 <ul>
-<li>由于next数组是部分匹配表右移一格，故初始值next[0]=1</li>
+<li>由于next数组是部分匹配表右移一格，故初始值next[0]=0</li>
 <li>求解next[i]时，假定next[0]到next[i-1]都已知，通过递推方式计算next[i]</li>
 <li>递推的讨论过程：
 <ul>
