@@ -6,7 +6,7 @@
     <description>Recent content on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 28 Aug 2020 20:36:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2020 17:28:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>21年硕士毕业，非CS专业，C++和操作系统初学。本科做硬件，读研做计算机视觉，工作打算找后台开发。 因为没有CS背景和开发经验，非常担心失业</description>
+    </item>
+    
+    <item>
+      <title>KMP算法：计算next数组</title>
+      <link>http://localhost:1313/post/oj/note_kmp/</link>
+      <pubDate>Mon, 31 Aug 2020 17:28:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/note_kmp/</guid>
+      <description>关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配</description>
     </item>
     
     <item>

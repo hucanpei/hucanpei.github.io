@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>[置顶]C&#43;&#43;文章集合 - pi</title>
+  <title>KMP算法：计算next数组 - pi</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="canpi" /><meta name="description" content="C&#43;&#43; primer 读书笔记 C&#43;&#43; primer 第1章 开始 C&#43;&#43; primer 第2章 变量和基本类型 C&#43;&#43; primer 第3章 字符串、向量和数组 C&#43;&#43; primer 第4章 表达式 C&#43;&#43; primer 第5章 语句 C&#43;&#43; primer 第6章 函数 C&#43;&#43; primer 第7章 类 C&#43;&#43; primer 第" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="canpi" /><meta name="description" content="关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/cpp/top_cpp/" />
+<link rel="canonical" href="http://localhost:1313/post/oj/note_kmp/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,24 +39,24 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="[置顶]C&#43;&#43;文章集合" />
-<meta property="og:description" content="C&#43;&#43; primer 读书笔记 C&#43;&#43; primer 第1章 开始 C&#43;&#43; primer 第2章 变量和基本类型 C&#43;&#43; primer 第3章 字符串、向量和数组 C&#43;&#43; primer 第4章 表达式 C&#43;&#43; primer 第5章 语句 C&#43;&#43; primer 第6章 函数 C&#43;&#43; primer 第7章 类 C&#43;&#43; primer 第" />
+<meta property="og:title" content="KMP算法：计算next数组" />
+<meta property="og:description" content="关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/cpp/top_cpp/" />
-<meta property="article:published_time" content="2020-05-18T17:33:00+08:00" />
-<meta property="article:modified_time" content="2020-05-18T17:33:00+08:00" />
-<meta itemprop="name" content="[置顶]C&#43;&#43;文章集合">
-<meta itemprop="description" content="C&#43;&#43; primer 读书笔记 C&#43;&#43; primer 第1章 开始 C&#43;&#43; primer 第2章 变量和基本类型 C&#43;&#43; primer 第3章 字符串、向量和数组 C&#43;&#43; primer 第4章 表达式 C&#43;&#43; primer 第5章 语句 C&#43;&#43; primer 第6章 函数 C&#43;&#43; primer 第7章 类 C&#43;&#43; primer 第">
-<meta itemprop="datePublished" content="2020-05-18T17:33:00+08:00" />
-<meta itemprop="dateModified" content="2020-05-18T17:33:00+08:00" />
-<meta itemprop="wordCount" content="382">
+<meta property="og:url" content="http://localhost:1313/post/oj/note_kmp/" />
+<meta property="article:published_time" content="2020-08-31T17:28:00+08:00" />
+<meta property="article:modified_time" content="2020-08-31T17:28:00+08:00" />
+<meta itemprop="name" content="KMP算法：计算next数组">
+<meta itemprop="description" content="关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配">
+<meta itemprop="datePublished" content="2020-08-31T17:28:00+08:00" />
+<meta itemprop="dateModified" content="2020-08-31T17:28:00+08:00" />
+<meta itemprop="wordCount" content="1025">
 
 
 
-<meta itemprop="keywords" content="C&#43;&#43;," />
+<meta itemprop="keywords" content="online judge,KMP," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[置顶]C&#43;&#43;文章集合"/>
-<meta name="twitter:description" content="C&#43;&#43; primer 读书笔记 C&#43;&#43; primer 第1章 开始 C&#43;&#43; primer 第2章 变量和基本类型 C&#43;&#43; primer 第3章 字符串、向量和数组 C&#43;&#43; primer 第4章 表达式 C&#43;&#43; primer 第5章 语句 C&#43;&#43; primer 第6章 函数 C&#43;&#43; primer 第7章 类 C&#43;&#43; primer 第"/>
+<meta name="twitter:title" content="KMP算法：计算next数组"/>
+<meta name="twitter:description" content="关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -119,13 +119,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">[置顶]C&#43;&#43;文章集合</h1>
+      <h1 class="post-title">KMP算法：计算next数组</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-05-18 </span>
+        <span class="post-time"> 2020-08-31 </span>
         
-          <span class="more-meta"> 约 382 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 1025 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
     </header>
@@ -135,58 +135,47 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#c-primer-读书笔记">C++ primer 读书笔记</a></li>
-    <li><a href="#c-技巧">C++ 技巧</a></li>
-    <li><a href="#网络资源">网络资源</a>
-      <ul>
-        <li><a href="#手册书">手册、书</a></li>
-        <li><a href="#帖子">帖子</a></li>
-      </ul>
-    </li>
+    <li><a href="#求解方式递推">求解方式：递推</a></li>
+    <li><a href="#递推遇到的两种情况">递推遇到的两种情况</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="c-primer-读书笔记">C++ primer 读书笔记</h2>
-<ul>
-<li><a href="../cppprimer_ch1">C++ primer 第1章 开始</a></li>
-<li><a href="../cppprimer_ch2">C++ primer 第2章 变量和基本类型</a></li>
-<li><a href="../cppprimer_ch3">C++ primer 第3章 字符串、向量和数组</a></li>
-<li><a href="../cppprimer_ch4">C++ primer 第4章 表达式</a></li>
-<li><a href="../cppprimer_ch5">C++ primer 第5章 语句</a></li>
-<li><a href="../cppprimer_ch6">C++ primer 第6章 函数</a></li>
-<li><a href="../cppprimer_ch7">C++ primer 第7章 类</a></li>
-<li><a href="../cppprimer_ch8">C++ primer 第8章 IO库</a></li>
-<li><a href="../cppprimer_ch9">C++ primer 第9章 顺序容器</a></li>
-<li><a href="../cppprimer_ch10">C++ primer 第10章 泛型算法</a></li>
-<li><a href="../cppprimer_ch11">C++ primer 第11章 关联容器</a></li>
-<li><a href="../cppprimer_ch12">C++ primer 第12章 动态内存</a></li>
-<li><a href="../cppprimer_ch13">C++ primer 第13章 拷贝控制</a></li>
-<li><a href="../cppprimer_ch14">C++ primer 第14章 重载运算与类型转换</a></li>
-<li><a href="../cppprimer_ch15">C++ primer 第15章 面向对象程序设计</a></li>
-<li><a href="../cppprimer_ch16">C++ primer 第16章 模板与泛型编程</a></li>
-<li><a href="../cppprimer_ch17">C++ primer 第17章 标准库特殊设施</a></li>
-<li><a href="../cppprimer_ch18">C++ primer 第18章 用于大型程序的工具</a></li>
-<li><a href="../cppprimer_ch19">C++ primer 第19章 特殊工具与技术</a></li>
+      <ul>
+<li>关于KMP中<code>部分匹配表</code>的含义及使用方法，参见<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">阮一峰的文章</a>，那边简明扼要，这边不再赘述</li>
+<li><code>next数组</code>和部分匹配表的关系：next数组是将部分匹配表向右移动一格的结果。使用next数组而不是部分匹配表，是为了在KMP中表述更加方便，不用手动-1</li>
+<li>可直接看图，文字只做辅助描述，不包含必要信息。关键话语会高亮。</li>
 </ul>
-<h2 id="c-技巧">C++ 技巧</h2>
+<h2 id="求解方式递推">求解方式：递推</h2>
 <ul>
-<li><a href="../cpp_iostream_cstdio">C++技巧：cin/cout和scanf/printf的速度</a></li>
-</ul>
-<h2 id="网络资源">网络资源</h2>
-<h3 id="手册书">手册、书</h3>
+<li>由于next数组是部分匹配表右移一格，故初始值next[0]=1</li>
+<li>求解next[i]时，假定next[0]到next[i-1]都已知，通过递推方式计算next[i]</li>
+<li>递推的讨论过程：
 <ul>
-<li>cppreference.com：<a href="https://en.cppreference.com">英文版</a>|<a href="https://zh.cppreference.com">中文版</a></li>
-<li>core guidelines：<a href="http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">英文版</a>|<a href="https://github.com/lynnboy/CppCoreGuidelines-zh-CN/blob/master/CppCoreGuidelines-zh-CN.md">中文版</a></li>
-<li>C++11 FAQ：<a href="http://www.stroustrup.com/C++11FAQ.html">英文版</a>|<a href="https://wizardforcel.gitbooks.io/cpp-11-faq/content/">中文版</a></li>
-<li>现代C++教程：<a href="https://changkun.de/modern-cpp/zh-cn/00-preface/index.html">现代C++教程：高速上手C++11/14/17/20</a></li>
-<li>C++17 STL cookbook：<a href="https://discourse-production.oss-cn-shanghai.aliyuncs.com/original/3X/c/e/ce2e1fe51865660aaa835bd2674c1920e49f4c82.pdf">英文版</a>|<a href="https://chenxiaowei.gitbook.io/c-17-stl-cook-book/">中文版</a></li>
+<li>next[i]可能是next[i-1]+1（如果读到的i处字符可以使得最长的相等前后缀都生长）</li>
+<li>next[i]也可能比next[i-1]更小（如果读到的i处字符不能使得最长相等前后缀生长，就一定会回退），当回退时，需搜索出next[i]。该算法的精髓在于<code>回退时如何搜索next[i]</code>：尽量利用pattern的性质选出一些值进行判断，减小搜索空间</li>
 </ul>
-<h3 id="帖子">帖子</h3>
+</li>
+</ul>
+<h2 id="递推遇到的两种情况">递推遇到的两种情况</h2>
 <ul>
-<li>万能引用：<a href="https://zhuanlan.zhihu.com/p/99524127">现代C++之万能引用、完美转发、引用折叠</a></li>
+<li>如图中第一种情况，读到多一个字符（i处）时，若最长相等前后缀可以生长（即加上i处字符后能构成相等前后缀），则next[i]=next[i-1]+1</li>
+<li>如图中后两种情况，读到多一个字符（i处）时，若最长相等前后缀不能生长，则需重新选择最长相等前后缀（回退），如何确定该回退到何处（即如何搜索next[i]）：
+<ul>
+<li>在next[i-1]对应的最长相等前后缀（图中绿色）中继续找它的最长相等前后缀（图中黄色），这样做的理由是：<code>最长相等前后缀的最长相等前后缀一定是次长的相等前后缀，当最长相等前后缀无法生长时，应该讨论次长相等前后缀是否可生长</code>。若找到，则可由该黄色部分生长（判断黄色部分和i处字符是否能构成相等前后缀）
+<ul>
+<li>若生长成功（图中第二种情况）则得到next[i]的值，return</li>
+<li>若生长失败（图像第三种情况）则继续该过程，查找黄色部分的最长相等前后缀</li>
+<li>只要生长失败就查找最长相等前后缀的最长相等前后缀，直到生长成功（图中第二种情况），或者找不到最长相等前后缀（图中第三种情况）</li>
+<li>上述查找过程迭代进行，而最长相等前后缀是由next数组界定的，即：<code>子串str[0:j]的最长相等前后缀就是str[0:next[j]]</code>，因此这个迭代查找最长相等前后缀的过程即是不断代入next数组的过程</li>
+<li>若直到最后无法找到最长相等前后缀（图中第三种情况），则认为原字符串中不存在任何长度的相等前后缀，此时像暴力解法一样直接从头开始比较即可。</li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="../oj_figs/KMP_next.png" alt="KMP_next"></p>
 
     </div>
 
@@ -198,7 +187,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2020-05-18
+        2020-08-31
         
     </span>
   </p>
@@ -224,12 +213,17 @@
   </div>
 </div><footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+          <a href="/tags/online-judge/">online judge</a>
+          <a href="/tags/kmp/">KMP</a>
           </div>
       <nav class="post-nav">
-        
-        <a class="next" href="/post/oj/note_kmp/">
-            <span class="next-text nav-default">KMP算法：计算next数组</span>
+        <a class="prev" href="/post/cpp/top_cpp/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[置顶]C&#43;&#43;文章集合</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/oj/leetcode%E6%B1%87%E6%80%BB21-40/">
+            <span class="next-text nav-default">LeetCode汇总21-40</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -238,29 +232,6 @@
   </article>
         </div>
         
-
-  <span id="/post/cpp/top_cpp/" class="leancloud_visitors" data-flag-title="[置顶]C&#43;&#43;文章集合">
-		<span class="post-meta-item-text">文章阅读量 </span>
-		<span class="leancloud-visitors-count">0</span>
-		<p></p>
-	  </span>
-  <div id="vcomments"></div>
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-  <script type="text/javascript">
-    new Valine({
-        el: '#vcomments' ,
-        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
-        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
-        notify:  false ,
-        verify:  false ,
-        avatar:'retro',
-        placeholder: '说点什么吧...',
-        visitor:  true 
-    });
-  </script>
-
-  
 
       </div>
     </main>

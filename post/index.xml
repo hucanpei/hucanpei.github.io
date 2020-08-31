@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 28 Aug 2020 20:36:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2020 17:28:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>http://localhost:1313/post/cpp/top_cpp/</guid>
       <description>C++ primer 读书笔记 C++ primer 第1章 开始 C++ primer 第2章 变量和基本类型 C++ primer 第3章 字符串、向量和数组 C++ primer 第4章 表达式 C++ primer 第5章 语句 C++ primer 第6章 函数 C++ primer 第7章 类 C++ primer 第</description>
+    </item>
+    
+    <item>
+      <title>KMP算法：计算next数组</title>
+      <link>http://localhost:1313/post/oj/note_kmp/</link>
+      <pubDate>Mon, 31 Aug 2020 17:28:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/note_kmp/</guid>
+      <description>关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配</description>
     </item>
     
     <item>

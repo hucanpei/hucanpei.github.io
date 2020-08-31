@@ -6,10 +6,19 @@
     <description>Recent content in online judge on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 28 Aug 2020 20:36:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2020 17:28:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/online-judge/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>KMP算法：计算next数组</title>
+      <link>http://localhost:1313/post/oj/note_kmp/</link>
+      <pubDate>Mon, 31 Aug 2020 17:28:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/note_kmp/</guid>
+      <description>关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配</description>
+    </item>
     
     <item>
       <title>LeetCode汇总21-40</title>

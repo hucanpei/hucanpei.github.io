@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KMP on pi</title>
+    <link>http://localhost:1313/tags/kmp/</link>
+    <description>Recent content in KMP on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 31 Aug 2020 17:28:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/kmp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>KMP算法：计算next数组</title>
+      <link>http://localhost:1313/post/oj/note_kmp/</link>
+      <pubDate>Mon, 31 Aug 2020 17:28:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/note_kmp/</guid>
+      <description>关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配</description>
+    </item>
+    
+  </channel>
+</rss>
