@@ -49,7 +49,7 @@
 <meta itemprop="description" content="关于KMP中部分匹配表的含义及使用方法，参见阮一峰的文章，那边简明扼要，这边不再赘述 next数组和部分匹配表的关系：next数组是将部分匹配">
 <meta itemprop="datePublished" content="2020-08-31T17:28:00+08:00" />
 <meta itemprop="dateModified" content="2020-08-31T17:28:00+08:00" />
-<meta itemprop="wordCount" content="1027">
+<meta itemprop="wordCount" content="1214">
 
 
 
@@ -124,7 +124,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-08-31 </span>
         
-          <span class="more-meta"> 约 1027 字 </span>
+          <span class="more-meta"> 约 1214 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -137,6 +137,7 @@
   <ul>
     <li><a href="#求解方式递推">求解方式：递推</a></li>
     <li><a href="#递推遇到的两种情况">递推遇到的两种情况</a></li>
+    <li><a href="#kmp完整代码">KMP完整代码</a></li>
   </ul>
 </nav>
   </div>
@@ -176,7 +177,81 @@
 </li>
 </ul>
 <p><img src="../oj_figs/KMP_next.png" alt="KMP_next"></p>
-
+<h2 id="kmp完整代码">KMP完整代码</h2>
+<ul>
+<li>使用leetcode 28进行测试，链接：<a href="https://leetcode.com/problems/implement-strstr/">https://leetcode.com/problems/implement-strstr/</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 4 ms, faster than 99.00% of C++ online submissions for Implement strStr().
+</span><span class="c1">// Memory Usage: 7.3 MB, less than 11.26% of C++ online submissions for Implement strStr().
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">strStr</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">,</span><span class="n">string</span> <span class="n">pat</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pat</span><span class="o">==</span><span class="s">&#34;&#34;</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">=</span><span class="n">get_next</span><span class="p">(</span><span class="n">pat</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">j</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">str</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">next</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="o">++</span><span class="n">j</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+               <span class="k">return</span> <span class="n">i</span><span class="o">-</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">get_next</span><span class="p">(</span><span class="n">string</span> <span class="n">pat</span><span class="p">){</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span><span class="p">(</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">j</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="n">pat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">next</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">pat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="o">++</span><span class="n">j</span><span class="p">;</span>
+            <span class="n">next</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">j</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

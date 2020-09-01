@@ -49,7 +49,7 @@
 <meta itemprop="description" content="21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return">
 <meta itemprop="datePublished" content="2020-08-28T20:36:00+08:00" />
 <meta itemprop="dateModified" content="2020-08-28T20:36:00+08:00" />
-<meta itemprop="wordCount" content="3407">
+<meta itemprop="wordCount" content="3814">
 
 
 
@@ -124,8 +124,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-08-28 </span>
         
-          <span class="more-meta"> 约 3407 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 3814 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
         
       </div>
     </header>
@@ -171,10 +171,16 @@
         <li><a href="#题解-5">题解</a></li>
       </ul>
     </li>
-    <li><a href="#heading"></a>
+    <li><a href="#27-remove-element">27. Remove Element</a>
       <ul>
         <li><a href="#描述-6">描述</a></li>
         <li><a href="#题解-6">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#28-implement-strstr">28. Implement strStr()</a>
+      <ul>
+        <li><a href="#描述-7">描述</a></li>
+        <li><a href="#题解-7">题解</a></li>
       </ul>
     </li>
   </ul>
@@ -835,7 +841,10 @@ It doesn&#39;t matter what values are set beyond the returned length.
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="heading"></h2>
+</div><h2 id="27-remove-element">27. Remove Element</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/remove-element/">https://leetcode.com/problems/remove-element/</a></li>
+</ul>
 <h3 id="描述-6">描述</h3>
 <p>Given an array nums and a value val, remove all instances of that value in-place and return the new length.</p>
 <p>Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.</p>
@@ -953,6 +962,116 @@ for (int i = 0; i &lt; len; i++) {
                 <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span><span class="o">=</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="28-implement-strstr">28. Implement strStr()</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/implement-strstr/">https://leetcode.com/problems/implement-strstr/</a></li>
+</ul>
+<h3 id="描述-7">描述</h3>
+<p>Implement strStr().</p>
+<p>Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: haystack = &#34;hello&#34;, needle = &#34;ll&#34;
+Output: 2
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: haystack = &#34;aaaaa&#34;, needle = &#34;bba&#34;
+Output: -1
+</code></pre></td></tr></table>
+</div>
+</div><p>Clarification:</p>
+<p>What should we return when needle is an empty string? This is a great question to ask during an interview.</p>
+<p>For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C&rsquo;s strstr() and Java&rsquo;s indexOf().</p>
+<p>Constraints:</p>
+<p>haystack and needle consist only of lowercase English characters.</p>
+<h3 id="题解-7">题解</h3>
+<ul>
+<li>使用KMP算法，关键是求next数组，参见<a href="https://canpi.cc/post/oj/note_kmp/">另一篇文章</a></li>
+<li>时间复杂度：假设原字符串长m，模式字符串长n，则O(m+n)</li>
+<li>空间复杂度：next数组和模式字符串等长，为O(n)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 4 ms, faster than 99.00% of C++ online submissions for Implement strStr().
+</span><span class="c1">// Memory Usage: 7.3 MB, less than 11.26% of C++ online submissions for Implement strStr().
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">strStr</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">,</span><span class="n">string</span> <span class="n">pat</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pat</span><span class="o">==</span><span class="s">&#34;&#34;</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">=</span><span class="n">get_next</span><span class="p">(</span><span class="n">pat</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">j</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">str</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">next</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="o">++</span><span class="n">j</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+               <span class="k">return</span> <span class="n">i</span><span class="o">-</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">get_next</span><span class="p">(</span><span class="n">string</span> <span class="n">pat</span><span class="p">){</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span><span class="p">(</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">j</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">pat</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="n">pat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">next</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">pat</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">pat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="o">++</span><span class="n">j</span><span class="p">;</span>
+            <span class="n">next</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">j</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">next</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
