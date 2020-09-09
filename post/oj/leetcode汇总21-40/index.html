@@ -49,7 +49,7 @@
 <meta itemprop="description" content="21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return">
 <meta itemprop="datePublished" content="2020-08-28T20:36:00+08:00" />
 <meta itemprop="dateModified" content="2020-08-28T20:36:00+08:00" />
-<meta itemprop="wordCount" content="3814">
+<meta itemprop="wordCount" content="8227">
 
 
 
@@ -124,8 +124,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-08-28 </span>
         
-          <span class="more-meta"> 约 3814 字 </span>
-          <span class="more-meta"> 预计阅读 8 分钟 </span>
+          <span class="more-meta"> 约 8227 字 </span>
+          <span class="more-meta"> 预计阅读 17 分钟 </span>
         
       </div>
     </header>
@@ -181,6 +181,54 @@
       <ul>
         <li><a href="#描述-7">描述</a></li>
         <li><a href="#题解-7">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#29-divide-two-integers">29. Divide Two Integers</a>
+      <ul>
+        <li><a href="#描述-8">描述</a></li>
+        <li><a href="#题解-8">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#30-substring-with-concatenation-of-all-words">30. Substring with Concatenation of All Words</a>
+      <ul>
+        <li><a href="#描述-9">描述</a></li>
+        <li><a href="#题解-9">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#31-next-permutation">31. Next Permutation</a>
+      <ul>
+        <li><a href="#描述-10">描述</a></li>
+        <li><a href="#题解-10">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#32-longest-valid-parentheses">32. Longest Valid Parentheses</a>
+      <ul>
+        <li><a href="#描述-11">描述</a></li>
+        <li><a href="#题解-11">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#33-search-in-rotated-sorted-array">33. Search in Rotated Sorted Array</a>
+      <ul>
+        <li><a href="#描述-12">描述</a></li>
+        <li><a href="#题解-12">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#34-find-first-and-last-position-of-element-in-sorted-array">34. Find First and Last Position of Element in Sorted Array</a>
+      <ul>
+        <li><a href="#描述-13">描述</a></li>
+        <li><a href="#题解-13">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#35-search-insert-position">35. Search Insert Position</a>
+      <ul>
+        <li><a href="#描述-14">描述</a></li>
+        <li><a href="#题解-14">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#36-valid-sudoku">36. Valid Sudoku</a>
+      <ul>
+        <li><a href="#描述-15">描述</a></li>
+        <li><a href="#题解-15">题解</a></li>
       </ul>
     </li>
   </ul>
@@ -1072,6 +1120,920 @@ Output: -1
             <span class="n">next</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">j</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="29-divide-two-integers">29. Divide Two Integers</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/divide-two-integers/">https://leetcode.com/problems/divide-two-integers/</a></li>
+</ul>
+<h3 id="描述-8">描述</h3>
+<p>Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.</p>
+<p>Return the quotient after dividing dividend by divisor.</p>
+<p>The integer division should truncate toward zero, which means losing its fractional part. For example, truncate(8.345) = 8 and truncate(-2.7335) = -2.</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: dividend = 10, divisor = 3
+Output: 3
+Explanation: 10/3 = truncate(3.33333..) = 3.
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: dividend = 7, divisor = -3
+Output: -2
+Explanation: 7/-3 = truncate(-2.33333..) = -2.
+</code></pre></td></tr></table>
+</div>
+</div><p>Note:</p>
+<ul>
+<li>Both dividend and divisor will be 32-bit signed integers.</li>
+<li>The divisor will never be 0.</li>
+<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^31 − 1]. For the purpose of this problem, assume that your function returns 2^31 − 1 when the division result overflows.</li>
+</ul>
+<h3 id="题解-8">题解</h3>
+<ul>
+<li>为处理正负数，先将两数全转为正数，得到商后再根据输入的两数符号是否相反（异或逻辑）来决定商是否要取反</li>
+<li>使用右移实现x2操作。先预设商为1，每次商和除数都x2，直到除数再x2就比被除数大，此时得到的商是2的幂，即是最终商的二进制形式中最高位的1，这个2的幂乘上除数后刚好小于被除数。用被除数减去这个商与被除数的乘积，再递归调用该函数，即可得到最终商的二进制形式中其他位的1</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 8 ms, faster than 20.71% of C++ online submissions for Divide Two Integers.
+</span><span class="c1">// Memory Usage: 5.9 MB, less than 91.14% of C++ online submissions for Divide Two Integers.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">divide</span><span class="p">(</span><span class="kt">int</span> <span class="n">dividend</span><span class="p">,</span> <span class="kt">int</span> <span class="n">divisor</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">m</span><span class="o">=</span><span class="n">labs</span><span class="p">(</span><span class="n">dividend</span><span class="p">),</span><span class="n">n</span><span class="o">=</span><span class="n">labs</span><span class="p">(</span><span class="n">divisor</span><span class="p">),</span><span class="n">res</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">m</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">n</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)){</span>
+            <span class="n">n</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">res</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">res</span><span class="o">+=</span><span class="n">divide</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="n">abs</span><span class="p">(</span><span class="n">divisor</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dividend</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">^</span> <span class="n">divisor</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">=-</span><span class="n">res</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">&gt;</span><span class="n">INT_MAX</span> <span class="o">?</span> <span class="nl">INT_MAX</span> <span class="p">:</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="30-substring-with-concatenation-of-all-words">30. Substring with Concatenation of All Words</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/substring-with-concatenation-of-all-words/">https://leetcode.com/problems/substring-with-concatenation-of-all-words/</a></li>
+</ul>
+<h3 id="描述-9">描述</h3>
+<p>You are given a string s and an array of strings words of the same length. Return all starting indices of substring(s) in s that is a concatenation of each word in words exactly once, in any order, and without any intervening characters.</p>
+<p>You can return the answer in any order.</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: s = &#34;barfoothefoobarman&#34;, words = [&#34;foo&#34;,&#34;bar&#34;]
+Output: [0,9]
+Explanation: Substrings starting at index 0 and 9 are &#34;barfoo&#34; and &#34;foobar&#34; respectively.
+The output order does not matter, returning [9,0] is fine too.
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: s = &#34;wordgoodgoodgoodbestword&#34;, words = [&#34;word&#34;,&#34;good&#34;,&#34;best&#34;,&#34;word&#34;]
+Output: []
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 3:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: s = &#34;barfoofoobarthefoobarman&#34;, words = [&#34;bar&#34;,&#34;foo&#34;,&#34;the&#34;]
+Output: [6,9,12]
+</code></pre></td></tr></table>
+</div>
+</div><p>Constraints:</p>
+<ul>
+<li>1 &lt;= s.length &lt;= 104</li>
+<li>s consists of lower-case English letters.</li>
+<li>1 &lt;= words.length &lt;= 5000</li>
+<li>1 &lt;= words[i].length &lt;= 30</li>
+<li>words[i] consists of lower-case English letters.</li>
+</ul>
+<h3 id="题解-9">题解</h3>
+<ul>
+<li>记vector中的小字符串长为m，vector中有n个小字符串。</li>
+<li>在原字符串上使用m*n的滑动窗口，判断滑动窗口中的内容是否是vector中小字符串的组合，滑动窗口每次右移一位
+<ul>
+<li>对于vector，建立字典cnt来表示每个小字符串应该出现的次数</li>
+<li>在滑动窗口中，建立字典cnt_str来表示窗口中n个小字符串实际出现的次数</li>
+<li>若cnt_str中出现vector中没有的key，或者每次滑动窗口构建的cnt_str和vector的cnt不完全相同，则该窗口不是vector中小字符串的组合，反之是</li>
+</ul>
+</li>
+<li>时间复杂度：每个滑动窗口中需要遍历一次来构建字典并比较字典，滑动窗口要遍历整个字符串，故O(n^2)</li>
+<li>空间复杂度：构建了两个字典，每个字典的大小取决于vector的尺寸，故O(n)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 380 ms, faster than 76.55% of C++ online submissions for Substring with Concatenation of All Words.
+</span><span class="c1">// Memory Usage: 22.5 MB, less than 76.01% of C++ online submissions for Substring with Concatenation of All Words.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findSubstring</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">(),</span><span class="n">n</span><span class="o">=</span><span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&lt;</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{};</span>
+        <span class="c1">//统计vector各个小字符串的个数，即应该具有的频率
+</span><span class="c1"></span>        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">word</span><span class="p">:</span><span class="n">words</span><span class="p">)</span>
+            <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">word</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="c1">//窗口的第一个小字符串不在vector中，则窗口直接右移
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">))</span><span class="o">==</span><span class="n">cnt</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="c1">//统计窗口中小字符串实际的出现次数
+</span><span class="c1"></span>            <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt_str</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="o">+</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">+=</span><span class="n">m</span><span class="p">)</span>
+                <span class="o">++</span><span class="n">cnt_str</span><span class="p">[</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">)];</span>
+            <span class="kt">bool</span> <span class="n">match</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+            <span class="c1">//将两个字典进行比较，发现不一样就将match置为false
+</span><span class="c1"></span>            <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">word</span><span class="p">:</span><span class="n">words</span><span class="p">){</span>
+                <span class="k">auto</span> <span class="n">word_find</span><span class="o">=</span><span class="n">cnt_str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">word_find</span><span class="o">!=</span><span class="n">cnt_str</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">word_find</span><span class="o">-&gt;</span><span class="n">second</span><span class="o">==</span><span class="n">cnt</span><span class="p">[</span><span class="n">word</span><span class="p">]);</span>
+                <span class="k">else</span><span class="p">{</span>
+                    <span class="n">match</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="c1">//match为true表示窗口中内容是vector中小字符串的组合
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+                <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="31-next-permutation">31. Next Permutation</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/next-permutation/">https://leetcode.com/problems/next-permutation/</a></li>
+</ul>
+<h3 id="描述-10">描述</h3>
+<p>Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.</p>
+<p>If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).</p>
+<p>The replacement must be in-place and use only constant extra memory.</p>
+<p>Here are some examples. Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">1,2,3 → 1,3,2
+3,2,1 → 1,2,3
+1,1,5 → 1,5,1
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="题解-10">题解</h3>
+<ul>
+<li>本题最难的是理解next permutation是在做什么，也即字典序的含义</li>
+<li>假设P是1~n的全排列，即P=p1p2&hellip;&hellip;pn=p1p2&hellip;&hellip;pj-1pjpj+1&hellip;&hellip;pk-1pkpk+1&hellip;&hellip;pn
+<ul>
+<li>假设尾部是降序排列，j是降序子序列的边界，即j=max{i|pi&lt;pi+1}</li>
+<li>假设pk是尾部降序子序列中刚好比pj大的元素，即pk=min{pi|pi&gt;pj}，由于降序，也即k=max{i|pi&gt;pj}</li>
+<li>操作步骤：
+<ul>
+<li>若j&gt;=0，即整个序列并非全部递减，即不是全排列的最后一个，就交换pj和pk，随后将j之后的部分翻转</li>
+<li>若j&lt;0，即整个序列全部递减，即是全排列的最后一个，就将整个序列翻转</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>时间复杂度：查找j和k需从后往前扫描两次，O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 0 ms, faster than 100.00% of C++ online submissions for Next Permutation.
+</span><span class="c1">// Memory Usage: 12.2 MB, less than 45.99% of C++ online submissions for Next Permutation.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">nextPermutation</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">j</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span><span class="o">--</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="n">j</span><span class="p">;</span><span class="o">--</span><span class="n">i</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]){</span>
+                    <span class="n">k</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-longest-valid-parentheses">32. Longest Valid Parentheses</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/longest-valid-parentheses/">https://leetcode.com/problems/longest-valid-parentheses/</a></li>
+</ul>
+<h3 id="描述-11">描述</h3>
+<p>Given a string containing just the characters &lsquo;(&rsquo; and &lsquo;)&rsquo;, find the length of the longest valid (well-formed) parentheses substring.</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: &#34;(()&#34;
+Output: 2
+Explanation: The longest valid parentheses substring is &#34;()&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: &#34;)()())&#34;
+Output: 4
+Explanation: The longest valid parentheses substring is &#34;()()&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="题解-11">题解</h3>
+<ul>
+<li>使用dp，数组dp[i]代表以第i个字符为结尾的有效字串的最大长度</li>
+<li>若第i个字符为<code>(</code>，不可能为有效子串的结尾，则dp[i]为0</li>
+<li>若第i个字符为<code>)</code>，则需讨论：
+<ul>
+<li>形如<code>(())</code>，dp[i-1]=2，而dp[i-1]代表的子串左侧是<code>(</code>，可以和i处的<code>)</code>匹配，故dp[i]=dp[i-1]+2</li>
+<li>形如<code>()(())</code>，i处的<code>)</code>不仅能和dp[i-1]代表的子串左侧的<code>(</code>匹配，有效的长度还要加上最左边的<code>()</code>，故dp[i]=dp[i-1]+2+dp[i-dp[i-1]-2]</li>
+</ul>
+</li>
+<li>时间复杂度：扫描一遍，O(n)</li>
+<li>空间复杂度：一维dp数组，O(n)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 4 ms, faster than 99.55% of C++ online submissions for Longest Valid Parentheses.
+</span><span class="c1">// Memory Usage: 7.3 MB, less than 49.10% of C++ online submissions for Longest Valid Parentheses.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">longestValidParentheses</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;(&#39;</span><span class="p">)</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;(&#39;</span><span class="p">)</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">:</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span>
+                <span class="k">else</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">*</span><span class="nf">max_element</span><span class="p">(</span><span class="n">dp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">dp</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-search-in-rotated-sorted-array">33. Search in Rotated Sorted Array</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/search-in-rotated-sorted-array/">https://leetcode.com/problems/search-in-rotated-sorted-array/</a></li>
+</ul>
+<h3 id="描述-12">描述</h3>
+<p>You are given an integer array nums sorted in ascending order, and an integer target.</p>
+<p>Suppose that nums is rotated at some pivot unknown to you beforehand (i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).</p>
+<p>If target is found in the array return its index, otherwise, return -1.</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: nums = [4,5,6,7,0,1,2], target = 0
+Output: 4
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: nums = [4,5,6,7,0,1,2], target = 3
+Output: -1
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 3:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: nums = [1], target = 0
+Output: -1
+</code></pre></td></tr></table>
+</div>
+</div><p>Constraints:</p>
+<ul>
+<li>1 &lt;= nums.length &lt;= 5000</li>
+<li>-10^4 &lt;= nums[i] &lt;= 10^4</li>
+<li>All values of nums are unique.</li>
+<li>nums is guranteed to be rotated at some pivot.</li>
+<li>-10^4 &lt;= target &lt;= 10^4</li>
+</ul>
+<h3 id="题解-12">题解</h3>
+<ul>
+<li>使用二分法，边界l和r</li>
+<li>取中间位置m，若中间的数大于最右边的数，则说明左边一半是升序的，比较l处和m处的值与target的关系即可确定target在左侧还是在右侧，可收缩边界。若中间的数小于最右边的数同理</li>
+<li>时间复杂度：每次排除一半，是二分，O(logn)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 8 ms, faster than 69.28% of C++ online submissions for Search in Rotated Sorted Array.
+</span><span class="c1">// Memory Usage: 11.3 MB, less than 23.54% of C++ online submissions for Search in Rotated Sorted Array.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">search</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">l</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">==</span><span class="n">target</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">&gt;</span><span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">target</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">target</span><span class="p">)</span>
+                    <span class="n">r</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                <span class="k">else</span>
+                    <span class="n">l</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">target</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">target</span><span class="p">)</span>
+                    <span class="n">l</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                <span class="k">else</span>
+                    <span class="n">r</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="34-find-first-and-last-position-of-element-in-sorted-array">34. Find First and Last Position of Element in Sorted Array</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a></li>
+</ul>
+<h3 id="描述-13">描述</h3>
+<p>Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.</p>
+<p>Your algorithm&rsquo;s runtime complexity must be in the order of O(log n).</p>
+<p>If the target is not found in the array, return [-1, -1].</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: nums = [5,7,7,8,8,10], target = 6
+Output: [-1,-1]
+</code></pre></td></tr></table>
+</div>
+</div><p>Constraints:</p>
+<ul>
+<li>0 &lt;= nums.length &lt;= 10^5</li>
+<li>-10^9 &lt;= nums[i] &lt;= 10^9</li>
+<li>nums is a non decreasing array.</li>
+<li>-10^9 &lt;= target &lt;= 10^9</li>
+</ul>
+<h3 id="题解-13">题解</h3>
+<ul>
+<li>使用两次二分查找，第一次找左边界，第二次找右边界</li>
+<li>使用l和r表示左闭右开区间，两次二分的终止条件是l==r</li>
+<li>第一次搜索左边界
+<ul>
+<li>初始l为0，r为尾后</li>
+<li>当nums[m]<code>&lt;</code>target时左边界变为m+1（+1是因为已经排除了这个值，且左边界为闭）</li>
+<li>其他情形（m&gt;=target）时右边界变为m（不+1是因为已经排除了这个值，但右边界为开）</li>
+<li>终止时l=r=左边界，即最左边的target</li>
+</ul>
+</li>
+<li>第二次搜索右边界
+<ul>
+<li>初始l为上次搜索到的左边界，r为尾后</li>
+<li>当nums[m]<code>&lt;=</code>target时左边界变为m+1（+1是因为已经排除了这个值，且左边界为闭）</li>
+<li>其他情形（m&gt;target）时右边界变为m（不+1是因为已经排除了这个值，但右边界为开）</li>
+<li>终止时l=r=右边界的后一个位置，即最右边的target之后</li>
+</ul>
+</li>
+<li>时间复杂度：二分查找，O(logn)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 16 ms, faster than 91.71% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
+</span><span class="c1">// Memory Usage: 13.7 MB, less than 91.92% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">searchRange</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="o">=</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+        <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">l</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">&lt;</span><span class="n">target</span><span class="p">)</span>
+                <span class="n">l</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">m</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">==</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">||</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">!=</span><span class="n">target</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+        <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">r</span><span class="p">;</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">l</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">target</span><span class="p">)</span>
+                <span class="n">l</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">m</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="35-search-insert-position">35. Search Insert Position</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/search-insert-position/">https://leetcode.com/problems/search-insert-position/</a></li>
+</ul>
+<h3 id="描述-14">描述</h3>
+<p>Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.</p>
+<p>You may assume no duplicates in the array.</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [1,3,5,6], 5
+Output: 2
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [1,3,5,6], 2
+Output: 1
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 3:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [1,3,5,6], 7
+Output: 4
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 4:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: [1,3,5,6], 0
+Output: 0
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="题解-14">题解</h3>
+<ul>
+<li>二分查找，使用l和r作为左闭右开区间的边界，终止条件是找到target或l==r</li>
+<li>若找到target直接返回，否则收缩区间。由于左闭右开，收缩时是l=m+1，r=m</li>
+<li>若最后还没找到target就l==r，则该值是大于target的第一个值</li>
+<li>时间复杂度：二分查找，O(logn)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 8 ms, faster than 92.94% of C++ online submissions for Search Insert Position.
+</span><span class="c1">// Memory Usage: 9.7 MB, less than 56.64% of C++ online submissions for Search Insert Position.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">searchInsert</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">l</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">==</span><span class="n">target</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
+            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">&lt;</span><span class="n">target</span><span class="p">)</span>
+                <span class="n">l</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">m</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="36-valid-sudoku">36. Valid Sudoku</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/valid-sudoku/">https://leetcode.com/problems/valid-sudoku/</a></li>
+</ul>
+<h3 id="描述-15">描述</h3>
+<p>Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:</p>
+<ol>
+<li>Each row must contain the digits 1-9 without repetition.</li>
+<li>Each column must contain the digits 1-9 without repetition.</li>
+<li>Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without repetition.</li>
+</ol>
+<p><img src="../oj_figs/LeetCode36.png" alt="LeetCode36"></p>
+<p>The Sudoku board could be partially filled, where empty cells are filled with the character &lsquo;.&rsquo;.</p>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input:
+[
+  [&#34;5&#34;,&#34;3&#34;,&#34;.&#34;,&#34;.&#34;,&#34;7&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;],
+  [&#34;6&#34;,&#34;.&#34;,&#34;.&#34;,&#34;1&#34;,&#34;9&#34;,&#34;5&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;],
+  [&#34;.&#34;,&#34;9&#34;,&#34;8&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;6&#34;,&#34;.&#34;],
+  [&#34;8&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;6&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;3&#34;],
+  [&#34;4&#34;,&#34;.&#34;,&#34;.&#34;,&#34;8&#34;,&#34;.&#34;,&#34;3&#34;,&#34;.&#34;,&#34;.&#34;,&#34;1&#34;],
+  [&#34;7&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;2&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;6&#34;],
+  [&#34;.&#34;,&#34;6&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;2&#34;,&#34;8&#34;,&#34;.&#34;],
+  [&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;4&#34;,&#34;1&#34;,&#34;9&#34;,&#34;.&#34;,&#34;.&#34;,&#34;5&#34;],
+  [&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;8&#34;,&#34;.&#34;,&#34;.&#34;,&#34;7&#34;,&#34;9&#34;]
+]
+Output: true
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input:
+[
+  [&#34;8&#34;,&#34;3&#34;,&#34;.&#34;,&#34;.&#34;,&#34;7&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;],
+  [&#34;6&#34;,&#34;.&#34;,&#34;.&#34;,&#34;1&#34;,&#34;9&#34;,&#34;5&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;],
+  [&#34;.&#34;,&#34;9&#34;,&#34;8&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;6&#34;,&#34;.&#34;],
+  [&#34;8&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;6&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;3&#34;],
+  [&#34;4&#34;,&#34;.&#34;,&#34;.&#34;,&#34;8&#34;,&#34;.&#34;,&#34;3&#34;,&#34;.&#34;,&#34;.&#34;,&#34;1&#34;],
+  [&#34;7&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;2&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;6&#34;],
+  [&#34;.&#34;,&#34;6&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;2&#34;,&#34;8&#34;,&#34;.&#34;],
+  [&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;4&#34;,&#34;1&#34;,&#34;9&#34;,&#34;.&#34;,&#34;.&#34;,&#34;5&#34;],
+  [&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;.&#34;,&#34;8&#34;,&#34;.&#34;,&#34;.&#34;,&#34;7&#34;,&#34;9&#34;]
+]
+Output: false
+Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8&#39;s in the top left 3x3 sub-box, it is invalid.
+</code></pre></td></tr></table>
+</div>
+</div><p>Note:</p>
+<ul>
+<li>A Sudoku board (partially filled) could be valid but is not necessarily solvable.</li>
+<li>Only the filled cells need to be validated according to the mentioned rules.</li>
+<li>The given board contain only digits 1-9 and the character &lsquo;.&rsquo;.</li>
+<li>The given board size is always 9x9.</li>
+</ul>
+<h3 id="题解-15">题解</h3>
+<ul>
+<li>使用字符串来描述一个位置及其所处的值：
+<ul>
+<li><code>x&lt;j&gt;[&lt;val&gt;]</code>代表第j列中含有数字val</li>
+<li><code>y&lt;i&gt;[&lt;val&gt;]</code>代表第i行中含有数字val</li>
+<li><code>c&lt;i/3&gt;&lt;j/3&gt;[&lt;val&gt;]</code>代表第(i/3,j/3)个3x3小方块中含有数字val</li>
+</ul>
+</li>
+<li>将这些字符串都存入一个集合中，看到一个位置时先检查集合中是否有重复项，有则false，无则放入集合。最终一直没false就是true</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 56 ms, faster than 26.16% of C++ online submissions for Valid Sudoku.
+</span><span class="c1">// Memory Usage: 20.3 MB, less than 14.43% of C++ online submissions for Valid Sudoku.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">isValidSudoku</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">seen</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">;</span><span class="o">++</span><span class="n">j</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;.&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="c1">// encoding
+</span><span class="c1"></span>                <span class="n">string</span> <span class="n">val</span><span class="o">=</span><span class="s">&#34;[&#34;</span><span class="o">+</span><span class="n">to_string</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">+</span><span class="s">&#34;]&#34;</span><span class="p">;</span>
+                <span class="n">string</span> <span class="n">x</span><span class="o">=</span><span class="s">&#34;x&#34;</span><span class="o">+</span><span class="n">to_string</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="n">val</span><span class="p">;</span>
+                <span class="n">string</span> <span class="n">y</span><span class="o">=</span><span class="s">&#34;y&#34;</span><span class="o">+</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="n">val</span><span class="p">;</span>
+                <span class="n">string</span> <span class="n">c</span><span class="o">=</span><span class="s">&#34;c&#34;</span><span class="o">+</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">to_string</span><span class="p">(</span><span class="n">j</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">val</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">seen</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">||</span> <span class="n">seen</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">||</span> <span class="n">seen</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+                    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+                <span class="n">seen</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+                <span class="n">seen</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+                <span class="n">seen</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></td></tr></table>
