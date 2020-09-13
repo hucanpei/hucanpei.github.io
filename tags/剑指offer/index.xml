@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>剑指offer on pi</title>
+    <link>http://localhost:1313/tags/%E5%89%91%E6%8C%87offer/</link>
+    <description>Recent content in 剑指offer on pi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 11 Sep 2020 13:37:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%89%91%E6%8C%87offer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>剑指offer汇总</title>
+      <link>http://localhost:1313/post/oj/jianzhi/</link>
+      <pubDate>Fri, 11 Sep 2020 13:37:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/jianzhi/</guid>
+      <description>链接：牛客网 29. 最小的K个数 描述 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2</description>
+    </item>
+    
+  </channel>
+</rss>

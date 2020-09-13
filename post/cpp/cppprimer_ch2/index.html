@@ -49,7 +49,7 @@
 <meta itemprop="description" content="C&#43;&#43;定义了一些基本内置类型（字符、整型、浮点等），也提供了自定义数据类型的机制，标准库还定义了一些复杂的数据类型。 数据类型决定了程序中数据">
 <meta itemprop="datePublished" content="2020-01-30T17:07:00+08:00" />
 <meta itemprop="dateModified" content="2020-01-30T17:07:00+08:00" />
-<meta itemprop="wordCount" content="9484">
+<meta itemprop="wordCount" content="9487">
 
 
 
@@ -124,7 +124,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-01-30 </span>
         
-          <span class="more-meta"> 约 9484 字 </span>
+          <span class="more-meta"> 约 9487 字 </span>
           <span class="more-meta"> 预计阅读 19 分钟 </span>
         
       </div>
@@ -201,7 +201,7 @@
 <li><code>char</code>的大小和机器字节一样</li>
 <li>除char外的其他字符类型用于扩展字符集，<code>wchar_t</code>用于确保可存放机器最大扩展字符集中的任意字符，<code>char16_t</code>和<code>char32_t</code>为Unicode字符集服务。</li>
 <li>int至少和short一样大，long至少和int一样大，long long至少和long一样大</li>
-<li>可寻址的最小内存块称为<code>字节byte</code>，存储的基本单元称为<code>字word</code>。大多数机器的字节由8bit构成，而字节由4字节（32bit）或8字节（64bit）构成。</li>
+<li>可寻址的最小内存块称为<code>字节byte</code>，存储的基本单元称为<code>字word</code>。大多数机器的字节由8bit构成，而字由4字节（32bit）或8字节（64bit）构成。</li>
 <li><code>类型</code>决定了数据所占的bit数以及如何解释这些bit的内容</li>
 <li><code>浮点型</code>可表示单精度、双精度、扩展精度</li>
 <li>除去bool和扩展的字符类型外，其他整型和浮点型都可分为<code>signed</code>和<code>unsigned</code>两种</li>
@@ -309,7 +309,7 @@
 <li>任何包含显式初始化的声明都成为定义。</li>
 <li><code>extern</code>：若只想声明而不定义，就使用关键字extern，且不要显式初始化。可以给extern显式初始化，一旦这样做，就成了定义。</li>
 <li>如果在函数体内初始化extern变量，就错误。</li>
-<li><code>多个文件使用同一变量</code>：用extren将声明和定义分离，定义必须出现且只能出现在一个文件中，其他文件内应声明但不可定义。</li>
+<li><code>多个文件使用同一变量</code>：用extren将声明和定义分离，定义必须出现且只能出现在一个文件中，其他文件内应extern声明但不可定义。</li>
 <li><code>静态类型语言</code>：在编译期检查类型</li>
 </ul>
 <h3 id="标识符">标识符</h3>
@@ -403,7 +403,7 @@
 <ul>
 <li>初始化为字面值<code>nullptr</code>，C++11引入</li>
 <li>初始化为字面值0</li>
-<li>初始化为<code>预处理变量``NULL</code>，该变量在头文件<code>cstdlib</code>中定义，值为0</li>
+<li>初始化为<code>预处理变量</code> <code>NULL</code>，该变量在头文件<code>cstdlib</code>中定义，值为0</li>
 </ul>
 </li>
 <li>用到<code>预处理变量</code>时，预处理器自动将其替换为实际值。因此用NULL初始化指针和用0初始化指针是一样的。</li>

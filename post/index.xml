@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 31 Aug 2020 17:28:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2020 13:37:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>http://localhost:1313/post/cpp/top_cpp/</guid>
       <description>C++ primer 读书笔记 C++ primer 第1章 开始 C++ primer 第2章 变量和基本类型 C++ primer 第3章 字符串、向量和数组 C++ primer 第4章 表达式 C++ primer 第5章 语句 C++ primer 第6章 函数 C++ primer 第7章 类 C++ primer 第</description>
+    </item>
+    
+    <item>
+      <title>剑指offer汇总</title>
+      <link>http://localhost:1313/post/oj/jianzhi/</link>
+      <pubDate>Fri, 11 Sep 2020 13:37:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/jianzhi/</guid>
+      <description>链接：牛客网 29. 最小的K个数 描述 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2</description>
     </item>
     
     <item>

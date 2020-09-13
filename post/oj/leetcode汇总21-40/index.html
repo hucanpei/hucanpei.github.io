@@ -49,7 +49,7 @@
 <meta itemprop="description" content="21. Merge Two Sorted Lists 链接：https://leetcode.com/problems/merge-two-sorted-lists/ 描述 Merge two sorted linked lists and return">
 <meta itemprop="datePublished" content="2020-08-28T20:36:00+08:00" />
 <meta itemprop="dateModified" content="2020-08-28T20:36:00+08:00" />
-<meta itemprop="wordCount" content="8227">
+<meta itemprop="wordCount" content="8830">
 
 
 
@@ -124,8 +124,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-08-28 </span>
         
-          <span class="more-meta"> 约 8227 字 </span>
-          <span class="more-meta"> 预计阅读 17 分钟 </span>
+          <span class="more-meta"> 约 8830 字 </span>
+          <span class="more-meta"> 预计阅读 18 分钟 </span>
         
       </div>
     </header>
@@ -229,6 +229,12 @@
       <ul>
         <li><a href="#描述-15">描述</a></li>
         <li><a href="#题解-15">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#37-sudoku-solver">37. Sudoku Solver</a>
+      <ul>
+        <li><a href="#描述-16">描述</a></li>
+        <li><a href="#题解-16">题解</a></li>
       </ul>
     </li>
   </ul>
@@ -2032,6 +2038,124 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
                 <span class="n">seen</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
                 <span class="n">seen</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
             <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="37-sudoku-solver">37. Sudoku Solver</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/sudoku-solver/">https://leetcode.com/problems/sudoku-solver/</a></li>
+</ul>
+<h3 id="描述-16">描述</h3>
+<p>Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
+<p>A sudoku solution must satisfy all of the following rules:</p>
+<ol>
+<li>Each of the digits 1-9 must occur exactly once in each row.</li>
+<li>Each of the digits 1-9 must occur exactly once in each column.</li>
+<li>Each of the the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.
+Empty cells are indicated by the character &lsquo;.&rsquo;.</li>
+</ol>
+<p><img src="../oj_figs/LeetCode37_1.png" alt="LeetCode37_1">
+<img src="../oj_figs/LeetCode37_2.png" alt="LeetCode37_2"></p>
+<p>Note:</p>
+<ul>
+<li>The given board contain only digits 1-9 and the character &lsquo;.&rsquo;.</li>
+<li>You may assume that the given Sudoku puzzle will have a single unique solution.</li>
+<li>The given board size is always 9x9.</li>
+</ul>
+<h3 id="题解-16">题解</h3>
+<ul>
+<li>使用DFS实现回溯</li>
+<li>使用辅助函数isValid来判断在(i,j)放置某值是否导致无效</li>
+<li>每次DFS前都要检验一个&rsquo;.&lsquo;处的值是否能被替换为数字，若替换合法则执行替换并进入下一层DFS，不合法则continue尝试下一个数字。</li>
+<li>若内层DFS返回true则说明找到了一个解，直接return即可。若内层DFS返回false说明这个位置放置这个值会导致无解，将这个位置的值回溯为&rsquo;.&lsquo;并尝试下一个值</li>
+<li>时间复杂度：每次判断isValid是O(n)，DFS的复杂度是O(n^3)，故总复杂度是O(n^4)</li>
+<li>空间复杂度：取决于DFS的深度即&rsquo;.&lsquo;的数量，O(n^2)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 24 ms, faster than 65.84% of C++ online submissions for Sudoku Solver.
+</span><span class="c1">// Memory Usage: 6.5 MB, less than 70.38% of C++ online submissions for Sudoku Solver.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">solveSudoku</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">DFS</span><span class="p">(</span><span class="n">board</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">DFS</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">;</span><span class="o">++</span><span class="n">j</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">!=</span><span class="sc">&#39;.&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="o">=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">&#39;9&#39;</span><span class="p">;</span><span class="o">++</span><span class="n">c</span><span class="p">){</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">isValid</span><span class="p">(</span><span class="n">board</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">c</span><span class="p">))</span>
+                        <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+                    <span class="k">else</span>
+                        <span class="k">continue</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">DFS</span><span class="p">(</span><span class="n">board</span><span class="p">))</span>
+                        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="k">else</span>
+                        <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;.&#39;</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">bool</span> <span class="nf">isValid</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">board</span><span class="p">,</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="kt">char</span> <span class="n">c</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">;</span><span class="o">++</span><span class="n">k</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">==</span><span class="n">c</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="n">c</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="n">k</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">j</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="n">k</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">c</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">}</span>

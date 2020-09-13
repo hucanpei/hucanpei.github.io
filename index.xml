@@ -6,7 +6,7 @@
     <description>Recent content on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 31 Aug 2020 17:28:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2020 13:37:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -27,6 +27,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>21年硕士毕业，非CS专业，C++和操作系统初学。本科做硬件，读研做计算机视觉，工作打算找后台开发。 因为没有CS背景和开发经验，非常担心失业</description>
+    </item>
+    
+    <item>
+      <title>剑指offer汇总</title>
+      <link>http://localhost:1313/post/oj/jianzhi/</link>
+      <pubDate>Fri, 11 Sep 2020 13:37:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/jianzhi/</guid>
+      <description>链接：牛客网 29. 最小的K个数 描述 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2</description>
     </item>
     
     <item>
