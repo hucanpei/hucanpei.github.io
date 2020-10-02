@@ -35,7 +35,7 @@
 
 
 
-<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link href="/sass/main.min.c7bc1becf36bcf6a9ebd25d2947e43a2eb745ddb0c9a32b43126fd7fa460c351.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -49,7 +49,7 @@
 <meta itemprop="description" content="定义一个类时，可显式或隐式的指定在此类型对象上拷贝、移动、赋值、销毁时做什么。通过5种成员函数实现拷贝控制操作： 拷贝构造函数：用同类型的另一">
 <meta itemprop="datePublished" content="2020-03-15T16:30:00+08:00" />
 <meta itemprop="dateModified" content="2020-03-15T16:30:00+08:00" />
-<meta itemprop="wordCount" content="15446">
+<meta itemprop="wordCount" content="15490">
 
 
 
@@ -124,7 +124,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-03-15 </span>
         
-          <span class="more-meta"> 约 15446 字 </span>
+          <span class="more-meta"> 约 15490 字 </span>
           <span class="more-meta"> 预计阅读 31 分钟 </span>
         
       </div>
@@ -749,6 +749,7 @@
 </span><span class="lnt">36
 </span><span class="lnt">37
 </span><span class="lnt">38
+</span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">HasPtr</span><span class="p">{</span>
@@ -766,10 +767,11 @@
     <span class="c1">//析构函数
 </span><span class="c1"></span>    <span class="o">~</span><span class="n">HasPtr</span><span class="p">();</span>
 <span class="k">private</span><span class="o">:</span>
-    <span class="n">string</span> <span class="o">*</span><span class="n">ps</span><span class="p">;</span> <span class="c1">//底层数据
+    <span class="c1">//底层数据和引用计数需在多个智能指针间共享，故每个智能指针内部保存的是指向它们的指针
+</span><span class="c1"></span>    <span class="n">string</span> <span class="o">*</span><span class="n">ps</span><span class="p">;</span>     <span class="c1">//底层数据
+</span><span class="c1"></span>    <span class="n">size_t</span> <span class="o">*</span><span class="n">use</span><span class="p">;</span>    <span class="c1">//引用计数器
 </span><span class="c1"></span>    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-    <span class="n">size_t</span> <span class="n">use</span><span class="p">;</span> <span class="c1">//引用计数器
-</span><span class="c1"></span><span class="p">};</span>
+<span class="p">};</span>
 <span class="c1">//析构函数
 </span><span class="c1"></span><span class="n">HasPtr</span><span class="o">::~</span><span class="n">HasPtr</span><span class="p">(){</span>
     <span class="k">if</span><span class="p">(</span><span class="o">--*</span><span class="n">use</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>  <span class="c1">//递减计数器，若递减后为0则释放资源
@@ -1990,13 +1992,10 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">canpi</span>
+    2020<span class="heart"><i class="iconfont icon-heart"></i></span><span>canpi</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -2010,7 +2009,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
 
 
 
