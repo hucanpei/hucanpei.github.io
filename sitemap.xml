@@ -16,29 +16,43 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/leetcode/</loc>
+    <lastmod>2020-10-03T15:25:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB41-60/</loc>
+    <lastmod>2020-10-03T15:25:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/tags/online-judge/</loc>
-    <lastmod>2020-09-11T13:37:00+08:00</lastmod>
+    <lastmod>2020-10-03T15:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2020-09-11T13:37:00+08:00</lastmod>
+    <lastmod>2020-10-03T15:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-09-11T13:37:00+08:00</lastmod>
+    <lastmod>2020-10-03T15:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2020-09-11T13:37:00+08:00</lastmod>
+    <lastmod>2020-10-03T15:25:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -67,13 +81,6 @@
   <url>
     <loc>http://localhost:1313/post/oj/note_kmp/</loc>
     <lastmod>2020-08-31T17:28:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/leetcode/</loc>
-    <lastmod>2020-08-28T20:36:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

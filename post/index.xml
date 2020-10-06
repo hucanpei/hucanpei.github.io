@@ -6,7 +6,7 @@
     <description>Recent content in Posts on pi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 11 Sep 2020 13:37:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2020 15:25:00 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>http://localhost:1313/post/cpp/top_cpp/</guid>
       <description>C++ primer 读书笔记 C++ primer 第1章 开始 C++ primer 第2章 变量和基本类型 C++ primer 第3章 字符串、向量和数组 C++ primer 第4章 表达式 C++ primer 第5章 语句 C++ primer 第6章 函数 C++ primer 第7章 类 C++ primer 第</description>
+    </item>
+    
+    <item>
+      <title>LeetCode汇总41-60</title>
+      <link>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB41-60/</link>
+      <pubDate>Sat, 03 Oct 2020 15:25:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/oj/leetcode%E6%B1%87%E6%80%BB41-60/</guid>
+      <description>41. First Missing Positive 链接：https://leetcode.com/problems/first-missing-positive/ 描述 Given an unsorted integer array, find the smallest</description>
     </item>
     
     <item>
