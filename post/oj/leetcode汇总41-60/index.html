@@ -49,7 +49,7 @@
 <meta itemprop="description" content="41. First Missing Positive 链接：https://leetcode.com/problems/first-missing-positive/ 描述 Given an unsorted integer array, find the smallest">
 <meta itemprop="datePublished" content="2020-10-03T15:25:00+08:00" />
 <meta itemprop="dateModified" content="2020-10-03T15:25:00+08:00" />
-<meta itemprop="wordCount" content="7785">
+<meta itemprop="wordCount" content="9094">
 
 
 
@@ -124,8 +124,8 @@
       <div class="post-meta">
         <span class="post-time"> 2020-10-03 </span>
         
-          <span class="more-meta"> 约 7785 字 </span>
-          <span class="more-meta"> 预计阅读 16 分钟 </span>
+          <span class="more-meta"> 约 9094 字 </span>
+          <span class="more-meta"> 预计阅读 19 分钟 </span>
         
       </div>
     </header>
@@ -235,6 +235,24 @@
       <ul>
         <li><a href="#描述-16">描述</a></li>
         <li><a href="#题解-16">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#58-length-of-last-word">58. Length of Last Word</a>
+      <ul>
+        <li><a href="#描述-17">描述</a></li>
+        <li><a href="#题解-17">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#59-spiral-matrix-ii">59. Spiral Matrix II</a>
+      <ul>
+        <li><a href="#描述-18">描述</a></li>
+        <li><a href="#题解-18">题解</a></li>
+      </ul>
+    </li>
+    <li><a href="#60-permutation-sequence">60. Permutation Sequence</a>
+      <ul>
+        <li><a href="#描述-19">描述</a></li>
+        <li><a href="#题解-19">题解</a></li>
       </ul>
     </li>
   </ul>
@@ -2216,6 +2234,335 @@ Output: [[1,7]]
 <span class="p">};</span>
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="58-length-of-last-word">58. Length of Last Word</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/length-of-last-word/">https://leetcode.com/problems/length-of-last-word/</a></li>
+</ul>
+<h3 id="描述-17">描述</h3>
+<p>Given a string s consists of upper/lower-case alphabets and empty space characters ' &lsquo;, return the length of last word (last word means the last appearing word if we loop from left to right) in the string.</p>
+<p>If the last word does not exist, return 0.</p>
+<p>Note: A word is defined as a maximal substring consisting of non-space characters only.</p>
+<p>Example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: &#34;Hello World&#34;
+Output: 5
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="题解-17">题解</h3>
+<ul>
+<li>跳过末尾的空格，开始往前走同时计数增加。往前走到第一个空格处停止</li>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 4 ms, faster than 89.37% of C++ online submissions for Length of Last Word.
+</span><span class="c1">// Memory Usage: 6.7 MB, less than 78.58% of C++ online submissions for Length of Last Word.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">lengthOfLastWord</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">last</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">last</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">last</span><span class="o">--</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">last</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="o">--</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="59-spiral-matrix-ii">59. Spiral Matrix II</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/spiral-matrix-ii/">https://leetcode.com/problems/spiral-matrix-ii/</a></li>
+</ul>
+<h3 id="描述-18">描述</h3>
+<p>Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.</p>
+<p>Example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: 3
+Output:
+[
+ [ 1, 2, 3 ],
+ [ 8, 9, 4 ],
+ [ 7, 6, 5 ]
+]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="题解-18">题解</h3>
+<ul>
+<li>设置一个变量，每次填充一个值时+1</li>
+<li>用四个坐标来维护当前填充的一圈，每次填完一圈后矩形收缩</li>
+<li>边界条件有两种：
+<ul>
+<li>第一种是填完某一圈后刚好填满整个矩阵，直接返回</li>
+<li>第二种是填完最后一圈后最中心还剩下一个元素，填充该元素后返回</li>
+</ul>
+</li>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix II.
+</span><span class="c1">// Memory Usage: 7.1 MB, less than 82.47% of C++ online submissions for Spiral Matrix II.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">generateMatrix</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="o">=</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">p</span><span class="p">{{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
+        <span class="n">generate</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="nf">generate</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">first</span><span class="o">&gt;</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">first</span> <span class="o">||</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">second</span><span class="o">&gt;</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">second</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">first</span><span class="o">==</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">second</span><span class="o">==</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">second</span><span class="p">){</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">second</span><span class="p">][</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">first</span><span class="p">]</span><span class="o">=++</span><span class="n">cnt</span><span class="p">;</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">first</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">first</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">second</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=++</span><span class="n">cnt</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">second</span><span class="p">;</span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">first</span><span class="p">]</span><span class="o">=++</span><span class="n">cnt</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">first</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">first</span><span class="p">;</span><span class="o">--</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">second</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=++</span><span class="n">cnt</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">second</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&gt;</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">second</span><span class="p">;</span><span class="o">--</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">first</span><span class="p">]</span><span class="o">=++</span><span class="n">cnt</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">first</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">second</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">first</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">second</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">first</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">second</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">first</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">second</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">generate</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="60-permutation-sequence">60. Permutation Sequence</h2>
+<ul>
+<li>链接：<a href="https://leetcode.com/problems/permutation-sequence/">https://leetcode.com/problems/permutation-sequence/</a></li>
+</ul>
+<h3 id="描述-19">描述</h3>
+<p>The set [1,2,3,&hellip;,n] contains a total of n! unique permutations.</p>
+<p>By listing and labeling all of the permutations in order, we get the following sequence for n = 3:</p>
+<ol>
+<li>&ldquo;123&rdquo;</li>
+<li>&ldquo;132&rdquo;</li>
+<li>&ldquo;213&rdquo;</li>
+<li>&ldquo;231&rdquo;</li>
+<li>&ldquo;312&rdquo;</li>
+<li>&ldquo;321&rdquo;</li>
+</ol>
+<p>Given n and k, return the kth permutation sequence.</p>
+<p>Note:</p>
+<ul>
+<li>Given n will be between 1 and 9 inclusive.</li>
+<li>Given k will be between 1 and n! inclusive.</li>
+</ul>
+<p>Example 1:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: n = 3, k = 3
+Output: &#34;213&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>Example 2:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Input: n = 4, k = 9
+Output: &#34;2314&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="题解-19">题解</h3>
+<ul>
+<li>全排列中，从低到高第i位上一个数字重复出现的次数是(i-1)!，因此从最高位入手，逐位向后推。计算次高位时固定最高位取出一段排列，将k置为原本的k在这一段中的偏移，继续递推</li>
+<li>若最高位上一个数字重复出现的次数是multip，则：
+<ul>
+<li>第k个排列的最高位数字是(k-1)/multip+1（由于不可重复，故用bool数组记录哪些数字已被取过，这里求的是第(k-1)/multip+1个未被取过的数字）</li>
+<li>取最高位固定下来的一段排列，下一次递推的k（即在这一段内的偏移量）是(k-1)%multip+1</li>
+<li>固定最高位，取这一段排列作为剩余数字的全排列，继续递推</li>
+</ul>
+</li>
+<li>时间复杂度：确定每一位时都要遍历bool数组找第(k-1)/multip+1个false，故O(n^2)</li>
+<li>空间复杂度：使用了vector保存阶乘，并用了bool数组，O(n)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Runtime: 0 ms, faster than 100.00% of C++ online submissions for Permutation Sequence.
+</span><span class="c1">// Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Permutation Sequence.
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">getPermutation</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">get_multip</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">visit</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="nb">false</span><span class="p">);</span>
+        <span class="n">string</span> <span class="n">res</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="o">--</span><span class="n">i</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">multip</span><span class="o">=</span><span class="n">multiplier</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="c1">// 这一次应该取第(k-1)/multip+1个未被取过的数字
+</span><span class="c1"></span>            <span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="n">find_kth_unseen</span><span class="p">(</span><span class="n">visit</span><span class="p">,(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">multip</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">visit</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+            <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">multip</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">// 快速计算多个数的阶乘
+</span><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">multiplier</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+    <span class="kt">void</span> <span class="nf">get_multip</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">cur</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">multiplier</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">multiplier</span><span class="p">[</span><span class="n">cur</span><span class="o">++</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="c1">// 找出bool数组中第k个false的下标
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">find_kth_unseen</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">visit</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">cur</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">k</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visit</span><span class="p">[</span><span class="n">cur</span><span class="o">++</span><span class="p">])</span>
+                <span class="o">--</span><span class="n">k</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -2272,6 +2619,29 @@ Output: [[1,7]]
   </article>
         </div>
         
+
+  <span id="/post/oj/leetcode%E6%B1%87%E6%80%BB41-60/" class="leancloud_visitors" data-flag-title="LeetCode汇总41-60">
+		<span class="post-meta-item-text">文章阅读量 </span>
+		<span class="leancloud-visitors-count">0</span>
+		<p></p>
+	  </span>
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ntftaTIdLaT8sVPL9qFX5dAg-gzGzoHsz',
+        appKey: 'lNOKznaI2Gnej5D2MgpUJnzV',
+        notify:  false ,
+        verify:  false ,
+        avatar:'retro',
+        placeholder: '说点什么吧...',
+        visitor:  true 
+    });
+  </script>
+
+  
 
       </div>
     </main>
